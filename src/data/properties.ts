@@ -33,7 +33,7 @@ export const properties: Property[] = [
     beds: 3,
     baths: 4,
     sqft: '4,800',
-    image: '/images/ravi-patel-qsMGnaxDGuw-unsplash.jpg',
+    image: '/images/image1.jpg',
     badge: 'Exclusive',
     badgeColor: 'bg-indigo-400'
   }

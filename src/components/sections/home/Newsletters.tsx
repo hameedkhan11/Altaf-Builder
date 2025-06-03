@@ -1,6 +1,5 @@
 "use client";
 import { useState, FormEvent } from 'react';
-import { motion } from 'framer-motion';
 import { Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -19,16 +18,11 @@ const Newsletter = () => {
   const socialIcons = [Facebook, Instagram, Twitter, Linkedin];
 
   return (
-    <section className="py-20">
-      <div className="container mx-auto px-6">
+    <section className="py-24 px-4">
+      <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+          <div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 dark:text-white">
               Stay Updated with ALTAF BUILDER
             </h2>
             <p className="text-muted-foreground mb-8">
@@ -45,7 +39,7 @@ const Newsletter = () => {
                   className="flex-grow"
                   required
                 />
-                <Button type="submit" className="bg-indigo-600 hover:bg-indigo-700">
+                <Button type="submit" className="bg-[#8B2131] hover:bg-transparent hover:border-2 cursor-pointer hover:border-[#8B2131] text-white ">
                   Subscribe Now
                 </Button>
               </div>
@@ -54,30 +48,24 @@ const Newsletter = () => {
             <div className="flex items-center space-x-6">
               {socialIcons.map((Icon, index) => (
                 <a 
-                  key={index} 
-                  href="#" 
-                  className="text-muted-foreground hover:text-indigo-600 transition-colors"
+                  key={index}
+                  href="#"
+                  className="text-muted-foreground hover:text-[#8B2131] transition-colors"
                   aria-label={`Social media link ${index + 1}`}
                 >
                   <Icon className="h-6 w-6" />
                 </a>
               ))}
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="relative h-[400px] rounded-lg overflow-hidden shadow-xl"
-          >
+          <div className="relative h-[400px] rounded-lg overflow-hidden shadow-xl">
             <img 
-              src="/images/avi-waxman-f9qZuKoZYoY-unsplash.jpg" 
+              src="/images/avi-waxman-f9qZuKoZYoY-unsplash.jpg"
               alt="ALTAF BUILDER Consultation"
               className="w-full h-full object-cover"
             />
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
