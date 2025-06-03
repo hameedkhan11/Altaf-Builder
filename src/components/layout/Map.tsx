@@ -16,6 +16,7 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
 
 const RealEstateLeafletMap = () => {
   const [map, setMap] = useState(null);
@@ -585,12 +586,13 @@ const RealEstateLeafletMap = () => {
 
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <img
+                      <Image
                         src={selectedProperty.image}
                         alt={selectedProperty.title}
+                        fill
                         className="w-full h-64 object-cover rounded-lg mb-4"
                       />
-                      <div className="flex items-center gap-4 text-gray-600 dark:text-gray-300 mb-4">
+                      <div className="flex items-center gap-4 dark:text-white mb-4">
                         <span className="flex items-center">
                           <Bed className="h-4 w-4 mr-1" />
                           {selectedProperty.beds} Beds
@@ -646,12 +648,12 @@ const RealEstateLeafletMap = () => {
                         </div>
 
                         <div className="flex gap-2 pt-4">
-                          <Button className="flex-1 bg-[#8B2131] hover:bg-[#7A1C2A] text-white">
+                          <Button className="flex-1 bg-[#8B2131] text-white hover:bg-[#7A1C2A] cursor-pointer">
                             Schedule Tour
                           </Button>
                           <Button
                             variant="outline"
-                            className="flex-1 border-[#8B2131] text-[#8B2131] hover:bg-[#8B2131] hover:text-white"
+                            className="flex-1 border-[#8B2131] hover:bg-[#8B2131] hover:text-white cursor-pointer"
                           >
                             Contact Agent
                           </Button>
