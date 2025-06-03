@@ -41,7 +41,7 @@ export const LatestProperties: React.FC = () => {
           </motion.div>
 
           <motion.button
-            className="px-8 py-3 bg-[#8B2131] text-white rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:bg-transparent hover:border-2 hover:border-[#8B2131] hover:text-black font-medium cursor-pointer"
+            className="px-8 py-3 bg-[#8B2131] text-white rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:bg-transparent hover:border-2 hover:text-black dark:text-white hover:border-[#8B2131]  font-medium cursor-pointer"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={viewportOnce}
