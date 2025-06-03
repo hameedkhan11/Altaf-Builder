@@ -16,110 +16,37 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
+import { Property } from "@/lib/types";
+import { properties,delays, viewportOnce, mapLayers } from "@/data/properties";
+import { GlobalStyles } from './styles';
 
-const RealEstateLeafletMap = () => {
-  const [map, setMap] = useState(null);
-  const [markers, setMarkers] = useState([]);
-  const [selectedProperty, setSelectedProperty] = useState(null);
-  const [searchValue, setSearchValue] = useState("");
-  const [showFilters, setShowFilters] = useState(false);
-  const [userLocation, setUserLocation] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [mapStyle, setMapStyle] = useState("street");
-  const mapRef = useRef(null);
+declare global {
+  interface Window {
+    L: any;
+    selectProperty: (propertyId: number) => void;
+  }
+}
 
-  const delays = { small: 0.1, medium: 0.2, large: 0.3 };
-  const viewportOnce = { once: true };
+const RealEstateLeafletMap: React.FC = () => {
+  const [map, setMap] = useState<any>(null);
+  const [markers, setMarkers] = useState<any[]>([]);
+  const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
+  const [searchValue, setSearchValue] = useState<string>("");
+  const [showFilters, setShowFilters] = useState<boolean>(false);
+  const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [mapStyle, setMapStyle] = useState<string>("street");
+  const mapRef = useRef<HTMLDivElement>(null);
 
-  // Sample properties data - replace with your actual data
-  const properties = [
-    {
-      id: 1,
-      title: "Modern Downtown Loft",
-      location: "Downtown District",
-      price: "$850,000",
-      beds: 3,
-      baths: 2,
-      sqft: "1,450",
-      image:
-        "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      coordinates: [40.758, -73.9855], // [lat, lng] for Leaflet
-      badge: "New Listing",
-      agent: {
-        name: "Sarah Johnson",
-        phone: "(555) 123-4567",
-        email: "sarah@realestate.com",
-      },
-    },
-    {
-      id: 2,
-      title: "Luxury Penthouse Suite",
-      location: "Upper East Side",
-      price: "$1,250,000",
-      beds: 4,
-      baths: 3,
-      sqft: "2,100",
-      image:
-        "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      coordinates: [40.7736, -73.9566],
-      badge: "Premium",
-      agent: {
-        name: "Michael Chen",
-        phone: "(555) 987-6543",
-        email: "michael@realestate.com",
-      },
-    },
-    {
-      id: 3,
-      title: "Cozy Family Home",
-      location: "Brooklyn Heights",
-      price: "$675,000",
-      beds: 2,
-      baths: 2,
-      sqft: "1,200",
-      image:
-        "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      coordinates: [40.6962, -73.9969],
-      badge: "Hot Deal",
-      agent: {
-        name: "Emily Rodriguez",
-        phone: "(555) 456-7890",
-        email: "emily@realestate.com",
-      },
-    },
-  ];
-
-  // Map tile layers
-  const mapLayers = {
-    street: {
-      name: "Street",
-      url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-      attribution: "© OpenStreetMap contributors",
-    },
-    satellite: {
-      name: "Satellite",
-      url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-      attribution: "© Esri",
-    },
-    terrain: {
-      name: "Terrain",
-      url: "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
-      attribution: "© OpenTopoMap",
-    },
-  };
-
-  // Load Leaflet
   useEffect(() => {
     const loadLeaflet = async () => {
       if (typeof window !== "undefined" && !window.L) {
-        // Load Leaflet CSS
         const link = document.createElement("link");
         link.rel = "stylesheet";
         link.href =
           "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css";
         document.head.appendChild(link);
 
-        // Load Leaflet JS
         const script = document.createElement("script");
         script.src =
           "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js";
@@ -133,17 +60,15 @@ const RealEstateLeafletMap = () => {
     loadLeaflet();
   }, []);
 
-  // Get user's current location
   const getUserLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          const userPos = [position.coords.latitude, position.coords.longitude];
+          const userPos: [number, number] = [position.coords.latitude, position.coords.longitude];
           setUserLocation(userPos);
           if (map) {
             map.setView(userPos, 13);
 
-            // Add user location marker
             const userIcon = window.L.divIcon({
               className: "user-location-marker",
               html: `
@@ -173,11 +98,10 @@ const RealEstateLeafletMap = () => {
     }
   };
 
-  // Initialize Leaflet Map
   const initializeMap = () => {
     if (!mapRef.current || !window.L) return;
 
-    const defaultCenter = userLocation || [40.758, -73.9855]; // Default to NYC
+    const defaultCenter: [number, number] = userLocation || [40.758, -73.9855];
 
     const leafletMap = window.L.map(mapRef.current, {
       center: defaultCenter,
@@ -186,7 +110,6 @@ const RealEstateLeafletMap = () => {
       scrollWheelZoom: true,
     });
 
-    // Add tile layer
     window.L.tileLayer(mapLayers[mapStyle].url, {
       attribution: mapLayers[mapStyle].attribution,
       maxZoom: 19,
@@ -197,10 +120,8 @@ const RealEstateLeafletMap = () => {
     setIsLoading(false);
   };
 
-  // Add markers for properties
-  const addPropertyMarkers = (leafletMap) => {
+  const addPropertyMarkers = (leafletMap: any) => {
     const newMarkers = properties.map((property) => {
-      // Custom property marker icon
       const propertyIcon = window.L.divIcon({
         className: "property-marker",
         html: `
@@ -252,7 +173,6 @@ const RealEstateLeafletMap = () => {
         icon: propertyIcon,
       }).addTo(leafletMap);
 
-      // Custom popup content
       const popupContent = `
         <div style="max-width: 280px; font-family: system-ui; padding: 8px;">
           <img src="${property.image}" alt="${property.title}" style="width: 100%; height: 120px; object-fit: cover; border-radius: 8px; margin-bottom: 8px;"/>
@@ -300,9 +220,8 @@ const RealEstateLeafletMap = () => {
     setMarkers(newMarkers);
   };
 
-  // Global function for popup button
   useEffect(() => {
-    window.selectProperty = (propertyId) => {
+    window.selectProperty = (propertyId: number) => {
       const property = properties.find((p) => p.id === propertyId);
       if (property) {
         setSelectedProperty(property);
@@ -314,10 +233,9 @@ const RealEstateLeafletMap = () => {
     };
   }, []);
 
-  // Update map tiles when style changes
   useEffect(() => {
     if (map) {
-      map.eachLayer((layer) => {
+      map.eachLayer((layer: any) => {
         if (layer._url) {
           map.removeLayer(layer);
         }
@@ -328,12 +246,10 @@ const RealEstateLeafletMap = () => {
         maxZoom: 19,
       }).addTo(map);
 
-      // Re-add markers
       markers.forEach((marker) => marker.addTo(map));
     }
-  }, [mapStyle, map]);
+  }, [mapStyle, map, markers]);
 
-  // Filter properties by search
   const filteredProperties = properties.filter(
     (property) =>
       property.title.toLowerCase().includes(searchValue.toLowerCase()) ||
@@ -342,35 +258,10 @@ const RealEstateLeafletMap = () => {
 
   return (
     <>
-      <style jsx global>{`
-        .leaflet-popup-content-wrapper {
-          border-radius: 12px !important;
-          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
-        }
-        .leaflet-popup-tip {
-          background: white !important;
-        }
-        .property-marker:hover {
-          transform: scale(1.1) !important;
-        }
-        .leaflet-control-zoom {
-          border: none !important;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
-        }
-        .leaflet-control-zoom a {
-          background: white !important;
-          border: none !important;
-          color: #8b2131 !important;
-          font-weight: bold !important;
-        }
-        .leaflet-control-zoom a:hover {
-          background: #f3f4f6 !important;
-        }
-      `}</style>
+      <GlobalStyles />
 
       <section className="py-24 px-4">
         <div className="max-w-7xl mx-auto">
-          {/* Header Section */}
           <motion.div
             className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 gap-6"
             initial={{ opacity: 0, y: -30 }}
@@ -439,7 +330,6 @@ const RealEstateLeafletMap = () => {
             </motion.div>
           </motion.div>
 
-          {/* Search Bar */}
           <motion.div
             className="mb-8"
             initial={{ opacity: 0, y: 20 }}
@@ -459,9 +349,7 @@ const RealEstateLeafletMap = () => {
             </div>
           </motion.div>
 
-          {/* Map and Properties Layout */}
           <div className="grid lg:grid-cols-3 gap-8">
-            {/* Map Container */}
             <motion.div
               className="lg:col-span-2 h-[600px] rounded-xl overflow-hidden shadow-lg relative"
               initial={{ opacity: 0, x: -50 }}
@@ -482,7 +370,6 @@ const RealEstateLeafletMap = () => {
               <div ref={mapRef} className="w-full h-full" />
             </motion.div>
 
-            {/* Properties List */}
             <motion.div
               className="space-y-4 max-h-[600px] overflow-y-auto"
               initial={{ opacity: 0, x: 50 }}
@@ -560,7 +447,6 @@ const RealEstateLeafletMap = () => {
             </motion.div>
           </div>
 
-          {/* Selected Property Details */}
           {selectedProperty && (
             <motion.div
               className="mt-8"
@@ -588,7 +474,8 @@ const RealEstateLeafletMap = () => {
                       <Image
                         src={selectedProperty.image}
                         alt={selectedProperty.title}
-                        fill
+                        width={400}
+                        height={256}
                         className="w-full h-64 object-cover rounded-lg mb-4"
                       />
                       <div className="flex items-center gap-4 dark:text-white mb-4">

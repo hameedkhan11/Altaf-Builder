@@ -1,17 +1,17 @@
 import type { LucideIcon } from "lucide-react"
 
-export interface Property {
-  id: string
-  title: string
-  location: string
-  price: string
-  beds: number
-  baths: number
-  sqft: string
-  image: string
-  badge: string
-  badgeColor: string
-}
+// export interface Property {
+//   id: number
+//   title: string
+//   location: string
+//   price: string
+//   beds: number
+//   baths: number
+//   sqft: string
+//   image: string
+//   badge: string
+//   badgeColor: string
+// }
 
 export interface Testimonial {
   id: string
@@ -52,7 +52,7 @@ export interface NewsItem {
 // lib/types/index.ts
 
 export interface Property {
-  id: string;
+  id: number;
   image: string;
   title: string;
   location: string;
@@ -68,6 +68,12 @@ export interface Property {
   propertyType?: 'apartment' | 'villa' | 'townhouse' | 'penthouse';
   status?: 'available' | 'sold' | 'reserved' | 'launching_soon';
   featured?: boolean;
+  coordinates?: [number, number];
+  agent?: {
+    name: string;
+    phone: string;
+    email: string;
+  }
 }
 
 export interface PropertyCardProps {
@@ -155,3 +161,42 @@ export interface PropertySearchForm {
   sortBy: 'price_asc' | 'price_desc' | 'date_new' | 'date_old';
 }
 
+export interface Agent {
+  name: string;
+  phone: string;
+  email: string;
+}
+
+export interface Property {
+  id: number;
+  title: string;
+  location: string;
+  price: string;
+  beds: number;
+  baths: number;
+  sqft: string;
+  image: string;
+  coordinates?: [number, number]; // [lat, lng] for Leaflet
+  badge: string;
+  agent?: Agent;
+}
+
+export interface MapLayer {
+  name: string;
+  url: string;
+  attribution: string;
+}
+
+export interface MapLayers {
+  [key: string]: MapLayer;
+}
+
+export interface Delays {
+  small: number;
+  medium: number;
+  large: number;
+}
+
+export interface ViewportOnce {
+  once: boolean;
+}
