@@ -154,3 +154,4 @@ export interface PropertySearchForm {
   maxPrice: number;
   sortBy: 'price_asc' | 'price_desc' | 'date_new' | 'date_old';
 }
+

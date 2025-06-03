@@ -1,3 +1,4 @@
+import { MotionProps } from "framer-motion";
 import { NavigationItem, NewsItem } from "./types";
 // import { Facebook, Instagram, Twitter, Linkedin } from "lucide-react";
 
@@ -228,19 +229,19 @@ export const delays = {
 };
 
 // Performance monitoring utilities
-interface AnimationVariant {
-  initial: any;
-  animate: any;
-  transition: any;
-}
-export const getOptimizedVariant = (baseVariant: AnimationVariant, isLowPower: boolean) => {
-  if (isLowPower) {
+export const getOptimizedVariantStrict = (
+  baseVariant: MotionProps, 
+  isLowPower: boolean
+): MotionProps => {
+  if (isLowPower && baseVariant.transition) {
     return {
       ...baseVariant,
       transition: {
         ...baseVariant.transition,
-        duration: baseVariant.transition.duration * 0.5,
-        ease: "linear" // Simpler easing for low-power devices
+        duration: typeof baseVariant.transition === 'object' && 'duration' in baseVariant.transition 
+          ? (baseVariant.transition.duration as number) * 0.5 
+          : 0.15,
+        ease: "linear"
       }
     };
   }

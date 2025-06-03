@@ -470,7 +470,7 @@ const RealEstateLeafletMap = () => {
               transition={{ duration: 0.8, delay: delays.medium }}
             >
               {isLoading && (
-                <div className="absolute inset-0 bg-gray-100 dark:bg-gray-900 flex items-center justify-center z-10">
+                <div className="absolute inset-0 bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
                   <div className="text-center">
                     <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#8B2131] mx-auto mb-4"></div>
                     <p className="text-gray-600 dark:text-gray-300">

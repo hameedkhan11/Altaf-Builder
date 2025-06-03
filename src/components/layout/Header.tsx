@@ -31,7 +31,7 @@ const Header = () => {
         className={`fixed w-full h-20 transition-all duration-500 ease-in-out ${
           scrolled
             ? "z-50 backdrop-blur-lg border-b bg-white/95 dark:bg-purple-950/95 shadow-lg"
-            : "z-10 bg-transparent"
+            : "z-20 bg-transparent"
         }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}

@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, MapPin, Home, Bed, Bath, Square, Star, Eye, Heart } from 'lucide-react';
+import Image from 'next/image';
 
 // Optimized animations from constants
 const fadeInUp = {
@@ -97,7 +98,7 @@ const showcaseProperties = [
     title: "Luxury Villa Paradise",
     location: "Beverly Hills, CA",
     price: "$2,850,000",
-    image: "images/image1.jpg",
+    image: "/images/image1.jpg",
     beds: 5,
     baths: 4,
     sqft: "3,200",
@@ -222,7 +223,8 @@ const PropertyShowcase = () => {
               setShowDetails(false);
             }}
           >
-            <img
+            <Image
+              fill
               src={currentProperty.image}
               alt={currentProperty.title}
               className="w-full h-full object-cover"
