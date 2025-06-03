@@ -3,7 +3,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import { PropertyCard } from "@/components/common/PropertyCard";
 import { properties } from "@/data/properties";
-import { Button } from "@/components/ui/button";
 import { delays, viewportOnce } from "@/lib/constants";
 
 export const LatestProperties: React.FC = () => {

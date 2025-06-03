@@ -6,8 +6,6 @@ import {
   Twitter,
   Mail,
   Phone,
-  MapPin,
-  Award,
   Users,
   Calendar,
 } from "lucide-react";
@@ -23,23 +21,23 @@ const fadeInUp = {
   },
 };
 
-const fadeInLeft = {
-  initial: { opacity: 0, x: -30 },
-  animate: { opacity: 1, x: 0 },
-  transition: {
-    duration: 0.4,
-    willChange: "transform, opacity",
-  },
-};
+// const fadeInLeft = {
+//   initial: { opacity: 0, x: -30 },
+//   animate: { opacity: 1, x: 0 },
+//   transition: {
+//     duration: 0.4,
+//     willChange: "transform, opacity",
+//   },
+// };
 
-const fadeInRight = {
-  initial: { opacity: 0, x: 30 },
-  animate: { opacity: 1, x: 0 },
-  transition: {
-    duration: 0.4,
-    willChange: "transform, opacity",
-  },
-};
+// const fadeInRight = {
+//   initial: { opacity: 0, x: 30 },
+//   animate: { opacity: 1, x: 0 },
+//   transition: {
+//     duration: 0.4,
+//     willChange: "transform, opacity",
+//   },
+// };
 
 const scaleOnHover = {
   whileHover: { scale: 1.03 },
@@ -200,7 +198,7 @@ const MeetOurTeam = () => {
           whileInView="animate"
           viewport={{ once: true, amount: 0.2 }}
         >
-          {teamMembers.map((member, index) => (
+          {teamMembers.map((member) => (
             <motion.div
               key={member.id}
               className="group dark:bg-gray-900"

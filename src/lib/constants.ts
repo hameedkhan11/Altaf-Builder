@@ -1,5 +1,5 @@
 import { NavigationItem, NewsItem } from "./types";
-import { Facebook, Instagram, Twitter, Linkedin } from "lucide-react";
+// import { Facebook, Instagram, Twitter, Linkedin } from "lucide-react";
 
 export const NAVIGATION_ITEMS: NavigationItem[] = [
   { name: "Properties", href: "/properties" },
@@ -228,7 +228,12 @@ export const delays = {
 };
 
 // Performance monitoring utilities
-export const getOptimizedVariant = (baseVariant: any, isLowPower: boolean) => {
+interface AnimationVariant {
+  initial: any;
+  animate: any;
+  transition: any;
+}
+export const getOptimizedVariant = (baseVariant: AnimationVariant, isLowPower: boolean) => {
   if (isLowPower) {
     return {
       ...baseVariant,

@@ -4,9 +4,9 @@ import { Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
-interface NewsletterProps {
-  onSubmit?: (email: string) => void;
-}
+// interface NewsletterProps {
+//   onSubmit?: (email: string) => void;
+// }
 
 const Newsletter = () => {
   const [email, setEmail] = useState('');

@@ -51,7 +51,7 @@ const WhyChoose = () => {
               transition={{ duration: 0.6, delay: delays.short }}
             >
               With over 25 years of experience in luxury real estate
-              development, we've established ourselves as a leader in creating
+              development, we have established ourselves as a leader in creating
               exceptional living spaces that combine innovative design, premium
               materials, and unparalleled craftsmanship.
             </motion.p>

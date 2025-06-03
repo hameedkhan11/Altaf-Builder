@@ -2,7 +2,6 @@
 "use client"
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
 import { projects } from '@/data/projects';
 import { ProjectCard } from '@/components/common/ProjectCard';
 import { 
@@ -10,8 +9,6 @@ import {
   fadeInLeft, 
   fadeInRight, 
   scaleOnHover, 
-  cardHover,
-  staggerContainer,
   viewportOnce,
   delays 
 } from '@/lib/constants';
@@ -71,7 +68,7 @@ const ProjectsSection = () => {
               />
             </motion.div>
             <motion.button 
-              className="px-8 py-3 bg-[#8B2131] text-white rounded-lg hover:bg-[#7A1C2A] transition-all duration-300 shadow-lg hover:shadow-xl font-medium"
+              className="px-8 py-3 bg-[#8B2131] rounded-lg hover:bg-[#7A1C2A] dark:text-white transition-all duration-300 shadow-lg hover:shadow-xl font-medium"
               {...fadeInRight}
               {...scaleOnHover}
               viewport={viewportOnce}

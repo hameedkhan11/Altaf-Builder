@@ -11,7 +11,6 @@ import {
   Ruler,
   Phone,
   Mail,
-  Layers,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -420,7 +419,7 @@ const RealEstateLeafletMap = () => {
               <select
                 value={mapStyle}
                 onChange={(e) => setMapStyle(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8B2131] dark:bg-gray-800 dark:border-gray-600 dark:text-white"
+                className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8B2131] dark:bg-gray-900 dark:border-gray-600 dark:text-white"
               >
                 {Object.entries(mapLayers).map(([key, layer]) => (
                   <option key={key} value={key}>
@@ -432,7 +431,7 @@ const RealEstateLeafletMap = () => {
               <Button
                 variant="outline"
                 onClick={() => setShowFilters(!showFilters)}
-                className="border-[#8B2131] text-[#8B2131] hover:bg-[#8B2131] hover:text-white"
+                className="border-[#8B2131] dark:bg-gray-900 hover:bg-[#8B2131] hover:text-white"
               >
                 <Filter className="h-4 w-4 mr-2" />
                 Filters
@@ -455,7 +454,7 @@ const RealEstateLeafletMap = () => {
                 placeholder="Search properties by name or location..."
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8B2131] focus:border-transparent dark:bg-gray-800 dark:border-gray-600 dark:text-white"
+                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8B2131] focus:border-transparent dark:bg-gray-900 dark:border-gray-600 dark:text-white"
               />
             </div>
           </motion.div>
@@ -471,7 +470,7 @@ const RealEstateLeafletMap = () => {
               transition={{ duration: 0.8, delay: delays.medium }}
             >
               {isLoading && (
-                <div className="absolute inset-0 bg-gray-100 dark:bg-gray-800 flex items-center justify-center z-10">
+                <div className="absolute inset-0 bg-gray-100 dark:bg-gray-900 flex items-center justify-center z-10">
                   <div className="text-center">
                     <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#8B2131] mx-auto mb-4"></div>
                     <p className="text-gray-600 dark:text-gray-300">
@@ -511,7 +510,7 @@ const RealEstateLeafletMap = () => {
                     }
                   }}
                 >
-                  <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 dark:bg-gray-800">
+                  <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 dark:bg-gray-900">
                     <CardContent className="p-4">
                       <div className="flex gap-4">
                         <div className="relative w-20 h-20 flex-shrink-0">
