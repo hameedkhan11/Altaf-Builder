@@ -16,9 +16,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
-import { Property } from "@/lib/types";
-import { properties,delays, viewportOnce, mapLayers } from "@/data/properties";
-import { GlobalStyles } from './styles';
+import { Property } from "@/lib/mapConstants/types";
+import { properties, delays, viewportOnce, mapLayers } from "@/data/properties";
+import { GlobalStyles } from "./styles";
 
 declare global {
   interface Window {
@@ -30,10 +30,14 @@ declare global {
 const RealEstateLeafletMap: React.FC = () => {
   const [map, setMap] = useState<any>(null);
   const [markers, setMarkers] = useState<any[]>([]);
-  const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
+  const [selectedProperty, setSelectedProperty] = useState<Property | null>(
+    null
+  );
   const [searchValue, setSearchValue] = useState<string>("");
   const [showFilters, setShowFilters] = useState<boolean>(false);
-  const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
+  const [userLocation, setUserLocation] = useState<[number, number] | null>(
+    null
+  );
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [mapStyle, setMapStyle] = useState<string>("street");
   const mapRef = useRef<HTMLDivElement>(null);
@@ -64,7 +68,10 @@ const RealEstateLeafletMap: React.FC = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          const userPos: [number, number] = [position.coords.latitude, position.coords.longitude];
+          const userPos: [number, number] = [
+            position.coords.latitude,
+            position.coords.longitude,
+          ];
           setUserLocation(userPos);
           if (map) {
             map.setView(userPos, 13);
@@ -211,7 +218,7 @@ const RealEstateLeafletMap: React.FC = () => {
       });
 
       marker.on("click", () => {
-        setSelectedProperty(property);
+        setSelectedProperty(property as Property);
       });
 
       return marker;
@@ -224,12 +231,14 @@ const RealEstateLeafletMap: React.FC = () => {
     window.selectProperty = (propertyId: number) => {
       const property = properties.find((p) => p.id === propertyId);
       if (property) {
-        setSelectedProperty(property);
+        setSelectedProperty(property as Property);
       }
     };
 
     return () => {
-      delete window.selectProperty;
+      if ("selectProperty" in window) {
+        delete (window as any).selectProperty;
+      }
     };
   }, []);
 
@@ -391,7 +400,7 @@ const RealEstateLeafletMap: React.FC = () => {
                   whileHover={{ scale: 1.02 }}
                   className="cursor-pointer"
                   onClick={() => {
-                    setSelectedProperty(property);
+                    setSelectedProperty(property as Property);
                     if (map) {
                       map.setView(property.coordinates, 15);
                     }
@@ -401,9 +410,10 @@ const RealEstateLeafletMap: React.FC = () => {
                     <CardContent className="p-4">
                       <div className="flex gap-4">
                         <div className="relative w-20 h-20 flex-shrink-0">
-                          <img
+                          <Image
                             src={property.image}
                             alt={property.title}
+                            fill
                             className="w-full h-full object-cover rounded-lg"
                           />
                           <Badge className="absolute -top-2 -right-2 bg-[#8B2131] text-white text-xs">

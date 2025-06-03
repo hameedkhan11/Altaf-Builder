@@ -3,6 +3,7 @@ import { useState, FormEvent } from 'react';
 import { Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import Image from 'next/image';
 
 // interface NewsletterProps {
 //   onSubmit?: (email: string) => void;
@@ -60,9 +61,10 @@ const Newsletter = () => {
           </div>
 
           <div className="relative h-[400px] rounded-lg overflow-hidden shadow-xl">
-            <img 
+            <Image 
               src="/images/avi-waxman-f9qZuKoZYoY-unsplash.jpg"
               alt="ALTAF BUILDER Consultation"
+              fill
               className="w-full h-full object-cover"
             />
           </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 interface PropertyCardProps {
   image: string;
@@ -11,7 +12,8 @@ export const ProjectCard = ({ image, title }: PropertyCardProps) => {
     <div className="relative group overflow-hidden rounded-2xl shadow-lg cursor-pointer transform transition-all duration-700 hover:-translate-y-2 hover:shadow-2xl">
       {/* Image Container */}
       <div className="relative overflow-hidden">
-        <img
+        <Image
+          fill
           src={image}
           alt={title}
           className="w-full h-[300px] object-cover transition-all duration-700 group-hover:scale-105"

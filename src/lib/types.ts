@@ -1,17 +1,17 @@
 import type { LucideIcon } from "lucide-react"
 
-// export interface Property {
-//   id: number
-//   title: string
-//   location: string
-//   price: string
-//   beds: number
-//   baths: number
-//   sqft: string
-//   image: string
-//   badge: string
-//   badgeColor: string
-// }
+export interface Property {
+  id: number
+  title: string
+  location: string
+  price: string
+  beds: number
+  baths: number
+  sqft: string
+  image: string
+  badge: string
+  badgeColor: string
+}
 
 export interface Testimonial {
   id: string
@@ -51,30 +51,30 @@ export interface NewsItem {
 
 // lib/types/index.ts
 
-export interface Property {
-  id: number;
-  image: string;
-  title: string;
-  location: string;
-  beds: number;
-  baths: number;
-  sqft: string;
-  price: string;
-  badge: string;
-  badgeColor: string;
-  description?: string;
-  amenities?: string[];
-  yearBuilt?: number;
-  propertyType?: 'apartment' | 'villa' | 'townhouse' | 'penthouse';
-  status?: 'available' | 'sold' | 'reserved' | 'launching_soon';
-  featured?: boolean;
-  coordinates?: [number, number];
-  agent?: {
-    name: string;
-    phone: string;
-    email: string;
-  }
-}
+// export interface Property {
+//   id: number;
+//   image: string;
+//   title: string;
+//   location: string;
+//   beds: number;
+//   baths: number;
+//   sqft: string;
+//   price: string;
+//   badge: string;
+//   badgeColor: string;
+//   description?: string;
+//   amenities?: string[];
+//   yearBuilt?: number;
+//   propertyType?: 'apartment' | 'villa' | 'townhouse' | 'penthouse';
+//   status?: 'available' | 'sold' | 'reserved' | 'launching_soon';
+//   featured?: boolean;
+//   coordinates?: [number, number];
+//   agent?: {
+//     name: string;
+//     phone: string;
+//     email: string;
+//   }
+// }
 
 export interface PropertyCardProps {
   property: Property;
