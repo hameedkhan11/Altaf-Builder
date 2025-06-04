@@ -178,7 +178,7 @@ export interface Property {
   image: string;
   coordinates?: [number, number]; // [lat, lng] for Leaflet
   badge: string;
-  agent?: Agent;
+  agent: Agent;
 }
 
 export interface MapLayer {

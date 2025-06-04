@@ -1,21 +1,26 @@
 "use client";
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, MapPin, Home, Bed, Bath, Square, Star, Eye, Heart } from 'lucide-react';
-import { 
-  fadeInUp, 
-  fadeInLeft, 
-  fadeInRight, 
-  scaleOnHover, 
-  cardHover, 
-  staggerContainer, 
-  slideInFromBottom, 
-  quickFade, 
-  microSlide 
+import {
+  fadeInUp,
+  fadeInLeft,
+  fadeInRight,
+  scaleOnHover,
+  cardHover,
+  slideInFromBottom,
+  quickFade,
+  microSlide,
+  shouldAnimate,
+  getPerformanceMode,
+  batchStaggerContainer,
+  batchStaggerItem,
+  delays
 } from '@/lib/constants';
+
 import Image from 'next/image';
 
-// Property data
+// Property data - moved outside component to prevent recreating on each render
 const showcaseProperties = [
   {
     id: 1,
@@ -78,35 +83,46 @@ const showcaseProperties = [
 const PropertyShowcase = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
-  const [showDetails, setShowDetails] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Check for mobile screen size
+  // Memoize performance checks
+  const animationEnabled = useMemo(() => shouldAnimate(), []);
+  const performanceMode = useMemo(() => getPerformanceMode(), []);
+
+  // Memoize current property to prevent unnecessary recalculations
+  const currentProperty = useMemo(() => showcaseProperties[currentIndex], [currentIndex]);
+
+  // Optimized mobile detection with debouncing
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+    
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        setIsMobile(window.innerWidth < 768);
+      }, 100); // Debounce resize events
     };
-    
-    // Initial check
+
     checkMobile();
-    
-    // Add event listener for resize
     window.addEventListener('resize', checkMobile);
     
-    // Cleanup
-    return () => window.removeEventListener('resize', checkMobile);
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+      clearTimeout(timeoutId);
+    };
   }, []);
 
-  // Auto-switch images
+  // Optimized auto-switch with proper cleanup
   useEffect(() => {
-    if (!isHovered) {
+    if (!isHovered && animationEnabled) {
       const interval = setInterval(() => {
         setCurrentIndex((prev) => (prev + 1) % showcaseProperties.length);
       }, 4000);
       return () => clearInterval(interval);
     }
-  }, [isHovered]);
+  }, [isHovered, animationEnabled]);
 
+  // Memoized navigation functions
   const nextSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % showcaseProperties.length);
   }, []);
@@ -115,9 +131,8 @@ const PropertyShowcase = () => {
     setCurrentIndex((prev) => (prev - 1 + showcaseProperties.length) % showcaseProperties.length);
   }, []);
 
-  const currentProperty = showcaseProperties[currentIndex];
-
-  const slideVariants = {
+  // Memoized slide variants - only create once
+  const slideVariants = useMemo(() => ({
     enter: (direction: number) => ({
       x: direction > 0 ? 1000 : -1000,
       opacity: 0,
@@ -135,7 +150,33 @@ const PropertyShowcase = () => {
       opacity: 0,
       scale: 0.9
     })
-  };
+  }), []);
+
+  // Memoized transition config based on performance mode
+  const slideTransition = useMemo(() => ({
+    x: { 
+      type: "spring" as const, 
+      stiffness: performanceMode === "fast" ? 400 : 300, 
+      damping: performanceMode === "fast" ? 35 : 30 
+    },
+    opacity: { duration: performanceMode === "fast" ? 0.4 : 0.6 },
+    scale: { duration: performanceMode === "fast" ? 0.6 : 0.8 }
+  }), [performanceMode]);
+
+  // Memoized price animation config
+  const priceAnimation = useMemo(() => ({
+    initial: { opacity: 0, scale: 0.8 },
+    animate: { opacity: 1, scale: 1 },
+    transition: { 
+      delay: animationEnabled ? 0.5 : 0, 
+      type: "spring" as const, 
+      stiffness: performanceMode === "fast" ? 250 : 200,
+      duration: animationEnabled ? undefined : 0
+    }
+  }), [animationEnabled, performanceMode]);
+
+  // Show details condition - memoized to prevent unnecessary re-renders
+  const showDetails = useMemo(() => isMobile || isHovered, [isMobile, isHovered]);
 
   return (
     <section className="relative w-full h-screen overflow-hidden bg-black">
@@ -149,20 +190,10 @@ const PropertyShowcase = () => {
             initial="enter"
             animate="center"
             exit="exit"
-            transition={{
-              x: { type: "spring", stiffness: 300, damping: 30 },
-              opacity: { duration: 0.6 },
-              scale: { duration: 0.8 }
-            }}
+            transition={slideTransition}
             className="absolute inset-0 w-full h-full"
-            onMouseEnter={() => {
-              setIsHovered(true);
-              setShowDetails(true);
-            }}
-            onMouseLeave={() => {
-              setIsHovered(false);
-              setShowDetails(false);
-            }}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
           >
             <Image
               width={1920}
@@ -170,13 +201,15 @@ const PropertyShowcase = () => {
               src={currentProperty.image}
               alt={currentProperty.title}
               className="w-full h-full object-cover"
+              priority={currentIndex === 0}
+              sizes="100vw"
             />
             <div className="absolute inset-0 bg-black/30" />
           </motion.div>
         </AnimatePresence>
       </div>
 
-      {/* Navigation Controls */}
+      {/* Navigation Controls - Optimized with memoized animations */}
       <motion.button
         onClick={prevSlide}
         className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-20 bg-white/20 backdrop-blur-sm border border-white/30 text-white p-3 sm:p-4 rounded-full hover:bg-white/30 transition-all duration-300"
@@ -195,7 +228,7 @@ const PropertyShowcase = () => {
         <ChevronRight size={20} className="sm:w-6 sm:h-6" />
       </motion.button>
 
-      {/* Main Content Overlay */}
+      {/* Main Content Overlay - Simplified animation structure */}
       <div className="absolute inset-0 flex items-center justify-center z-10 px-4 sm:px-8">
         <div className="container mx-auto text-center text-white max-w-4xl">
           <AnimatePresence mode="wait">
@@ -229,9 +262,7 @@ const PropertyShowcase = () => {
 
               <motion.div
                 className="text-2xl sm:text-3xl md:text-4xl text-[#8B2131] mb-6 sm:mb-8"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
+                {...priceAnimation}
               >
                 {currentProperty.price}
               </motion.div>
@@ -240,20 +271,22 @@ const PropertyShowcase = () => {
         </div>
       </div>
 
-      {/* Property Details on Hover - Mobile: Always Show on Small Screens */}
+      {/* Property Details Block - Optimized with batch stagger */}
       <AnimatePresence>
-        {(showDetails || isMobile) && (
+        {showDetails && (
           <motion.div
+            key="details"
             {...slideInFromBottom}
+            exit={slideInFromBottom.initial}
             className="absolute bottom-4 sm:bottom-8 left-4 right-4 sm:left-8 sm:right-8 z-20"
           >
             <div className="bg-white/8 backdrop-blur-lg rounded-xl sm:rounded-2xl border border-white/15 p-4 sm:p-6 lg:p-8 max-w-6xl mx-auto">
-              <motion.div 
+              <motion.div
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
-                {...staggerContainer}
+                {...batchStaggerContainer}
               >
                 {/* Property Stats */}
-                <motion.div {...microSlide} className="space-y-3 sm:space-y-4">
+                <motion.div {...batchStaggerItem} className="space-y-3 sm:space-y-4">
                   <h3 className="text-white/80 text-base sm:text-lg font-normal mb-3 sm:mb-4">Property Details</h3>
                   <div className="grid grid-cols-2 gap-3 sm:gap-4">
                     <div className="flex items-center gap-2 sm:gap-3 text-white/60">
@@ -275,8 +308,8 @@ const PropertyShowcase = () => {
                   </div>
                 </motion.div>
 
-                {/* Features */}
-                <motion.div {...microSlide} className="space-y-3 sm:space-y-4">
+                {/* Features - Optimized stagger */}
+                <motion.div {...batchStaggerItem} className="space-y-3 sm:space-y-4">
                   <h3 className="text-white/80 text-base sm:text-lg font-normal mb-3 sm:mb-4">Key Features</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {currentProperty.features.map((feature, index) => (
@@ -284,7 +317,10 @@ const PropertyShowcase = () => {
                         key={feature}
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.05, duration: 0.25 }}
+                        transition={{ 
+                          delay: delays.stagger(index), 
+                          duration: animationEnabled ? (performanceMode === "fast" ? 0.2 : 0.25) : 0 
+                        }}
                         className="bg-white/8 backdrop-blur-sm rounded-lg px-3 py-2 text-xs text-white/60 font-light"
                       >
                         {feature}
@@ -294,7 +330,7 @@ const PropertyShowcase = () => {
                 </motion.div>
 
                 {/* Description & Actions */}
-                <motion.div {...microSlide} className="space-y-3 sm:space-y-4 md:col-span-2 lg:col-span-1">
+                <motion.div {...batchStaggerItem} className="space-y-3 sm:space-y-4 md:col-span-2 lg:col-span-1">
                   <h3 className="text-white/80 text-base sm:text-lg font-normal mb-3 sm:mb-4">Description</h3>
                   <p className="text-white/60 text-xs sm:text-sm font-light leading-relaxed mb-4 sm:mb-6">
                     {currentProperty.description}
@@ -322,15 +358,15 @@ const PropertyShowcase = () => {
         )}
       </AnimatePresence>
 
-      {/* Dots Indicator */}
+      {/* Dots Indicator - Simplified */}
       <div className="absolute bottom-20 sm:bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-2 sm:gap-3">
         {showcaseProperties.map((_, index) => (
           <motion.button
             key={index}
             onClick={() => setCurrentIndex(index)}
             className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
-              index === currentIndex 
-                ? 'bg-[#8B2131] scale-125' 
+              index === currentIndex
+                ? 'bg-[#8B2131] scale-125'
                 : 'bg-white/40 hover:bg-white/60'
             }`}
             {...scaleOnHover}
@@ -339,18 +375,22 @@ const PropertyShowcase = () => {
         ))}
       </div>
 
-      {/* Progress Bar */}
+      {/* Progress Bar - Simplified logic */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-white/20 z-20">
-        <motion.div
-          className="h-full bg-gradient-to-r from-[#8B2131] to-[#B91C1C]"
-          initial={{ width: "0%" }}
-          animate={{ width: "100%" }}
-          key={currentIndex}
-          transition={{ 
-            duration: isHovered ? 0 : 4,
-            ease: "linear"
-          }}
-        />
+        {animationEnabled && !isHovered ? (
+          <motion.div
+            className="h-full bg-gradient-to-r from-[#8B2131] to-[#B91C1C]"
+            initial={{ width: "0%" }}
+            animate={{ width: "100%" }}
+            key={currentIndex}
+            transition={{
+              duration: 4,
+              ease: "linear"
+            }}
+          />
+        ) : (
+          <div className="h-full bg-gradient-to-r from-[#8B2131] to-[#B91C1C] w-full" />
+        )}
       </div>
     </section>
   );

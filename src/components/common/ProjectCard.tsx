@@ -2,12 +2,12 @@ import React from "react";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 import Image from "next/image";
 
-interface PropertyCardProps {
+interface ProjectCardProps {
   image: string;
   title: string;
 }
 
-export const ProjectCard = ({ image, title }: PropertyCardProps) => {
+export const ProjectCard = ({ image, title }: ProjectCardProps) => {
   return (
     <div className="relative group overflow-hidden rounded-2xl shadow-lg cursor-pointer transform transition-all duration-700 hover:-translate-y-2 hover:shadow-2xl w-full">
       {/* Image Container - Using width/height with responsive sizing */}

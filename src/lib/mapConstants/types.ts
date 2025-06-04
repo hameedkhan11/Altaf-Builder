@@ -43,6 +43,8 @@ export const LEAFLET_JS_URL =
   featured?: boolean;
   coordinates?: [number, number];
   agent: Agent
+  type?: string
+  parking?: number
 }
 // Map tile layers
 export const mapLayers: MapLayers = {

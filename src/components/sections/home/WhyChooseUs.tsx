@@ -8,47 +8,145 @@ import { features } from "@/data/features";
 import { 
   fadeInLeft, 
   fadeInRight, 
-  fadeInUp, 
-  staggerContainer,
+  batchStaggerContainer,
+  batchStaggerItem,
   viewportOnce,
-  delays 
+  delays,
+  shouldAnimate,
+  getPerformanceMode,
+  createLazyAnimation,
+  animationMetrics,
+  quickFade,
+  easingPresets
 } from "@/lib/constants";
+import { useEffect } from "react";
 
 const WhyChoose = () => {
+  const performanceMode = getPerformanceMode();
+  const canAnimate = shouldAnimate();
+
+  // Performance-optimized animations
+  const leftAnimation = createLazyAnimation({
+    ...fadeInLeft,
+    transition: { 
+      duration: performanceMode === "fast" ? 0.6 : 0.8 
+    }
+  });
+
+  const rightAnimation = createLazyAnimation({
+    ...fadeInRight,
+    transition: { 
+      duration: performanceMode === "fast" ? 0.6 : 0.8, 
+      delay: delays.short 
+    }
+  });
+
+  // Optimized title animation
+  const titleAnimation = canAnimate ? {
+    initial: { opacity: 0, y: 30 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: viewportOnce,
+    transition: { 
+      duration: performanceMode === "fast" ? 0.4 : 0.6 
+    }
+  } : quickFade;
+
+  // Optimized underline animation
+  const underlineAnimation = canAnimate ? {
+    initial: { scaleX: 0 },
+    whileInView: { scaleX: 1 },
+    viewport: viewportOnce,
+    transition: { 
+      duration: performanceMode === "fast" ? 0.6 : 0.8, 
+      delay: performanceMode === "fast" ? 0.1 : 0.2, 
+      ease: easingPresets.smooth 
+    },
+    style: { transformOrigin: "left" }
+  } : {
+    initial: { scaleX: 1 },
+    animate: { scaleX: 1 },
+    transition: { duration: 0 }
+  };
+
+  // Optimized description animation
+  const descriptionAnimation = canAnimate ? {
+    initial: { opacity: 0, y: 20 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: viewportOnce,
+    transition: { 
+      duration: performanceMode === "fast" ? 0.4 : 0.6, 
+      delay: delays.short 
+    }
+  } : quickFade;
+
+  // Optimized image hover animation
+  const imageHoverAnimation = canAnimate ? {
+    whileHover: { 
+      scale: 1.02,
+      transition: { duration: performanceMode === "fast" ? 0.3 : 0.4 }
+    }
+  } : {};
+
+  // Optimized decorative animations - disable on slow devices
+  const decorativeAnimation1 = canAnimate && performanceMode !== "slow" ? {
+    animate: { 
+      scale: [1, 1.2, 1],
+      opacity: [0.2, 0.3, 0.2]
+    },
+    transition: { 
+      duration: performanceMode === "fast" ? 2 : 3,
+      repeat: Infinity,
+      ease: easingPresets.smooth
+    }
+  } : {
+    animate: { scale: 1, opacity: 0.2 },
+    transition: { duration: 0 }
+  };
+
+  const decorativeAnimation2 = canAnimate && performanceMode !== "slow" ? {
+    animate: { 
+      scale: [1, 1.1, 1],
+      opacity: [0.15, 0.25, 0.15]
+    },
+    transition: { 
+      duration: performanceMode === "fast" ? 3 : 4,
+      repeat: Infinity,
+      ease: easingPresets.smooth,
+      delay: 1
+    }
+  } : {
+    animate: { scale: 1, opacity: 0.15 },
+    transition: { duration: 0 }
+  };
+
+  // Track animation performance
+  useEffect(() => {
+    animationMetrics.track('whychoose-section', !canAnimate);
+  }, [canAnimate]);
+
   return (
     <section className="py-24 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div
-            {...fadeInLeft}
+            {...leftAnimation}
             viewport={viewportOnce}
-            transition={{ duration: 0.8 }}
           >
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={viewportOnce}
-              transition={{ duration: 0.6 }}
+              {...titleAnimation}
             >
-              <h2 className="text-3xl md:text-4xl  dark:text-white mb-6">
+              <h2 className="text-3xl md:text-4xl dark:text-white mb-6">
                 Why Choose ALTAF BUILDER
               </h2>
               <motion.div 
                 className="w-20 h-1 bg-gradient-to-r from-[#8B2131] to-[#B91C1C] rounded-full mb-6"
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                viewport={viewportOnce}
-                transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-                style={{ transformOrigin: "left" }}
+                {...underlineAnimation}
               />
             </motion.div>
             
             <motion.p 
               className="text-muted-foreground mb-8 text-lg leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={viewportOnce}
-              transition={{ duration: 0.6, delay: delays.short }}
+              {...descriptionAnimation}
             >
               With over 25 years of experience in luxury real estate
               development, we have established ourselves as a leader in creating
@@ -58,35 +156,58 @@ const WhyChoose = () => {
 
             <motion.div 
               className="grid grid-cols-1 md:grid-cols-2 gap-6"
-              {...staggerContainer}
+              {...(canAnimate ? batchStaggerContainer : {
+                initial: { opacity: 1 },
+                animate: { opacity: 1 },
+                transition: { duration: 0 }
+              })}
               viewport={viewportOnce}
             >
               {features.map((item, index) => {
                 const Icon = item.icon;
+                
+                // Performance-optimized feature item animation
+                const featureAnimation = canAnimate ? {
+                  ...batchStaggerItem,
+                  transition: { 
+                    duration: performanceMode === "fast" ? 0.4 : 0.6,
+                    delay: delays.stagger(index) + delays.medium,
+                    ease: easingPresets.smooth
+                  }
+                } : {
+                  initial: { opacity: 1, y: 0 },
+                  animate: { opacity: 1, y: 0 },
+                  transition: { duration: 0 }
+                };
+
+                // Optimized hover animations
+                const itemHoverAnimation = canAnimate ? {
+                  whileHover: { 
+                    y: -5, 
+                    scale: 1.02,
+                    transition: { duration: performanceMode === "fast" ? 0.2 : 0.3 }
+                  }
+                } : {};
+
+                const iconHoverAnimation = canAnimate ? {
+                  whileHover: { 
+                    rotate: 5,
+                    scale: 1.1,
+                    transition: { duration: performanceMode === "fast" ? 0.2 : 0.3 }
+                  }
+                } : {};
+
                 return (
                   <motion.div
                     key={index}
-                    {...fadeInUp}
+                    {...featureAnimation}
+                    {...itemHoverAnimation}
                     viewport={viewportOnce}
-                    transition={{ 
-                      duration: 0.6, 
-                      delay: delays.stagger(index) + delays.medium,
-                      ease: [0.25, 0.25, 0, 1]
-                    }}
-                    whileHover={{ 
-                      y: -5, 
-                      scale: 1.02,
-                      transition: { duration: 0.3 }
-                    }}
                     className="flex items-start p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors duration-300"
                   >
                     <motion.div 
                       className="w-12 h-12 bg-gradient-to-br from-[#8B2131] to-[#B91C1C] rounded-full flex items-center justify-center mr-4 flex-shrink-0"
-                      whileHover={{ 
-                        rotate: 5,
-                        scale: 1.1,
-                        transition: { duration: 0.3 }
-                      }}
+                      {...iconHoverAnimation}
                     >
                       <Icon className="h-6 w-6 text-white" />
                     </motion.div>
@@ -105,13 +226,9 @@ const WhyChoose = () => {
           </motion.div>
 
           <motion.div
-            {...fadeInRight}
+            {...rightAnimation}
+            {...imageHoverAnimation}
             viewport={viewportOnce}
-            transition={{ duration: 0.8, delay: delays.short }}
-            whileHover={{ 
-              scale: 1.02,
-              transition: { duration: 0.4 }
-            }}
             className="relative h-[500px] rounded-lg overflow-hidden shadow-xl group"
           >
             <motion.div
@@ -121,34 +238,18 @@ const WhyChoose = () => {
               src="/images/avi-waxman-f9qZuKoZYoY-unsplash.jpg"
               alt="ALTAF BUILDER Office"
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              fill
+              width={800}
+              height={600}
             />
             
-            {/* Decorative elements */}
+            {/* Decorative elements - Performance optimized */}
             <motion.div
               className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-[#8B2131] to-[#B91C1C] rounded-full opacity-20 blur-xl"
-              animate={{ 
-                scale: [1, 1.2, 1],
-                opacity: [0.2, 0.3, 0.2]
-              }}
-              transition={{ 
-                duration: 3,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
+              {...decorativeAnimation1}
             />
             <motion.div
               className="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-tr from-blue-500 to-purple-500 rounded-full opacity-15 blur-2xl"
-              animate={{ 
-                scale: [1, 1.1, 1],
-                opacity: [0.15, 0.25, 0.15]
-              }}
-              transition={{ 
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 1
-              }}
+              {...decorativeAnimation2}
             />
           </motion.div>
         </div>

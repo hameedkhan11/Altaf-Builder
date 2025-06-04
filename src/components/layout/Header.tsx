@@ -70,7 +70,7 @@ const Header = () => {
                   src="/logos/removal-809.png"
                   alt="Altaf Builder Logo"
                   width={100}
-                  height={32}
+                  height={34}
                   className="object-contain z-10 pt-4"
                   priority
                 />

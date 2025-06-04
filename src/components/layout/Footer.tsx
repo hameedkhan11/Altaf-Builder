@@ -33,16 +33,16 @@ const Footer = () => {
                 src="/logos/removal-809.png"
                 alt="Altaf Builder Logo"
                 width={100}
-                height={32}
-                className="object-contain z-10"
+                height={34}
+                className="object-contain w-auto h-auto z-10"
                 priority
               />
               <Image
                 src="/logos/altaf.png"
                 alt="Altaf Builder Text"
                 width={100}
-                height={32}
-                className="object-contain -ml-12 z-0"
+                height={34}
+                className="object-contain -ml-12 z-0 w-auto h-auto mb-4"
                 priority
               />
             </div>

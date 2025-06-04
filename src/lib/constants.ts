@@ -1,4 +1,5 @@
-import { MotionProps } from "framer-motion";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Variants } from "framer-motion";
 import { NavigationItem, NewsItem } from "./types";
 // import { Facebook, Instagram, Twitter, Linkedin } from "lucide-react";
 
@@ -24,253 +25,534 @@ export const COMPANY_INFO = {
 };
 
 export const quickLinks = [
-  'Properties',
-  'Communities', 
-  'Projects',
-  'Services',
-  'About Us',
-  'Contact Us'
+  "Properties",
+  "Communities",
+  "Projects",
+  "Services",
+  "About Us",
+  "Contact Us",
 ];
 
 export const socialMediaLinks = [
-  { name: 'Facebook', href: '#' },
-  { name: 'Instagram', href: '#' },
-  { name: 'Twitter', href: '#' },
-  { name: 'LinkedIn', href: '#' }
+  { name: "Facebook", href: "#" },
+  { name: "Instagram", href: "#" },
+  { name: "Twitter", href: "#" },
+  { name: "LinkedIn", href: "#" },
 ];
 
 export const contactInfo = {
   address: "Sheikh Zayed Road, Dubai, UAE",
   phone: "+971 4 123 4567",
   email: "info@altafbuilder.com",
-  workingHours: "Sun - Thu: 9AM - 6PM"
+  workingHours: "Sun - Thu: 9AM - 6PM",
 };
 
 export const footerLinks = {
   privacy: "#",
   terms: "#",
-  cookies: "#"
+  cookies: "#",
 };
 
 export const companyInfo = {
   name: "ALTAF BUILDER",
-  description: "Redefining luxury living with exceptional properties in prime locations. Experience the pinnacle of architectural excellence and craftsmanship.",
-  copyright: "© 2025 ALTAF BUILDER. All rights reserved."
+  description:
+    "Redefining luxury living with exceptional properties in prime locations. Experience the pinnacle of architectural excellence and craftsmanship.",
+  copyright: "© 2025 ALTAF BUILDER. All rights reserved.",
 };
 export const latestNews: NewsItem[] = [
   {
     title: "New Project Launch",
     description: "The Oasis Towers breaks ground in Business Bay",
-    date: "Dec 15, 2024"
+    date: "Dec 15, 2024",
   },
   {
     title: "Award Recognition",
     description: "Best Luxury Developer Award 2024",
-    date: "Nov 28, 2024"
+    date: "Nov 28, 2024",
   },
   {
     title: "Sustainability Initiative",
     description: "Green building certification for all new projects",
-    date: "Oct 20, 2024"
-  }
+    date: "Oct 20, 2024",
+  },
 ];
 
 // lib/constants/animations.ts
 
-// Optimized Animation Constants
-// Performance improvements: shorter durations, GPU acceleration, reduced complexity
+// ULTRA-OPTIMIZED Animation Constants for LCP < 2.5s
+// Critical performance improvements for 4.44s → <2.5s LCP
 
-export const fadeInUp = {
-  initial: { opacity: 0, y: 30 }, // Reduced from 50px
-  animate: { opacity: 1, y: 0 },
-  transition: { 
-    duration: 0.4, // Reduced from 0.6s
-    ease: [0.25, 0.25, 0, 1],
-    // GPU acceleration hint
-    willChange: "transform, opacity"
+// Performance detection utilities
+// Balanced & High-Performance Animation System (Combined Approach)
+// Prioritizes LCP, User Preference, and Maintainability while optimizing performance
+
+// --- Global State and Configuration ---
+
+// Cached animation configuration
+// @/lib/constants.ts (Updated Combined Version)
+
+// --- Import Framer Motion Types ---
+// Stable, high-performance animation system
+// Fixed version that won't break your code
+
+// Simple performance detection without caching issues
+const getAnimationConfig = () => {
+  // Always respect user preference first
+  if (
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
+    return { shouldAnimate: false, mode: "disabled" as const };
+  }
+
+  // Only check for extreme low-end scenarios
+  if (typeof navigator !== "undefined") {
+    const connection = (navigator as any).connection;
+    const hardwareConcurrency = navigator.hardwareConcurrency || 4;
+
+    // Conservative thresholds - only disable for genuinely struggling devices
+    if (hardwareConcurrency <= 1 || connection?.effectiveType === "slow-2g") {
+      return { shouldAnimate: false, mode: "slow" as const };
+    }
+
+    // Fast devices get full animations
+    if (hardwareConcurrency >= 8) {
+      return { shouldAnimate: true, mode: "fast" as const };
+    }
+  }
+
+  return { shouldAnimate: true, mode: "normal" as const };
+};
+
+// Simple shouldAnimate function - no caching to avoid issues
+export const shouldAnimate = () => {
+  try {
+    return getAnimationConfig().shouldAnimate;
+  } catch {
+    return true; // Fallback to true if detection fails
   }
 };
 
-export const fadeInLeft = {
-  initial: { opacity: 0, x: -30 }, // Reduced from -50px
-  animate: { opacity: 1, x: 0 },
-  transition: { 
-    duration: 0.4, // Reduced from 0.6s
-    willChange: "transform, opacity"
+// Safe performance mode getter
+export const getPerformanceMode = () => {
+  try {
+    return getAnimationConfig().mode;
+  } catch {
+    return "normal" as const;
   }
 };
 
-export const fadeInRight = {
-  initial: { opacity: 0, x: 30 }, // Reduced from 50px
-  animate: { opacity: 1, x: 0 },
-  transition: { 
-    duration: 0.4, // Reduced from 0.6s
-    willChange: "transform, opacity"
+// Performance-aware animation creator
+const createAnimation = (config: {
+  initialHidden: Record<string, any>;
+  visible: Record<string, any>;
+  duration?: { fast: number; normal: number; slow: number };
+  ease?: string;
+}) => {
+  const animate = shouldAnimate();
+  if (!animate) {
+    return {
+      initial: config.visible,
+      animate: config.visible,
+      transition: { duration: 0 },
+    };
   }
+
+  // Performance-tiered durations
+  const durations = config.duration || {
+    fast: 0.15,
+    normal: 0.2,
+    slow: 0.25,
+    disabled: 0,
+  };
+  const mode = getPerformanceMode();
+  const duration = mode !== "disabled" ? durations[mode] : durations.normal;
+
+  return {
+    initial: config.initialHidden,
+    animate: config.visible,
+    transition: {
+      duration,
+      ease: config.ease || "easeOut",
+      willChange: "transform, opacity",
+    },
+  };
 };
 
-export const scaleOnHover = {
-  whileHover: { scale: 1.03 }, // Reduced from 1.05 for subtlety
-  whileTap: { scale: 0.97 }, // Reduced from 0.95
-  transition: { 
-    duration: 0.15, // Reduced from 0.2s for snappier feel
-    ease: "easeOut"
+// Performance-aware hover creator
+const createHoverAnimation = (
+  hoverState: Record<string, any>,
+  tapState?: Record<string, any>
+) => {
+  const animate = shouldAnimate();
+  const mode = getPerformanceMode();
+
+  if (!animate || mode === "slow") {
+    return {};
   }
+
+  const duration = mode === "fast" ? 0.1 : 0.15;
+
+  return {
+    whileHover: hoverState,
+    ...(tapState && { whileTap: tapState }),
+    transition: { duration, ease: "easeOut" },
+  };
 };
 
-export const cardHover = {
-  whileHover: { 
-    y: -6, // Reduced from -8px
-    scale: 1.01 // Reduced from 1.02
-  },
-  transition: { 
-    duration: 0.2, // Reduced from 0.3s
-    ease: "easeOut",
-    willChange: "transform"
-  }
+// Base animation states
+const baseStates = {
+  visible: { opacity: 1, y: 0, x: 0, scale: 1 },
+  hiddenUp: { opacity: 0, y: 15 },
+  hiddenLeft: { opacity: 0, x: -15 },
+  hiddenRight: { opacity: 0, x: 15 },
+  hiddenDown: { opacity: 0, y: 20 },
+  microHidden: { opacity: 0, y: 8 },
 };
 
-export const staggerContainer = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  transition: {
-    duration: 0.3, // Reduced from 0.6s
-    staggerChildren: 0.08, // Reduced from 0.1s
-    ease: "easeOut"
-  }
-};
+// Core animations - stable exports
+export const fadeInUp = createAnimation({
+  initialHidden: baseStates.hiddenUp,
+  visible: baseStates.visible,
+});
 
-export const slideInFromBottom = {
-  initial: { opacity: 0, y: 40 }, // Reduced from 100px
-  animate: { opacity: 1, y: 0 },
-  transition: { 
-    duration: 0.5, // Reduced from 0.8s
-    ease: "easeOut",
-    willChange: "transform, opacity"
-  }
-};
+export const fadeInLeft = createAnimation({
+  initialHidden: baseStates.hiddenLeft,
+  visible: baseStates.visible,
+});
 
-export const rotateOnHover = {
-  whileHover: { rotate: 3 }, // Reduced from 5 degrees
-  transition: { 
-    duration: 0.2, // Reduced from 0.3s
-    ease: "easeOut",
-    willChange: "transform"
-  }
-};
+export const fadeInRight = createAnimation({
+  initialHidden: baseStates.hiddenRight,
+  visible: baseStates.visible,
+});
 
-// Optimized pulse - use CSS for better performance
-export const pulseAnimation = {
-  initial: { scale: 1 },
-  animate: { scale: [1, 1.02, 1] }, // Smaller scale change, removed opacity
-  transition: {
-    duration: 1.5, // Reduced from 2s
-    repeat: Infinity,
-    ease: "easeInOut",
-    willChange: "transform"
-  }
-};
+export const slideInFromBottom = createAnimation({
+  initialHidden: baseStates.hiddenDown,
+  visible: baseStates.visible,
+  duration: { fast: 0.2, normal: 0.25, slow: 0.3 },
+});
 
-// New optimized animations
+export const microSlide = createAnimation({
+  initialHidden: baseStates.microHidden,
+  visible: baseStates.visible,
+  duration: { fast: 0.12, normal: 0.15, slow: 0.18 },
+});
+
+// Hover animations
+export const scaleOnHover = createHoverAnimation(
+  { scale: 1.02 },
+  { scale: 0.98 }
+);
+
+export const cardHover = createHoverAnimation({ y: -4, scale: 1.01 });
+
+export const rotateOnHover = createHoverAnimation({ rotate: 2 });
+
+// Quick fade for critical path
 export const quickFade = {
-  initial: { opacity: 0 },
+  initial: { opacity: shouldAnimate() ? 0 : 1 },
   animate: { opacity: 1 },
   exit: { opacity: 0 },
-  transition: { duration: 0.2 }
+  transition: { duration: shouldAnimate() ? 0.1 : 0 },
 };
 
-export const microSlide = {
-  initial: { opacity: 0, y: 10 },
-  animate: { opacity: 1, y: 0 },
-  transition: { 
-    duration: 0.25,
-    ease: "easeOut",
-    willChange: "transform, opacity"
+// Stagger container
+export const staggerContainer = (() => {
+  const animate = shouldAnimate();
+  const mode = getPerformanceMode();
+
+  if (!animate) {
+    return {
+      initial: { opacity: 1 },
+      animate: { opacity: 1 },
+      transition: { duration: 0 },
+    };
   }
-};
 
-// Optimized viewport settings
+  const staggerDelay = mode === "fast" ? 0.02 : mode === "slow" ? 0.05 : 0.03;
+
+  return {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    transition: {
+      duration: 0.15,
+      staggerChildren: staggerDelay,
+      ease: "easeOut",
+    },
+  };
+})();
+
+// Pulse animation
+export const pulseAnimation = (() => {
+  const animate = shouldAnimate();
+  const mode = getPerformanceMode();
+
+  if (!animate || mode === "slow") {
+    return {
+      initial: { scale: 1 },
+      animate: { scale: 1 },
+      transition: { duration: 0 },
+    };
+  }
+
+  return {
+    initial: { scale: 1 },
+    animate: { scale: [1, 1.01, 1] },
+    transition: {
+      duration: 2.5,
+      repeat: Infinity,
+      ease: "easeInOut",
+      willChange: "transform",
+    },
+  };
+})();
+
+// Batch stagger for lists
+// Fixed batchStagger export
+// Fixed batchStagger export
+export const batchStagger = (() => {
+  const animate = shouldAnimate();
+  const mode = getPerformanceMode();
+  
+  if (!animate) {
+    return {
+      container: {
+        initial: { opacity: 1 },
+        animate: { opacity: 1 },
+        transition: { duration: 0 }
+      },
+      item: {
+        initial: baseStates.visible,
+        animate: baseStates.visible,
+        transition: { duration: 0 }
+      }
+    };
+  }
+
+  const staggerDelay = mode === "fast" ? 0.01 : 0.02;
+  const itemDuration = mode === "fast" ? 0.12 : 0.15;
+
+  return {
+    container: {
+      initial: { opacity: 0 },
+      animate: { 
+        opacity: 1,
+        transition: {
+          staggerChildren: staggerDelay,
+          delayChildren: 0.02,
+        }
+      },
+      transition: {
+        staggerChildren: staggerDelay,
+        delayChildren: 0.02,
+      }
+    },
+    item: {
+      initial: { opacity: 0, y: 10 },
+      animate: {
+        opacity: 1,
+        y: 0,
+        transition: {
+          duration: itemDuration,
+          willChange: "transform, opacity",
+        }
+      },
+      transition: {
+        duration: itemDuration,
+        willChange: "transform, opacity",
+      }
+    }
+  };
+})();
+
+// Alternative: Individual variants for better type safety
+export const batchStaggerContainer = (() => {
+  const animate = shouldAnimate();
+  const mode = getPerformanceMode();
+  
+  if (!animate) {
+    return {
+      initial: { opacity: 1 },
+      animate: { opacity: 1 },
+      transition: { duration: 0 }
+    };
+  }
+
+  const staggerDelay = mode === "fast" ? 0.01 : 0.02;
+
+  return {
+    initial: { opacity: 0 },
+    animate: { 
+      opacity: 1,
+      transition: {
+        staggerChildren: staggerDelay,
+        delayChildren: 0.02,
+      }
+    },
+    transition: {
+      staggerChildren: staggerDelay,
+      delayChildren: 0.02,
+    }
+  };
+})();
+
+export const batchStaggerItem = (() => {
+  const animate = shouldAnimate();
+  const mode = getPerformanceMode();
+  
+  if (!animate) {
+    return {
+      initial: baseStates.visible,
+      animate: baseStates.visible,
+      transition: { duration: 0 }
+    };
+  }
+
+  const itemDuration = mode === "fast" ? 0.12 : 0.15;
+
+  return {
+    initial: { opacity: 0, y: 10 },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: itemDuration,
+        willChange: "transform, opacity",
+      }
+    },
+    transition: {
+      duration: itemDuration,
+      willChange: "transform, opacity",
+    }
+  };
+})();
+// Viewport settings
 export const viewportOnce = {
   once: true,
-  margin: "-50px" // Reduced from -100px for earlier trigger
+  margin: "0px",
+  amount: 0.1,
 };
 
 export const viewportDefault = {
   once: true,
-  amount: 0.2 // Reduced from 0.3 for earlier trigger
+  amount: 0.05,
 };
 
-// Performance-focused viewport for mobile
 export const viewportMobile = {
   once: true,
-  margin: "-20px",
-  amount: 0.1
+  margin: "0px",
+  amount: 0.05,
 };
 
-// Updated easing presets - more performant
+// Easing presets
 export const easingPresets = {
-  smooth: [0.25, 0.25, 0, 1],
-  bounce: [0.68, -0.55, 0.265, 1.55],
-  elastic: [0.175, 0.885, 0.32, 1.275], 
-  fast: [0.4, 0, 0.2, 1],
-  slow: [0.4, 0, 0.6, 1],
-  // New optimized easings
-  snappy: [0.25, 0.46, 0.45, 0.94],
-  gentle: [0.25, 0.1, 0.25, 1]
+  instant: "linear" as const,
+  fast: [0.4, 0, 0.2, 1] as const,
+  smooth: [0.25, 0.1, 0.25, 1] as const,
+  bounce: [0.68, -0.55, 0.265, 1.55] as const,
+  elastic: [0.175, 0.885, 0.32, 1.275] as const,
 };
 
-// Optimized animation delays
+// Delay utilities
 export const delays = {
   instant: 0,
-  short: 0.05, // Reduced from 0.1
-  medium: 0.15, // Reduced from 0.3
-  long: 0.25, // Reduced from 0.5
-  stagger: (index: number) => index * 0.05 // Reduced from 0.1
+  short: 0.02,
+  medium: 0.05,
+  long: 0.1,
+  stagger: (index: number) => {
+    const animate = shouldAnimate();
+    const mode = getPerformanceMode();
+    if (!animate) return 0;
+    const baseDelay = mode === "fast" ? 0.015 : 0.025;
+    return index * baseDelay;
+  },
 };
 
-// Performance monitoring utilities
-export const getOptimizedVariantStrict = (
-  baseVariant: MotionProps, 
-  isLowPower: boolean
-): MotionProps => {
-  if (isLowPower && baseVariant.transition) {
+// Utility functions - safe versions
+export const getPerformanceVariant = (baseVariant: any) => {
+  const animate = shouldAnimate();
+  if (!animate) {
     return {
-      ...baseVariant,
-      transition: {
-        ...baseVariant.transition,
-        duration: typeof baseVariant.transition === 'object' && 'duration' in baseVariant.transition 
-          ? (baseVariant.transition.duration as number) * 0.5 
-          : 0.15,
-        ease: "linear"
-      }
+      initial: baseVariant.animate || baseStates.visible,
+      animate: baseVariant.animate || baseStates.visible,
+      transition: { duration: 0 },
     };
   }
   return baseVariant;
 };
 
-// Conditional animation based on device capability
-export const smartAnimation = (prefersReducedMotion: boolean) => ({
-  initial: prefersReducedMotion ? {} : { opacity: 0, y: 20 },
-  animate: prefersReducedMotion ? {} : { opacity: 1, y: 0 },
-  transition: prefersReducedMotion ? {} : { duration: 0.3 }
-});
+export const deferredAnimation = (animation: any) => {
+  try {
+    if (typeof window !== "undefined" && document.readyState !== "complete") {
+      return {
+        initial: animation.animate || baseStates.visible,
+        animate: animation.animate || baseStates.visible,
+        transition: { duration: 0 },
+      };
+    }
+    return animation;
+  } catch {
+    return animation; // Fallback to original animation
+  }
+};
 
-// Batch animation for multiple elements
-export const batchStagger = {
-  container: {
-    animate: {
-      transition: {
-        staggerChildren: 0.03, // Very quick stagger
-        delayChildren: 0.05
-      }
+export const createLazyAnimation = (animation: any) => {
+  const animate = shouldAnimate();
+  if (typeof window === "undefined" || !animate) {
+    return {
+      initial: animation.animate || baseStates.visible,
+      animate: animation.animate || baseStates.visible,
+      transition: { duration: 0 },
+    };
+  }
+
+  return {
+    ...animation,
+    viewport: { once: true, amount: 0.1 },
+  };
+};
+
+// Performance monitoring (simplified and safe)
+export const animationMetrics = {
+  totalAnimations: 0,
+  skippedAnimations: 0,
+
+  track(name: string, wasSkipped: boolean) {
+    this.totalAnimations++;
+    if (wasSkipped) this.skippedAnimations++;
+
+    // Occasional logging (safe)
+    if (this.totalAnimations > 0 && this.totalAnimations % 20 === 0) {
+      console.log(
+        `Animation Performance: ${this.skippedAnimations}/${this.totalAnimations} optimized`
+      );
     }
   },
-  item: {
-    initial: { opacity: 0, y: 20 },
-    animate: { 
-      opacity: 1, 
-      y: 0,
-      transition: { duration: 0.3 }
-    }
-  }
+};
+
+// Backward compatibility exports
+export const optimizedAnimations = {
+  fadeInUp,
+  fadeInLeft,
+  fadeInRight,
+  slideInFromBottom,
+  microSlide,
+};
+
+// Performance mode constants
+export const PERFORMANCE_MODE = {
+  FAST: "fast",
+  NORMAL: "normal",
+  SLOW: "slow",
+  DISABLED: "disabled",
+} as const;
+
+// Type definitions for better TypeScript support
+export type PerformanceMode =
+  (typeof PERFORMANCE_MODE)[keyof typeof PERFORMANCE_MODE];
+export type AnimationVariant = Variants;
+
+// No caching reset needed - this version doesn't cache
+export const resetAnimationConfig = () => {
+  // No-op in this stable version
 };
