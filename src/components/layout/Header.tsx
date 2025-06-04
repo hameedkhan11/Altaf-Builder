@@ -72,6 +72,7 @@ const Header = () => {
                   width={100}
                   height={32}
                   className="object-contain z-10 pt-4"
+                  priority
                 />
                 <Image
                   src="/logos/altaf.png"
@@ -79,6 +80,7 @@ const Header = () => {
                   width={100}
                   height={32}
                   className="object-contain -ml-12 z-0"
+                  priority
                 />
               </div>
             </motion.div>

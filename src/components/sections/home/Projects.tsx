@@ -15,12 +15,12 @@ import {
 
 // Unsplash images for better visual appeal
 const unsplashImages = [
-  'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80', // Modern building
-  'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=800&q=80', // Luxury apartment
-  'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80', // Beautiful home
-  'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80', // Modern house
-  'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80', // Residential complex
-  'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80', // Luxury villa
+  'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80', 
+  'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=800&q=80',
+  'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80', 
+  'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80', 
+  'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80', 
+  'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80', 
 ];
 
 const ProjectsSection = () => {
@@ -68,13 +68,13 @@ const ProjectsSection = () => {
               />
             </motion.div>
             <motion.button 
-              className="px-8 py-3 bg-[#8B2131] rounded-lg hover:bg-[#7A1C2A] dark:text-white transition-all duration-300 shadow-lg hover:shadow-xl font-medium"
+              className="px-8 py-3 bg-[#8B2131]  rounded-lg hover:bg-[#7A1C2A] dark:text-white transition-all duration-300 shadow-lg hover:shadow-xl font-medium"
               {...fadeInRight}
               {...scaleOnHover}
               viewport={viewportOnce}
               transition={{ duration: 0.6, delay: delays.medium }}
             >
-              SEE ALL PROJECTS
+              SEE ALL PROJECTSs
             </motion.button>
           </motion.div>
           <p className="text-yellow-600">No projects to display</p>
@@ -120,7 +120,7 @@ const ProjectsSection = () => {
           </motion.div>
           
           <motion.button 
-            className="px-8 py-3 bg-[#8B2131] text-white rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:bg-transparent hover:border-2 hover:border-[#8B2131] dark:text-white hover:text-black font-medium cursor-pointer"
+            className="px-8 py-3 bg-[#B91C1C] text-white rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:bg-transparent hover:border-2 hover:border-[#8B2131] dark:text-white hover:text-black font-medium cursor-pointer"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={viewportOnce}

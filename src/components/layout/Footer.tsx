@@ -35,6 +35,7 @@ const Footer = () => {
                 width={100}
                 height={32}
                 className="object-contain z-10"
+                priority
               />
               <Image
                 src="/logos/altaf.png"
@@ -42,9 +43,10 @@ const Footer = () => {
                 width={100}
                 height={32}
                 className="object-contain -ml-12 z-0"
+                priority
               />
             </div>
-            <p className="text-black mb-6 dark:text-white ml-8">
+            <p className="text-black font-bold mb-6 dark:text-white ml-8">
               {companyInfo.description}
             </p>
             <div className="flex items-center space-x-4 ml-6">
@@ -52,7 +54,7 @@ const Footer = () => {
                 <a
                   key={index}
                   href={socialMediaLinks[index]?.href || "#"}
-                  className="text-[#8B2131] transition-colors dark:text-white"
+                  className="text-[#B91C1C] transition-colors dark:text-white"
                   aria-label={
                     socialMediaLinks[index]?.name || `Social link ${index + 1}`
                   }
@@ -68,14 +70,14 @@ const Footer = () => {
             <h3 className="text-lg font-bold mb-6 dark:text-white text-black">
               Quick Links
             </h3>
-            <ul className="space-y-4">
+            <ul className="space-y-2">
               {quickLinks.map((item) => (
                 <li key={item}>
                   <a
                     href="#"
-                    className="text-black hover:text-indigo-400 transition-colors dark:text-white"
+                    className="text-black font-bold hover:text-[#B91C1C] transition-colors dark:text-white"
                   >
-                    {item}
+                    <span className="font-bold">{item}</span>
                   </a>
                 </li>
               ))}
@@ -89,26 +91,26 @@ const Footer = () => {
             </h3>
             <ul className="space-y-4">
               <li className="flex items-center">
-                <MapPin className="h-5 w-5 text-[#8B2131] mr-3" />
-                <span className="text-black dark:text-white">
+                <MapPin className="h-5 w-5 text-[#B91C1C] mr-3 " />
+                <span className="text-black dark:text-white font-bold">
                   {contactInfo.address}
                 </span>
               </li>
               <li className="flex items-center">
-                <Phone className="h-5 w-5 text-[#8B2131] mr-3" />
-                <span className="text-black dark:text-white">
+                <Phone className="h-5 w-5 text-[#B91C1C] mr-3" />
+                <span className="text-black dark:text-white font-bold">
                   {contactInfo.phone}
                 </span>
               </li>
               <li className="flex items-center">
-                <Mail className="h-5 w-5 text-[#8B2131] mr-3" />
-                <span className="text-black dark:text-white">
+                <Mail className="h-5 w-5 text-[#B91C1C] mr-3" />
+                <span className="text-black dark:text-white font-bold">
                   {contactInfo.email}
                 </span>
               </li>
               <li className="flex items-center">
-                <Clock className="h-5 w-5 text-[#8B2131] mr-3" />
-                <span className="text-black dark:text-white">
+                <Clock className="h-5 w-5 text-[#B91C1C] mr-3" />
+                <span className="text-black dark:text-white font-bold">
                   {contactInfo.workingHours}
                 </span>
               </li>
@@ -122,14 +124,14 @@ const Footer = () => {
             </h3>
             <div className="space-y-4">
               {latestNews.map((news, index) => (
-                <div key={index} className="border-l-2 border-indigo-400 pl-4">
+                <div key={index} className="border-l-2 border-[#B91C1C] pl-4">
                   <h3 className="font-bold text-sm mb-1 dark:text-white">
                     {news.title}
                   </h3>
-                  <p className="text-black text-sm dark:text-white">
+                  <p className="text-black font-bold text-sm dark:text-white">
                     {news.description}
                   </p>
-                  <p className="text-gray-400 text-xs mt-1 dark:text-white">
+                  <p className="text-black font-bold text-xs mt-1 dark:text-white">
                     {news.date}
                   </p>
                 </div>
@@ -147,19 +149,19 @@ const Footer = () => {
             <div className="flex items-center space-x-6">
               <a
                 href={footerLinks.privacy}
-                className="text-black hover:text-indigo-400 font-semibold transition-colors text-sm dark:text-white"
+                className="text-black hover:text-[#B91C1C] font-semibold transition-colors text-sm dark:text-white"
               >
                 Privacy Policy
               </a>
               <a
                 href={footerLinks.terms}
-                className="text-black hover:text-indigo-400 transition-colors text-sm dark:text-white font-semibold"
+                className="text-black hover:text-[#B91C1C] transition-colors text-sm dark:text-white font-semibold"
               >
                 Terms of Service
               </a>
               <a
                 href={footerLinks.cookies}
-                className="text-black hover:text-indigo-400 transition-colors text-sm dark:text-white font-semibold"
+                className="text-black hover:text-[#B91C1C] transition-colors text-sm dark:text-white font-bold"
               >
                 Cookie Policy
               </a>

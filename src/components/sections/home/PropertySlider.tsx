@@ -2,103 +2,27 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, MapPin, Home, Bed, Bath, Square, Star, Eye, Heart } from 'lucide-react';
+import { 
+  fadeInUp, 
+  fadeInLeft, 
+  fadeInRight, 
+  scaleOnHover, 
+  cardHover, 
+  staggerContainer, 
+  slideInFromBottom, 
+  quickFade, 
+  microSlide 
+} from '@/lib/constants';
 import Image from 'next/image';
 
-// Optimized animations from constants
-const fadeInUp = {
-  initial: { opacity: 0, y: 30 },
-  animate: { opacity: 1, y: 0 },
-  transition: { 
-    duration: 0.4,
-    ease: [0.25, 0.25, 0, 1],
-    willChange: "transform, opacity"
-  }
-};
-
-const fadeInLeft = {
-  initial: { opacity: 0, x: -30 },
-  animate: { opacity: 1, x: 0 },
-  transition: { 
-    duration: 0.4,
-    willChange: "transform, opacity"
-  }
-};
-
-const fadeInRight = {
-  initial: { opacity: 0, x: 30 },
-  animate: { opacity: 1, x: 0 },
-  transition: { 
-    duration: 0.4,
-    willChange: "transform, opacity"
-  }
-};
-
-const scaleOnHover = {
-  whileHover: { scale: 1.03 },
-  whileTap: { scale: 0.97 },
-  transition: { 
-    duration: 0.15,
-    ease: "easeOut"
-  }
-};
-
-const cardHover = {
-  whileHover: { 
-    y: -6,
-    scale: 1.01
-  },
-  transition: { 
-    duration: 0.2,
-    ease: "easeOut",
-    willChange: "transform"
-  }
-};
-
-const staggerContainer = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  transition: {
-    duration: 0.3,
-    staggerChildren: 0.08,
-    ease: "easeOut"
-  }
-};
-
-const slideInFromBottom = {
-  initial: { opacity: 0, y: 40 },
-  animate: { opacity: 1, y: 0 },
-  transition: { 
-    duration: 0.5,
-    ease: "easeOut",
-    willChange: "transform, opacity"
-  }
-};
-
-const quickFade = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  exit: { opacity: 0 },
-  transition: { duration: 0.2 }
-};
-
-const microSlide = {
-  initial: { opacity: 0, y: 10 },
-  animate: { opacity: 1, y: 0 },
-  transition: { 
-    duration: 0.25,
-    ease: "easeOut",
-    willChange: "transform, opacity"
-  }
-};
-
-// Property data with Unsplash images
+// Property data
 const showcaseProperties = [
   {
     id: 1,
     title: "Luxury Villa Paradise",
     location: "Beverly Hills, CA",
     price: "$2,850,000",
-    image: "/images/image1.jpg",
+    image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1200&h=800&fit=crop&crop=center",
     beds: 5,
     baths: 4,
     sqft: "3,200",
@@ -112,7 +36,7 @@ const showcaseProperties = [
     title: "Modern Downtown Penthouse",
     location: "Manhattan, NY",
     price: "$4,200,000",
-    image: "/images/image2.jpg",
+    image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&h=800&fit=crop&crop=center",
     beds: 3,
     baths: 3,
     sqft: "2,800",
@@ -126,7 +50,7 @@ const showcaseProperties = [
     title: "Oceanfront Estate",
     location: "Malibu, CA",
     price: "$6,750,000",
-    image: "/images/image3.jpg",
+    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200&h=800&fit=crop&crop=center",
     beds: 6,
     baths: 5,
     sqft: "4,500",
@@ -140,7 +64,7 @@ const showcaseProperties = [
     title: "Mountain Retreat Cabin",
     location: "Aspen, CO",
     price: "$1,850,000",
-    image: "/images/image1.jpg",
+    image: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1200&h=800&fit=crop&crop=center",
     beds: 4,
     baths: 3,
     sqft: "2,400",
@@ -155,6 +79,23 @@ const PropertyShowcase = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check for mobile screen size
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    // Initial check
+    checkMobile();
+    
+    // Add event listener for resize
+    window.addEventListener('resize', checkMobile);
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Auto-switch images
   useEffect(() => {
@@ -199,7 +140,7 @@ const PropertyShowcase = () => {
   return (
     <section className="relative w-full h-screen overflow-hidden bg-black">
       {/* Background Images */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 w-full h-full">
         <AnimatePresence mode="wait" custom={1}>
           <motion.div
             key={currentIndex}
@@ -213,7 +154,7 @@ const PropertyShowcase = () => {
               opacity: { duration: 0.6 },
               scale: { duration: 0.8 }
             }}
-            className="absolute inset-0"
+            className="absolute inset-0 w-full h-full"
             onMouseEnter={() => {
               setIsHovered(true);
               setShowDetails(true);
@@ -224,7 +165,8 @@ const PropertyShowcase = () => {
             }}
           >
             <Image
-              fill
+              width={1920}
+              height={1080}
               src={currentProperty.image}
               alt={currentProperty.title}
               className="w-full h-full object-cover"
@@ -237,56 +179,56 @@ const PropertyShowcase = () => {
       {/* Navigation Controls */}
       <motion.button
         onClick={prevSlide}
-        className="absolute left-8 top-1/2 -translate-y-1/2 z-20 bg-white/20 backdrop-blur-sm border border-white/30 text-white p-4 rounded-full hover:bg-white/30 transition-all duration-300"
+        className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-20 bg-white/20 backdrop-blur-sm border border-white/30 text-white p-3 sm:p-4 rounded-full hover:bg-white/30 transition-all duration-300"
         {...scaleOnHover}
         {...fadeInLeft}
       >
-        <ChevronLeft size={24} />
+        <ChevronLeft size={20} className="sm:w-6 sm:h-6" />
       </motion.button>
 
       <motion.button
         onClick={nextSlide}
-        className="absolute right-8 top-1/2 -translate-y-1/2 z-20 bg-white/20 backdrop-blur-sm border border-white/30 text-white p-4 rounded-full hover:bg-white/30 transition-all duration-300"
+        className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-20 bg-white/20 backdrop-blur-sm border border-white/30 text-white p-3 sm:p-4 rounded-full hover:bg-white/30 transition-all duration-300"
         {...scaleOnHover}
         {...fadeInRight}
       >
-        <ChevronRight size={24} />
+        <ChevronRight size={20} className="sm:w-6 sm:h-6" />
       </motion.button>
 
       {/* Main Content Overlay */}
-      <div className="absolute inset-0 flex items-center justify-center z-10">
-        <div className="container mx-auto px-8 text-center text-white">
+      <div className="absolute inset-0 flex items-center justify-center z-10 px-4 sm:px-8">
+        <div className="container mx-auto text-center text-white max-w-4xl">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
               {...slideInFromBottom}
-              className="max-w-4xl mx-auto"
+              className="w-full"
             >
               <motion.div
-                className="inline-flex items-center gap-2 bg-[#8B2131]/80 backdrop-blur-sm px-4 py-2 rounded-full mb-6"
+                className="inline-flex items-center gap-2 bg-[#8B2131]/80 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-full mb-4 sm:mb-6"
                 {...microSlide}
               >
-                <Home size={16} />
-                <span className="text-sm font-medium">{currentProperty.type}</span>
+                <Home size={14} className="sm:w-4 sm:h-4" />
+                <span className="text-xs sm:text-sm font-medium">{currentProperty.type}</span>
               </motion.div>
 
               <motion.h1
-                className="text-3xl md:text-4xl font-normal opacity-[0.5]"
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal opacity-[0.9] mb-2 sm:mb-4 px-4"
                 {...fadeInUp}
               >
                 {currentProperty.title}
               </motion.h1>
 
               <motion.div
-                className="flex items-center justify-center gap-2 mb-8"
+                className="flex items-center justify-center gap-2 mb-6 sm:mb-8"
                 {...microSlide}
               >
-                <MapPin size={20} className="text-[#8B2131]" />
-                <span className="text-xl">{currentProperty.location}</span>
+                <MapPin size={16} className="text-[#8B2131] sm:w-5 sm:h-5" />
+                <span className="text-lg sm:text-xl">{currentProperty.location}</span>
               </motion.div>
 
               <motion.div
-                className="text-3xl md:text-4xl text-[#8B2131] mb-8"
+                className="text-2xl sm:text-3xl md:text-4xl text-[#8B2131] mb-6 sm:mb-8"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
@@ -298,45 +240,45 @@ const PropertyShowcase = () => {
         </div>
       </div>
 
-      {/* Property Details on Hover - Reduced Opacity & Font Weight */}
+      {/* Property Details on Hover - Mobile: Always Show on Small Screens */}
       <AnimatePresence>
-        {showDetails && (
+        {(showDetails || isMobile) && (
           <motion.div
             {...slideInFromBottom}
-            className="absolute bottom-8 left-8 right-8 z-20"
+            className="absolute bottom-4 sm:bottom-8 left-4 right-4 sm:left-8 sm:right-8 z-20"
           >
-            <div className="bg-white/8 backdrop-blur-lg rounded-2xl border border-white/15 p-8 max-w-6xl mx-auto">
+            <div className="bg-white/8 backdrop-blur-lg rounded-xl sm:rounded-2xl border border-white/15 p-4 sm:p-6 lg:p-8 max-w-6xl mx-auto">
               <motion.div 
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
                 {...staggerContainer}
               >
                 {/* Property Stats */}
-                <motion.div {...microSlide} className="space-y-4">
-                  <h3 className="text-white/80 text-lg font-normal mb-4">Property Details</h3>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="flex items-center gap-3 text-white/60">
-                      <Bed size={18} className="text-[#8B2131]/80" />
-                      <span className="text-sm font-light">{currentProperty.beds} Beds</span>
+                <motion.div {...microSlide} className="space-y-3 sm:space-y-4">
+                  <h3 className="text-white/80 text-base sm:text-lg font-normal mb-3 sm:mb-4">Property Details</h3>
+                  <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                    <div className="flex items-center gap-2 sm:gap-3 text-white/60">
+                      <Bed size={16} className="text-[#8B2131]/80 sm:w-[18px] sm:h-[18px]" />
+                      <span className="text-xs sm:text-sm font-light">{currentProperty.beds} Beds</span>
                     </div>
-                    <div className="flex items-center gap-3 text-white/60">
-                      <Bath size={18} className="text-[#8B2131]/80" />
-                      <span className="text-sm font-light">{currentProperty.baths} Baths</span>
+                    <div className="flex items-center gap-2 sm:gap-3 text-white/60">
+                      <Bath size={16} className="text-[#8B2131]/80 sm:w-[18px] sm:h-[18px]" />
+                      <span className="text-xs sm:text-sm font-light">{currentProperty.baths} Baths</span>
                     </div>
-                    <div className="flex items-center gap-3 text-white/60">
-                      <Square size={18} className="text-[#8B2131]/80" />
-                      <span className="text-sm font-light">{currentProperty.sqft} sqft</span>
+                    <div className="flex items-center gap-2 sm:gap-3 text-white/60">
+                      <Square size={16} className="text-[#8B2131]/80 sm:w-[18px] sm:h-[18px]" />
+                      <span className="text-xs sm:text-sm font-light">{currentProperty.sqft} sqft</span>
                     </div>
-                    <div className="flex items-center gap-3 text-white/60">
-                      <Star size={18} className="text-yellow-400/80 fill-current" />
-                      <span className="text-sm font-light">{currentProperty.rating}</span>
+                    <div className="flex items-center gap-2 sm:gap-3 text-white/60">
+                      <Star size={16} className="text-yellow-400/80 fill-current sm:w-[18px] sm:h-[18px]" />
+                      <span className="text-xs sm:text-sm font-light">{currentProperty.rating}</span>
                     </div>
                   </div>
                 </motion.div>
 
                 {/* Features */}
-                <motion.div {...microSlide} className="space-y-4">
-                  <h3 className="text-white/80 text-lg font-normal mb-4">Key Features</h3>
-                  <div className="grid grid-cols-2 gap-2">
+                <motion.div {...microSlide} className="space-y-3 sm:space-y-4">
+                  <h3 className="text-white/80 text-base sm:text-lg font-normal mb-3 sm:mb-4">Key Features</h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {currentProperty.features.map((feature, index) => (
                       <motion.div
                         key={feature}
@@ -352,24 +294,24 @@ const PropertyShowcase = () => {
                 </motion.div>
 
                 {/* Description & Actions */}
-                <motion.div {...microSlide} className="space-y-4">
-                  <h3 className="text-white/80 text-lg font-normal mb-4">Description</h3>
-                  <p className="text-white/60 text-sm font-light leading-relaxed mb-6">
+                <motion.div {...microSlide} className="space-y-3 sm:space-y-4 md:col-span-2 lg:col-span-1">
+                  <h3 className="text-white/80 text-base sm:text-lg font-normal mb-3 sm:mb-4">Description</h3>
+                  <p className="text-white/60 text-xs sm:text-sm font-light leading-relaxed mb-4 sm:mb-6">
                     {currentProperty.description}
                   </p>
-                  <div className="flex gap-4">
+                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                     <motion.button
                       {...cardHover}
-                      className="flex items-center gap-2 bg-[#8B2131]/80 text-white px-5 py-2.5 rounded-lg font-light text-sm hover:bg-[#8B2131]/70 transition-colors"
+                      className="flex items-center justify-center gap-2 bg-[#8B2131]/80 text-white px-4 sm:px-5 py-2.5 rounded-lg font-light text-xs sm:text-sm hover:bg-[#8B2131]/70 transition-colors"
                     >
-                      <Eye size={16} />
+                      <Eye size={14} className="sm:w-4 sm:h-4" />
                       View Details
                     </motion.button>
                     <motion.button
                       {...cardHover}
-                      className="flex items-center gap-2 bg-white/15 backdrop-blur-sm text-white/80 px-5 py-2.5 rounded-lg font-light text-sm hover:bg-white/20 transition-colors border border-white/20"
+                      className="flex items-center justify-center gap-2 bg-white/15 backdrop-blur-sm text-white/80 px-4 sm:px-5 py-2.5 rounded-lg font-light text-xs sm:text-sm hover:bg-white/20 transition-colors border border-white/20"
                     >
-                      <Heart size={16} />
+                      <Heart size={14} className="sm:w-4 sm:h-4" />
                       Save
                     </motion.button>
                   </div>
@@ -381,12 +323,12 @@ const PropertyShowcase = () => {
       </AnimatePresence>
 
       {/* Dots Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-3">
+      <div className="absolute bottom-20 sm:bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-2 sm:gap-3">
         {showcaseProperties.map((_, index) => (
           <motion.button
             key={index}
             onClick={() => setCurrentIndex(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+            className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
               index === currentIndex 
                 ? 'bg-[#8B2131] scale-125' 
                 : 'bg-white/40 hover:bg-white/60'

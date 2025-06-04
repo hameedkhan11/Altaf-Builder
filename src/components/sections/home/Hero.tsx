@@ -78,10 +78,10 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4"
+            className="flex flex-col items-center sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4"
           >
             <motion.button
-              className="bg-[#8B2131] text-white cursor-pointer hover:bg-transparent px-4  rounded-md font-semibold  hover:border-2 hover:border-[#8B2131] hover:text-white transition-colors"
+              className="bg-[#B91C1C] text-white py-2 cursor-pointer hover:bg-transparent px-4  rounded-md font-semibold  hover:border-2 hover:border-[#8B2131] hover:text-white transition-colors"
               {...scaleOnHover}
             >
               <Home size={20} className="inline-block mr-2" />
