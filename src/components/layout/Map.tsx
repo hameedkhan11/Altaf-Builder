@@ -472,8 +472,8 @@ const RealEstateLeafletMap: React.FC = () => {
     <>
       <GlobalStyles />
 
-      <section className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+      <section className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-16">
+        <div className=" mx-auto">
           {/* Optimized Header Animation */}
           <motion.div
             className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 sm:mb-12 gap-6"
@@ -485,7 +485,7 @@ const RealEstateLeafletMap: React.FC = () => {
               viewport={viewportOnce}
               transition={{ ...fadeInLeft.transition, delay: delays.medium }}
             >
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl dark:text-white mb-2">
+              <h2 className="text-2xl sm:text-3xl dark:text-white mb-2">
                 EXPLORE PROPERTIES
               </h2>
               <motion.div
@@ -802,7 +802,7 @@ const RealEstateLeafletMap: React.FC = () => {
               <Card className="dark:bg-gray-900 shadow-xl">
                 <CardContent className="p-4 sm:p-6">
                   <div className="flex justify-between items-center mb-4">
-                    <h3 className="text-lg sm:text-xl font-bold dark:text-white">
+                    <h3 className="text-lg sm:text-xl dark:text-white">
                       Filter Properties
                     </h3>
                     <Button

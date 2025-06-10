@@ -54,8 +54,8 @@ const Newsletter = () => {
   const imageVariant = getPerformanceVariant(fadeInRight);
 
   return (
-    <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 w-full">
-      <div className="max-w-7xl mx-auto w-full">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-16 w-full">
+      <div className=" mx-auto w-full">
         <motion.div 
           className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center w-full"
           variants={staggerContainer}
@@ -73,7 +73,7 @@ const Newsletter = () => {
           >
             {/* Header with optimized animation */}
             <motion.h2 
-              className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 dark:text-white"
+              className="text-2xl sm:text-3xl md:text-4xl mb-4 sm:mb-6 dark:text-white"
               variants={headerVariant}
               initial="initial"
               whileInView="animate"

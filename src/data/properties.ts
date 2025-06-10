@@ -10,8 +10,7 @@ export const properties: Property[] = [
     baths: 2,
     sqft: "1,450",
     badgeColor: "bg-indigo-600",
-    image:
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    image: "/images/property1.jpg",
     coordinates: [40.758, -73.9855],
     badge: "New Listing",
     agent: {
@@ -29,8 +28,7 @@ export const properties: Property[] = [
     baths: 3,
     sqft: "2,100",
     badgeColor: "bg-indigo-600",
-    image:
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    image: "/images/image2.jpg",
     coordinates: [40.7736, -73.9566],
     badge: "Premium",
     agent: {
@@ -48,8 +46,7 @@ export const properties: Property[] = [
     beds: 2,
     baths: 2,
     sqft: "1,200",
-    image:
-      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    image: "/images/property.PNG",
     coordinates: [40.6962, -73.9969],
     badge: "Hot Deal",
     agent: {

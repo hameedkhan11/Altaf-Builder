@@ -53,17 +53,17 @@ const Testimonials = () => {
   }, [canAnimate]);
 
   return (
-    <section className="py-24 px-4 relative">
+    <section className="py-24 px-16 relative">
       <div className="absolute inset-0 bg-cover bg-center opacity-10" />
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="mx-auto relative z-10">
         {/* Header Section - Performance Optimized */}
         <motion.div
           className="text-center mb-16"
           {...headerAnimation}
         >
           <motion.h2
-            className="text-3xl md:text-4xl font-bold mb-4 dark:text-white"
+            className="text-3xl md:text-4xl mb-4 dark:text-white"
             {...titleAnimation}
           >
             What Our Clients Say
@@ -132,13 +132,13 @@ const Testimonials = () => {
                 {...cardAnimation}
                 className="h-full"
               >
-                <Card className="p-8 h-full hover:shadow-xl transition-shadow duration-300 dark:bg-gray-900">
+                <Card className="p-8 h-full hover:shadow-xl transition-shadow duration-300">
                   <CardContent className="p-0">
                     <motion.div
                       className="flex items-center mb-6"
                       {...profileAnimation}
                     >
-                      <div className="w-12 h-12 bg-[#8B2131] rounded-full flex items-center justify-center mr-4">
+                      <div className="w-12 h-12 bg-[rgb(140,46,71)] rounded-full flex items-center justify-center mr-4">
                         <Quote className="h-6 w-6 text-white" />
                       </div>
                       <div>
@@ -159,7 +159,7 @@ const Testimonials = () => {
                     </motion.p>
 
                     <motion.div
-                      className="flex text-yellow-500"
+                      className="flex text-[rgb(140,46,71)]"
                       {...starsAnimation}
                     >
                       {Array.from({ length: 5 }).map((_, i) => (

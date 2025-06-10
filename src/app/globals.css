@@ -5,8 +5,9 @@
 
 @font-face {
   font-family: "Chronicle Display";
-  src: url("/fonts/chronicle-display/ChronicleDisplay-XLight.woff2") format("woff2"),
-       url("/fonts/chronicle-display/ChronicleDisplay-XLight.woff") format("woff");
+  src: url("/fonts/chronicle-display/ChronicleDisplay-XLight.woff2")
+      format("woff2"),
+    url("/fonts/chronicle-display/ChronicleDisplay-XLight.woff") format("woff");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -15,12 +16,19 @@
 @font-face {
   font-family: "Optima";
   src: url("/fonts/optima/Optima.woff2") format("woff2"),
-       url("/fonts/optima/Optima.woff") format("woff");
+    url("/fonts/optima/Optima.woff") format("woff");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Diagrid";
+  src: url("/fonts/Bwdiagrid.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
 @theme inline {
   --color-background: var(--background);
@@ -29,6 +37,7 @@
   --font-mono: var(--font-geist-mono);
   --font-chronicle: "Chronicle Display", serif;
   --font-optima: Optima, "Segoe UI", "Helvetica Neue", sans-serif;
+  --font-diagrid: "Diagrid", sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -100,7 +109,7 @@
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
+  --background: oklch(0 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
@@ -134,7 +143,10 @@
 }
 
 @layer base {
-  * {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
     @apply border-border outline-ring/50;
   }
 
@@ -144,13 +156,32 @@
     line-height: 1.6;
   }
 
-  h1, h2, h3 {
-    font-family: var(--font-optima), Optima, "Segoe UI", "Helvetica Neue", sans-serif;
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-optima), Optima;
     letter-spacing: -0.01em;
     line-height: 1.2;
+    font-weight: 300;
+    color: rgb(140, 46, 71);
+    box-sizing: border-box;
+    font-family: Optima;
+    font-size: 1.8rem;
+    font-weight: 300;
+    letter-spacing: 0.784px;
+    margin-block-end: 15px;
+    margin-block-start: 0px;
+    margin-bottom: 15px;
+    margin-inline-end: 0px;
+    margin-inline-start: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    text-transform: uppercase;
+    unicode-bidi: isolate;
   }
 
-  h1 {
+  /* h1 {
     font-size: 2.5rem;
     font-weight: 800;
   }
@@ -163,9 +194,13 @@
   h3 {
     font-size: 1.5rem;
     font-weight: 600;
-  }
+  } */
 
-  h4, h5, h6, p, span {
+  h4,
+  h5,
+  h6,
+  p,
+  span {
     font-family: var(--font-chronicle), "Chronicle Display", serif;
     letter-spacing: 0.005em;
     line-height: 1.5;
@@ -200,6 +235,30 @@
 
 a {
   font-weight: 500;
+}
+
+/* Diagrid Font Utility Classes */
+.font-diagrid {
+  font-family: var(--font-diagrid), "Diagrid", sans-serif;
+  font-feature-settings: "kern" 0;
+  font-kerning: none;
+  font-variation-settings: normal;
+  color: rgb(140, 46, 71);
+  font-size: 30.8974px;
+}
+
+.diagrid-large {
+  font-family: var(--font-diagrid), "Diagrid", sans-serif;
+  font-size: 79.8974px;
+  font-weight: 400;
+  line-height: 79.8974px;
+  letter-spacing: -1.99744px;
+  color: rgb(138, 108, 96);
+  display: block;
+  height: 239.7px;
+  font-feature-settings: "kern" 0;
+  font-kerning: none;
+  font-variation-settings: normal;
 }
 
 /* Add this to your global CSS file (globals.css or similar) */
@@ -268,7 +327,8 @@ a {
 
 /* Pulse animation variations */
 @keyframes pulse-soft {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.4;
     transform: scale(1);
   }
@@ -304,7 +364,8 @@ a {
 
 /* Floating animation for decorative elements */
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px) rotate(0deg);
   }
   33% {
@@ -321,7 +382,8 @@ a {
 
 /* Gradient shift animation */
 @keyframes gradient-shift {
-  0%, 100% {
+  0%,
+  100% {
     background-position: 0% 50%;
   }
   50% {

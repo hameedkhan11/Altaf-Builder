@@ -200,3 +200,48 @@ export interface Delays {
 export interface ViewportOnce {
   once: boolean;
 }
+
+// types/blog.ts
+export interface BlogPost {
+  id: string;
+  title: string;
+  excerpt: string;
+  image: string;
+  date: string;
+  category: 'NEWS' | 'BLOG';
+  slug: string;
+  readTime?: string;
+}
+
+export interface BlogSectionProps {
+  posts: BlogPost[];
+  title?: string;
+  showSeeAll?: boolean;
+}
+
+export interface BlogCardProps {
+  post: BlogPost;
+  variant?: 'default' | 'large' | 'small';
+}
+
+export interface CEOMessageProps {
+  title?: string;
+  content: string[];
+  ceoName: string;
+  ceoTitle: string;
+  ceoImage: string;
+}
+
+// types/amenities.ts
+export interface AmenityData {
+  id: string;
+  name: string;
+  title: string;
+  description: string;
+  image: string;
+  features: string[];
+}
+
+export interface AmenitiesData {
+  [key: string]: AmenityData;
+}

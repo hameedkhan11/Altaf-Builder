@@ -78,34 +78,19 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative h-screen overflow-hidden z-0">
-      {/* Background Image - Critical content, minimal animation */}
-      <motion.div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: "url('/images/ravi-patel-qsMGnaxDGuw-unsplash.jpg')",
-          y: heroY,
-        }}
-        {...quickFade}
-      />
-      
-      {/* Video - Load after critical content with lazy animation */}
+    <section className="h-screen overflow-hidden">
+      {/* Video Background - Full opacity, positioned behind everything */}
       <motion.video
-        src="/videos/video.mp4"
+        src="/videos/video2.mp4"
         autoPlay
         loop
         muted
-        className="absolute inset-0 w-full h-full object-cover"
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover opacity-100 z-0"
         {...createLazyAnimation(quickFade)}
       />
-      
-      {/* Gradient overlay with quick fade */}
-      <motion.div 
-        className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/20"
-        {...quickFade}
-      />
 
-      <div className="container mx-auto px-6 h-full flex items-center relative z-10">
+      <div className="container mx-auto w-full px-6 h-full flex items-center relative z-20">
         {/* Main content container with optimized stagger */}
         <motion.div
           variants={staggerContainer}
@@ -118,13 +103,13 @@ const HeroSection = () => {
             variants={deferredAnimation(heroTitleVariant)}
             initial="initial"
             animate="animate"
-            className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-6 leading-tight font-chronicle"
+            className="text-2xl md:text-3xl lg:text-6xl leading-tight text-white"
           >
             {COMPANY_INFO.tagline}
           </motion.h1>
 
           {/* Hero Description with optimized fade in */}
-          <motion.p
+          {/* <motion.p
             variants={deferredAnimation(heroDescriptionVariant)}
             initial="initial"
             animate="animate"
@@ -133,7 +118,7 @@ const HeroSection = () => {
             {COMPANY_INFO.description}
           </motion.p>
 
-          {/* CTA Buttons with staggered animation */}
+          CTA Buttons with staggered animation
           <motion.div
             variants={deferredAnimation(ctaButtonsVariant)}
             initial="initial"
@@ -157,17 +142,26 @@ const HeroSection = () => {
                 Contact Us
               </Button>
             </motion.div>
-          </motion.div>
+          </motion.div> */}
         </motion.div>
       </div>
 
-      {/* Scroll indicator with performance-aware pulse */}
+      {/* Scroll indicator with higher z-index and proper clickable area */}
       <motion.div
         variants={scrollIndicatorVariant}
         animate="animate"
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white z-20 cursor-pointer"
+        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white z-30 cursor-pointer p-4 hover:bg-white/10 rounded-full transition-colors duration-300"
         onClick={handleScrollDown}
         {...scaleOnHover}
+        role="button"
+        aria-label="Scroll to next section"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            handleScrollDown();
+          }
+        }}
       >
         <ChevronDown className="h-8 w-8" />
       </motion.div>

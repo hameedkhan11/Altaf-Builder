@@ -15,7 +15,8 @@ import {
   getPerformanceMode,
   batchStaggerContainer,
   batchStaggerItem,
-  delays
+  delays,
+  simpleFadeSlide
 } from '@/lib/constants';
 
 import Image from 'next/image';
@@ -27,7 +28,7 @@ const showcaseProperties = [
     title: "Luxury Villa Paradise",
     location: "Beverly Hills, CA",
     price: "$2,850,000",
-    image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1200&h=800&fit=crop&crop=center",
+    image: "/images/property1.jpg",
     beds: 5,
     baths: 4,
     sqft: "3,200",
@@ -41,7 +42,7 @@ const showcaseProperties = [
     title: "Modern Downtown Penthouse",
     location: "Manhattan, NY",
     price: "$4,200,000",
-    image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&h=800&fit=crop&crop=center",
+    image: "/images/property2.jpg",
     beds: 3,
     baths: 3,
     sqft: "2,800",
@@ -55,7 +56,7 @@ const showcaseProperties = [
     title: "Oceanfront Estate",
     location: "Malibu, CA",
     price: "$6,750,000",
-    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200&h=800&fit=crop&crop=center",
+    image: "/images/property3.jpg",
     beds: 6,
     baths: 5,
     sqft: "4,500",
@@ -84,6 +85,7 @@ const PropertyShowcase = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [direction, setDirection] = useState(0);
 
   // Memoize performance checks
   const animationEnabled = useMemo(() => shouldAnimate(), []);
@@ -116,283 +118,88 @@ const PropertyShowcase = () => {
   useEffect(() => {
     if (!isHovered && animationEnabled) {
       const interval = setInterval(() => {
+        setDirection(1);
         setCurrentIndex((prev) => (prev + 1) % showcaseProperties.length);
-      }, 4000);
+      }, 8000);
       return () => clearInterval(interval);
     }
   }, [isHovered, animationEnabled]);
 
   // Memoized navigation functions
   const nextSlide = useCallback(() => {
+    setDirection(1);
     setCurrentIndex((prev) => (prev + 1) % showcaseProperties.length);
   }, []);
 
   const prevSlide = useCallback(() => {
+    setDirection(-1);
     setCurrentIndex((prev) => (prev - 1 + showcaseProperties.length) % showcaseProperties.length);
   }, []);
 
-  // Memoized slide variants - only create once
-  const slideVariants = useMemo(() => ({
-    enter: (direction: number) => ({
-      x: direction > 0 ? 1000 : -1000,
-      opacity: 0,
-      scale: 1.1
-    }),
-    center: {
-      zIndex: 1,
-      x: 0,
-      opacity: 1,
-      scale: 1
-    },
-    exit: (direction: number) => ({
-      zIndex: 0,
-      x: direction < 0 ? 1000 : -1000,
-      opacity: 0,
-      scale: 0.9
-    })
-  }), []);
-
-  // Memoized transition config based on performance mode
-  const slideTransition = useMemo(() => ({
-    x: { 
-      type: "spring" as const, 
-      stiffness: performanceMode === "fast" ? 400 : 300, 
-      damping: performanceMode === "fast" ? 35 : 30 
-    },
-    opacity: { duration: performanceMode === "fast" ? 0.4 : 0.6 },
-    scale: { duration: performanceMode === "fast" ? 0.6 : 0.8 }
-  }), [performanceMode]);
-
-  // Memoized price animation config
-  const priceAnimation = useMemo(() => ({
-    initial: { opacity: 0, scale: 0.8 },
-    animate: { opacity: 1, scale: 1 },
-    transition: { 
-      delay: animationEnabled ? 0.5 : 0, 
-      type: "spring" as const, 
-      stiffness: performanceMode === "fast" ? 250 : 200,
-      duration: animationEnabled ? undefined : 0
-    }
-  }), [animationEnabled, performanceMode]);
-
-  // Show details condition - memoized to prevent unnecessary re-renders
-  const showDetails = useMemo(() => isMobile || isHovered, [isMobile, isHovered]);
-
   return (
-    <section className="relative w-full h-screen overflow-hidden bg-black">
-      {/* Background Images */}
-      <div className="absolute inset-0 w-full h-full">
-        <AnimatePresence mode="wait" custom={1}>
+    <div className="relative h-screen w-full overflow-hidden">
+      {/* Background Images with Simple Fade Effect */}
+      <div className="absolute inset-0 bg-black">
+        <AnimatePresence initial={false} mode="popLayout">
           <motion.div
             key={currentIndex}
-            custom={1}
-            variants={slideVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={slideTransition}
-            className="absolute inset-0 w-full h-full"
+            {...simpleFadeSlide}
+            className="absolute inset-0 z-10"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            <Image
-              width={1920}
-              height={1080}
-              src={currentProperty.image}
-              alt={currentProperty.title}
-              className="w-full h-full object-cover"
-              priority={currentIndex === 0}
-              sizes="100vw"
+            <div 
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+              style={{ backgroundImage: `url(${currentProperty.image})` }}
             />
-            <div className="absolute inset-0 bg-black/30" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
           </motion.div>
         </AnimatePresence>
       </div>
 
-      {/* Navigation Controls - Optimized with memoized animations */}
+      {/* Navigation Controls - Only show on larger screens or when hovered */}
       <motion.button
         onClick={prevSlide}
-        className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-20 bg-white/20 backdrop-blur-sm border border-white/30 text-white p-3 sm:p-4 rounded-full hover:bg-white/30 transition-all duration-300"
+        className={`absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-all duration-300 ${
+          isMobile ? 'opacity-0 pointer-events-none' : 'opacity-100'
+        } md:opacity-100`}
         {...scaleOnHover}
         {...fadeInLeft}
       >
-        <ChevronLeft size={20} className="sm:w-6 sm:h-6" />
+        <ChevronLeft size={24} />
       </motion.button>
 
       <motion.button
         onClick={nextSlide}
-        className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-20 bg-white/20 backdrop-blur-sm border border-white/30 text-white p-3 sm:p-4 rounded-full hover:bg-white/30 transition-all duration-300"
+        className={`absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-all duration-300 ${
+          isMobile ? 'opacity-0 pointer-events-none' : 'opacity-100'
+        } md:opacity-100`}
         {...scaleOnHover}
         {...fadeInRight}
       >
-        <ChevronRight size={20} className="sm:w-6 sm:h-6" />
+        <ChevronRight size={24} />
       </motion.button>
 
-      {/* Main Content Overlay - Simplified animation structure */}
-      <div className="absolute inset-0 flex items-center justify-center z-10 px-4 sm:px-8">
-        <div className="container mx-auto text-center text-white max-w-4xl">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentIndex}
-              {...slideInFromBottom}
-              className="w-full"
-            >
-              <motion.div
-                className="inline-flex items-center gap-2 bg-[#8B2131]/80 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-full mb-4 sm:mb-6"
-                {...microSlide}
-              >
-                <Home size={14} className="sm:w-4 sm:h-4" />
-                <span className="text-xs sm:text-sm font-medium">{currentProperty.type}</span>
-              </motion.div>
-
-              <motion.h1
-                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal opacity-[0.9] mb-2 sm:mb-4 px-4"
-                {...fadeInUp}
+      {/* Main Content Overlay */}
+      <div className="absolute inset-0 z-10 flex items-end">
+        <div className="w-full p-6 sm:p-8 lg:p-12">
+          <motion.div 
+            className="max-w-4xl mx-auto"
+            {...fadeInUp}
+          >
+            <motion.div className="mb-6" {...microSlide}>
+              
+              <motion.h1 
+                className="text-2xl sm:text-3xl text-center lg:text-5xl text-white leading-tight"
+                {...slideInFromBottom}
               >
                 {currentProperty.title}
               </motion.h1>
-
-              <motion.div
-                className="flex items-center justify-center gap-2 mb-6 sm:mb-8"
-                {...microSlide}
-              >
-                <MapPin size={16} className="text-[#8B2131] sm:w-5 sm:h-5" />
-                <span className="text-lg sm:text-xl">{currentProperty.location}</span>
-              </motion.div>
-
-              <motion.div
-                className="text-2xl sm:text-3xl md:text-4xl text-[#8B2131] mb-6 sm:mb-8"
-                {...priceAnimation}
-              >
-                {currentProperty.price}
-              </motion.div>
             </motion.div>
-          </AnimatePresence>
+          </motion.div>
         </div>
       </div>
-
-      {/* Property Details Block - Optimized with batch stagger */}
-      <AnimatePresence>
-        {showDetails && (
-          <motion.div
-            key="details"
-            {...slideInFromBottom}
-            exit={slideInFromBottom.initial}
-            className="absolute bottom-4 sm:bottom-8 left-4 right-4 sm:left-8 sm:right-8 z-20"
-          >
-            <div className="bg-white/8 backdrop-blur-lg rounded-xl sm:rounded-2xl border border-white/15 p-4 sm:p-6 lg:p-8 max-w-6xl mx-auto">
-              <motion.div
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
-                {...batchStaggerContainer}
-              >
-                {/* Property Stats */}
-                <motion.div {...batchStaggerItem} className="space-y-3 sm:space-y-4">
-                  <h3 className="text-white/80 text-base sm:text-lg font-normal mb-3 sm:mb-4">Property Details</h3>
-                  <div className="grid grid-cols-2 gap-3 sm:gap-4">
-                    <div className="flex items-center gap-2 sm:gap-3 text-white/60">
-                      <Bed size={16} className="text-[#8B2131]/80 sm:w-[18px] sm:h-[18px]" />
-                      <span className="text-xs sm:text-sm font-light">{currentProperty.beds} Beds</span>
-                    </div>
-                    <div className="flex items-center gap-2 sm:gap-3 text-white/60">
-                      <Bath size={16} className="text-[#8B2131]/80 sm:w-[18px] sm:h-[18px]" />
-                      <span className="text-xs sm:text-sm font-light">{currentProperty.baths} Baths</span>
-                    </div>
-                    <div className="flex items-center gap-2 sm:gap-3 text-white/60">
-                      <Square size={16} className="text-[#8B2131]/80 sm:w-[18px] sm:h-[18px]" />
-                      <span className="text-xs sm:text-sm font-light">{currentProperty.sqft} sqft</span>
-                    </div>
-                    <div className="flex items-center gap-2 sm:gap-3 text-white/60">
-                      <Star size={16} className="text-yellow-400/80 fill-current sm:w-[18px] sm:h-[18px]" />
-                      <span className="text-xs sm:text-sm font-light">{currentProperty.rating}</span>
-                    </div>
-                  </div>
-                </motion.div>
-
-                {/* Features - Optimized stagger */}
-                <motion.div {...batchStaggerItem} className="space-y-3 sm:space-y-4">
-                  <h3 className="text-white/80 text-base sm:text-lg font-normal mb-3 sm:mb-4">Key Features</h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {currentProperty.features.map((feature, index) => (
-                      <motion.div
-                        key={feature}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ 
-                          delay: delays.stagger(index), 
-                          duration: animationEnabled ? (performanceMode === "fast" ? 0.2 : 0.25) : 0 
-                        }}
-                        className="bg-white/8 backdrop-blur-sm rounded-lg px-3 py-2 text-xs text-white/60 font-light"
-                      >
-                        {feature}
-                      </motion.div>
-                    ))}
-                  </div>
-                </motion.div>
-
-                {/* Description & Actions */}
-                <motion.div {...batchStaggerItem} className="space-y-3 sm:space-y-4 md:col-span-2 lg:col-span-1">
-                  <h3 className="text-white/80 text-base sm:text-lg font-normal mb-3 sm:mb-4">Description</h3>
-                  <p className="text-white/60 text-xs sm:text-sm font-light leading-relaxed mb-4 sm:mb-6">
-                    {currentProperty.description}
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                    <motion.button
-                      {...cardHover}
-                      className="flex items-center justify-center gap-2 bg-[#8B2131]/80 text-white px-4 sm:px-5 py-2.5 rounded-lg font-light text-xs sm:text-sm hover:bg-[#8B2131]/70 transition-colors"
-                    >
-                      <Eye size={14} className="sm:w-4 sm:h-4" />
-                      View Details
-                    </motion.button>
-                    <motion.button
-                      {...cardHover}
-                      className="flex items-center justify-center gap-2 bg-white/15 backdrop-blur-sm text-white/80 px-4 sm:px-5 py-2.5 rounded-lg font-light text-xs sm:text-sm hover:bg-white/20 transition-colors border border-white/20"
-                    >
-                      <Heart size={14} className="sm:w-4 sm:h-4" />
-                      Save
-                    </motion.button>
-                  </div>
-                </motion.div>
-              </motion.div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Dots Indicator - Simplified */}
-      <div className="absolute bottom-20 sm:bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-2 sm:gap-3">
-        {showcaseProperties.map((_, index) => (
-          <motion.button
-            key={index}
-            onClick={() => setCurrentIndex(index)}
-            className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
-              index === currentIndex
-                ? 'bg-[#8B2131] scale-125'
-                : 'bg-white/40 hover:bg-white/60'
-            }`}
-            {...scaleOnHover}
-            {...quickFade}
-          />
-        ))}
-      </div>
-
-      {/* Progress Bar - Simplified logic */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-white/20 z-20">
-        {animationEnabled && !isHovered ? (
-          <motion.div
-            className="h-full bg-gradient-to-r from-[#8B2131] to-[#B91C1C]"
-            initial={{ width: "0%" }}
-            animate={{ width: "100%" }}
-            key={currentIndex}
-            transition={{
-              duration: 4,
-              ease: "linear"
-            }}
-          />
-        ) : (
-          <div className="h-full bg-gradient-to-r from-[#8B2131] to-[#B91C1C] w-full" />
-        )}
-      </div>
-    </section>
+    </div>
   );
 };
 

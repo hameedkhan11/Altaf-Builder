@@ -65,16 +65,6 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property, index }) =
           >
             {property.title}
           </motion.h3>
-          
-          <motion.p 
-            className="text-muted-foreground mb-3 sm:mb-4 text-xs sm:text-sm line-clamp-1"
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.1 + 0.5 }}
-          >
-            📍 {property.location}
-          </motion.p>
                  
           <motion.div 
             className="flex flex-wrap items-center gap-2 sm:gap-4 mb-3 sm:mb-4 text-xs sm:text-sm"

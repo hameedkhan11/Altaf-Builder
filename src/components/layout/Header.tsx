@@ -8,6 +8,7 @@ import { useTheme } from "@/hooks/useTheme";
 import { NAVIGATION_ITEMS } from "@/lib/constants";
 import MobileMenu from "./MobileMenu";
 import Image from "next/image";
+import Link from "next/link";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -30,32 +31,17 @@ const Header = () => {
       <motion.header
         className={`fixed w-full h-20 transition-all duration-500 ease-in-out ${
           scrolled
-            ? "z-50 backdrop-blur-lg border-b bg-white/95 dark:bg-purple-950/95 shadow-lg"
-            : "z-20 bg-transparent"
-        }`}
+            ? "z-50 backdrop-blur-lg border-b bg-white dark:bg-purple-950/95 shadow-lg"
+            : "z-50"
+        } bg:opacity-0`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6 }}
       >
         {/* Background image overlay for initial state */}
         {!scrolled && (
-          <div
-            className="absolute inset-0 bg-cover bg-center opacity-20"
-            style={{
-              backgroundImage:
-                "url('/images/ravi-patel-qsMGnaxDGuw-unsplash.jpg')",
-            }}
-          />
+          <div className="absolute inset-0 bg-cover bg-center opacity-0" />
         )}
-
-        {/* Gradient overlay for better text readability */}
-        <div
-          className={`absolute inset-0 transition-all duration-500 ${
-            scrolled
-              ? "bg-transparent"
-              : "bg-gradient-to-r from-black/60 via-black/40 to-black/20"
-          }`}
-        />
 
         <div className="container mx-auto px-6 h-full relative z-10">
           <div className="flex items-center justify-between h-full">
@@ -88,22 +74,21 @@ const Header = () => {
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
               {NAVIGATION_ITEMS.map((item) => (
-                <a
+                <Link
                   key={item.name}
                   href={item.href}
                   className={`transition-all duration-500 font-medium relative group ${
                     scrolled
-                      ? "text-foreground hover:text-indigo-600"
-                      : "text-white hover:text-indigo-300"
+                      ? "text-foreground hover:text-[rgb(140,46,71)] hover:font-bold"
+                      : "text-white hover:text-[rgb(140,46,71)] hover:font-bold"
                   }`}
                 >
                   {item.name}
                   <span
-                    className={`absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full ${
-                      scrolled ? "bg-indigo-600" : "bg-indigo-400"
+                    className={`absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full bg-[rgb(140,46,71)]
                     }`}
                   />
-                </a>
+                </Link>
               ))}
 
               <div className="flex items-center space-x-4">

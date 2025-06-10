@@ -1,9 +1,8 @@
-
 "use client"
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { projects } from '@/data/projects'; // Assuming this exports an array of objects
-import { ProjectCard } from '@/components/common/ProjectCard';
+import { ProjectCard } from '@/components/common/ProjectCard'; // Your ProjectCard component
 import {
   batchStagger,
   shouldAnimate,
@@ -26,34 +25,30 @@ interface Project {
   // category: string;
 }
 
-
 // Memoized constants
 const UNSPLASH_IMAGES = [
-  'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80',
-  'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=800&q=80',
-  'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80',
-  'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80',
-  'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80',
-  'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80',
+  '/images/apartment1.jpeg',
+  '/images/apartment2.jpeg',
+  '/images/apartment3.jpg',
 ];
 
 const DISPLAY_COUNT = 6;
 
 // Memoized components for better performance
-const StaticHeader = React.memo(() => (
-  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 gap-6">
-    <div>
-      <h2 className="text-3xl sm:text-4xl dark:text-white mb-2">
-        LATEST PROJECTS
-      </h2>
-      <div className="w-20 h-1 bg-gradient-to-r from-[#8B2131] to-[#B91C1C] rounded-full" />
-    </div>
-    <button className="px-8 py-3 bg-[#B91C1C] text-white rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:bg-transparent hover:border-2 hover:border-[#8B2131] dark:text-white hover:text-black font-medium cursor-pointer">
-      SEE ALL PROJECTS
-    </button>
-  </div>
-));
-StaticHeader.displayName = 'StaticHeader'; // Fix for react/display-name
+// const StaticHeader = React.memo(() => (
+//   <div className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 gap-6">
+//     <div>
+//       <h2 className="text-3xl sm:text-4xl dark:text-white mb-2">
+//         LATEST PROJECTS
+//       </h2>
+//       <div className="w-20 h-1 bg-gradient-to-r from-[#8B2131] to-[#B91C1C] rounded-full" />
+//     </div>
+//     <button className="px-8 py-3 bg-[#B91C1C] text-white rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:bg-transparent hover:border-2 hover:border-[#8B2131] dark:text-white hover:text-black font-medium cursor-pointer">
+//       SEE ALL PROJECTS
+//     </button>
+//   </div>
+// ));
+// StaticHeader.displayName = 'StaticHeader';
 
 // Fixed type from any[] to Project[]
 const StaticGrid = React.memo(({ projectsData }: { projectsData: Project[] }) => (
@@ -66,19 +61,16 @@ const StaticGrid = React.memo(({ projectsData }: { projectsData: Project[] }) =>
         <ProjectCard
           image={UNSPLASH_IMAGES[index % UNSPLASH_IMAGES.length]}
           title={project.title}
-          // Assuming ProjectCard expects image and title props
-          // Add other props here if ProjectCard needs them from your Project interface
         />
       </div>
     ))}
   </div>
 ));
-StaticGrid.displayName = "StaticGrid"; // Fix for react/display-name
+StaticGrid.displayName = "StaticGrid";
 
 const AnimatedHeader = React.memo(({ canAnimate }: { canAnimate: boolean }) => (
   <motion.div
     className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 gap-6"
-    // Using spread syntax for animation variants
     {...fadeInUp}
     viewport={viewportOnce}
   >
@@ -112,12 +104,12 @@ const AnimatedHeader = React.memo(({ canAnimate }: { canAnimate: boolean }) => (
     </motion.button>
   </motion.div>
 ));
-AnimatedHeader.displayName = 'AnimatedHeader'; // Fix for react/display-name
+AnimatedHeader.displayName = 'AnimatedHeader';
 
 // Fixed type from any[] to Project[]
 const AnimatedGrid = React.memo(({ projectsData, canAnimate }: { projectsData: Project[], canAnimate: boolean }) => (
   <motion.div
-    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+    className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
     variants={batchStagger.container}
     initial="initial"
     whileInView="animate"
@@ -136,14 +128,12 @@ const AnimatedGrid = React.memo(({ projectsData, canAnimate }: { projectsData: P
         <ProjectCard
           image={UNSPLASH_IMAGES[index % UNSPLASH_IMAGES.length]}
           title={project.title}
-           // Assuming ProjectCard expects image and title props
-          // Add other props here if ProjectCard needs them from your Project interface
         />
       </motion.div>
     ))}
   </motion.div>
 ));
-AnimatedGrid.displayName = "AnimatedGrid"; // Fix for react/display-name
+AnimatedGrid.displayName = "AnimatedGrid";
 
 const BackgroundDecoration = React.memo(() => (
   <div className="absolute top-0 left-0 w-full h-full opacity-5">
@@ -151,30 +141,28 @@ const BackgroundDecoration = React.memo(() => (
     <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500 rounded-full blur-3xl"></div>
   </div>
 ));
-BackgroundDecoration.displayName = "BackgroundDecoration"; // Fix for react/display-name
+BackgroundDecoration.displayName = "BackgroundDecoration";
 
 const ProjectsSection = () => {
   const [isClient, setIsClient] = useState(false);
   const [canAnimate, setCanAnimate] = useState(false);
 
   // Memoize projects data processing and ensure type
-  // The return type Project[] is inferred here from the return value
-  const projectsData = useMemo<Project[]>(() => { // Explicitly define return type for clarity
+  const projectsData = useMemo<Project[]>(() => {
     // Ensure projects is an array before slicing
     if (!Array.isArray(projects)) {
       console.error('Projects data is not a valid array:', projects);
       return [];
     }
-     // Add a basic check for object structure if possible/needed
-     const validProjects = projects.filter(p => typeof p === 'object' && p !== null && 'id' in p && 'title' in p);
-     if (validProjects.length !== projects.length) {
-        console.warn('Some projects data objects are missing id or title', projects);
-     }
+    
+    // Add a basic check for object structure if possible/needed
+    const validProjects = projects.filter(p => typeof p === 'object' && p !== null && 'id' in p && 'title' in p);
+    if (validProjects.length !== projects.length) {
+      console.warn('Some projects data objects are missing id or title', projects);
+    }
 
-
-    return validProjects.slice(0, DISPLAY_COUNT) as Project[]; // Cast after filtering if needed, or trust the source data type
-  }, []); // projects is the dependency, assuming it's stable on initial load
-
+    return validProjects.slice(0, DISPLAY_COUNT) as Project[];
+  }, []);
 
   // Memoize animation check
   const animationEnabled = useMemo(() => shouldAnimate(), []);
@@ -189,20 +177,17 @@ const ProjectsSection = () => {
   }, [animationEnabled]);
 
   useEffect(() => {
-     // Only initialize client state and animation detection once on mount
+    // Only initialize client state and animation detection once on mount
     initializeClient();
-  }, [initializeClient]); // Dependency array includes initializeClient
-
+  }, [initializeClient]);
 
   // Early return for SSR with optimized static content
-  // This ensures rendering happens without browser APIs on the server
   if (!isClient) {
     return (
-      <section className="py-24 px-4 relative overflow-hidden">
-         {/* No background decoration on SSR */}
-        <div className="max-w-7xl mx-auto relative z-10">
-          <StaticHeader />
-          <StaticGrid projectsData={projectsData} /> {/* Pass the typed data */}
+      <section className="py-24 px-16">
+        <div className="max-w-8xl mx-auto  z-10">
+          {/* <StaticHeader /> */}
+          <StaticGrid projectsData={projectsData} />
         </div>
       </section>
     );
@@ -212,48 +197,55 @@ const ProjectsSection = () => {
   if (!projects) {
     console.error('Projects data is null or undefined after client hydration');
     return (
-      <section className="py-24 px-4">
-        <div className="max-w-7xl mx-auto">
+      <section className="py-24 px-16">
+        <div className="max-w-8xl mx-auto">
           <p className="text-red-500">Error loading projects data.</p>
         </div>
       </section>
     );
   }
 
-   // Handle case where projects data array is empty or becomes empty after filtering
+  // Handle case where projects data array is empty or becomes empty after filtering
   if (projectsData.length === 0) {
-     console.log('No projects to display after processing data');
+    console.log('No projects to display after processing data');
     return (
       <section className="py-24 px-4">
         <div className="max-w-7xl mx-auto">
-           {/* Render header based on animation capability */}
-          {canAnimate ? <AnimatedHeader canAnimate={canAnimate} /> : <StaticHeader />}
+          {/* {canAnimate ? <AnimatedHeader canAnimate={canAnimate} /> : <StaticHeader />} */}
           <p className="text-yellow-600">No projects to display in this section.</p>
         </div>
       </section>
     );
   }
 
-
   // Render section with animations if enabled on the client
   return (
-    <section className="py-24 px-4 relative overflow-hidden">
+    <section className="py-24 px-16 overflow-hidden">
+      <motion.h1 
+      variants={fadeInUp}
+      initial="initial"
+      whileInView="animate"
+      viewport={viewportOnce}
+      className="text-3xl md:text-4xl lg:text-8xl text-center pb-24"
+      >
+        EXPLORE APARTMENTS
+      </motion.h1>
       {/* Background decoration - only render when animations are enabled and on client */}
       {canAnimate && <BackgroundDecoration />}
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-8xl mx-auto relative z-10">
         {/* Conditional rendering of Header based on animation capability */}
-        {canAnimate ? (
+        {/* {canAnimate ? (
           <AnimatedHeader canAnimate={canAnimate} />
         ) : (
           <StaticHeader />
-        )}
+        )} */}
 
         {/* Conditional rendering of Grid based on animation capability */}
         {canAnimate ? (
-          <AnimatedGrid projectsData={projectsData} canAnimate={canAnimate} /> // Pass the typed data
+          <AnimatedGrid projectsData={projectsData} canAnimate={canAnimate} />
         ) : (
-          <StaticGrid projectsData={projectsData} /> // Pass the typed data
+          <StaticGrid projectsData={projectsData} />
         )}
       </div>
     </section>

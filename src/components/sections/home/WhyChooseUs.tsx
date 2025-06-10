@@ -125,8 +125,8 @@ const WhyChoose = () => {
   }, [canAnimate]);
 
   return (
-    <section className="py-24 px-4">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-24 px-16">
+      <div className=" mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div
             {...leftAnimation}
@@ -135,17 +135,17 @@ const WhyChoose = () => {
             <motion.div
               {...titleAnimation}
             >
-              <h2 className="text-3xl md:text-4xl dark:text-white mb-6">
-                Why Choose ALTAF BUILDER
+              <h2 className="text-3xl md:text-4xl dark:text-white">
+                Why Choose ALTAF DEVELOPMENT
               </h2>
               <motion.div 
-                className="w-20 h-1 bg-gradient-to-r from-[#8B2131] to-[#B91C1C] rounded-full mb-6"
+                className="w-[94%] h-0.5 bg-gradient-to-r from-[#8B2131] to-[#B91C1C] rounded-full mb-6"
                 {...underlineAnimation}
               />
             </motion.div>
             
             <motion.p 
-              className="text-muted-foreground mb-8 text-lg leading-relaxed"
+              className=" mb-8 text-lg font-medium leading-relaxed"
               {...descriptionAnimation}
             >
               With over 25 years of experience in luxury real estate
@@ -212,7 +212,7 @@ const WhyChoose = () => {
                       <Icon className="h-6 w-6 text-white" />
                     </motion.div>
                     <div>
-                      <h3 className="text-lg font-bold mb-2 text-gray-900 dark:text-white">
+                      <h3 className="text-lg font-bold mb-2 dark:text-white">
                         {item.title}
                       </h3>
                       <p className="text-muted-foreground leading-relaxed">

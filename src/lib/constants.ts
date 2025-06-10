@@ -4,9 +4,8 @@ import { NavigationItem, NewsItem } from "./types";
 // import { Facebook, Instagram, Twitter, Linkedin } from "lucide-react";
 
 export const NAVIGATION_ITEMS: NavigationItem[] = [
+  { name: "About-us", href: "/about" },
   { name: "Properties", href: "/properties" },
-  { name: "Communities", href: "/communities" },
-  { name: "Projects", href: "/projects" },
   { name: "Careers", href: "/careers" },
   { name: "Blogs", href: "/blogs" },
   { name: "Media Center", href: "/media" },
@@ -555,4 +554,24 @@ export type AnimationVariant = Variants;
 // No caching reset needed - this version doesn't cache
 export const resetAnimationConfig = () => {
   // No-op in this stable version
+};
+// Simple slideshow fade animation with continuous scale
+export const simpleFadeSlide = {
+  initial: { opacity: 0, scale: 1 },
+  animate: { 
+    opacity: 1, 
+    scale: 1.1,
+    transition: {
+      opacity: { duration: 0.8, ease: "easeInOut" },
+      scale: { duration: 4, ease: "easeInOut" } // Slow scale up during display
+    }
+  },
+  exit: { 
+    opacity: 0, 
+    scale: 1,
+    transition: {
+      opacity: { duration: 0.8, ease: "easeInOut" },
+      scale: { duration: 4, ease: "easeInOut" } // Slow scale down during exit
+    }
+  }
 };

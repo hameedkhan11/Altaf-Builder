@@ -23,7 +23,7 @@ const Footer = () => {
   const socialIcons = [Facebook, Instagram, Twitter, Linkedin];
 
   return (
-    <footer className="bg-rgb(30,5,36)  text-primary-foreground py-16 border-t-2 border-gray-700">
+    <footer className="dark:bg-[rgb(1,10,26)] text-primary-foreground py-16 border-t-2 border-gray-700">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Company Info */}
