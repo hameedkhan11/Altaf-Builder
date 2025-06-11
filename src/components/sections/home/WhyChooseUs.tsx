@@ -215,7 +215,7 @@ const WhyChoose = () => {
                       <h3 className="text-lg font-bold mb-2 dark:text-white">
                         {item.title}
                       </h3>
-                      <p className="text-muted-foreground leading-relaxed">
+                      <p className=" leading-relaxed">
                         {item.desc}
                       </p>
                     </div>

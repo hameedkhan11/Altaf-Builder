@@ -395,3 +395,148 @@ a {
   background-size: 200% 200%;
   animation: gradient-shift 3s ease infinite;
 }
+
+/* From Uiverse.io by alexroumi - Scoped to .uiverse-btn only */
+.uiverse-btn {
+  padding: 15px 25px;
+  border: unset;
+  border-radius: 15px;
+  color: rgb(140, 46, 71);
+  z-index: 1;
+  background: #e8e8e8;
+  position: relative;
+  font-weight: 1000;
+  font-size: 17px;
+  -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+  box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+  transition: all 250ms;
+  overflow: hidden;
+}
+
+.uiverse-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  border-radius: 15px;
+  background-color: rgb(140, 46, 71);
+  z-index: -1;
+  -webkit-box-shadow: 4px 8px 19px -3px rgb(140, 46, 71);
+  box-shadow: 4px 8px 19px -3px rgb(140, 46, 71);
+  transition: all 250ms;
+}
+
+.uiverse-btn:hover {
+  color: #e8e8e8;
+}
+
+.uiverse-btn:hover::before {
+  width: 100%;
+}
+
+/* Uiverse.io button style by mobinkakei, tailored for direct use in Button */
+.uiverse-btn-cta {
+  display: flex;
+  padding: 10px 33px;
+  font-size: 30px;
+  color: white;
+  background: rgb(140, 46, 71);
+  transition: 0.5s;
+  box-shadow: 6px 6px 0 black;
+  transform: skewX(-15deg);
+  border: none;
+  cursor: pointer;
+}
+
+.uiverse-btn-cta:focus {
+  outline: none;
+}
+
+.uiverse-btn-cta:hover {
+  box-shadow: 10px 10px 0 #820853;
+}
+
+.uiverse-btn-cta .span {
+  transform: skewX(15deg);
+}
+
+.uiverse-btn-cta .second {
+  width: 20px;
+  margin-left: 30px;
+  position: relative;
+  top: 12%;
+  transition: 0.5s;
+  margin-right: 0px;
+}
+
+.uiverse-btn-cta:hover .second {
+  margin-right: 45px;
+}
+
+.uiverse-btn-cta .one {
+  transition: 0.4s;
+  transform: translateX(-60%);
+}
+
+.uiverse-btn-cta .two {
+  transition: 0.5s;
+  transform: translateX(-30%);
+}
+
+.uiverse-btn-cta:hover .one {
+  transform: translateX(0%);
+  animation: color_anim 1s infinite 0.6s;
+}
+
+.uiverse-btn-cta:hover .two {
+  transform: translateX(0%);
+  animation: color_anim 1s infinite 0.4s;
+}
+
+.uiverse-btn-cta:hover .three {
+  animation: color_anim 1s infinite 0.2s;
+}
+
+@keyframes color_anim {
+  0% {
+    fill: white;
+  }
+  50% {
+    fill: #fbc638;
+  }
+  100% {
+    fill: white;
+  }
+}
+
+/* From Uiverse.io by Gautammsharma */ 
+.comic-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: rgb(140, 46, 71);
+  border: 2px solid #000;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0px #000;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.comic-button:hover {
+  background-color: #fff;
+  color: rgb(140, 46, 71);
+  border: 2px solid #35003c;
+  box-shadow: 5px 5px 0px #820853;
+}
+
+.comic-button:active {
+  background-color: #820853;
+  box-shadow: none;
+  transform: translateY(4px);
+}

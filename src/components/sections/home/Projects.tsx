@@ -1,8 +1,8 @@
-"use client"
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { motion } from 'framer-motion';
-import { projects } from '@/data/projects'; // Assuming this exports an array of objects
-import { ProjectCard } from '@/components/common/ProjectCard'; // Your ProjectCard component
+"use client";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
+import { motion } from "framer-motion";
+import { projects } from "@/data/projects"; // Assuming this exports an array of objects
+import { ProjectCard } from "@/components/common/ProjectCard"; // Your ProjectCard component
 import {
   batchStagger,
   shouldAnimate,
@@ -10,8 +10,10 @@ import {
   delays,
   fadeInUp,
   fadeInLeft,
-  fadeInRight
-} from '@/lib/constants';
+  fadeInRight,
+} from "@/lib/constants";
+import { Button } from "@/components/ui/button";
+import { ArrowIcon } from "../../../../public/icons/ArrowIcon";
 
 // --- Define the Project data structure ---
 // Adjust this interface if your actual project data in projects.ts
@@ -27,9 +29,9 @@ interface Project {
 
 // Memoized constants
 const UNSPLASH_IMAGES = [
-  '/images/apartment1.jpeg',
-  '/images/apartment2.jpeg',
-  '/images/apartment3.jpg',
+  "/images/apartment1.jpeg",
+  "/images/apartment2.jpeg",
+  "/images/apartment3.jpg",
 ];
 
 const DISPLAY_COUNT = 6;
@@ -51,21 +53,23 @@ const DISPLAY_COUNT = 6;
 // StaticHeader.displayName = 'StaticHeader';
 
 // Fixed type from any[] to Project[]
-const StaticGrid = React.memo(({ projectsData }: { projectsData: Project[] }) => (
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-    {projectsData.map((project, index) => (
-      <div
-        key={project.id}
-        className="hover:transform hover:-translate-y-1 transition-transform duration-200"
-      >
-        <ProjectCard
-          image={UNSPLASH_IMAGES[index % UNSPLASH_IMAGES.length]}
-          title={project.title}
-        />
-      </div>
-    ))}
-  </div>
-));
+const StaticGrid = React.memo(
+  ({ projectsData }: { projectsData: Project[] }) => (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {projectsData.map((project, index) => (
+        <div
+          key={project.id}
+          className="hover:transform hover:-translate-y-1 transition-transform duration-200"
+        >
+          <ProjectCard
+            image={UNSPLASH_IMAGES[index % UNSPLASH_IMAGES.length]}
+            title={project.title}
+          />
+        </div>
+      ))}
+    </div>
+  )
+);
 StaticGrid.displayName = "StaticGrid";
 
 const AnimatedHeader = React.memo(({ canAnimate }: { canAnimate: boolean }) => (
@@ -104,35 +108,47 @@ const AnimatedHeader = React.memo(({ canAnimate }: { canAnimate: boolean }) => (
     </motion.button>
   </motion.div>
 ));
-AnimatedHeader.displayName = 'AnimatedHeader';
+AnimatedHeader.displayName = "AnimatedHeader";
 
 // Fixed type from any[] to Project[]
-const AnimatedGrid = React.memo(({ projectsData, canAnimate }: { projectsData: Project[], canAnimate: boolean }) => (
-  <motion.div
-    className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-    variants={batchStagger.container}
-    initial="initial"
-    whileInView="animate"
-    viewport={viewportOnce}
-  >
-    {projectsData.map((project, index) => (
-      <motion.div
-        key={project.id}
-        variants={batchStagger.item}
-        whileHover={canAnimate ? {
-          y: -3,
-          scale: 1.005,
-          transition: { duration: 0.15, ease: "easeOut" }
-        } : {}}
-      >
-        <ProjectCard
-          image={UNSPLASH_IMAGES[index % UNSPLASH_IMAGES.length]}
-          title={project.title}
-        />
-      </motion.div>
-    ))}
-  </motion.div>
-));
+const AnimatedGrid = React.memo(
+  ({
+    projectsData,
+    canAnimate,
+  }: {
+    projectsData: Project[];
+    canAnimate: boolean;
+  }) => (
+    <motion.div
+      className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+      variants={batchStagger.container}
+      initial="initial"
+      whileInView="animate"
+      viewport={viewportOnce}
+    >
+      {projectsData.map((project, index) => (
+        <motion.div
+          key={project.id}
+          variants={batchStagger.item}
+          whileHover={
+            canAnimate
+              ? {
+                  y: -3,
+                  scale: 1.005,
+                  transition: { duration: 0.15, ease: "easeOut" },
+                }
+              : {}
+          }
+        >
+          <ProjectCard
+            image={UNSPLASH_IMAGES[index % UNSPLASH_IMAGES.length]}
+            title={project.title}
+          />
+        </motion.div>
+      ))}
+    </motion.div>
+  )
+);
 AnimatedGrid.displayName = "AnimatedGrid";
 
 const BackgroundDecoration = React.memo(() => (
@@ -151,14 +167,19 @@ const ProjectsSection = () => {
   const projectsData = useMemo<Project[]>(() => {
     // Ensure projects is an array before slicing
     if (!Array.isArray(projects)) {
-      console.error('Projects data is not a valid array:', projects);
+      console.error("Projects data is not a valid array:", projects);
       return [];
     }
-    
+
     // Add a basic check for object structure if possible/needed
-    const validProjects = projects.filter(p => typeof p === 'object' && p !== null && 'id' in p && 'title' in p);
+    const validProjects = projects.filter(
+      (p) => typeof p === "object" && p !== null && "id" in p && "title" in p
+    );
     if (validProjects.length !== projects.length) {
-      console.warn('Some projects data objects are missing id or title', projects);
+      console.warn(
+        "Some projects data objects are missing id or title",
+        projects
+      );
     }
 
     return validProjects.slice(0, DISPLAY_COUNT) as Project[];
@@ -195,7 +216,7 @@ const ProjectsSection = () => {
 
   // Basic error handling if projects import is null/undefined after client hydration
   if (!projects) {
-    console.error('Projects data is null or undefined after client hydration');
+    console.error("Projects data is null or undefined after client hydration");
     return (
       <section className="py-24 px-16">
         <div className="max-w-8xl mx-auto">
@@ -207,12 +228,14 @@ const ProjectsSection = () => {
 
   // Handle case where projects data array is empty or becomes empty after filtering
   if (projectsData.length === 0) {
-    console.log('No projects to display after processing data');
+    console.log("No projects to display after processing data");
     return (
       <section className="py-24 px-4">
         <div className="max-w-7xl mx-auto">
           {/* {canAnimate ? <AnimatedHeader canAnimate={canAnimate} /> : <StaticHeader />} */}
-          <p className="text-yellow-600">No projects to display in this section.</p>
+          <p className="text-yellow-600">
+            No projects to display in this section.
+          </p>
         </div>
       </section>
     );
@@ -221,15 +244,40 @@ const ProjectsSection = () => {
   // Render section with animations if enabled on the client
   return (
     <section className="py-24 px-16 overflow-hidden">
-      <motion.h1 
-      variants={fadeInUp}
-      initial="initial"
-      whileInView="animate"
-      viewport={viewportOnce}
-      className="text-3xl md:text-4xl lg:text-8xl text-center pb-24"
+      <motion.div
+        variants={fadeInUp}
+        initial="initial"
+        whileInView="animate"
+        viewport={viewportOnce}
+        className="text-3xl md:text-4xl lg:text-7xl font-medium flex gap-24 items-center justify-between pb-28"
       >
-        EXPLORE APARTMENTS
-      </motion.h1>
+        <motion.h1 className="text-3xl md:text-5xl lg:text-8xl w-[40%]">
+          EXPLORE APARTMENTS
+        </motion.h1>
+
+        <div className="flex flex-col gap-4 w-[40%]">
+          <motion.p
+            variants={fadeInUp}
+            initial="initial"
+            whileInView="animate"
+            viewport={viewportOnce}
+            className="text-lg"
+          >
+            Welcome to Altaf Development, a premier development strategically
+            located in the vibrant New Mount Hampden City. As the first smart
+            and sustainable mixed-use private development by Altaf & Co, Altaf
+            Development stands as a flagship project within the city, featuring
+            upscale apartments and villas, a luxurious duty-free mall, and
+            state-of-the-art commercial facilities.
+          </motion.p>
+          <Button className="uiverse-btn-cta">
+            <span className="span font-bold text-lg">VIEW ALL APARTMENTS</span>
+            <span className="second mb-0.5">
+              <ArrowIcon />
+            </span>
+          </Button>
+        </div>
+      </motion.div>
       {/* Background decoration - only render when animations are enabled and on client */}
       {canAnimate && <BackgroundDecoration />}
 

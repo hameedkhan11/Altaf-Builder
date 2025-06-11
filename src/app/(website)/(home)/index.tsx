@@ -20,9 +20,9 @@ const HomePage = () => {
       {/* <Header /> */}
       <HeroSection />.
       <div>
+        <ProjectsSection />
         <CEOMessage />
         {/* <PropertyGallery /> */}
-        <ProjectsSection />
         <PropertyShowcase />
         {/* <LatestProperties /> */}
         <Amenities />

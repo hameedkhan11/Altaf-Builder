@@ -51,21 +51,13 @@ const Header = () => {
               className="flex items-center"
             >
               {/* Logo section with two images */}
-              <div className="relative flex items-center">
+              <div className="pl-12 cursor-pointer pt-6 flex items-center">
                 <Image
-                  src="/logos/removal-809.png"
-                  alt="Altaf Builder Logo"
-                  width={100}
-                  height={34}
-                  className="object-contain z-10 pt-4"
-                  priority
-                />
-                <Image
-                  src="/logos/altaf.png"
+                  src="/logos/altaf-logo.svg"
                   alt="Altaf Builder Text"
-                  width={100}
-                  height={32}
-                  className="object-contain -ml-12 z-0"
+                  width={188}
+                  height={138}
+                  className="z-10"
                   priority
                 />
               </div>

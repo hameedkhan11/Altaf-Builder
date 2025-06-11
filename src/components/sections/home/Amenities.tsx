@@ -13,6 +13,7 @@ import {
 } from '@/lib/constants';
 import { amenitiesData } from '@/data/amenities';
 import { AmenityData } from '@/lib/types';
+import { Button } from '@/components/ui/button';
 
 const Amenities = () => {
   const [activeAmenity, setActiveAmenity] = useState<string>('shopping-mall');
@@ -72,16 +73,16 @@ const Amenities = () => {
                   whileHover={canAnimate ? { scale: 1.02 } : {}}
                   whileTap={canAnimate ? { scale: 0.98 } : {}}
                 >
-                  <button
+                  <Button
                     onClick={() => handleAmenityClick(amenityKey)}
-                    className={`text-base sm:text-lg px-4 py-3 rounded-full border-2 transition-all duration-300 font-medium ${
+                    className={`uiverse-btn p-2 ${
                       isActive
                         ? 'bg-amber-600 text-white border-amber-600 shadow-lg'
                         : 'bg-white text-gray-700 border-gray-300 hover:border-amber-400 hover:text-amber-600'
                     }`}
                   >
                     {amenity.name}
-                  </button>
+                  </Button>
                 </motion.li>
               );
             })}

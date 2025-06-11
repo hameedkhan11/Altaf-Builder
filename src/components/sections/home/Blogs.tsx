@@ -18,6 +18,7 @@ import {
   getPerformanceMode,
   getPerformanceVariant,
 } from "@/lib/constants";
+import { ArrowIcon } from '../../../../public/icons/ArrowIcon';
 
 const BlogSection: React.FC<BlogSectionProps> = ({
   posts,
@@ -54,7 +55,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({
 
   return (
     <section className="py-16">
-      <div className="container mx-auto px-16 max-w-8xl">
+      <div className="container mx-auto px-16">
         {/* Header - Performance optimized */}
         <motion.div
           className="flex items-start justify-between mb-12"
@@ -83,16 +84,18 @@ const BlogSection: React.FC<BlogSectionProps> = ({
             <motion.div
               {...buttonAnimation}
               viewport={viewportOnce}
+              className='w-auto'
             >
               <Link
                 href="/blog"
-                className="bg-red-700 text-white px-8 py-3 text-sm font-semibold uppercase tracking-wide hover:bg-red-800 transition-colors"
+                className="comic-button text-white py-3 text-sm uppercase tracking-wide object-cover"
               >
                 <motion.span
                   {...scaleOnHover}
-                  className="inline-block"
+                  className="flex font-bold active:text-white"
                 >
                   SEE ALL BLOGS
+                  {/* <ArrowIcon /> */}
                 </motion.span>
               </Link>
             </motion.div>

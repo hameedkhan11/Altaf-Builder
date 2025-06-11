@@ -145,14 +145,14 @@ const Testimonials = () => {
                         <h4 className="font-bold dark:text-white">
                           {testimonial.name}
                         </h4>
-                        <p className="text-muted-foreground text-sm dark:text-white">
+                        <p className="text-sm dark:text-white">
                           {testimonial.role}
                         </p>
                       </div>
                     </motion.div>
 
                     <motion.p
-                      className="text-muted-foreground mb-4 dark:text-white"
+                      className="mb-4 dark:text-white"
                       {...contentAnimation}
                     >
                       {testimonial.content}
