@@ -27,7 +27,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property, index }) =
       whileHover={{ y: -8 }}
       className="w-full"
     >
-      <Card className="overflow-hidden group cursor-pointer hover:shadow-xl transition-all duration-500 dark:bg-gray-900 w-full">
+      <Card className="overflow-hidden group cursor-pointer hover:shadow-xl transition-all duration-500 w-full">
         <motion.div 
           className="relative overflow-hidden"
           whileHover={{ scale: 1.02 }}
@@ -57,7 +57,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property, index }) =
              
         <CardContent className="p-3 sm:p-4 md:p-5 lg:p-6">
           <motion.h3 
-            className="text-lg sm:text-xl font-bold mb-2 text-gray-900 dark:text-white line-clamp-2"
+            className="text-lg sm:text-xl font-bold mb-2 dark:text-white line-clamp-2"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -73,15 +73,15 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property, index }) =
             viewport={{ once: true }}
             transition={{ delay: index * 0.1 + 0.6 }}
           >
-            <div className="flex items-center text-gray-600 dark:text-gray-300">
+            <div className="flex items-center">
               <Bed className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground mr-1" />
               <span>{property.beds} Beds</span>
             </div>
-            <div className="flex items-center text-gray-600 dark:text-gray-300">
+            <div className="flex items-center">
               <Bath className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground mr-1" />
               <span>{property.baths} Baths</span>
             </div>
-            <div className="flex items-center text-gray-600 dark:text-gray-300">
+            <div className="flex items-center">
               <Ruler className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground mr-1" />
               <span>{property.sqft} sqft</span>
             </div>

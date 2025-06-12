@@ -66,9 +66,9 @@ const CEOMessage = () => {
           >
             {/* Title */}
             <motion.div {...titleAnimation} viewport={viewportOnce}>
-              <h2 className="text-3xl md:text-4xl mb-2">{title}</h2>
+              <h2 className="text-3xl md:text-4xl mb-0">{title}</h2>
               <motion.div
-                className="w-full h-0.5 bg-gradient-to-r from-[#8B2131] to-[#B91C1C] rounded-full"
+                className="w-[89%] h-0.5 bg-gradient-to-r from-[#8B2131] to-[#5f0909] rounded-full"
                 {...underlineAnimation}
                 viewport={viewportOnce}
                 style={{ transformOrigin: "left" }}
@@ -106,7 +106,7 @@ const CEOMessage = () => {
               viewport={viewportOnce}
             >
               <h3 className="text-lg font-bold text-[#8B2131]">{ceoName}</h3>
-              <p className="text-gray-500 text-sm">{ceoTitle}</p>
+              <p className="text-sm">{ceoTitle}</p>
             </motion.div>
           </motion.div>
 
