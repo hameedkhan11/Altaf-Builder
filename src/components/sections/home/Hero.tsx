@@ -1,20 +1,15 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
-import { useScrollEffects } from "@/hooks/useScroll";
 import { COMPANY_INFO } from "@/lib/constants";
-import { Home } from "lucide-react";
 
 // Import optimized animations
 import { 
   scaleOnHover,
   shouldAnimate,
   staggerContainer,
-  delays,
   fadeInUp,
-  fadeInLeft,
   quickFade,
   deferredAnimation,
   createLazyAnimation,
@@ -22,7 +17,7 @@ import {
 } from "@/lib/constants";
 
 const HeroSection = () => {
-  const { heroY } = useScrollEffects();
+  // const { heroY } = useScrollEffects();
 
   const handleScrollDown = () => {
     const nextSection =
@@ -47,23 +42,23 @@ const HeroSection = () => {
   // Optimized animation variants using the performance system
   const heroTitleVariant = getPerformanceVariant(fadeInUp);
   
-  const heroDescriptionVariant = getPerformanceVariant({
-    ...fadeInLeft,
-    transition: {
-      ...fadeInLeft.transition,
-      delay: shouldAnimate() ? delays.medium : 0
-    }
-  });
+  // const heroDescriptionVariant = getPerformanceVariant({
+  //   ...fadeInLeft,
+  //   transition: {
+  //     ...fadeInLeft.transition,
+  //     delay: shouldAnimate() ? delays.medium : 0
+  //   }
+  // });
 
-  const ctaButtonsVariant = getPerformanceVariant({
-    initial: shouldAnimate() ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 },
-    animate: { opacity: 1, y: 0 },
-    transition: { 
-      duration: shouldAnimate() ? 0.25 : 0,
-      delay: shouldAnimate() ? delays.long : 0,
-      ease: "easeOut"
-    }
-  });
+  // const ctaButtonsVariant = getPerformanceVariant({
+  //   initial: shouldAnimate() ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 },
+  //   animate: { opacity: 1, y: 0 },
+  //   transition: { 
+  //     duration: shouldAnimate() ? 0.25 : 0,
+  //     delay: shouldAnimate() ? delays.long : 0,
+  //     ease: "easeOut"
+  //   }
+  // });
 
   const scrollIndicatorVariant = shouldAnimate() ? {
     animate: { y: [0, -10, 0] },

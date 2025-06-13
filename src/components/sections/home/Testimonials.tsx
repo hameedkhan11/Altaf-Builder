@@ -69,11 +69,11 @@ const Testimonials = () => {
             What Our Clients Say
           </motion.h2>
           <motion.p
-            className="text-muted-foreground max-w-2xl mx-auto"
+            className=" max-w-2xl mx-auto"
             {...subtitleAnimation}
           >
             Hear from our satisfied clients about their experience with ALTAF
-            BUILDER.
+            DEVELOPMENT.
           </motion.p>
         </motion.div>
 

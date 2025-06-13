@@ -1,10 +1,9 @@
-// components/BlogSection.tsx
+// components/BlogSection.tsx (Updated)
 "use client";
 import React from 'react';
 import Link from 'next/link';
 import { motion } from "framer-motion";
-import { BlogSectionProps } from '@/lib/types';
-import BlogCard from '@/components/common/BlogCard';
+import BlogCard from '@/components/cards/BlogCard';
 import {
   fadeInUp,
   fadeInLeft,
@@ -18,7 +17,7 @@ import {
   getPerformanceMode,
   getPerformanceVariant,
 } from "@/lib/constants";
-import { ArrowIcon } from '../../../../public/icons/ArrowIcon';
+import { BlogSectionProps } from '@/lib/blogs/types';
 
 const BlogSection: React.FC<BlogSectionProps> = ({
   posts,
@@ -53,8 +52,13 @@ const BlogSection: React.FC<BlogSectionProps> = ({
         transition: { duration: 0 },
       };
 
+  // Get latest posts (sorted by publishedAt date)
+  const latestPosts = posts
+    .sort((a, b) => new Date(b.publishedAt || b.date).getTime() - new Date(a.publishedAt || a.date).getTime())
+    .slice(0, 6); // Show maximum 6 posts
+
   return (
-    <section className="py-16">
+    <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-16">
         {/* Header - Performance optimized */}
         <motion.div
@@ -68,11 +72,11 @@ const BlogSection: React.FC<BlogSectionProps> = ({
             viewport={viewportOnce}
           >
             <div>
-              <h2 className="uppercase tracking-wide dark:text-white">
+              <h2 className="text-3xl lg:text-4xl uppercase tracking-wide mb-0">
                 {title}
               </h2>
               <motion.div
-                className="w-full h-0.5 bg-gradient-to-r from-[#8B2131] to-[#B91C1C] rounded-full mt-2"
+                className="w-full h-0.5 bg-[rgb(140,46,71)] rounded-full"
                 {...underlineAnimation}
                 viewport={viewportOnce}
                 style={{ transformOrigin: "left" }}
@@ -81,13 +85,13 @@ const BlogSection: React.FC<BlogSectionProps> = ({
           </motion.div>
           
           {showSeeAll && (
-            <motion.div
+          <motion.div
               {...buttonAnimation}
               viewport={viewportOnce}
               className='w-auto'
             >
               <Link
-                href="/blog"
+                href="/blogs"
                 className="comic-button text-white py-3 text-sm uppercase tracking-wide object-cover"
               >
                 <motion.span
@@ -108,7 +112,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({
           {...lazyBatchStagger.container}
           viewport={viewportDefault}
         >
-          {posts.map((post, index) => (
+          {latestPosts.map((post, index) => (
             <motion.div
               key={post.id}
               {...lazyBatchStagger.item}
@@ -125,13 +129,22 @@ const BlogSection: React.FC<BlogSectionProps> = ({
           ))}
         </motion.div>
 
-        {posts.length === 0 && (
+        {/* Empty State */}
+        {latestPosts.length === 0 && (
           <motion.div
             className="text-center py-12"
             {...fadeInUp}
             viewport={viewportOnce}
           >
-            <p className="text-gray-500 text-lg">No blog posts available at the moment.</p>
+            <div className="max-w-md mx-auto">
+              <div className="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">No Blog Posts Available</h3>
+              <p className="text-gray-500 text-lg">Check back later for new content and updates.</p>
+            </div>
           </motion.div>
         )}
       </div>

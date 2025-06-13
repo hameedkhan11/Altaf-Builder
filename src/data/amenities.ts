@@ -5,8 +5,8 @@ export const amenitiesData: AmenitiesData = {
   'shopping-mall': {
     id: 'shopping-mall',
     name: 'Shopping Mall',
-    title: 'Zim Cyber City Mall',
-    description: 'Explore the Zim Cyber City Mall, where luxury meets convenience. Our mall offers a variety of high-end retail stores, dining options, and entertainment venues, creating a vibrant shopping experience. Discover the latest fashion, enjoy gourmet meals, and unwind with premium entertainment in Zimbabwe\'s premier smart city.',
+    title: 'Faisal Hills City Mall',
+    description: 'Explore the Faisal Hills City Mall, where luxury meets convenience. Our mall offers a variety of high-end retail stores, dining options, and entertainment venues, creating a vibrant shopping experience. Discover the latest fashion, enjoy gourmet meals, and unwind with premium entertainment in Zimbabwe\'s premier smart city.',
     image: '/images/apartment1.jpeg',
     features: ['High-end retail stores', 'Gourmet dining options', 'Entertainment venues', 'Premium shopping experience']
   },

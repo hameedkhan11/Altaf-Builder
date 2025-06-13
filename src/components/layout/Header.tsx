@@ -29,7 +29,7 @@ const Header = () => {
   return (
     <>
       <motion.header
-        className={`fixed w-full h-20 transition-all duration-500 ease-in-out ${
+        className={`fixed w-full h-20 transition-all duration-500 ease-in-out font-avenir ${
           scrolled
             ? "z-50 backdrop-blur-lg border-b bg-white dark:bg-purple-950/95 shadow-lg"
             : "z-50"
@@ -50,8 +50,7 @@ const Header = () => {
               animate={{ opacity: 1, x: 0 }}
               className="flex items-center"
             >
-              {/* Logo section with two images */}
-              <div className="pl-12 cursor-pointer pt-6 flex items-center">
+              <Link href={"/"} className="pl-12 cursor-pointer pt-6 flex items-center">
                 <Image
                   src="/logos/altaf-logo.svg"
                   alt="Altaf Builder Text"
@@ -60,7 +59,7 @@ const Header = () => {
                   className="z-10"
                   priority
                 />
-              </div>
+              </Link>
             </motion.div>
 
             {/* Desktop Navigation */}

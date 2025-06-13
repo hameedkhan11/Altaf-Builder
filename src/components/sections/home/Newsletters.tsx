@@ -3,22 +3,18 @@ import { useState, FormEvent } from "react";
 import { motion } from "framer-motion";
 import { Facebook, Instagram, Twitter, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 
 // Import optimized animations
 import {
   fadeInUp,
   fadeInLeft,
-  fadeInRight,
   staggerContainer,
   batchStagger,
   scaleOnHover,
-  cardHover,
   viewportOnce,
   delays,
   shouldAnimate,
   getPerformanceVariant,
-  createLazyAnimation
 } from "@/lib/constants";
 
 const Newsletter = () => {
@@ -51,13 +47,11 @@ const Newsletter = () => {
     }
   });
 
-  const imageVariant = getPerformanceVariant(fadeInRight);
-
   return (
     <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-16 w-full">
-      <div className=" mx-auto w-full">
+      <div className="mx-auto w-full max-w-4xl">
         <motion.div 
-          className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center w-full"
+          className="w-full text-center"
           variants={staggerContainer}
           initial="initial"
           whileInView="animate"
@@ -84,7 +78,7 @@ const Newsletter = () => {
             
             {/* Description with staggered entrance */}
             <motion.p 
-              className="text-gray-600 dark:text-gray-400 mb-6 sm:mb-8 text-sm sm:text-base leading-relaxed"
+              className="text-gray-600 dark:text-gray-400 mb-6 sm:mb-8 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto"
               variants={descriptionVariant}
               initial="initial"
               whileInView="animate"
@@ -96,7 +90,7 @@ const Newsletter = () => {
 
             {/* Form Section with optimized animation */}
             <motion.div 
-              className="mb-6 sm:mb-8 w-full"
+              className="mb-6 sm:mb-8 w-full max-w-lg mx-auto"
               variants={formVariant}
               initial="initial"
               whileInView="animate"
@@ -129,7 +123,7 @@ const Newsletter = () => {
 
             {/* Social Icons with batch stagger animation */}
             <motion.div 
-              className="flex items-center space-x-4 sm:space-x-6"
+              className="flex items-center justify-center space-x-4 sm:space-x-6"
               variants={batchStagger.container}
               initial="initial"
               whileInView="animate"
@@ -148,24 +142,6 @@ const Newsletter = () => {
                 </motion.a>
               ))}
             </motion.div>
-          </motion.div>
-
-          {/* Image Section with optimized animation */}
-          <motion.div 
-            className="w-full h-[280px] sm:h-[320px] md:h-[360px] lg:h-[400px] relative rounded-lg overflow-hidden shadow-xl"
-            variants={createLazyAnimation(imageVariant)}
-            initial="initial"
-            whileInView="animate"
-            viewport={viewportOnce}
-            {...cardHover}
-          >
-            <Image
-              width={800}
-              height={600}
-              src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop&crop=center"
-              alt="ALTAF BUILDER Consultation"
-              className="w-full h-full object-cover"
-            />
           </motion.div>
         </motion.div>
       </div>

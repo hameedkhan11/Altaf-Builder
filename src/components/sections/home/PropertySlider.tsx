@@ -1,25 +1,17 @@
 "use client";
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, MapPin, Home, Bed, Bath, Square, Star, Eye, Heart } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import {
   fadeInUp,
   fadeInLeft,
   fadeInRight,
   scaleOnHover,
-  cardHover,
   slideInFromBottom,
-  quickFade,
   microSlide,
   shouldAnimate,
-  getPerformanceMode,
-  batchStaggerContainer,
-  batchStaggerItem,
-  delays,
   simpleFadeSlide
 } from '@/lib/constants';
-
-import Image from 'next/image';
 
 // Property data - moved outside component to prevent recreating on each render
 const showcaseProperties = [
@@ -85,11 +77,11 @@ const PropertyShowcase = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [direction, setDirection] = useState(0);
+  const [, setDirection] = useState(0);
 
   // Memoize performance checks
   const animationEnabled = useMemo(() => shouldAnimate(), []);
-  const performanceMode = useMemo(() => getPerformanceMode(), []);
+  // const performanceMode = useMemo(() => getPerformanceMode(), []);
 
   // Memoize current property to prevent unnecessary recalculations
   const currentProperty = useMemo(() => showcaseProperties[currentIndex], [currentIndex]);

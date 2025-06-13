@@ -2,7 +2,6 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import { projects } from "@/data/projects"; // Assuming this exports an array of objects
-import { ProjectCard } from "@/components/common/ProjectCard"; // Your ProjectCard component
 import {
   batchStagger,
   shouldAnimate,
@@ -14,6 +13,7 @@ import {
 } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import { ArrowIcon } from "../../../../public/icons/ArrowIcon";
+import { ProjectCard } from "@/components/cards/ProjectCard";
 
 // --- Define the Project data structure ---
 // Adjust this interface if your actual project data in projects.ts

@@ -135,11 +135,11 @@ const WhyChoose = () => {
             <motion.div
               {...titleAnimation}
             >
-              <h2 className="text-3xl md:text-4xl dark:text-white">
+              <h2 className="text-3xl md:text-4xl dark:text-white mb-0">
                 Why Choose ALTAF DEVELOPMENT
               </h2>
               <motion.div 
-                className="w-[94%] h-0.5 bg-gradient-to-r from-[#8B2131] to-[#B91C1C] rounded-full mb-6"
+                className="w-[95%] h-0.5 bg-[rgb(140,46,71)] rounded-full mb-6"
                 {...underlineAnimation}
               />
             </motion.div>
@@ -206,7 +206,7 @@ const WhyChoose = () => {
                     className="flex items-start p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors duration-300"
                   >
                     <motion.div 
-                      className="w-12 h-12 bg-gradient-to-br from-[#8B2131] to-[#B91C1C] rounded-full flex items-center justify-center mr-4 flex-shrink-0"
+                      className="w-12 h-12 bg-[rgb(140,46,71)] rounded-full flex items-center justify-center mr-4 flex-shrink-0"
                       {...iconHoverAnimation}
                     >
                       <Icon className="h-6 w-6 text-white" />

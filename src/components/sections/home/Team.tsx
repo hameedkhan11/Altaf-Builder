@@ -6,7 +6,6 @@ import {
   Twitter,
   Mail,
   Phone,
-  Users,
   Calendar,
 } from "lucide-react";
 
@@ -80,7 +79,7 @@ const MeetOurTeam = () => {
   const animationsEnabled = shouldAnimate();
 
   return (
-    <section className="py-12 px-16 sm:py-16 md:py-20 lg:py-24">
+    <section className="py-12 px-16 sm:py-8 md:py-12 lg:py-16">
       <div className="container mx-auto px-4 sm:px-6">
         {/* Header Section */}
         <motion.div 
@@ -90,28 +89,13 @@ const MeetOurTeam = () => {
           transition={slideInFromBottom.transition}
           viewport={viewportDefault}
         >
-          <motion.div
-            className="inline-flex items-center gap-2 bg-[#8B2131]/10 px-3 py-2 sm:px-4 rounded-full mb-4 sm:mb-6"
-            initial={microSlide.initial}
-            animate={microSlide.animate}
-            transition={microSlide.transition}
-          >
-            <Users size={16} className="text-[#8B2131] sm:w-5 sm:h-5" />
-            <span className="text-[#8B2131] font-medium dark:text-white text-sm sm:text-base">
-              Our Team
-            </span>
-          </motion.div>
-
           <motion.h2
-            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl mb-4 sm:mb-6"
+            className="text-xl sm:text-2xl md:text-3xl lg:text-5xl mb-4 sm:mb-6"
             initial={fadeInUp.initial}
             animate={fadeInUp.animate}
             transition={fadeInUp.transition}
           >
-            MEET OUR
-            <span className="bg-gradient-to-r from-[#8B2131] to-[#B91C1C] bg-clip-text text-transparent text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold block sm:inline">
-              {" "}CEO
-            </span>
+            MEET OUR TEAM
           </motion.h2>
 
           <motion.p
@@ -316,11 +300,11 @@ const MeetOurTeam = () => {
           viewport={viewportDefault}
         >
           <motion.div
-            className="bg-gradient-to-r from-[#8B2131] to-[#B91C1C] rounded-2xl p-6 sm:p-8 text-white mx-4 sm:mx-0"
+            className="bg-gradient-to-r from-[#8B2131] to-[#B91C1C] rounded-2xl p-6 sm:p-8 mx-4 sm:mx-0"
             {...(animationsEnabled ? cardHover : {})}
           >
             <motion.h3
-              className="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4"
+              className="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 text-white"
               initial={fadeInUp.initial}
               animate={fadeInUp.animate}
               transition={fadeInUp.transition}

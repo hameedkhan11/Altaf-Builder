@@ -1,23 +1,22 @@
-// components/BlogCard.tsx
+// components/cards/BlogCard.tsx (Updated)
 "use client";
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from "framer-motion";
-import { ArrowRight } from 'lucide-react';
-import { BlogCardProps } from '@/lib/types';
+import { ArrowRight, Clock, User } from 'lucide-react';
+
 import {
   fadeInUp,
   microSlide,
-  scaleOnHover,
   viewportOnce,
   delays,
   getPerformanceVariant,
 } from "@/lib/constants";
+import { BlogCardProps } from '@/lib/blogs/types';
 
 const BlogCard: React.FC<BlogCardProps & { index?: number }> = ({ 
   post, 
-  variant = 'default',
   index = 0 
 }) => {
   // Performance-aware animations
@@ -26,17 +25,18 @@ const BlogCard: React.FC<BlogCardProps & { index?: number }> = ({
   
   return (
     <motion.div 
-      className="group cursor-pointer"
+      className="group cursor-pointer rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
       {...cardAnimation}
       transition={{
         ...cardAnimation.transition,
         delay: delays.stagger(index),
       }}
       viewport={viewportOnce}
+      whileHover={{ y: -5 }}
     >
       {/* Image Container */}
       <motion.div 
-        className="relative h-[360px] w-full overflow-hidden mb-4 rounded-md"
+        className="relative h-[340px] w-full overflow-hidden"
         whileHover={{ scale: 1.02 }}
         transition={{ duration: 0.3, ease: "easeOut" }}
       >
@@ -53,11 +53,21 @@ const BlogCard: React.FC<BlogCardProps & { index?: number }> = ({
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </motion.div>
+        
+        {/* Category Badge */}
+        <div className="absolute top-4 left-4">
+          <span className="px-3 py-1 bg-gradient-to-r from-[#8B2131] to-[#B91C1C] text-white rounded-full text-xs uppercase font-semibold tracking-wide">
+            {post.category}
+          </span>
+        </div>
+
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </motion.div>
            
       {/* Content Container */}
       <motion.div 
-        className="space-y-3"
+        className="p-6 space-y-4"
         {...contentAnimation}
         transition={{
           ...contentAnimation.transition,
@@ -65,22 +75,42 @@ const BlogCard: React.FC<BlogCardProps & { index?: number }> = ({
         }}
         viewport={viewportOnce}
       >
-        {/* Category and Date */}
+        {/* Meta Info */}
         <motion.div 
-          className="flex items-center gap-2 text-sm text-gray-500 uppercase tracking-wide"
+          className="flex items-center gap-2 text-sm"
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: delays.stagger(index) + delays.medium }}
           viewport={viewportOnce}
         >
-          <span className="font-medium">{post.category}</span>
-          <span>-</span>
-          <span>{post.date}</span>
+          <div className="flex items-center gap-1">
+            <span>{post.date}</span>
+          </div>
+          
+          {post.author && (
+            <>
+              <span>•</span>
+              <div className="flex items-center gap-1">
+                <User className="w-3 h-3" />
+                <span className='line-clamp-1'>{post.author}</span>
+              </div>
+            </>
+          )}
+          
+          {post.readTime && (
+            <>
+              <span>•</span>
+              <div className="flex items-center gap-1">
+                <Clock className="w-3 h-3" />
+                <span>{post.readTime}</span>
+              </div>
+            </>
+          )}
         </motion.div>
                 
         {/* Title */}
         <motion.h3 
-          className="text-xl font-bold text-gray-900 line-clamp-1 group-hover:text-gray-700 transition-colors leading-tight"
+          className="text-xl font-semibold  line-clamp-1 group-hover:text-[#8B2131] transition-colors leading-tight"
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: delays.stagger(index) + delays.long }}
@@ -91,7 +121,7 @@ const BlogCard: React.FC<BlogCardProps & { index?: number }> = ({
                 
         {/* Excerpt */}
         <motion.p 
-          className="text-gray-600 text-sm leading-relaxed line-clamp-2"
+          className="text-sm leading-relaxed line-clamp-2"
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: delays.stagger(index) + delays.long + 0.1 }}
@@ -102,14 +132,15 @@ const BlogCard: React.FC<BlogCardProps & { index?: number }> = ({
                 
         {/* Read More Link */}
         <motion.div
+          className="pt-2"
           initial={{ opacity: 0, x: -10 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ delay: delays.stagger(index) + delays.long + 0.2 }}
           viewport={viewportOnce}
         >
           <Link 
-            href={`/blog/${post.slug}`}
-            className="inline-flex items-center font-bold text-[rgb(140,46,71)] gap-2 transition-colors group/link text-sm uppercase tracking-wide"
+            href={`/blogs/${post.slug}`}
+            className="inline-flex items-center font-bold text-[#8B2131] gap-2 transition-colors group/link text-sm uppercase tracking-wide hover:text-[#B91C1C]"
           >
             <motion.span
               whileHover={{ x: 5 }}
@@ -121,7 +152,7 @@ const BlogCard: React.FC<BlogCardProps & { index?: number }> = ({
               whileHover={{ x: 3 }}
               transition={{ duration: 0.2 }}
             >
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
             </motion.div>
           </Link>
         </motion.div>

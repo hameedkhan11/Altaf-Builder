@@ -49,7 +49,7 @@ const Amenities = () => {
             viewport={viewportOnce}
             transition={{ duration: 0.6, delay: delays.medium }}
           >
-            At Altaf Devlopment, the neigborhood offers top-tier fitness centers, luxurious pools, parks, high-end shopping, dining, coworking spaces, and event venues. Enjoy security, high-speed internet, and eco-friendly infrastructure for modern living in Zimbabwe's premier smart city.
+            At Altaf Devlopment, the neigborhood offers top-tier fitness centers, luxurious pools, parks, high-end shopping, dining, coworking spaces, and event venues. Enjoy security, high-speed internet, and eco-friendly infrastructure for modern living in Pakistan&apos;s premier smart city.
           </motion.p>
         </motion.div>
 
@@ -62,7 +62,7 @@ const Amenities = () => {
           viewport={viewportOnce}
         >
           <motion.ul className="flex flex-wrap gap-4 justify-start">
-            {amenityKeys.map((amenityKey, index) => {
+            {amenityKeys.map((amenityKey) => {
               const amenity = amenitiesData[amenityKey];
               const isActive = activeAmenity === amenityKey;
               
@@ -137,7 +137,7 @@ const Amenities = () => {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3, delay: 0.3 + (index * 0.1) }}
                   >
-                    <div className="w-2 h-2 bg-amber-600 rounded-full mr-3 flex-shrink-0"/>
+                    <div className="w-2 h-2 bg-[rgb(140,46,71)] rounded-full mr-3 flex-shrink-0"/>
                     {feature}
                   </motion.li>
                 ))}

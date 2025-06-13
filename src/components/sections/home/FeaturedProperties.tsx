@@ -1,24 +1,21 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { PropertyCard } from "@/components/common/PropertyCard";
 import { properties } from "@/data/properties";
 import {
   fadeInUp,
   fadeInLeft,
   fadeInRight,
-  microSlide,
   scaleOnHover,
-  staggerContainer,
   batchStagger,
   viewportOnce,
   viewportDefault,
   delays,
   shouldAnimate,
   getPerformanceMode,
-  createLazyAnimation,
   getPerformanceVariant,
 } from "@/lib/constants";
+import { PropertyCard } from "@/components/cards/PropertyCard";
 
 export const LatestProperties: React.FC = () => {
   // Performance-aware animations

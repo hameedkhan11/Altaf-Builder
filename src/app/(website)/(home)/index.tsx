@@ -1,7 +1,7 @@
 import WhyChoose from "@/components/sections/home/WhyChooseUs";
 import ProjectsSection from "@/components/sections/home/Projects";
 import Testimonials from "@/components/sections/home/Testimonials";
-import Newsletter from "@/components/sections/home/Newsletters";
+// import Newsletter from "@/components/sections/home/Newsletters";
 // import { LatestProperties } from "@/components/sections/home/FeaturedProperties";
 import HeroSection from "@/components/sections/home/Hero";
 import PropertyShowcase from "@/components/sections/home/PropertySlider";
@@ -20,17 +20,17 @@ const HomePage = () => {
       {/* <Header /> */}
       <HeroSection />.
       <div>
-        <ProjectsSection />
         <CEOMessage />
+        <ProjectsSection />
         {/* <PropertyGallery /> */}
         <PropertyShowcase />
         {/* <LatestProperties /> */}
         <Amenities />
         <WhyChoose />
         <Testimonials />
-        <Newsletter />
-        <BlogSection posts={posts}/>
+        {/* <Newsletter /> */}
         <MeetOurTeam />
+        <BlogSection posts={posts}/>
       </div>
       <RealEstateLeafletMap />
       {/* <Footer /> */}

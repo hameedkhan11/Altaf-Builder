@@ -1,18 +1,22 @@
 // data/blogData.ts
 
-import { BlogPost } from "@/lib/types";
+import { BlogPost } from "@/lib/blogs/types";
+
 
 
 export const mockBlogPosts: BlogPost[] = [
   {
     id: '1',
-    title: 'IMTIAZ ANNOUNCES KHABIB NURMAGOMEDOV AS...',
-    excerpt: 'IMTIAZ announces Khabib Nurmagomedov as brand ambassador at launch of Beach Walk 4 in Dubai Islands During a special press...',
+    title: 'Altaf ANNOUNCES LUXURY AS...',
+    excerpt: 'Altaf announces Sohail Khan as brand ambassador at launch of Beach Walk 4 in Dubai Islands During a special press...',
     image: '/images/property1.jpg',
     date: '05-05-2025',
     category: 'NEWS',
-    slug: 'imtiaz-announces-khabib-nurmagomedov',
-    readTime: '3 min read'
+    slug: 'altaf-announces-sohail-khan',
+    readTime: '3 min read',
+    publishedAt: new Date(),
+    author: 'John Doe',
+    content: 'This is the content of the blog post.'
   },
   {
     id: '2',
@@ -22,22 +26,29 @@ export const mockBlogPosts: BlogPost[] = [
     date: '04-04-2025',
     category: 'NEWS',
     slug: 'the-dubai-phenomenon',
-    readTime: '5 min read'
+    readTime: '5 min read',
+    publishedAt: new Date(),
+    author: 'John Doe',
   },
   {
     id: '3',
-    title: 'IMTIAZ DEVELOPMENTS RECEIVES PRESTIGIOUS...',
+    title: 'Altaf DEVELOPMENTS RECEIVES PRESTIGIOUS...',
     excerpt: 'In a landmark event, His Highness Shaikh Mohammad Bin Rashid Al Maktoum, Vice President and Prime Minister of the UAE and Ruler of...',
     image: '/images/property3.jpg',
     date: '27-03-2025',
     category: 'NEWS',
-    slug: 'imtiaz-developments-receives-prestigious',
-    readTime: '4 min read'
+    slug: 'altaf-developments-receives-prestigious',
+    readTime: '4 min read',
+    publishedAt: new Date(),
+    author: 'John Doe',
   }
 ];
 
 export const getBlogPosts = (): BlogPost[] => {
-  return mockBlogPosts;
+  return mockBlogPosts.map(post =>({
+    ...post,
+    publishedAt: new Date()
+  }));
 };
 
 export const getBlogPostBySlug = (slug: string): BlogPost | undefined => {
