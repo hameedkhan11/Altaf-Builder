@@ -72,7 +72,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({
             viewport={viewportOnce}
           >
             <div>
-              <h2 className="text-3xl lg:text-4xl uppercase tracking-wide mb-0">
+              <h2 className="text-3xl lg:text-4xl uppercase tracking-wide ">
                 {title}
               </h2>
               <motion.div

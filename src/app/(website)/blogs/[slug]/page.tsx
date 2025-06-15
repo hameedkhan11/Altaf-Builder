@@ -23,6 +23,6 @@ export default async function BlogSlugPage({ params }: PageProps) {
 
   if (!post) notFound();
 
-  const currentUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://altafdevelopment.com'}/blogs/${slug}`;
+  const currentUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://altafdevelopment.com || altaf-builder.vercel.app'}/blogs/${slug}`;
   return <BlogDetailPage post={post} currentUrl={currentUrl} />;
 }

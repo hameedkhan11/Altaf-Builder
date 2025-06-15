@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Variants } from "framer-motion";
 import { NavigationItem, NewsItem } from "./types";
+
 // import { Facebook, Instagram, Twitter, Linkedin } from "lucide-react";
 
 export const NAVIGATION_ITEMS: NavigationItem[] = [

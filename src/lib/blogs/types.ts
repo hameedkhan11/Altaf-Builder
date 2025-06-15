@@ -23,6 +23,8 @@ export interface BlogSectionProps {
 export interface BlogCardProps {
   post: BlogPost;
   index?: number;
+  prioritizeLoading?: boolean;
+  enableAnimations?: boolean;
 }
 
 export interface FeaturedBlogProps {

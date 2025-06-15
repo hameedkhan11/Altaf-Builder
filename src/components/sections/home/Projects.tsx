@@ -29,9 +29,9 @@ interface Project {
 
 // Memoized constants
 const UNSPLASH_IMAGES = [
-  "/images/apartment1.jpeg",
-  "/images/apartment2.jpeg",
-  "/images/apartment3.jpg",
+  "/images/Apartment1.jpeg",
+  "/images/Apartment2.jpeg",
+  "/images/Apartment3.jpg",
 ];
 
 const DISPLAY_COUNT = 6;
