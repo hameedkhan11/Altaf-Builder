@@ -1,4 +1,4 @@
-// lib/observers/SharedIntersectionObserver.ts
+// This file stays clean and reusable
 class SharedIntersectionObserver {
   private static instance: SharedIntersectionObserver;
   private observer: IntersectionObserver;
@@ -47,4 +47,8 @@ class SharedIntersectionObserver {
   }
 }
 
-export const sharedObserver = SharedIntersectionObserver.getInstance();
+// Export a getter function to safely retrieve the instance only on the client
+export const getSharedObserver = (): SharedIntersectionObserver | null => {
+  if (typeof window === 'undefined') return null;
+  return SharedIntersectionObserver.getInstance();
+};
