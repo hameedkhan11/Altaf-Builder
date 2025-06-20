@@ -17,8 +17,6 @@ import {
 } from "@/lib/constants";
 
 const HeroSection = () => {
-  // const { heroY } = useScrollEffects();
-
   const handleScrollDown = () => {
     const nextSection =
       document.querySelector("section:nth-of-type(2)") ||
@@ -41,24 +39,6 @@ const HeroSection = () => {
 
   // Optimized animation variants using the performance system
   const heroTitleVariant = getPerformanceVariant(fadeInUp);
-  
-  // const heroDescriptionVariant = getPerformanceVariant({
-  //   ...fadeInLeft,
-  //   transition: {
-  //     ...fadeInLeft.transition,
-  //     delay: shouldAnimate() ? delays.medium : 0
-  //   }
-  // });
-
-  // const ctaButtonsVariant = getPerformanceVariant({
-  //   initial: shouldAnimate() ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 },
-  //   animate: { opacity: 1, y: 0 },
-  //   transition: { 
-  //     duration: shouldAnimate() ? 0.25 : 0,
-  //     delay: shouldAnimate() ? delays.long : 0,
-  //     ease: "easeOut"
-  //   }
-  // });
 
   const scrollIndicatorVariant = shouldAnimate() ? {
     animate: { y: [0, -10, 0] },
@@ -72,17 +52,39 @@ const HeroSection = () => {
     transition: { duration: 0 }
   };
 
+  // Replace 'your-cloud-name' with your actual Cloudinary cloud name
+  const cloudinaryVideoUrl = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/video/upload/q_auto,f_auto/video2_lzrdux.mp4`;
+
   return (
-    <section className="h-screen overflow-hidden">
-      {/* Video Background - Full opacity, positioned behind everything */}
-      <motion.video
-        src="/videos/video2.mp4"
+    <section className="h-screen overflow-hidden relative">
+      {/* Video Background using direct Cloudinary URL */}
+      <video
+        src={cloudinaryVideoUrl}
         autoPlay
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover opacity-100 z-0"
+        preload="auto"
+        className="absolute inset-0 w-full h-full object-cover z-0"
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover'
+        }}
+        onLoadStart={() => console.log('Video loading started')}
+        onCanPlay={() => console.log('Video can play')}
+        onError={(e) => console.error('Video error:', e)}
         {...createLazyAnimation(quickFade)}
+      />
+
+      {/* Fallback background in case video doesn't load */}
+      <div 
+        className="absolute inset-0 w-full h-full bg-gradient-to-br from-gray-900 to-gray-700 z-0"
+        style={{
+          backgroundImage: `url(https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_fill,w_1920,h_1080/video2_lzrdux.jpg)`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
       />
 
       <div className="container mx-auto w-full px-6 h-full flex items-center relative z-20">
@@ -102,42 +104,6 @@ const HeroSection = () => {
           >
             {COMPANY_INFO.tagline}
           </motion.h1>
-
-          {/* Hero Description with optimized fade in */}
-          {/* <motion.p
-            variants={deferredAnimation(heroDescriptionVariant)}
-            initial="initial"
-            animate="animate"
-            className="text-lg md:text-xl mb-8 max-w-lg"
-          >
-            {COMPANY_INFO.description}
-          </motion.p>
-
-          CTA Buttons with staggered animation
-          <motion.div
-            variants={deferredAnimation(ctaButtonsVariant)}
-            initial="initial"
-            animate="animate"
-            className="flex flex-col items-center sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4"
-          >
-            <motion.button
-              className="bg-[#B91C1C] text-white py-2 cursor-pointer hover:bg-transparent px-4 rounded-md font-semibold hover:border-2 hover:border-[#8B2131] hover:text-white transition-colors"
-              {...scaleOnHover}
-            >
-              <Home size={20} className="inline-block mr-2" />
-              Explore Properties
-            </motion.button>
-            
-            <motion.div {...scaleOnHover}>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white text-black dark:bg-white hover:bg-transparent hover:text-white cursor-pointer"
-              >
-                Contact Us
-              </Button>
-            </motion.div>
-          </motion.div> */}
         </motion.div>
       </div>
 

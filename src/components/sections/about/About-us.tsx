@@ -1,9 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
+import { CldImage } from "next-cloudinary"
 import { motion } from "framer-motion";
-import { HeroSection } from "@/components/common/Hero";
+import { Hero } from "@/components/common/Hero";
 
 // Types
 interface TeamMember {
@@ -34,7 +34,7 @@ const aboutPageData = {
     title: "Redefining Luxury Real Estate Excellence",
     subtitle: "Where Vision Meets Reality in Premium Property Development",
     backgroundImage:
-      "/images/Booking1.jpg",
+      "Booking3_uieo5a",
   },
   missionVision: [
     {
@@ -67,7 +67,7 @@ const aboutPageData = {
       id: "chairman",
       name: "Altaf Khan",
       position: "Chairman",
-      image: "/images/altaf.jpg",
+      image: "altaf2_ikdngn",
       description:
         "With over 30 years of experience in luxury real estate development, Altaf Khan has been the visionary force behind our company's growth into one of the region's most prestigious property developers.",
       experience: "30+ Years in Real Estate",
@@ -87,7 +87,7 @@ const aboutPageData = {
       id: "md",
       name: "Muhammad Asghar",
       position: "Managing Director",
-      image: "/images/altaf2.jpg",
+      image: "altaf3_voziop",
       description:
         "Sarah Davidson brings exceptional operational expertise and strategic leadership to our organization. Her innovative approach to project management and client relations has elevated our standards of excellence.",
       experience: "25+ Years in Operations",
@@ -107,7 +107,7 @@ const aboutPageData = {
       id: "sales",
       name: "Muhammad Sohail",
       position: "Sales Expert",
-      image: "/images/altaf3.jpg",
+      image: "altaf_neclu6",
       description:
         "Muhammad Sohail is our top-performing sales professional, renowned for his deep market knowledge and ability to match clients with their perfect luxury properties. His consultative approach has earned him recognition as a trusted advisor.",
       experience: "20+ Years in Luxury Sales",
@@ -152,6 +152,10 @@ const aboutPageData = {
     ],
   },
 };
+const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "About Us", href: "/about" }
+  ];
 
 // Mission Vision Card Component
 const MissionVisionCard: React.FC<{ data: MissionVision; index: number }> = ({
@@ -208,7 +212,7 @@ const TeamMemberCard: React.FC<{ member: TeamMember; reversed?: boolean }> = ({
         >
           {/* Image Section */}
           <div className="lg:w-1/2 h-full relative overflow-hidden group/image">
-            <Image
+            <CldImage
               src={member.image}
               alt={member.name}
               width={600}
@@ -328,8 +332,14 @@ export default function AboutPage() {
       `}</style>
 
       {/* Hero Section */}
-      <HeroSection {...aboutPageData.hero} page="About Us"/>
-
+ <Hero
+      title="Home/About Us"
+      backgroundType="image"
+      backgroundSrc="Booking1_rg1bhs"
+      breadcrumbs={breadcrumbs}
+      overlay="gradient"
+      contentAlignment="center"
+    />
       {/* Mission & Vision Section */}
       <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml,<svg width=\'40\' height=\'40\' viewBox=\'0 0 40 40\' xmlns=\'http://www.w3.org/2000/svg\'><g fill=\'none\' fill-rule=\'evenodd\'><g fill=\'#f3f4f6\' fill-opacity=\'0.4\'><circle cx=\'20\' cy=\'20\' r=\'1\'/></g></g></svg>\')] opacity-30" />
@@ -400,7 +410,7 @@ export default function AboutPage() {
             <h2 className="text-4xl lg:text-6xl mb-6">
               Our Core Values
             </h2>
-            <p className="text-xl max-w-3xl mx-auto mb-8">
+            <p className="text-lg max-w-3xl mx-auto mb-8">
               {aboutPageData.company.description}
             </p>
             <div className="w-24 h-1 bg-gradient-to-r from-[rgb(140,46,71)] to-[rgb(180,86,111)] mx-auto rounded-full" />

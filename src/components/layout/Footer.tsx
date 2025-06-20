@@ -15,7 +15,7 @@ import {
 import { Button } from "@/components/ui/button";
 import {
   quickLinks,
-  latestNews,
+  // latestNews,
   socialMediaLinks,
   contactInfo,
   footerLinks,
@@ -35,10 +35,10 @@ const Footer = () => {
     <footer className="dark:bg-[rgb(1,10,26)] text-primary-foreground py-16 border-t-2 border-gray-700">
       <div className="container mx-auto px-6">
         {/* Footer Content with Newsletter */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* Company Info */}
           <div>
-            <div className="relative flex items-center cursor-pointer">
+            <div className="relative flex items-center cursor-pointer ">
               <Image
                 src="/logos/removal-809.png"
                 alt="Altaf Builder Logo"
@@ -76,7 +76,7 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div className="ml-12">
             <h3 className="text-lg font-bold mb-4 dark:text-white">
               Quick Links
             </h3>
@@ -128,7 +128,7 @@ const Footer = () => {
           </div>
 
           {/* Latest News */}
-          <div>
+          {/* <div>
             <h3 className="text-lg font-bold mb-2 dark:text-white">
               Latest News
             </h3>
@@ -147,7 +147,7 @@ const Footer = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
 
           {/* Newsletter Section */}
 

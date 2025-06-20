@@ -21,7 +21,7 @@ export const ProjectCard = ({
   location = "Villa"
 }: ProjectCardProps) => {
   return (
-    <Card className="w-full bg-white shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
+    <Card className="w-full shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
       {/* Image Container */}
       <CardHeader className="p-0 relative group">
         <div className="relative w-full h-[360px] overflow-hidden cursor-pointer rounded-xl">

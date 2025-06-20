@@ -58,7 +58,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({
     .slice(0, 6); // Show maximum 6 posts
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16">
       <div className="container mx-auto px-16">
         {/* Header - Performance optimized */}
         <motion.div

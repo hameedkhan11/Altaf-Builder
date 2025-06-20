@@ -56,7 +56,7 @@ const Header = () => {
                   alt="Altaf Builder Text"
                   width={188}
                   height={138}
-                  className="z-10"
+                  className={`cursor-pointer ${!scrolled && "text-white"}`}
                   priority
                 />
               </Link>

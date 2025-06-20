@@ -80,7 +80,7 @@ const CEOMessage = () => {
               {content.map((paragraph, index) => (
                 <motion.p
                   key={index}
-                  className="text-gray-700 leading-relaxed text-sm md:text-base"
+                  className="leading-relaxed text-sm md:text-base"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{

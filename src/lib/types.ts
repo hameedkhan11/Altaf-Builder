@@ -245,3 +245,56 @@ export interface AmenityData {
 export interface AmenitiesData {
   [key: string]: AmenityData;
 }
+
+// types/form.ts
+export interface RegisterInterestFormData {
+  fullName: string;
+  email: string;
+  phone: string;
+  countryCode: string;
+  apartmentType: 'one-bed' | 'two-bed';
+  apartmentSize: 'compact' | 'standard' | 'premium';
+  message?: string;
+}
+
+export interface Country {
+  code: string;
+  name: string;
+  dialCode: string;
+  flag: string;
+}
+
+// common/types/hero.types.ts
+export interface BreadcrumbItem {
+  label: string;
+  href: string;
+}
+
+export interface HeroProps {
+  // Content
+  title?: string;
+  subtitle?: string;
+  
+  // Background
+  backgroundType: 'video' | 'image';
+  backgroundSrc: string;
+  fallbackImage?: string;
+  
+  // Layout & Styling
+  height?: 'screen' | 'half' | 'auto';
+  overlay?: 'light' | 'medium' | 'dark' | 'gradient' | 'none';
+  contentAlignment?: 'left' | 'center' | 'right';
+  
+  // Navigation
+  breadcrumbs?: BreadcrumbItem[];
+  showScrollIndicator?: boolean;
+  
+  // Animation
+  enableAnimations?: boolean;
+  
+  // Custom content
+  children?: React.ReactNode;
+  
+  // Accessibility
+  ariaLabel?: string;
+}

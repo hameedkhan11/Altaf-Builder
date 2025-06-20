@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import {
   fadeInUp,
   fadeInLeft,
@@ -14,6 +13,7 @@ import {
 import { amenitiesData } from '@/data/amenities';
 import { AmenityData } from '@/lib/types';
 import { Button } from '@/components/ui/button';
+import { CldImage } from 'next-cloudinary';
 
 const Amenities = () => {
   const [activeAmenity, setActiveAmenity] = useState<string>('shopping-mall');
@@ -27,7 +27,7 @@ const Amenities = () => {
   };
 
   return (
-    <section className="py-24 px-4 sm:px-8 lg:px-16 bg-gray-50">
+    <section className="py-24 px-4 sm:px-8 lg:px-16">
       <div className=" mx-auto">
         {/* Header Section */}
         <motion.div 
@@ -78,7 +78,7 @@ const Amenities = () => {
                     className={`uiverse-btn p-2 ${
                       isActive
                         ? 'bg-amber-600 text-white border-amber-600 shadow-lg'
-                        : 'bg-white text-gray-700 border-gray-300 hover:border-amber-400 hover:text-amber-600'
+                        : 'bg-white  border-gray-300 hover:border-amber-400 hover:text-amber-600'
                     }`}
                   >
                     {amenity.name}
@@ -132,7 +132,7 @@ const Amenities = () => {
                 {currentAmenity.features.map((feature, index) => (
                   <motion.li 
                     key={index}
-                    className="flex items-center"
+                    className="flex items-center font-optima"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3, delay: 0.3 + (index * 0.1) }}
@@ -158,7 +158,7 @@ const Amenities = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}
             >
-              <Image
+              <CldImage
                 src={currentAmenity.image}
                 alt={currentAmenity.title}
                 fill

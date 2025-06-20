@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Variants } from "framer-motion";
-import { NavigationItem, NewsItem } from "./types";
+import { Country, NavigationItem, NewsItem } from "./types";
 
 // import { Facebook, Instagram, Twitter, Linkedin } from "lucide-react";
 
@@ -564,7 +564,7 @@ export const simpleFadeSlide = {
     scale: 1.1,
     transition: {
       opacity: { duration: 0.8, ease: "easeInOut" },
-      scale: { duration: 4, ease: "easeInOut" } // Slow scale up during display
+      scale: { duration: 3, ease: "easeInOut" } // Slow scale up during display
     }
   },
   exit: { 
@@ -572,7 +572,34 @@ export const simpleFadeSlide = {
     scale: 1,
     transition: {
       opacity: { duration: 0.8, ease: "easeInOut" },
-      scale: { duration: 4, ease: "easeInOut" } // Slow scale down during exit
+      scale: { duration: 3, ease: "easeInOut" } // Slow scale down during exit
     }
   }
 };
+
+
+
+// constants/countries.ts
+export const COUNTRIES: Country[] = [
+  { code: 'AE', name: 'United Arab Emirates', dialCode: '+971', flag: '🇦🇪' },
+  { code: 'SA', name: 'Saudi Arabia', dialCode: '+966', flag: '🇸🇦' },
+  { code: 'US', name: 'United States', dialCode: '+1', flag: '🇺🇸' },
+  { code: 'GB', name: 'United Kingdom', dialCode: '+44', flag: '🇬🇧' },
+  { code: 'IN', name: 'India', dialCode: '+91', flag: '🇮🇳' },
+  { code: 'PK', name: 'Pakistan', dialCode: '+92', flag: '🇵🇰' },
+  { code: 'CA', name: 'Canada', dialCode: '+1', flag: '🇨🇦' },
+  { code: 'AU', name: 'Australia', dialCode: '+61', flag: '🇦🇺' },
+  { code: 'DE', name: 'Germany', dialCode: '+49', flag: '🇩🇪' },
+  { code: 'FR', name: 'France', dialCode: '+33', flag: '🇫🇷' },
+];
+
+export const APARTMENT_TYPES = [
+  { value: 'one-bed', label: 'One Bedroom Apartment' },
+  { value: 'two-bed', label: 'Two Bedroom Apartment' },
+] as const;
+
+export const APARTMENT_SIZES = [
+  { value: 'compact', label: 'Compact (450-550 sq ft)', description: 'Perfect for individuals' },
+  { value: 'standard', label: 'Standard (550-750 sq ft)', description: 'Ideal for couples' },
+  { value: 'premium', label: 'Premium (750-950 sq ft)', description: 'Spacious luxury living' },
+] as const;

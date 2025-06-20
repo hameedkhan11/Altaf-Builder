@@ -43,7 +43,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
   return (
     <>
       <article 
-        className="blog-card group bg-white rounded-xl shadow-lg overflow-hidden h-full flex flex-col"
+        className="blog-card group rounded-xl shadow-lg overflow-hidden h-full flex flex-col"
         data-index={index}
         itemScope 
         itemType="https://schema.org/BlogPosting"

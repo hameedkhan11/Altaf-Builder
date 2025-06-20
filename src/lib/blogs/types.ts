@@ -39,6 +39,7 @@ export interface BlogGridProps {
 }
 
 export interface BlogLandingPageProps {
+  blogTitle?: string;
   featuredPost: BlogPost;
   regularPosts: BlogPost[];
   hasMore?: boolean;

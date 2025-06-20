@@ -1,21 +1,145 @@
-import { Breadcrumb } from "./Breadcrumb";
+// common/components/Hero.tsx
+"use client";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { HeroBackground } from './HeroBackground';
+import { Breadcrumb } from './Breadcrumb';
+import { HeroProps } from '@/lib/types';
+import { ScrollIndicator } from './ScrollIndicator';
 
-export const HeroSection: React.FC<{
-  title: string;
-  subtitle: string;
-  backgroundImage: string;
-  page: string;
-  blogTitle?: string;
-}> = ({ backgroundImage, page, blogTitle }) => {
+// Animation variants
+const containerVariants = {
+  initial: { opacity: 0 },
+  animate: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3,
+      delayChildren: 0.2
+    }
+  }
+};
+
+const itemVariants = {
+  initial: { opacity: 0, y: 30 },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: "easeOut" }
+  }
+};
+
+export const Hero: React.FC<HeroProps> = ({
+  title,
+  subtitle,
+  backgroundType,
+  backgroundSrc,
+  fallbackImage,
+  height = 'screen',
+  overlay = 'medium',
+  contentAlignment = 'left',
+  breadcrumbs,
+  showScrollIndicator = false,
+  enableAnimations = true,
+  children,
+  ariaLabel = "Hero section"
+}) => {
+  const getHeightClass = () => {
+    switch (height) {
+      case 'screen':
+        return 'h-screen min-h-screen';
+      case 'half':
+        return 'h-[50vh] min-h-[400px]';
+      case 'auto':
+        return 'min-h-[60vh]';
+      default:
+        return 'h-screen min-h-screen';
+    }
+  };
+
+  const getContentAlignmentClass = () => {
+    switch (contentAlignment) {
+      case 'center':
+        return 'items-center justify-center text-center';
+      case 'right':
+        return 'items-center justify-end text-right';
+      case 'left':
+      default:
+        return 'items-center justify-start text-left';
+    }
+  };
+
+  const MotionWrapper = enableAnimations ? motion.section : 'section';
+  const MotionDiv = enableAnimations ? motion.div : 'div';
+  const MotionH1 = enableAnimations ? motion.h1 : 'h1';
+  const MotionP = enableAnimations ? motion.p : 'p';
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div
-        className="absolute inset-0 h-full bg-cover bg-center"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
+    <MotionWrapper
+      className={`relative ${getHeightClass()} overflow-hidden flex ${getContentAlignmentClass()}`}
+      aria-label={ariaLabel}
+      {...(enableAnimations && {
+        variants: containerVariants,
+        initial: "initial",
+        animate: "animate"
+      })}
+    >
+      {/* Background */}
+      <HeroBackground
+        type={backgroundType}
+        src={backgroundSrc}
+        fallbackImage={fallbackImage}
+        overlay={overlay}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/30 to-black/40" />
-      
-      <Breadcrumb page={page} blogTitle={blogTitle} />
-    </section>
+
+      {/* Breadcrumb */}
+      {breadcrumbs && <Breadcrumb items={breadcrumbs} />}
+
+      {/* Content */}
+      <div className="container mx-auto px-6 relative z-20 w-full">
+        <MotionDiv
+          className={`${contentAlignment === 'center' ? 'max-w-6xl mx-auto' : contentAlignment === 'right' ? 'ml-auto max-w-2xl' : 'max-w-2xl'}`}
+          {...(enableAnimations && {
+            variants: containerVariants,
+            initial: "initial",
+            animate: "animate"
+          })}
+        >
+          {title && (
+            <MotionH1
+              className="text-3xl md:text-4xl lg:text-5xl text-white mb-6 leading-tight"
+              {...(enableAnimations && {
+                variants: itemVariants
+              })}
+            >
+              {title}
+            </MotionH1>
+          )}
+
+          {subtitle && (
+            <MotionP
+              className="text-xl text-white/90 mb-8 leading-relaxed"
+              {...(enableAnimations && {
+                variants: itemVariants
+              })}
+            >
+              {subtitle}
+            </MotionP>
+          )}
+
+          {children && (
+            <MotionDiv
+              {...(enableAnimations && {
+                variants: itemVariants
+              })}
+            >
+              {children}
+            </MotionDiv>
+          )}
+        </MotionDiv>
+      </div>
+
+      {/* Scroll Indicator */}
+      {showScrollIndicator && <ScrollIndicator />}
+    </MotionWrapper>
   );
 };

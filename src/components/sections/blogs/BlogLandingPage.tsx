@@ -1,12 +1,13 @@
 // pages/blog/BlogLandingPage.tsx
 "use client";
-import { HeroSection } from '@/components/common/Hero';
+import { Hero } from '@/components/common/Hero';
 import { getRegularPosts, sampleBlogPosts } from '@/data/blogs/data';
 import { BlogLandingPageProps } from '@/lib/blogs/types';
 import React, { useState, useCallback } from 'react';
 import FeaturedBlog from './FeaturedBlogs';
 import BlogGrid from './BlogGrid';
 const BlogLandingPage: React.FC<BlogLandingPageProps> = ({
+  blogTitle,
   featuredPost,
   regularPosts: initialPosts,
   hasMore = true,
@@ -44,16 +45,25 @@ const BlogLandingPage: React.FC<BlogLandingPageProps> = ({
       }, 1000);
     }
   }, [onLoadMore, posts.length]);
+    const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "Blogs", href: "/blogs" },
+    ...(blogTitle ? [{ label: blogTitle, href: "#" }] : [])
+  ];
+
 
   return (
     <>
       {/* Hero Section */}
-      <HeroSection
-        title="Blog"
-        subtitle="Insights & Updates"
-        backgroundImage="/images/Booking3.jpg"
-        page="Blogs"
-      />
+        <Hero
+      title={blogTitle || "Our Blog"}
+      subtitle={blogTitle ? undefined : "Insights and stories from our team"}
+      backgroundType="image"
+      backgroundSrc="Booking2_wltkjn"
+      breadcrumbs={breadcrumbs}
+      height="half"
+      overlay="dark"
+    />
 
       {/* Featured Blog Section */}
       <FeaturedBlog post={featuredPost} />

@@ -1,28 +1,38 @@
-import Link from "next/link";
+// common/components/Breadcrumb.tsx
 
-interface Props {
-  page: string;
-  blogTitle?: string;
+import React from 'react';
+import { BreadcrumbItem } from '@/lib/types';
+
+interface BreadcrumbProps {
+  items: BreadcrumbItem[];
+  className?: string;
 }
-export const Breadcrumb: React.FC<Props> = ({ page, blogTitle }) => {
+
+export const Breadcrumb: React.FC<BreadcrumbProps> = ({ 
+  items, 
+  className = "absolute bottom-8 left-8 z-20" 
+}) => {
+  if (!items || items.length === 0) return null;
+
   return (
-    <div className="absolute bottom-0 left-8 z-20">
+    <div className={className}>
       <nav className="flex items-center space-x-2 text-white/80 text-sm">
-        <Link href="/" className="transition-colors">
-          <h3 className="text-white  hover:text-white/80">Home</h3>
-        </Link>
-        <span className="h-8">/</span>
-        <Link href="/blogs" className="transition-colors">
-          <h3 className="text-white  hover:text-white/80">{page}</h3>
-        </Link>
-        {blogTitle && (
-          <>
-            <span className="h-8">/</span>
-            <h3 className="text-white hover:text-white/80 max-w-md truncate">
-              {blogTitle}
-            </h3>
-          </>
-        )}
+        {items.map((item, index) => (
+          <React.Fragment key={index}>
+            {index > 0 && <span className="mx-2">/</span>}
+            {index === items.length - 1 ? (
+              <h3 className="text-white max-w-md truncate">
+                {item.label}
+              </h3>
+            ) : (
+              <h3 
+                className="text-white hover:text-white/80 transition-colors"
+              >
+                {item.label}
+              </h3>
+            )}
+          </React.Fragment>
+        ))}
       </nav>
     </div>
   );

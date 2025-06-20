@@ -3,7 +3,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { features } from "@/data/features";
 import { 
   fadeInLeft, 
@@ -20,6 +19,7 @@ import {
   easingPresets
 } from "@/lib/constants";
 import { useEffect } from "react";
+import { CldImage } from "next-cloudinary";
 
 const WhyChoose = () => {
   const performanceMode = getPerformanceMode();
@@ -234,8 +234,8 @@ const WhyChoose = () => {
             <motion.div
               className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
             />
-            <Image
-              src="/images/avi-waxman-f9qZuKoZYoY-unsplash.jpg"
+            <CldImage
+              src="gallery8_kkp6hg"
               alt="ALTAF BUILDER Office"
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               width={800}
