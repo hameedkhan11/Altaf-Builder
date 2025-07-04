@@ -51,10 +51,10 @@ export const ContactInfoCard = () => {
 
       <div className="relative z-10">
         <div className="mb-8">
-          <h2 className="text-3xl font-bold mt-4">
+          <h2 className="text-3xl mt-4">
             Get in Touch
           </h2>
-          <p className="leading-relaxed">
+          <p className="leading-relaxed font-optima">
             Experience luxury living redefined. Our expert team is ready to help you 
             discover your perfect home in our premium residential developments.
           </p>
@@ -73,7 +73,7 @@ export const ContactInfoCard = () => {
                 <info.icon className="w-5 h-5 text-[rgb(140,46,71)]" />
               </div>
               <div className="flex-1">
-                <h3 className="font-semibold text-lg mb-1">
+                <h3 className="text-lg mb-1">
                   {info.title}
                 </h3>
                 <p className="mb-1">{info.primary}</p>

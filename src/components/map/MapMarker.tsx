@@ -1,4 +1,5 @@
 // components/map/CustomMarker.tsx
+"use client";
 
 import { Marker, Popup } from 'react-leaflet';
 import { MapLocation } from '@/lib/mapConstants/types';

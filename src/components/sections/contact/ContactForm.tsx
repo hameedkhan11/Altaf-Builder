@@ -109,7 +109,7 @@ export const ContactForm = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <div className="mb-8">
-                <h2 className="text-3xl font-semibold mb-3">
+                <h2 className="text-3xl mb-3">
                   Register Your Interest
                 </h2>
                 <p>
