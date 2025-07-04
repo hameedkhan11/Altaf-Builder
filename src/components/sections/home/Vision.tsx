@@ -1,7 +1,6 @@
 // components/CEOMessage.tsx
 "use client";
 import React from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   fadeInUp,
@@ -11,8 +10,8 @@ import {
   viewportOnce,
   viewportDefault,
   delays,
-  shouldAnimate,
-  getPerformanceMode,
+  // shouldAnimate,
+  // getPerformanceMode,
   getPerformanceVariant,
   createLazyAnimation,
   staggerContainer,
@@ -21,7 +20,7 @@ import { visionData } from "@/data/vision";
 import { CldImage } from "next-cloudinary";
 
 const CEOMessage = () => {
-  const { ceoImage, ceoName, ceoTitle, content, title } = visionData;
+  const { ceoName, ceoTitle} = visionData;
   // Performance-aware animations
   const titleAnimation = getPerformanceVariant(fadeInUp);
   const contentAnimation = getPerformanceVariant(fadeInLeft);
@@ -31,57 +30,57 @@ const CEOMessage = () => {
   const lazyStatsContainer = createLazyAnimation(staggerContainer);
 
   // Custom underline animation with performance awareness
-  const underlineAnimation = shouldAnimate()
-    ? {
-        initial: { scaleX: 0 },
-        animate: { scaleX: 1 },
-        transition: {
-          duration:
-            getPerformanceMode() === "fast"
-              ? 0.6
-              : getPerformanceMode() === "slow"
-              ? 1.0
-              : 0.8,
-          delay: delays.medium,
-          ease: "easeOut",
-        },
-      }
-    : {
-        initial: { scaleX: 1 },
-        animate: { scaleX: 1 },
-        transition: { duration: 0 },
-      };
+  // const underlineAnimation = shouldAnimate()
+  //   ? {
+  //       initial: { scaleX: 0 },
+  //       animate: { scaleX: 1 },
+  //       transition: {
+  //         duration:
+  //           getPerformanceMode() === "fast"
+  //             ? 0.6
+  //             : getPerformanceMode() === "slow"
+  //             ? 1.0
+  //             : 0.8,
+  //         delay: delays.medium,
+  //         ease: "easeOut",
+  //       },
+  //     }
+  //   : {
+  //       initial: { scaleX: 1 },
+  //       animate: { scaleX: 1 },
+  //       transition: { duration: 0 },
+  //     };
+
+  // Using content from visionData
+  const shortContent = [
+    "Our vision at Altaf Developments lies in creating communities that not only reflect architectural brilliance, but also resonate with the dreams and aspirations of modern living.",
+    "With unwavering commitment to innovation, sustainability, and quality, we're dedicated to shaping environments that inspire and elevate every aspect of modern luxury living."
+  ];
 
   return (
-    <section className="py-16 px-16">
+    <section className="py-8 sm:py-12 md:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
       <div className="max-w-8xl mx-auto">
-        <motion.h1 className=" text-8xl text-center pb-24 ">
+        <motion.h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-center pb-12 sm:pb-16 md:pb-20 lg:pb-24">
             THE NEW ERA OF LUXURY
         </motion.h1>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-start">
           {/* Content Section */}
           <motion.div
-            className="space-y-6"
+            className="space-y-4 sm:space-y-5 md:space-y-6 flex flex-col justify-center h-full"
             {...contentAnimation}
             viewport={viewportDefault}
           >
             {/* Title */}
-            <motion.div {...titleAnimation} viewport={viewportOnce}>
-              <h2 className="text-3xl md:text-4xl mb-0">{title}</h2>
-              <motion.div
-                className="w-[89%] h-0.5 bg-gradient-to-r from-[#8B2131] to-[#5f0909] rounded-full"
-                {...underlineAnimation}
-                viewport={viewportOnce}
-                style={{ transformOrigin: "left" }}
-              />
+            <motion.div {...titleAnimation} viewport={viewportOnce} className="text-left">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-0">OUR MISSION</h2>
             </motion.div>
 
             {/* Content Paragraphs */}
-            <div className="space-y-4">
-              {content.map((paragraph, index) => (
+            <div className="space-y-3 sm:space-y-4 text-left">
+              {shortContent.map((paragraph, index) => (
                 <motion.p
                   key={index}
-                  className="leading-relaxed text-sm md:text-base"
+                  className="leading-relaxed font-optima max-w-xl text-sm sm:text-base"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{
@@ -98,7 +97,7 @@ const CEOMessage = () => {
 
             {/* CEO Signature */}
             <motion.div
-              className="pt-6 space-y-1"
+              className="pt-4 sm:pt-5 md:pt-6 space-y-1 text-center lg:text-left"
               {...signatureAnimation}
               transition={{
                 ...signatureAnimation.transition,
@@ -106,18 +105,18 @@ const CEOMessage = () => {
               }}
               viewport={viewportOnce}
             >
-              <h3 className="text-lg font-bold text-[#8B2131]">{ceoName}</h3>
-              <p className="text-sm">{ceoTitle}</p>
+              <h3 className="text-base sm:text-lg font-bold text-[#8B2131]">{ceoName}</h3>
+              <p className="text-xs sm:text-sm">{ceoTitle}</p>
             </motion.div>
           </motion.div>
 
           {/* Image Section */}
           <motion.div
-            className="relative"
+            className="relative order-first lg:order-last"
             {...imageAnimation}
             viewport={viewportDefault}
           >
-            <div className="relative h-[500px] lg:h-[600px] w-full overflow-hidden  shadow-2xl">
+            <div className="relative h-[300px] sm:h-[400px] md:h-[450px] lg:h-[500px] xl:h-[600px] w-full overflow-hidden shadow-2xl">
               <motion.div
                 className="w-full h-full"
                 whileHover={{ scale: 1.02 }}
@@ -128,7 +127,7 @@ const CEOMessage = () => {
                   alt={`${ceoName} - ${ceoTitle}`}
                   fill
                   className="object-cover object-center"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 50vw"
                   priority
                 />
               </motion.div>
@@ -140,7 +139,7 @@ const CEOMessage = () => {
         </div>
         {/* Statistics Section - Optimized stagger container */}
         <motion.div
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 w-full"
+          className="mt-8 sm:mt-10 md:mt-12 lg:mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 w-full"
           {...lazyStatsContainer}
           viewport={viewportDefault}
         >
@@ -160,10 +159,10 @@ const CEOMessage = () => {
               }}
               viewport={viewportOnce}
             >
-              <div className="text-5xl font-bold text-[#8B2131] dark:text-red-400 mb-2">
+              <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#8B2131] dark:text-red-400 mb-1 sm:mb-2">
                 {stat.value}
               </div>
-              <div className="text-[#8B2131] dark:text-gray-300  font-bold">
+              <div className="text-[#8B2131] dark:text-gray-300 font-bold text-xs sm:text-sm md:text-base">
                 {stat.label}
               </div>
             </motion.div>

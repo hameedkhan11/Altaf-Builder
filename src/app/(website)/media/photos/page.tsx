@@ -3,96 +3,96 @@
 
 import { Hero } from "@/components/common/Hero";
 import NextCloudinaryGallery from "@/components/media/PhotoGallery";
-import PhotoGallery from "@/components/media/PhotoGallery";
+// import PhotoGallery from "@/components/media/PhotoGallery";
 import React from "react";
 
 // Sample data - replace with your actual images
-const sampleImages = [
-  {
-    id: "1",
-    src: "luxury-apartment-living-room-1",
-    alt: "Spacious living room with modern furniture and city view",
-    category: "living-spaces",
-    title: "Modern Living Room",
-  },
-  {
-    id: "2",
-    src: "luxury-apartment-kitchen-1",
-    alt: "Contemporary kitchen with marble countertops",
-    category: "kitchen",
-    title: "Gourmet Kitchen",
-  },
-  {
-    id: "3",
-    src: "luxury-apartment-bedroom-1",
-    alt: "Master bedroom with panoramic windows",
-    category: "bedrooms",
-    title: "Master Suite",
-  },
-  {
-    id: "4",
-    src: "luxury-apartment-bathroom-1",
-    alt: "Spa-like bathroom with rainfall shower",
-    category: "bathrooms",
-    title: "Luxury Bathroom",
-  },
-  {
-    id: "5",
-    src: "luxury-apartment-balcony-1",
-    alt: "Private balcony with city skyline view",
-    category: "outdoor",
-    title: "Private Terrace",
-  },
-  {
-    id: "6",
-    src: "luxury-apartment-amenities-1",
-    alt: "Rooftop pool and lounge area",
-    category: "amenities",
-    title: "Rooftop Pool",
-  },
-  {
-    id: "7",
-    src: "luxury-apartment-living-room-2",
-    alt: "Open concept living and dining area",
-    category: "living-spaces",
-    title: "Open Concept Design",
-  },
-  {
-    id: "8",
-    src: "luxury-apartment-kitchen-2",
-    alt: "Island kitchen with premium appliances",
-    category: "kitchen",
-    title: "Chef's Kitchen",
-  },
-  {
-    id: "9",
-    src: "luxury-apartment-bedroom-2",
-    alt: "Guest bedroom with elegant decor",
-    category: "bedrooms",
-    title: "Guest Suite",
-  },
-  {
-    id: "10",
-    src: "luxury-apartment-amenities-2",
-    alt: "Fitness center with modern equipment",
-    category: "amenities",
-    title: "Fitness Center",
-  },
-  {
-    id: "11",
-    src: "luxury-apartment-outdoor-2",
-    alt: "Garden courtyard with water features",
-    category: "outdoor",
-    title: "Garden Oasis",
-  },
-  {
-    id: "12",
-    src: "luxury-apartment-lobby-1",
-    alt: "Grand lobby with marble and gold accents",
-    category: "common-areas",
-    title: "Grand Lobby",
-  },
-];
+// const sampleImages = [
+//   {
+//     id: "1",
+//     src: "luxury-apartment-living-room-1",
+//     alt: "Spacious living room with modern furniture and city view",
+//     category: "living-spaces",
+//     title: "Modern Living Room",
+//   },
+//   {
+//     id: "2",
+//     src: "luxury-apartment-kitchen-1",
+//     alt: "Contemporary kitchen with marble countertops",
+//     category: "kitchen",
+//     title: "Gourmet Kitchen",
+//   },
+//   {
+//     id: "3",
+//     src: "luxury-apartment-bedroom-1",
+//     alt: "Master bedroom with panoramic windows",
+//     category: "bedrooms",
+//     title: "Master Suite",
+//   },
+//   {
+//     id: "4",
+//     src: "luxury-apartment-bathroom-1",
+//     alt: "Spa-like bathroom with rainfall shower",
+//     category: "bathrooms",
+//     title: "Luxury Bathroom",
+//   },
+//   {
+//     id: "5",
+//     src: "luxury-apartment-balcony-1",
+//     alt: "Private balcony with city skyline view",
+//     category: "outdoor",
+//     title: "Private Terrace",
+//   },
+//   {
+//     id: "6",
+//     src: "luxury-apartment-amenities-1",
+//     alt: "Rooftop pool and lounge area",
+//     category: "amenities",
+//     title: "Rooftop Pool",
+//   },
+//   {
+//     id: "7",
+//     src: "luxury-apartment-living-room-2",
+//     alt: "Open concept living and dining area",
+//     category: "living-spaces",
+//     title: "Open Concept Design",
+//   },
+//   {
+//     id: "8",
+//     src: "luxury-apartment-kitchen-2",
+//     alt: "Island kitchen with premium appliances",
+//     category: "kitchen",
+//     title: "Chef's Kitchen",
+//   },
+//   {
+//     id: "9",
+//     src: "luxury-apartment-bedroom-2",
+//     alt: "Guest bedroom with elegant decor",
+//     category: "bedrooms",
+//     title: "Guest Suite",
+//   },
+//   {
+//     id: "10",
+//     src: "luxury-apartment-amenities-2",
+//     alt: "Fitness center with modern equipment",
+//     category: "amenities",
+//     title: "Fitness Center",
+//   },
+//   {
+//     id: "11",
+//     src: "luxury-apartment-outdoor-2",
+//     alt: "Garden courtyard with water features",
+//     category: "outdoor",
+//     title: "Garden Oasis",
+//   },
+//   {
+//     id: "12",
+//     src: "luxury-apartment-lobby-1",
+//     alt: "Grand lobby with marble and gold accents",
+//     category: "common-areas",
+//     title: "Grand Lobby",
+//   },
+// ];
 
 const PhotoGalleryPage = () => {
   return (

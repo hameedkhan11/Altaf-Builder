@@ -21,9 +21,22 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [initialLoad, setInitialLoad] = useState(true);
   const { isDark, toggleTheme } = useTheme();
-  const [showBackgroundOverlay, setShowBackgroundOverlay] = useState(false);
+  const [showBackgroundOverlay] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    // Set client-side rendering flag
+    setIsClient(true);
+    
+    // Check if device is mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    // Check initial mobile state
+    checkMobile();
+
     // Check initial scroll position on component mount
     const checkInitialScroll = () => {
       const scrollPosition = window.scrollY;
@@ -44,16 +57,25 @@ const Header = () => {
       setScrolled(scrollPosition > 100);
     };
 
+    const handleResize = () => {
+      checkMobile();
+    };
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
-  // Logo animation variants - starts large in screen center, then moves to header
+  // Logo animation variants - responsive scale based on device
   const logoVariants = {
     initial: {
       opacity: 1,
-      scale: initialLoad && !scrolled ? 4 : 1, // Start large only on initial load and not scrolled
-      y: initialLoad && !scrolled ? "50vh" : 0, // Start in center only on initial load and not scrolled
+      scale: initialLoad && !scrolled ? (isClient && isMobile ? 1.2 : 4) : 1, // Use isClient check
+      y: initialLoad && !scrolled ? (isClient && isMobile ? "25vh" : "50vh") : 0, // Use isClient check
       x: 0,
       rotate: 0,
     },
@@ -146,8 +168,8 @@ const Header = () => {
                   <Image
                     src="/logos/altaf-logo.svg"
                     alt="Altaf Builder Text"
-                    width={188}
-                    height={138}
+                    width={isClient && isMobile ? 120 : 188} // Use isClient check
+                    height={isClient && isMobile ? 88 : 138} // Use isClient check
                     className={`cursor-pointer transition-all duration-500 ${
                       !scrolled 
                         ? "brightness-0 invert" // Makes logo white when not scrolled

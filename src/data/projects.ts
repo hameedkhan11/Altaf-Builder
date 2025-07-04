@@ -21,16 +21,16 @@ export const projects: Project[] = [
     image: '/images/avi-waxman-f9qZuKoZYoY-unsplash.jpg',
     badgeColor: 'bg-indigo-400'
   },
-  {
-    id: '3',
-    title: 'Metropolitan Square',
-    location: 'Sheikh Zayed Road, Dubai',
-    status: 'Coming Soon',
-    launch: 'Q1 2025',
-    description: 'A mixed-use development featuring luxury residences, premium office spaces, and high-end retail outlets.',
-    image: '/images/avi-waxman-f9qZuKoZYoY-unsplash.jpg',
-    badgeColor: 'bg-indigo-600'
-  },
+  // {
+  //   id: '3',
+  //   title: 'Metropolitan Square',
+  //   location: 'Sheikh Zayed Road, Dubai',
+  //   status: 'Coming Soon',
+  //   launch: 'Q1 2025',
+  //   description: 'A mixed-use development featuring luxury residences, premium office spaces, and high-end retail outlets.',
+  //   image: '/images/avi-waxman-f9qZuKoZYoY-unsplash.jpg',
+  //   badgeColor: 'bg-indigo-600'
+  // },
   // {
   //   id: '4',
   //   title: 'The Oasis Towers',

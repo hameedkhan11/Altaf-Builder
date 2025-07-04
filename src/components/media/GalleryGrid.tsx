@@ -27,9 +27,9 @@ const GalleryGrid: React.FC<GalleryGridProps> = ({
   filteredImages,
   isInView,
   onImageClick,
-  searchTerm,
+  // searchTerm,
   setSearchTerm,
-  filter,
+  // filter,
   setFilter
 }) => {
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());

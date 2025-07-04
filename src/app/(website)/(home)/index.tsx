@@ -14,6 +14,7 @@ import Amenities from "@/components/sections/home/Amenities";
 import { Hero } from "@/components/common/Hero";
 // import { RegisterInterestForm } from "@/components/register-form/register-interest-form";
 import { RegisterHero } from "@/components/register-form/hero-section";
+import LuxuryRealEstateFAQ from "@/components/sections/home/FAQs";
 // import PropertyGallery from "@/components/sections/home/ApartmentGallery";
 
 const HomePage = () => {
@@ -25,8 +26,9 @@ const HomePage = () => {
       <Hero
         title="Designing the future of living"
         // subtitle="Experience unparalleled comfort and elegance"
+        isHomePage={true}
         backgroundType="image"
-        backgroundSrc="imgi_111_dnWJIN0wc12BQykNGm4ok54W330_rydzw3"
+        backgroundSrc="imgi_21_IjGNDVkEAbAhpxd8VU8yRt7KGM_exhsbq"
         fallbackImage=""
         // showScrollIndicator={true}
         showHeroButtons={true}
@@ -47,6 +49,7 @@ const HomePage = () => {
         {/* <MeetOurTeam /> */}
         <BlogSection posts={posts} />
         <RegisterHero />
+        <LuxuryRealEstateFAQ />
       </div>
       {/* <RealEstateLeafletMap /> */}
       {/* <Footer /> */}

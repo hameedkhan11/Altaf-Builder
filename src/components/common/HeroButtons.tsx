@@ -4,7 +4,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Building2, MessageCircle, Sparkles, ArrowRight } from 'lucide-react';
+import {  ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 interface HeroButtonsProps {
@@ -86,7 +86,7 @@ const HeroButtons: React.FC<HeroButtonsProps> = ({
             <div className="flex items-center space-x-3 relative z-10">
               {/* <MessageCircle className="h-5 w-5 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12" /> */}
               <span className="transition-all duration-300 group-hover:tracking-wider">
-                Let's Connect
+                Let&apos;s Connect
               </span>
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
             </div>

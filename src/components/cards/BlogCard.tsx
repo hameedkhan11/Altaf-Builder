@@ -1,7 +1,6 @@
 // components/cards/BlogCard.tsx (Optimized Server Component)
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Clock, User } from 'lucide-react';
 import { BlogCardProps } from '@/lib/blogs/types';
 import { BlogCardAnimations } from '@/lib/styles/BlogsAnimation';
@@ -157,7 +156,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
 
           {/* Excerpt */}
           <p 
-            className="text-sm sm:text-base mb-4 line-clamp-2 flex-1 leading-relaxed animate-child"
+            className="text-sm sm:text-base mb-4 line-clamp-2 flex-1 leading-relaxed animate-child font-optima"
             itemProp="description"
             style={{ opacity: enableAnimations ? 0 : 1, transform: enableAnimations ? 'translateY(8px)' : 'none' }}
           >

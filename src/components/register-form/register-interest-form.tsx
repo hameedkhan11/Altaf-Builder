@@ -18,9 +18,9 @@ export function RegisterInterestForm() {
   const { form, onSubmit, isSubmitting } = useRegisterForm();
 
   return (
-    <div className="w-full max-w-2xl mx-auto bg-black/40 backdrop-blur- rounded-2xl p-6 border border-white/10 font-optima text-white">
-      <div className="mb-6">
-        <h1 className="text-xl font-semibold mb-2 text-white">
+    <div className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl mx-auto bg-black/40 backdrop-blur- rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-white/10 font-optima text-white">
+      <div className="mb-4 sm:mb-6">
+        <h1 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2 text-white">
           Register Your Interest
         </h1>
       </div>
@@ -28,7 +28,7 @@ export function RegisterInterestForm() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-4 font-optima"
+          className="space-y-3 sm:space-y-4 font-optima"
         >
           <FormFieldWrapper
             control={form.control}
@@ -37,7 +37,7 @@ export function RegisterInterestForm() {
           >
             <Input
               placeholder="Enter your full name"
-              className="bg-black/30 border-white/20 placeholder:text-gray-400 focus:border-white/40 py-5"
+              className="bg-black/30 border-white/20 placeholder:text-gray-400 focus:border-white/40 py-3 sm:py-4 md:py-5 text-sm sm:text-base"
               {...form.register("fullName")}
             />
           </FormFieldWrapper>
@@ -50,7 +50,7 @@ export function RegisterInterestForm() {
             <Input
               type="email"
               placeholder="Enter your email"
-              className="bg-black/30 border-white/20 className placeholder:text-gray-400 focus:border-white/40 py-5"
+              className="bg-black/30 border-white/20 className placeholder:text-gray-400 focus:border-white/40 py-3 sm:py-4 md:py-5 text-sm sm:text-base"
               {...form.register("email")}
             />
           </FormFieldWrapper>
@@ -64,18 +64,18 @@ export function RegisterInterestForm() {
               onPhoneChange={(value) => form.setValue("phone", value)}
             />
             {form.formState.errors.countryCode && (
-              <p className="text-red-400 text-sm">
+              <p className="text-red-400 text-xs sm:text-sm mt-1">
                 {form.formState.errors.countryCode.message}
               </p>
             )}
             {form.formState.errors.phone && (
-              <p className="text-red-400 text-sm">
+              <p className="text-red-400 text-xs sm:text-sm mt-1">
                 {form.formState.errors.phone.message}
               </p>
             )}
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <FormFieldWrapper
               control={form.control}
               name="apartmentType"
@@ -113,7 +113,7 @@ export function RegisterInterestForm() {
           >
             <Textarea
               placeholder="Tell us about your preferences or any questions..."
-              className="bg-black/30 border-white/20 className placeholder:text-gray-400 focus:border-white/40 resize-none h-20 overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/20 hover:scrollbar-thumb-white/30"
+              className="bg-black/30 border-white/20 className placeholder:text-gray-400 focus:border-white/40 resize-none h-16 sm:h-20 overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/20 hover:scrollbar-thumb-white/30 text-sm sm:text-base"
               {...form.register("message")}
             />
           </FormFieldWrapper>
@@ -121,16 +121,16 @@ export function RegisterInterestForm() {
           <Button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-white text-black hover:bg-gray-100 cursor-pointer font-semibold py-3 rounded-lg transition-all duration-200 disabled:opacity-50"
+            className="w-full bg-white text-black hover:bg-gray-100 cursor-pointer font-semibold py-2.5 sm:py-3 rounded-lg transition-all duration-200 disabled:opacity-50 text-sm sm:text-base"
           >
             {isSubmitting ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                <Loader2 className="mr-2 h-3 w-3 sm:h-4 sm:w-4 animate-spin" />
                 Submitting...
               </>
             ) : (
               <>
-                <Send className="mr-2 h-4 w-4" />
+                <Send className="mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                 Submit Interest
               </>
             )}

@@ -29,9 +29,8 @@ interface Project {
 
 // Memoized constants
 const UNSPLASH_IMAGES = [
-  "/images/Apartment1.jpeg",
-  "/images/Apartment2.jpeg",
-  "/images/Apartment3.jpg",
+  "imgi_2_EXTERIOR_FRONT_STREET_VIEW_REVISED_vajrlu",
+  "imgi_3_5_Bed_Villa_Revised_Front_Closeup_pkdtfq",
 ];
 
 const DISPLAY_COUNT = 6;
@@ -55,7 +54,7 @@ const DISPLAY_COUNT = 6;
 // Fixed type from any[] to Project[]
 const StaticGrid = React.memo(
   ({ projectsData }: { projectsData: Project[] }) => (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
       {projectsData.map((project, index) => (
         <div
           key={project.id}
@@ -74,7 +73,7 @@ StaticGrid.displayName = "StaticGrid";
 
 const AnimatedHeader = React.memo(({ canAnimate }: { canAnimate: boolean }) => (
   <motion.div
-    className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 gap-6"
+    className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 sm:mb-10 md:mb-12 gap-4 sm:gap-6"
     {...fadeInUp}
     viewport={viewportOnce}
   >
@@ -83,11 +82,11 @@ const AnimatedHeader = React.memo(({ canAnimate }: { canAnimate: boolean }) => (
       viewport={viewportOnce}
       transition={{ duration: 0.2, delay: delays.short }}
     >
-      <h2 className="text-3xl sm:text-4xl dark:text-white mb-2">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl dark:text-white mb-2">
         LATEST PROJECTS
       </h2>
       <motion.div
-        className="w-20 h-1 bg-gradient-to-r from-[#8B2131] to-[#B91C1C] rounded-full"
+        className="w-16 sm:w-20 h-1 bg-gradient-to-r from-[#8B2131] to-[#B91C1C] rounded-full"
         initial={{ scaleX: 0 }}
         whileInView={{ scaleX: 1 }}
         viewport={viewportOnce}
@@ -97,7 +96,7 @@ const AnimatedHeader = React.memo(({ canAnimate }: { canAnimate: boolean }) => (
     </motion.div>
 
     <motion.button
-      className="px-8 py-3 bg-[#B91C1C] text-white rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:bg-transparent hover:border-2 hover:border-[#8B2131] dark:text-white hover:text-black font-medium cursor-pointer"
+      className="px-6 sm:px-8 py-2 sm:py-3 bg-[#B91C1C] text-white rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:bg-transparent hover:border-2 hover:border-[#8B2131] dark:text-white hover:text-black font-medium cursor-pointer text-sm sm:text-base"
       {...fadeInRight}
       viewport={viewportOnce}
       whileHover={canAnimate ? { scale: 1.01 } : {}}
@@ -120,7 +119,7 @@ const AnimatedGrid = React.memo(
     canAnimate: boolean;
   }) => (
     <motion.div
-      className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+      className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8"
       variants={batchStagger.container}
       initial="initial"
       whileInView="animate"
@@ -153,8 +152,8 @@ AnimatedGrid.displayName = "AnimatedGrid";
 
 const BackgroundDecoration = React.memo(() => (
   <div className="absolute top-0 left-0 w-full h-full opacity-5">
-    <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500 rounded-full blur-3xl"></div>
-    <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500 rounded-full blur-3xl"></div>
+    <div className="absolute top-10 sm:top-20 left-5 sm:left-10 w-48 sm:w-72 h-48 sm:h-72 bg-blue-500 rounded-full blur-3xl"></div>
+    <div className="absolute bottom-10 sm:bottom-20 right-5 sm:right-10 w-64 sm:w-96 h-64 sm:h-96 bg-purple-500 rounded-full blur-3xl"></div>
   </div>
 ));
 BackgroundDecoration.displayName = "BackgroundDecoration";
@@ -205,8 +204,8 @@ const ProjectsSection = () => {
   // Early return for SSR with optimized static content
   if (!isClient) {
     return (
-      <section className="py-24 px-16">
-        <div className="max-w-8xl mx-auto  z-10">
+      <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+        <div className="max-w-8xl mx-auto z-10">
           {/* <StaticHeader /> */}
           <StaticGrid projectsData={projectsData} />
         </div>
@@ -218,7 +217,7 @@ const ProjectsSection = () => {
   if (!projects) {
     console.error("Projects data is null or undefined after client hydration");
     return (
-      <section className="py-24 px-16">
+      <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         <div className="max-w-8xl mx-auto">
           <p className="text-red-500">Error loading projects data.</p>
         </div>
@@ -230,7 +229,7 @@ const ProjectsSection = () => {
   if (projectsData.length === 0) {
     console.log("No projects to display after processing data");
     return (
-      <section className="py-24 px-4">
+      <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         <div className="max-w-7xl mx-auto">
           {/* {canAnimate ? <AnimatedHeader canAnimate={canAnimate} /> : <StaticHeader />} */}
           <p className="text-yellow-600">
@@ -243,25 +242,25 @@ const ProjectsSection = () => {
 
   // Render section with animations if enabled on the client
   return (
-    <section className="py-24 px-16 overflow-hidden">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 overflow-hidden">
       <motion.div
         variants={fadeInUp}
         initial="initial"
         whileInView="animate"
         viewport={viewportOnce}
-        className="text-3xl md:text-4xl lg:text-7xl font-medium flex gap-24 items-center justify-between pb-28"
+        className="flex flex-col lg:flex-row gap-8 sm:gap-12 lg:gap-16 xl:gap-24 items-start lg:items-center justify-between pb-16 sm:pb-20 md:pb-24 lg:pb-28"
       >
-        <motion.h1 className="text-3xl md:text-5xl lg:text-8xl  w-[40%]">
+        <motion.h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl w-full lg:w-[40%]">
           EXPLORE APARTMENTS
         </motion.h1>
 
-        <div className="flex flex-col gap-4 w-[40%]">
+        <div className="flex flex-col gap-3 sm:gap-4 w-full lg:w-[40%]">
           <motion.p
             variants={fadeInUp}
             initial="initial"
             whileInView="animate"
             viewport={viewportOnce}
-            className="text-lg"
+            className="text-sm sm:text-base lg:text-lg leading-relaxed font-optima"
           >
             Welcome to Altaf Development, a premier development strategically
             located in the vibrant New Mount Hampden City. As the first smart
@@ -270,8 +269,8 @@ const ProjectsSection = () => {
             upscale apartments and villas, a luxurious duty-free mall, and
             state-of-the-art commercial facilities.
           </motion.p>
-          <Button className="uiverse-btn-cta">
-            <span className="span font-bold text-lg">VIEW ALL APARTMENTS</span>
+          <Button className="uiverse-btn-cta w-fit">
+            <span className="span font-bold text-sm sm:text-base lg:text-lg">VIEW ALL APARTMENTS</span>
             <span className="second mb-0.5">
               <ArrowIcon />
             </span>

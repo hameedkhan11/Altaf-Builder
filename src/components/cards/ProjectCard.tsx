@@ -1,7 +1,7 @@
 import React from "react";
-import Image from "next/image";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { ArrowUpRight } from "lucide-react";
+import { CldImage } from "next-cloudinary";
 
 interface ProjectCardProps {
   image: string;
@@ -24,8 +24,8 @@ export const ProjectCard = ({
     <Card className="w-full shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
       {/* Image Container */}
       <CardHeader className="p-0 relative group">
-        <div className="relative w-full h-[360px] overflow-hidden cursor-pointer rounded-xl">
-          <Image
+        <div className="relative w-full h-[460px] overflow-hidden cursor-pointer rounded-md">
+          <CldImage
             src={image}
             alt={title}
             width={800}

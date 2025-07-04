@@ -3,9 +3,9 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import PhotoGallery from "@/components/media/PhotoGallery";
-import VideoGallery from "@/components/media/VideoGallery";
-import VirtualTours from "@/components/media/VirtualTour";
+// import PhotoGallery from "@/components/media/PhotoGallery";
+// import VideoGallery from "@/components/media/VideoGallery";
+// import VirtualTours from "@/components/media/VirtualTour";
 import {
   Camera,
   Video,
@@ -18,118 +18,118 @@ import { Button } from "@/components/ui/button";
 import { Hero } from "@/components/common/Hero";
 
 // Sample data - replace with your actual data
-const sampleImages = [
-  {
-    id: "1",
-    src: "/images/Booking1.jpg",
-    alt: "Luxury Living Room",
-    category: "living-room",
-    title: "Spacious Living Area",
-  },
-  {
-    id: "2",
-    src: "/images/Booking2.jpg",
-    alt: "Master Bedroom",
-    category: "bedroom",
-    title: "Master Bedroom Suite",
-  },
-  {
-    id: "3",
-    src: "/images/Booking3.jpg",
-    alt: "Modern Kitchen",
-    category: "kitchen",
-    title: "Designer Kitchen",
-  },
-  {
-    id: "4",
-    src: "/images/Apartment1.jpg",
-    alt: "Luxury Bathroom",
-    category: "bathroom",
-    title: "Premium Bathroom",
-  },
-  {
-    id: "5",
-    src: "/images/Apartment2.jpg",
-    alt: "Private Balcony",
-    category: "outdoor",
-    title: "Private Balcony View",
-  },
-  {
-    id: "6",
-    src: "/images/Apartment3.jpg",
-    alt: "Building Lobby",
-    category: "amenities",
-    title: "Grand Lobby",
-  },
-];
+// const sampleImages = [
+//   {
+//     id: "1",
+//     src: "/images/Booking1.jpg",
+//     alt: "Luxury Living Room",
+//     category: "living-room",
+//     title: "Spacious Living Area",
+//   },
+//   {
+//     id: "2",
+//     src: "/images/Booking2.jpg",
+//     alt: "Master Bedroom",
+//     category: "bedroom",
+//     title: "Master Bedroom Suite",
+//   },
+//   {
+//     id: "3",
+//     src: "/images/Booking3.jpg",
+//     alt: "Modern Kitchen",
+//     category: "kitchen",
+//     title: "Designer Kitchen",
+//   },
+//   {
+//     id: "4",
+//     src: "/images/Apartment1.jpg",
+//     alt: "Luxury Bathroom",
+//     category: "bathroom",
+//     title: "Premium Bathroom",
+//   },
+//   {
+//     id: "5",
+//     src: "/images/Apartment2.jpg",
+//     alt: "Private Balcony",
+//     category: "outdoor",
+//     title: "Private Balcony View",
+//   },
+//   {
+//     id: "6",
+//     src: "/images/Apartment3.jpg",
+//     alt: "Building Lobby",
+//     category: "amenities",
+//     title: "Grand Lobby",
+//   },
+// ];
 
-const sampleVideos = [
-  {
-    id: "1",
-    title: "One Bedroom Apartment Tour",
-    thumbnail: "/images/video-thumb-1.jpg",
-    videoUrl: "/videos/1bed-tour.mp4",
-    duration: "3:45",
-    category: "apartment-tours",
-    description: "Complete walkthrough of our luxury one-bedroom apartment",
-  },
-  {
-    id: "2",
-    title: "Two Bedroom Apartment Tour",
-    thumbnail: "/images/video-thumb-2.jpg",
-    videoUrl: "/videos/2bed-tour.mp4",
-    duration: "5:20",
-    category: "apartment-tours",
-    description: "Detailed tour of our spacious two-bedroom unit",
-  },
-  {
-    id: "3",
-    title: "Building Amenities Overview",
-    thumbnail: "/images/video-thumb-3.jpg",
-    videoUrl: "/videos/amenities.mp4",
-    duration: "4:15",
-    category: "amenities",
-    description: "Explore our world-class amenities and facilities",
-  },
-];
+// const sampleVideos = [
+//   {
+//     id: "1",
+//     title: "One Bedroom Apartment Tour",
+//     thumbnail: "/images/video-thumb-1.jpg",
+//     videoUrl: "/videos/1bed-tour.mp4",
+//     duration: "3:45",
+//     category: "apartment-tours",
+//     description: "Complete walkthrough of our luxury one-bedroom apartment",
+//   },
+//   {
+//     id: "2",
+//     title: "Two Bedroom Apartment Tour",
+//     thumbnail: "/images/video-thumb-2.jpg",
+//     videoUrl: "/videos/2bed-tour.mp4",
+//     duration: "5:20",
+//     category: "apartment-tours",
+//     description: "Detailed tour of our spacious two-bedroom unit",
+//   },
+//   {
+//     id: "3",
+//     title: "Building Amenities Overview",
+//     thumbnail: "/images/video-thumb-3.jpg",
+//     videoUrl: "/videos/amenities.mp4",
+//     duration: "4:15",
+//     category: "amenities",
+//     description: "Explore our world-class amenities and facilities",
+//   },
+// ];
 
-const sampleTours = [
-  {
-    id: "1",
-    title: "One Bedroom Luxury Suite",
-    thumbnail: "/images/tour-thumb-1.jpg",
-    tourUrl: "https://my.matterport.com/show/?m=example1",
-    type: "3D" as const,
-    propertyType: "Apartment",
-    rooms: 1,
-    area: "750 sq ft",
-    description: "Experience our premium one-bedroom apartment in immersive 3D",
-    featured: true,
-  },
-  {
-    id: "2",
-    title: "Two Bedroom Premium Unit",
-    thumbnail: "/images/tour-thumb-2.jpg",
-    tourUrl: "https://my.matterport.com/show/?m=example2",
-    type: "360" as const,
-    propertyType: "Apartment",
-    rooms: 2,
-    area: "1200 sq ft",
-    description: "360° tour of our spacious two-bedroom luxury apartment",
-    featured: true,
-  },
-  {
-    id: "3",
-    title: "Rooftop Amenities",
-    thumbnail: "/images/Booking3.jpg",
-    tourUrl: "https://my.matterport.com/show/?m=example3",
-    type: "360" as const,
-    propertyType: "Amenities",
-    rooms: 0,
-    area: "Various",
-    description: "Explore our stunning rooftop facilities and amenities",
-  },
-];
+// const sampleTours = [
+//   {
+//     id: "1",
+//     title: "One Bedroom Luxury Suite",
+//     thumbnail: "/images/tour-thumb-1.jpg",
+//     tourUrl: "https://my.matterport.com/show/?m=example1",
+//     type: "3D" as const,
+//     propertyType: "Apartment",
+//     rooms: 1,
+//     area: "750 sq ft",
+//     description: "Experience our premium one-bedroom apartment in immersive 3D",
+//     featured: true,
+//   },
+//   {
+//     id: "2",
+//     title: "Two Bedroom Premium Unit",
+//     thumbnail: "/images/tour-thumb-2.jpg",
+//     tourUrl: "https://my.matterport.com/show/?m=example2",
+//     type: "360" as const,
+//     propertyType: "Apartment",
+//     rooms: 2,
+//     area: "1200 sq ft",
+//     description: "360° tour of our spacious two-bedroom luxury apartment",
+//     featured: true,
+//   },
+//   {
+//     id: "3",
+//     title: "Rooftop Amenities",
+//     thumbnail: "/images/Booking3.jpg",
+//     tourUrl: "https://my.matterport.com/show/?m=example3",
+//     type: "360" as const,
+//     propertyType: "Amenities",
+//     rooms: 0,
+//     area: "Various",
+//     description: "Explore our stunning rooftop facilities and amenities",
+//   },
+// ];
 
 const MediaCenterPage = () => {
   const [activeSection, setActiveSection] = useState<string>("photos");
@@ -155,23 +155,23 @@ const MediaCenterPage = () => {
     },
   ];
 
-  const renderActiveSection = () => {
-    switch (activeSection) {
-      case "photos":
-        return (
-          <PhotoGallery
-            images={sampleImages}
-            standalone={false} // This ensures consistent behavior with header detection
-          />
-        );
-      case "videos":
-        return <VideoGallery videos={sampleVideos} />;
-      case "virtual":
-        return <VirtualTours tours={sampleTours} />;
-      default:
-        return <PhotoGallery images={sampleImages} standalone={false} />;
-    }
-  };
+  // const renderActiveSection = () => {
+  //   switch (activeSection) {
+  //     case "photos":
+  //       return (
+  //         <PhotoGallery
+  //           images={sampleImages}
+  //           standalone={false} // This ensures consistent behavior with header detection
+  //         />
+  //       );
+  //     case "videos":
+  //       return <VideoGallery videos={sampleVideos} />;
+  //     // case "virtual":
+  //     //   return <VirtualTours tours={sampleTours} />;
+  //     default:
+  //       return <PhotoGallery images={sampleImages} standalone={false} />;
+  //   }
+  // };
 
   const breadcrumbs = [
     { label: "Home", href: "/" },
@@ -224,7 +224,7 @@ const MediaCenterPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            {renderActiveSection()}
+            {/* {renderActiveSection()} */}
           </motion.div>
         </div>
       </section>

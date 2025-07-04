@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { CldImage } from 'next-cloudinary';
 import {
   fadeInUp,
   fadeInLeft,
@@ -20,7 +21,7 @@ const showcaseProperties = [
     title: "Luxury Villa Paradise",
     location: "Beverly Hills, CA",
     price: "$2,850,000",
-    image: "/images/property1.jpg",
+    image: "imgi_21_IjGNDVkEAbAhpxd8VU8yRt7KGM_exhsbq",
     beds: 5,
     baths: 4,
     sqft: "3,200",
@@ -34,7 +35,7 @@ const showcaseProperties = [
     title: "Modern Downtown Penthouse",
     location: "Manhattan, NY",
     price: "$4,200,000",
-    image: "/images/property2.jpg",
+    image: "imgi_28_hFGYVnlwaecZbMBXIolx5d7ExQ_uo5x2i",
     beds: 3,
     baths: 3,
     sqft: "2,800",
@@ -48,7 +49,7 @@ const showcaseProperties = [
     title: "Oceanfront Estate",
     location: "Malibu, CA",
     price: "$6,750,000",
-    image: "/images/property3.jpg",
+    image: "Booking1_rg1bhs",
     beds: 6,
     baths: 5,
     sqft: "4,500",
@@ -62,7 +63,7 @@ const showcaseProperties = [
     title: "Mountain Retreat Cabin",
     location: "Aspen, CO",
     price: "$1,850,000",
-    image: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1200&h=800&fit=crop&crop=center",
+    image: "Booking3_uieo5a",
     beds: 4,
     baths: 3,
     sqft: "2,400",
@@ -129,7 +130,7 @@ const PropertyShowcase = () => {
   }, []);
 
   return (
-    <div className="relative h-screen w-full overflow-hidden">
+    <div className="relative h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-[90vh] xl:h-[110vh] w-full overflow-hidden">
       {/* Background Images with Simple Fade Effect */}
       <div className="absolute inset-0 bg-black">
         <AnimatePresence initial={false} mode="popLayout">
@@ -140,9 +141,13 @@ const PropertyShowcase = () => {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            <div 
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-              style={{ backgroundImage: `url(${currentProperty.image})` }}
+            <CldImage
+              src={currentProperty.image}
+              alt={currentProperty.title}
+              fill
+              sizes="100vw"
+              className="object-cover"
+              priority
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
           </motion.div>
@@ -152,37 +157,37 @@ const PropertyShowcase = () => {
       {/* Navigation Controls - Only show on larger screens or when hovered */}
       <motion.button
         onClick={prevSlide}
-        className={`absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-all duration-300 ${
+        className={`absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 p-2 sm:p-3 rounded-full bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-all duration-300 ${
           isMobile ? 'opacity-0 pointer-events-none' : 'opacity-100'
         } md:opacity-100`}
         {...scaleOnHover}
         {...fadeInLeft}
       >
-        <ChevronLeft size={24} />
+        <ChevronLeft size={isMobile ? 20 : 24} />
       </motion.button>
 
       <motion.button
         onClick={nextSlide}
-        className={`absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-all duration-300 ${
+        className={`absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 p-2 sm:p-3 rounded-full bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-all duration-300 ${
           isMobile ? 'opacity-0 pointer-events-none' : 'opacity-100'
         } md:opacity-100`}
         {...scaleOnHover}
         {...fadeInRight}
       >
-        <ChevronRight size={24} />
+        <ChevronRight size={isMobile ? 20 : 24} />
       </motion.button>
 
       {/* Main Content Overlay */}
       <div className="absolute inset-0 z-10 flex items-end">
-        <div className="w-full p-6 sm:p-8 lg:p-12">
+        <div className="w-full p-4 sm:p-6 md:p-8 lg:p-12">
           <motion.div 
             className="max-w-4xl mx-auto"
             {...fadeInUp}
           >
-            <motion.div className="mb-6" {...microSlide}>
+            <motion.div className="mb-4 sm:mb-6" {...microSlide}>
               
               <motion.h1 
-                className="text-2xl sm:text-3xl text-center lg:text-5xl text-white leading-tight"
+                className="text-xl sm:text-2xl md:text-3xl text-center lg:text-4xl xl:text-5xl text-white leading-tight px-2 sm:px-4"
                 {...slideInFromBottom}
               >
                 {currentProperty.title}

@@ -31,13 +31,13 @@ const Footer = () => {
   };
 
   return (
-    <footer className="dark:bg-[rgb(1,10,26)] bg-[rgb(35,18,38)] text-white py-16 border-t-2 border-gray-700">
-      <div className="container mx-auto px-6">
+    <footer className="dark:bg-[rgb(1,10,26)] bg-[rgb(35,18,38)] text-white py-8 sm:py-12 lg:py-16 border-t-2 border-gray-700">
+      <div className="container mx-auto px-4 sm:px-6">
         {/* Footer Content with Newsletter */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-6">
           {/* Company Info */}
-          <div>
-            <div className="relative flex items-center cursor-pointer ">
+          <div className="col-span-1 sm:col-span-2 lg:col-span-1">
+            <div className="relative flex items-center cursor-pointer">
               <Image
                 src="/logos/removal-809.png"
                 alt="Altaf Builder Logo"
@@ -51,32 +51,18 @@ const Footer = () => {
                 alt="Altaf Builder Text"
                 width={100}
                 height={34}
-                className="object-contain -ml-12 z-0 w-auto h-auto mb-4"
+                className="object-contain -ml-8 sm:-ml-10 lg:-ml-12 z-0 w-auto h-auto mb-4"
                 priority
               />
             </div>
-            <p className="mb-4 dark:text-white ml-8">
+            <p className="mb-4 dark:text-white ml-4 sm:ml-6 lg:ml-8 text-sm sm:text-base">
               {companyInfo.description}
             </p>
-            {/* <div className="flex items-center space-x-3 ml-6">
-              {socialIcons.map((Icon, index) => (
-                <a
-                  key={index}
-                  href={socialMediaLinks[index]?.href || "#"}
-                  className="text-[#B91C1C] transition-colors dark:text-white"
-                  aria-label={
-                    socialMediaLinks[index]?.name || `Social link ${index + 1}`
-                  }
-                >
-                  <Icon className="h-4 w-4" />
-                </a>
-              ))}
-            </div> */}
           </div>
 
           {/* Quick Links */}
-          <div className="ml-12">
-            <h3 className="text-lg text-white font-bold mb-4 dark:text-white">
+          <div className="ml-0 sm:ml-6 lg:ml-12">
+            <h3 className="text-base sm:text-lg text-white font-bold mb-3 sm:mb-4 dark:text-white">
               Quick Links
             </h3>
             <ul className="space-y-0">
@@ -84,7 +70,7 @@ const Footer = () => {
                 <li key={item}>
                   <Link
                     href="#"
-                    className=" font-bold font-optima hover:text-[#B91C1C] transition-colors dark:text-white"
+                    className="font-bold font-optima hover:text-[#B91C1C] transition-colors dark:text-white text-sm sm:text-base"
                   >
                     {item}
                   </Link>
@@ -95,66 +81,43 @@ const Footer = () => {
 
           {/* Contact Information */}
           <div>
-            <h3 className="text-lg font-bold mb-4 text-white">
+            <h3 className="text-base sm:text-lg font-bold mb-3 sm:mb-4 text-white">
               Contact Information
             </h3>
             <ul className="space-y-2">
-              <li className="flex items-center">
-                <MapPin className="h-3 w-3 text-[rgb(140,46,71)] mr-2" />
-                <span className=" dark:text-white">
+              <li className="flex items-start sm:items-center">
+                <MapPin className="h-3 w-3 text-[rgb(140,46,71)] mr-2 mt-1 sm:mt-0 flex-shrink-0" />
+                <span className="dark:text-white text-sm sm:text-base">
                   {contactInfo.address}
                 </span>
               </li>
               <li className="flex items-center">
-                <Phone className="h-3 w-3 text-[#B91C1C] mr-2" />
-                <span className="dark:text-white">
+                <Phone className="h-3 w-3 text-[#B91C1C] mr-2 flex-shrink-0" />
+                <span className="dark:text-white text-sm sm:text-base">
                   {contactInfo.phone}
                 </span>
               </li>
               <li className="flex items-center">
-                <Mail className="h-3 w-3 text-[#B91C1C] mr-2" />
-                <span className=" dark:text-white">
+                <Mail className="h-3 w-3 text-[#B91C1C] mr-2 flex-shrink-0" />
+                <span className="dark:text-white text-sm sm:text-base break-all">
                   {contactInfo.email}
                 </span>
               </li>
-              <li className="flex items-center">
-                <Clock className="h-3 w-3 text-[#B91C1C] mr-2" />
-                <span className=" dark:text-white">
+              <li className="flex items-start sm:items-center">
+                <Clock className="h-3 w-3 text-[#B91C1C] mr-2 mt-1 sm:mt-0 flex-shrink-0" />
+                <span className="dark:text-white text-sm sm:text-base">
                   {contactInfo.workingHours}
                 </span>
               </li>
             </ul>
           </div>
 
-          {/* Latest News */}
-          {/* <div>
-            <h3 className="text-lg font-bold mb-2 dark:text-white">
-              Latest News
-            </h3>
-            <div className="space-y-1">
-              {latestNews.map((news, index) => (
-                <div key={index} className="border-l-2 border-[#B91C1C] pl-3">
-                  <h4 className="dark:text-white">
-                    {news.title}
-                  </h4>
-                  <p className="text-black font-medium  dark:text-white">
-                    {news.description}
-                  </p>
-                  <p className="text-black font-medium mt-1 dark:text-white opacity-75">
-                    {news.date}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div> */}
-
           {/* Newsletter Section */}
-
           <div>
-            <h3 className="text-lg mb-4 font-bold text-white">
+            <h3 className="text-base sm:text-lg mb-3 sm:mb-4 font-bold text-white">
               Stay Updated
             </h3>
-            <p className=" mb-4 leading-relaxed">
+            <p className="mb-4 leading-relaxed text-sm sm:text-base">
               Subscribe for latest updates on projects and offers.
             </p>
 
@@ -166,7 +129,7 @@ const Footer = () => {
                   placeholder="Enter email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-2 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded focus:outline-none focus:ring-1 focus:ring-[#8B2131] focus:border-transparent placeholder-gray-500 dark:placeholder-gray-400"
+                  className="w-full px-2 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded focus:outline-none focus:ring-1 focus:ring-[#8B2131] focus:border-transparent placeholder-gray-500 dark:placeholder-gray-400 text-sm sm:text-base"
                   required
                 />
                 <Button
@@ -174,7 +137,7 @@ const Footer = () => {
                   type="submit"
                   onClick={handleNewsletterSubmit}
                   variant="outline"
-                  className="py-1 px-3 text-white font-medium hover:bg-transparent border-[#B91C1C] bg-[#B91C1C] cursor-pointer dark:hover:text-white dark:bg-[#B91C1C] dark:hover:bg-transparent dark:border-[#B91C1C] dark:text-white"
+                  className="py-1 px-3 text-white font-medium hover:bg-transparent border-[#B91C1C] bg-[#B91C1C] cursor-pointer dark:hover:text-white dark:bg-[#B91C1C] dark:hover:bg-transparent dark:border-[#B91C1C] dark:text-white text-sm sm:text-base"
                 >
                   Subscribe
                 </Button>
@@ -200,27 +163,27 @@ const Footer = () => {
         </div>
 
         {/* Footer Bottom */}
-        <div className="border-t border-gray-700 mt-12 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="font-semibold text-sm mb-4 md:mb-0 dark:text-white">
+        <div className="border-t border-gray-700 mt-8 sm:mt-10 lg:mt-12 pt-6 sm:pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <p className="font-semibold text-xs sm:text-sm dark:text-white text-center md:text-left">
               {companyInfo.copyright}
             </p>
-            <div className="flex items-center space-x-6">
+            <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4 lg:space-x-6">
               <a
                 href={footerLinks.privacy}
-                className="hover:text-[#B91C1C] font-semibold transition-colors text-sm dark:text-white"
+                className="hover:text-[#B91C1C] font-semibold transition-colors text-xs sm:text-sm dark:text-white"
               >
                 Privacy Policy
               </a>
               <a
                 href={footerLinks.terms}
-                className=" hover:text-[#B91C1C] transition-colors text-sm dark:text-white font-semibold"
+                className="hover:text-[#B91C1C] transition-colors text-xs sm:text-sm dark:text-white font-semibold"
               >
                 Terms of Service
               </a>
               <a
                 href={footerLinks.cookies}
-                className=" hover:text-[#B91C1C] transition-colors text-sm dark:text-white font-bold"
+                className="hover:text-[#B91C1C] transition-colors text-xs sm:text-sm dark:text-white font-bold"
               >
                 Cookie Policy
               </a>

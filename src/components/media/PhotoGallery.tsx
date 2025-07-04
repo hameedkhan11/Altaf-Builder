@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { CldImage } from "next-cloudinary";
 import GalleryControls from "./GalleryControl";
 import Lightbox from "./Lightbox";
+import Image from "next/image";
 
 interface CloudinaryResource {
   public_id: string;
@@ -151,9 +152,9 @@ const NextCloudinaryGallery: React.FC<NextCloudinaryGalleryProps> = ({
   };
 
   // Initialize gallery
-  useEffect(() => {
-    fetchCloudinaryImages();
-  }, [folder, maxResults]);
+  // useEffect(() => {
+  //   fetchCloudinaryImages();
+  // }, [folder, maxResults,]);
 
   // Load more images
   const loadMoreImages = () => {
@@ -272,7 +273,7 @@ const NextCloudinaryGallery: React.FC<NextCloudinaryGalleryProps> = ({
               Retry
             </Button>
             <p className="text-xs text-gray-500 mt-4">
-              Make sure your Cloudinary credentials are set up correctly and images exist in the "{folder}" folder.
+              Make sure your Cloudinary credentials are set up correctly and images exist in the &apos;{folder}&apos; folder.
             </p>
           </div>
         </div>
@@ -287,7 +288,7 @@ const NextCloudinaryGallery: React.FC<NextCloudinaryGalleryProps> = ({
         <div className="text-gray-500 dark:text-gray-400">
           <Search className="w-16 h-16 mx-auto mb-4 text-gray-300 dark:text-gray-600" />
           <p className="text-xl mb-2">No images found</p>
-          <p className="text-sm mb-4">No images were found in the "{folder}" folder in Cloudinary</p>
+          <p className="text-sm mb-4">No images were found in the &apos;{folder}&apos; folder in Cloudinary</p>
           <div className="space-y-2">
             <Button 
               onClick={fetchCloudinaryImages} 
@@ -296,7 +297,7 @@ const NextCloudinaryGallery: React.FC<NextCloudinaryGalleryProps> = ({
               Refresh Gallery
             </Button>
             <p className="text-xs text-gray-500 mt-4">
-              Make sure images are uploaded to the "{folder}" folder in your Cloudinary account.
+              Make sure images are uploaded to the &apos;{folder}&apos; folder in your Cloudinary account.
             </p>
           </div>
         </div>
@@ -424,10 +425,10 @@ const NextCloudinaryGrid: React.FC<NextCloudinaryGridProps> = ({
   filteredImages,
   isInView,
   onImageClick,
-  cloudName,
-  searchTerm,
+  // cloudName,
+  // searchTerm,
   setSearchTerm,
-  filter,
+  // filter,
   setFilter
 }) => {
   const [imageErrors, setImageErrors] = useState<Set<string>>(new Set());
@@ -547,7 +548,8 @@ const NextCloudinaryGrid: React.FC<NextCloudinaryGridProps> = ({
               
               {/* Fallback regular image if CldImage fails */}
               {imageErrors.has(image.id) && (
-                <img
+                <Image
+                  fill
                   src={image.src}
                   alt={image.alt}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 rounded-xl"

@@ -3,7 +3,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Play, X, Volume2, VolumeX, Maximize, Clock } from "lucide-react";
+import { Play, X,Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 

@@ -3,6 +3,7 @@
 import { Marker, Popup } from 'react-leaflet';
 import { MapLocation } from '@/lib/mapConstants/types';
 import L from "leaflet"
+import Image from 'next/image';
 
 interface CustomMarkerProps {
   location: MapLocation;
@@ -53,9 +54,10 @@ export const CustomMarker: React.FC<CustomMarkerProps> = ({ location }) => {
       <Popup className="luxury-popup" minWidth={300}>
         <div className="p-4 bg-white rounded-lg shadow-lg">
           {location.image && (
-            <img 
+            <Image
               src={location.image} 
               alt={location.name}
+              fill
               className="w-full h-32 object-cover rounded-lg mb-3"
             />
           )}

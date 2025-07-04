@@ -101,7 +101,7 @@ const MapPage = () => {
           </h2>
           <p className="text-lg max-w-2xl mx-auto">
             Interactive map showcasing our office locations and exclusive property listings 
-            in Manhattan's most desirable neighborhoods
+            in Manhattan&apos;s most desirable neighborhoods
           </p>
         </div>
 
