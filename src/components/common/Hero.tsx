@@ -6,6 +6,12 @@ import { HeroBackground } from './HeroBackground';
 import { Breadcrumb } from './Breadcrumb';
 import { HeroProps } from '@/lib/types';
 import { ScrollIndicator } from './ScrollIndicator';
+import HeroButtons from './HeroButtons';
+
+// Extended HeroProps interface to include showHeroButtons
+interface ExtendedHeroProps extends HeroProps {
+  showHeroButtons?: boolean;
+}
 
 // Animation variants
 const containerVariants = {
@@ -28,7 +34,7 @@ const itemVariants = {
   }
 };
 
-export const Hero: React.FC<HeroProps> = ({
+export const Hero: React.FC<ExtendedHeroProps> = ({
   title,
   subtitle,
   backgroundType,
@@ -39,6 +45,7 @@ export const Hero: React.FC<HeroProps> = ({
   contentAlignment = 'left',
   breadcrumbs,
   showScrollIndicator = false,
+  showHeroButtons = false,
   enableAnimations = true,
   children,
   ariaLabel = "Hero section"
@@ -95,9 +102,9 @@ export const Hero: React.FC<HeroProps> = ({
       {breadcrumbs && <Breadcrumb items={breadcrumbs} />}
 
       {/* Content */}
-      <div className="container mx-auto px-6 relative z-20 w-full">
+      <div className="container mx-auto px-6 relative z-20 w-full mt-24">
         <MotionDiv
-          className={`${contentAlignment === 'center' ? 'max-w-6xl mx-auto' : contentAlignment === 'right' ? 'ml-auto max-w-2xl' : 'max-w-2xl'}`}
+          className={`${contentAlignment === 'center' ? 'max-w-4xl mx-auto' : contentAlignment === 'right' ? 'ml-auto max-w-2xl' : 'max-w-2xl'}`}
           {...(enableAnimations && {
             variants: containerVariants,
             initial: "initial",
@@ -106,7 +113,7 @@ export const Hero: React.FC<HeroProps> = ({
         >
           {title && (
             <MotionH1
-              className="text-3xl md:text-4xl lg:text-5xl text-white mb-6 leading-tight"
+              className="text-3xl md:text-4xl lg:text-7xl text-white mb-6 leading-tight"
               {...(enableAnimations && {
                 variants: itemVariants
               })}
@@ -124,6 +131,22 @@ export const Hero: React.FC<HeroProps> = ({
             >
               {subtitle}
             </MotionP>
+          )}
+
+          {/* Hero Buttons */}
+          {showHeroButtons && (
+            <MotionDiv
+              className="mb-8 flex justify-center pt-24"
+              {...(enableAnimations && {
+                variants: itemVariants
+              })}
+            >
+              
+              <HeroButtons 
+                enableAnimations={enableAnimations}
+                className={contentAlignment === 'center' ? 'justify-center' : contentAlignment === 'right' ? 'justify-end' : 'justify-start'}
+              />
+            </MotionDiv>
           )}
 
           {children && (

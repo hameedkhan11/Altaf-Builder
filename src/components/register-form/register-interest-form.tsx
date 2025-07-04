@@ -18,11 +18,11 @@ export function RegisterInterestForm() {
   const { form, onSubmit, isSubmitting } = useRegisterForm();
 
   return (
-    <div className="w-full max-w-lg mx-auto bg-black/20 backdrop-blur- rounded-2xl p-6 border border-white/10 font-optima text-white">
+    <div className="w-full max-w-2xl mx-auto bg-black/40 backdrop-blur- rounded-2xl p-6 border border-white/10 font-optima text-white">
       <div className="mb-6">
-        <h2 className="text-xl font-semibold mb-2 text-white">
+        <h1 className="text-xl font-semibold mb-2 text-white">
           Register Your Interest
-        </h2>
+        </h1>
       </div>
 
       <Form {...form}>

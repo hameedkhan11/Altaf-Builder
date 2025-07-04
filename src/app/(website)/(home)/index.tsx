@@ -19,20 +19,21 @@ import { RegisterHero } from "@/components/register-form/hero-section";
 const HomePage = () => {
   const posts = getBlogPosts();
   return (
-    <div >
+    <div>
       {/* <Header /> */}
       {/* <HeroSection /> */}
       <Hero
-      title="Luxury Living Redefined"
-      subtitle="Experience unparalleled comfort and elegance"
-      backgroundType="video"
-      backgroundSrc="video2_lzrdux.mp4"
-      fallbackImage="video2_lzrdux.jpg"
-      showScrollIndicator={true}
-      contentAlignment="left"
-      enableAnimations={true}
-    />
-    
+        title="Designing the future of living"
+        // subtitle="Experience unparalleled comfort and elegance"
+        backgroundType="image"
+        backgroundSrc="imgi_111_dnWJIN0wc12BQykNGm4ok54W330_rydzw3"
+        fallbackImage=""
+        // showScrollIndicator={true}
+        showHeroButtons={true}
+        contentAlignment="center"
+        enableAnimations={true}
+      />
+
       <div>
         <CEOMessage />
         <ProjectsSection />
@@ -44,7 +45,7 @@ const HomePage = () => {
         <Testimonials />
         {/* <Newsletter /> */}
         {/* <MeetOurTeam /> */}
-        <BlogSection posts={posts}/>
+        <BlogSection posts={posts} />
         <RegisterHero />
       </div>
       {/* <RealEstateLeafletMap /> */}

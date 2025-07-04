@@ -15,6 +15,7 @@ import {
   getPerformanceVariant,
 } from "@/lib/constants";
 import { ArrowIcon } from '../../../../public/icons/ArrowIcon';
+import { CldImage } from 'next-cloudinary';
 
 const FeaturedBlog: React.FC<FeaturedBlogProps> = ({ post }) => {
   // Performance-aware animations
@@ -149,7 +150,7 @@ const FeaturedBlog: React.FC<FeaturedBlogProps> = ({ post }) => {
                 whileHover={{ scale: 1.1 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
               >
-                <Image
+                <CldImage
                   src={post.image}
                   alt={post.title}
                   fill

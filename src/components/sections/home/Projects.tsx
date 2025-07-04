@@ -251,7 +251,7 @@ const ProjectsSection = () => {
         viewport={viewportOnce}
         className="text-3xl md:text-4xl lg:text-7xl font-medium flex gap-24 items-center justify-between pb-28"
       >
-        <motion.h1 className="text-3xl md:text-5xl lg:text-8xl w-[40%]">
+        <motion.h1 className="text-3xl md:text-5xl lg:text-8xl  w-[40%]">
           EXPLORE APARTMENTS
         </motion.h1>
 

@@ -18,6 +18,7 @@ import {
   staggerContainer,
 } from "@/lib/constants";
 import { visionData } from "@/data/vision";
+import { CldImage } from "next-cloudinary";
 
 const CEOMessage = () => {
   const { ceoImage, ceoName, ceoTitle, content, title } = visionData;
@@ -54,7 +55,7 @@ const CEOMessage = () => {
   return (
     <section className="py-16 px-16">
       <div className="max-w-8xl mx-auto">
-        <motion.h1 className=" text-8xl text-center pb-24">
+        <motion.h1 className=" text-8xl text-center pb-24 ">
             THE NEW ERA OF LUXURY
         </motion.h1>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
@@ -122,8 +123,8 @@ const CEOMessage = () => {
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
               >
-                <Image
-                  src={ceoImage}
+                <CldImage
+                  src={"imgi_81_x1jKKGBbcFDotH9VW4wXmw2gA_jtti68"}
                   alt={`${ceoName} - ${ceoTitle}`}
                   fill
                   className="object-cover object-center"

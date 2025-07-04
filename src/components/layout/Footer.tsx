@@ -15,7 +15,6 @@ import {
 import { Button } from "@/components/ui/button";
 import {
   quickLinks,
-  // latestNews,
   socialMediaLinks,
   contactInfo,
   footerLinks,
@@ -32,7 +31,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="dark:bg-[rgb(1,10,26)] text-primary-foreground py-16 border-t-2 border-gray-700">
+    <footer className="dark:bg-[rgb(1,10,26)] bg-[rgb(35,18,38)] text-white py-16 border-t-2 border-gray-700">
       <div className="container mx-auto px-6">
         {/* Footer Content with Newsletter */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -56,7 +55,7 @@ const Footer = () => {
                 priority
               />
             </div>
-            <p className="text-black mb-4 dark:text-white ml-8">
+            <p className="mb-4 dark:text-white ml-8">
               {companyInfo.description}
             </p>
             {/* <div className="flex items-center space-x-3 ml-6">
@@ -77,7 +76,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div className="ml-12">
-            <h3 className="text-lg font-bold mb-4 dark:text-white">
+            <h3 className="text-lg text-white font-bold mb-4 dark:text-white">
               Quick Links
             </h3>
             <ul className="space-y-0">
@@ -85,7 +84,7 @@ const Footer = () => {
                 <li key={item}>
                   <Link
                     href="#"
-                    className="text-black font-bold font-optima hover:text-[#B91C1C] transition-colors dark:text-white"
+                    className=" font-bold font-optima hover:text-[#B91C1C] transition-colors dark:text-white"
                   >
                     {item}
                   </Link>
@@ -96,31 +95,31 @@ const Footer = () => {
 
           {/* Contact Information */}
           <div>
-            <h3 className="text-lg font-bold mb-4 dark:text-white">
+            <h3 className="text-lg font-bold mb-4 text-white">
               Contact Information
             </h3>
             <ul className="space-y-2">
               <li className="flex items-center">
                 <MapPin className="h-3 w-3 text-[rgb(140,46,71)] mr-2" />
-                <span className="text-black dark:text-white">
+                <span className=" dark:text-white">
                   {contactInfo.address}
                 </span>
               </li>
               <li className="flex items-center">
                 <Phone className="h-3 w-3 text-[#B91C1C] mr-2" />
-                <span className="text-black dark:text-white">
+                <span className="dark:text-white">
                   {contactInfo.phone}
                 </span>
               </li>
               <li className="flex items-center">
                 <Mail className="h-3 w-3 text-[#B91C1C] mr-2" />
-                <span className="text-black dark:text-white">
+                <span className=" dark:text-white">
                   {contactInfo.email}
                 </span>
               </li>
               <li className="flex items-center">
                 <Clock className="h-3 w-3 text-[#B91C1C] mr-2" />
-                <span className="text-black dark:text-white">
+                <span className=" dark:text-white">
                   {contactInfo.workingHours}
                 </span>
               </li>
@@ -152,10 +151,10 @@ const Footer = () => {
           {/* Newsletter Section */}
 
           <div>
-            <h3 className="text-lg mb-4 font-bold dark:text-white">
+            <h3 className="text-lg mb-4 font-bold text-white">
               Stay Updated
             </h3>
-            <p className="text-black dark:text-gray-400 mb-4 leading-relaxed">
+            <p className=" mb-4 leading-relaxed">
               Subscribe for latest updates on projects and offers.
             </p>
 
@@ -185,16 +184,16 @@ const Footer = () => {
             {/* Small Social Icons */}
             <div className="flex items-center space-x-3">
               {socialIcons.map((Icon, index) => (
-                <a
+                <Link
                   key={index}
                   href={socialMediaLinks[index]?.href || "#"}
-                  className="text-[#B91C1C] transition-colors dark:text-white hover:text-[#8B2131] dark:hover:text-[#8B2131]"
+                  className="text-white transition-colors dark:text-white hover:text-[#8B2131] dark:hover:text-[#8B2131]"
                   aria-label={
                     socialMediaLinks[index]?.name || `Social link ${index + 1}`
                   }
                 >
                   <Icon className="h-4 w-4" />
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -203,25 +202,25 @@ const Footer = () => {
         {/* Footer Bottom */}
         <div className="border-t border-gray-700 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-black font-semibold text-sm mb-4 md:mb-0 dark:text-white">
+            <p className="font-semibold text-sm mb-4 md:mb-0 dark:text-white">
               {companyInfo.copyright}
             </p>
             <div className="flex items-center space-x-6">
               <a
                 href={footerLinks.privacy}
-                className="text-black hover:text-[#B91C1C] font-semibold transition-colors text-sm dark:text-white"
+                className="hover:text-[#B91C1C] font-semibold transition-colors text-sm dark:text-white"
               >
                 Privacy Policy
               </a>
               <a
                 href={footerLinks.terms}
-                className="text-black hover:text-[#B91C1C] transition-colors text-sm dark:text-white font-semibold"
+                className=" hover:text-[#B91C1C] transition-colors text-sm dark:text-white font-semibold"
               >
                 Terms of Service
               </a>
               <a
                 href={footerLinks.cookies}
-                className="text-black hover:text-[#B91C1C] transition-colors text-sm dark:text-white font-bold"
+                className=" hover:text-[#B91C1C] transition-colors text-sm dark:text-white font-bold"
               >
                 Cookie Policy
               </a>

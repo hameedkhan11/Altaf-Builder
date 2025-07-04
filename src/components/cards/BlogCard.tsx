@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Clock, User } from 'lucide-react';
 import { BlogCardProps } from '@/lib/blogs/types';
 import { BlogCardAnimations } from '@/lib/styles/BlogsAnimation';
+import { CldImage } from 'next-cloudinary';
 
 const BlogCard: React.FC<BlogCardProps> = ({
   post,
@@ -53,9 +54,9 @@ const BlogCard: React.FC<BlogCardProps> = ({
         }}
       >
         {/* Image Container */}
-        <div className="relative w-full h-48 sm:h-56 md:h-80 bg-gray-200 overflow-hidden">
+        <div className="relative w-full h-48 sm:h-56 md:h-96 bg-gray-200 overflow-hidden">
           {post.image ? (
-            <Image
+            <CldImage
               src={post.image}
               alt={`Featured image for ${post.title}`}
               fill

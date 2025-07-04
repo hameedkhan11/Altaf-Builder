@@ -142,7 +142,7 @@ const Testimonials = () => {
                         <Quote className="h-6 w-6 text-white" />
                       </div>
                       <div>
-                        <h4 className="font-bold dark:text-white">
+                        <h4 className="dark:text-white">
                           {testimonial.name}
                         </h4>
                         <p className="text-sm dark:text-white">

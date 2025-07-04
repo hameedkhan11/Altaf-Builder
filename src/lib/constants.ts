@@ -5,12 +5,12 @@ import { Country, NavigationItem, NewsItem } from "./types";
 // import { Facebook, Instagram, Twitter, Linkedin } from "lucide-react";
 
 export const NAVIGATION_ITEMS: NavigationItem[] = [
-  { name: "About-us", href: "/about" },
-  { name: "Properties", href: "/properties" },
-  { name: "Careers", href: "/careers" },
-  { name: "Blogs", href: "/blogs" },
-  { name: "Media Center", href: "/media" },
-  { name: "Contact Us", href: "/contact" },
+  { name: "ABOUT", href: "/about" },
+  { name: "PROPERTIES", href: "/properties" },
+  // { name: "CAREERS", href: "/careers" },
+  { name: "BLOGS", href: "/blogs" },
+  { name: "MEDIA CENTER", href: "/media" },
+  // Removed "Contact Us" as it's now a separate button
 ];
 
 export const COMPANY_INFO = {
@@ -59,6 +59,7 @@ export const companyInfo = {
     "Redefining luxury living with exceptional properties in prime locations. Experience the pinnacle of architectural excellence and craftsmanship.",
   copyright: "© 2025 ALTAF BUILDER. All rights reserved.",
 };
+
 export const latestNews: NewsItem[] = [
   {
     title: "New Project Launch",
