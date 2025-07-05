@@ -57,11 +57,11 @@ const HeroButtons: React.FC<HeroButtonsProps> = ({
       >
         <Link href="/properties">
           <Button
-            className="group relative cursor-pointer px-8 py-6 bg-white text-[rgb(140,46,71)] rounded-full font-bold text-lg hover:bg-gray-100 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden min-w-[200px]"
+            className="group relative cursor-pointer px-8 py-6 bg-white text-[rgb(140,46,71)] rounded-full font-bold text-lg hover:bg-gray-100 shadow-lg  transition-all duration-300 overflow-hidden min-w-[12rem] hover:scale-105"
           > 
             <div className="flex items-center space-x-3 relative z-10">
               {/* <Building2 className="h-5 w-5 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-12" /> */}
-              <span className="transition-all duration-300 group-hover:tracking-wider font-bold">
+              <span className="transition-all duration-300  font-bold">
                 View Properties
               </span>
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -81,7 +81,7 @@ const HeroButtons: React.FC<HeroButtonsProps> = ({
       >
         <Link href="/contact">
           <Button
-            className="group relative px-4 py-6 cursor-pointer bg-transparent border-1 border-white text-white rounded-full font-bold text-lg hover:bg-[rgb(120,40,61)] shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden min-w-[12rem]"
+            className="group relative px-4 py-6 cursor-pointer bg-transparent border-1 border-white text-white rounded-full font-bold text-lg hover:bg-[rgb(120,40,61)] shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden min-w-[12rem] hover:border-transparent"
           >
             <div className="flex items-center space-x-3 relative z-10">
               {/* <MessageCircle className="h-5 w-5 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12" /> */}

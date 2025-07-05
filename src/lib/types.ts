@@ -298,3 +298,10 @@ export interface HeroProps {
   // Accessibility
   ariaLabel?: string;
 }
+
+export interface PropertySection {
+  id: string;
+  title: string;
+  image: string;
+  alt: string;
+}

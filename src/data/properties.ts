@@ -1,4 +1,4 @@
-import { Property, Delays, MapLayers, ViewportOnce } from "@/lib/types";
+import { Property, Delays, MapLayers, ViewportOnce, PropertySection } from "@/lib/types";
 
 export const properties: Property[] = [
   {
@@ -84,3 +84,26 @@ export const delays: Delays = {
 export const viewportOnce: ViewportOnce = {
   once: true,
 };
+
+
+
+export const propertySections: PropertySection[] = [
+  {
+    id: 'properties',
+    title: 'Our Properties',
+    image: 'imgi_4_FRONT_EXTERIOR_VIEW_1_yivycn',
+    alt: 'Luxury living room with modern furniture'
+  },
+  {
+    id: 'transactions',
+    title: 'Past Transactions',
+    image: 'imgi_3_5_Bed_Villa_Revised_Front_Closeup_pkdtfq',
+    alt: 'Modern room with fireplace and large windows'
+  },
+  {
+    id: 'connect',
+    title: "Let's Connect",
+    image: 'imgi_2_EXTERIOR_FRONT_STREET_VIEW_REVISED_vajrlu',
+    alt: 'Elegant dining area with natural lighting'
+  }
+];

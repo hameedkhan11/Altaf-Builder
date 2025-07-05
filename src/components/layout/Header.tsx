@@ -12,9 +12,11 @@ import {
 import { useTheme } from "@/hooks/useTheme";
 import { NAVIGATION_ITEMS } from "@/lib/constants";
 import MobileMenu from "./MobileMenu";
-import Image from "next/image";
 import Link from "next/link";
 import MediaCenterDropdown from "../ui/media-center-dropdown";
+
+// Import SVG as React component
+import AltafLogo from "../../../public/logos/altaf-logo.svg"
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -74,8 +76,8 @@ const Header = () => {
   const logoVariants = {
     initial: {
       opacity: 1,
-      scale: initialLoad && !scrolled ? (isClient && isMobile ? 1.2 : 4) : 1, // Use isClient check
-      y: initialLoad && !scrolled ? (isClient && isMobile ? "25vh" : "50vh") : 0, // Use isClient check
+      scale: initialLoad && !scrolled ? (isClient && isMobile ? 1.2 : 4) : 1,
+      y: initialLoad && !scrolled ? (isClient && isMobile ? "25vh" : "50vh") : 0,
       x: 0,
       rotate: 0,
     },
@@ -86,9 +88,9 @@ const Header = () => {
       x: 0,
       rotate: 0,
       transition: {
-        duration: initialLoad && !scrolled ? 2.5 : 0, // Animate only on initial load and not scrolled
-        delay: initialLoad && !scrolled ? 1 : 0, // Wait a moment before starting the movement
-        ease: [0.25, 0.1, 0.25, 1], // Smooth easing
+        duration: initialLoad && !scrolled ? 2.5 : 0,
+        delay: initialLoad && !scrolled ? 1 : 0,
+        ease: [0.25, 0.1, 0.25, 1],
         onComplete: () => {
           setInitialLoad(false);
         }
@@ -126,7 +128,7 @@ const Header = () => {
             {/* Left Navigation */}
             <nav className={`hidden lg:flex items-center space-x-8 ml-12 transition-opacity duration-500 ${
               showBackgroundOverlay ? "opacity-0" : "opacity-100"
-            } ${showBackgroundOverlay ? "opacity-0" : "opacity-100"}`}>
+            }`}>
               {NAVIGATION_ITEMS.map((item) => (
                 <React.Fragment key={item.name}>
                   {item.name === "MEDIA CENTER" ? (
@@ -142,8 +144,7 @@ const Header = () => {
                     >
                       {item.name}
                       <span
-                        className={`absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full bg-[rgb(140,46,71)]
-                        }`}
+                        className={`absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full bg-[rgb(140,46,71)]`}
                       />
                     </Link>
                   )}
@@ -163,21 +164,16 @@ const Header = () => {
                 href={"/"}
                 className="cursor-pointer pt-6 flex items-center relative"
               >
-                {/* Logo container */}
-                <div className="relative">
-                  <Image
-                    src="/logos/altaf-logo.svg"
-                    alt="Altaf Builder Text"
-                    width={isClient && isMobile ? 120 : 188} // Use isClient check
-                    height={isClient && isMobile ? 88 : 138} // Use isClient check
-                    className={`cursor-pointer transition-all duration-500 ${
-                      !scrolled 
-                        ? "brightness-0 invert" // Makes logo white when not scrolled
-                        : "brightness-100" // Original colors when scrolled
-                    }`}
-                    priority
-                  />
-                </div>
+                {/* Logo using SVGR */}
+                <AltafLogo 
+                  className={`cursor-pointer transition-all duration-500 ${
+                    isClient && isMobile ? 'w-[120px] h-[88px]' : 'w-[188px] h-[138px]'
+                  } ${
+                    !scrolled 
+                      ? "text-white" // White when not scrolled
+                      : "text-[#8c2e47]" // Brand color when scrolled
+                  }`}
+                />
               </Link>
             </motion.div>
 

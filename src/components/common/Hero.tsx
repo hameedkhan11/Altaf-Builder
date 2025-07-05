@@ -148,7 +148,7 @@ export const Hero: React.FC<ExtendedHeroProps> = ({
       {/* Content */}
       <div className="container mx-auto px-6 relative z-20 w-full mt-24">
         <MotionDiv
-          className={`${contentAlignment === 'center' && !isHomePage ? 'max-w-6xl mx-auto' : contentAlignment === 'right' ? 'ml-auto max-w-2xl' : 'max-w-3xl mx-auto'}`}
+          className={`${contentAlignment === 'center' && !isHomePage ? 'max-w-6xl mx-auto' : contentAlignment === 'right' ? 'ml-auto max-w-2xl' : 'max-w-2xl mx-auto'}`}
           {...(enableAnimations && {
             variants: showContent ? contentVariants : { hidden: { opacity: 0 } },
             initial: "hidden",
@@ -157,7 +157,7 @@ export const Hero: React.FC<ExtendedHeroProps> = ({
         >
           {title && (
             <MotionH1
-              className="text-3xl md:text-4xl lg:text-7xl text-white mb-6 leading-tight"
+              className="text-3xl md:text-4xl lg:text-6xl text-white leading-tight"
               {...(enableAnimations && {
                 variants: itemVariants
               })}
@@ -179,7 +179,7 @@ export const Hero: React.FC<ExtendedHeroProps> = ({
           {/* Hero Buttons */}
           {showHeroButtons && (
             <MotionDiv
-              className="mb-8 flex justify-center pt-24"
+              className="mb-8 flex justify-center pt-8"
               {...(enableAnimations && {
                 variants: itemVariants
               })}
