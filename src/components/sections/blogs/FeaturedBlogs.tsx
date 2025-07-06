@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from "framer-motion";
-import {  Clock, User, Calendar } from 'lucide-react';
+import { Clock, User, Calendar } from 'lucide-react';
 import { FeaturedBlogProps } from '@/lib/blogs/types';
 import {
   fadeInUp,
@@ -24,39 +24,39 @@ const FeaturedBlog: React.FC<FeaturedBlogProps> = ({ post }) => {
 
   return (
     <motion.section 
-      className="py-16 bg-gradient-to-br from-gray-50 to-white"
+      className="py-8 sm:py-12 md:py-16 bg-gradient-to-br from-gray-50 to-white"
       {...containerAnimation}
       viewport={viewportOnce}
     >
-      <div className="container mx-auto px-16">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         {/* Featured Badge */}
         <motion.div
-          className="flex items-center mb-8"
+          className="flex items-center mb-6 sm:mb-8"
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: delays.short }}
           viewport={viewportOnce}
         >
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <div className="w-2 h-2 bg-gradient-to-r from-[#8B2131] to-[#B91C1C] rounded-full animate-pulse"></div>
-            <span className="text-sm uppercase tracking-widest font-bold">
+            <span className="text-xs sm:text-sm uppercase tracking-widest font-bold">
               Featured Article
             </span>
-            <div className="w-8 h-0.5 bg-gradient-to-r from-[#8B2131] to-[#B91C1C]"></div>
+            <div className="w-6 sm:w-8 h-0.5 bg-gradient-to-r from-[#8B2131] to-[#B91C1C]"></div>
           </div>
         </motion.div>
 
         {/* Main Featured Content */}
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center">
           {/* Left Content */}
           <motion.div 
-            className="space-y-6"
+            className="space-y-4 sm:space-y-6 order-2 lg:order-1"
             {...contentAnimation}
             viewport={viewportOnce}
           >
             {/* Category and Meta Info */}
             <motion.div 
-              className="flex flex-wrap items-center gap-4 text-sm text-gray-600"
+              className="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-3 sm:gap-4 text-sm text-gray-600"
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: delays.medium }}
@@ -66,22 +66,22 @@ const FeaturedBlog: React.FC<FeaturedBlogProps> = ({ post }) => {
                 {post.category}
               </span>
               
-              <div className="flex items-center gap-4">
+              <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs sm:text-sm">
                 {post.author && (
                   <div className="flex items-center gap-1">
-                    <User className="w-4 h-4" />
+                    <User className="w-3 h-3 sm:w-4 sm:h-4" />
                     <span>{post.author}</span>
                   </div>
                 )}
                 
                 <div className="flex items-center gap-1">
-                  <Calendar className="w-4 h-4" />
+                  <Calendar className="w-3 h-3 sm:w-4 sm:h-4" />
                   <span>{post.date}</span>
                 </div>
                 
                 {post.readTime && (
                   <div className="flex items-center gap-1">
-                    <Clock className="w-4 h-4" />
+                    <Clock className="w-3 h-3 sm:w-4 sm:h-4" />
                     <span>{post.readTime}</span>
                   </div>
                 )}
@@ -90,7 +90,7 @@ const FeaturedBlog: React.FC<FeaturedBlogProps> = ({ post }) => {
 
             {/* Title */}
             <motion.h1 
-              className="text-2xl lg:text-4xl leading-tight max-w-xl "
+              className="text-xl sm:text-2xl md:text-3xl lg:text-4xl leading-tight max-w-xl"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: delays.long }}
@@ -101,7 +101,7 @@ const FeaturedBlog: React.FC<FeaturedBlogProps> = ({ post }) => {
 
             {/* Excerpt */}
             <motion.p 
-              className=" leading-relaxed"
+              className="text-sm sm:text-base leading-relaxed"
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: delays.long + 0.1 }}
@@ -119,12 +119,12 @@ const FeaturedBlog: React.FC<FeaturedBlogProps> = ({ post }) => {
             >
               <Link 
                 href={`/blogs/${post.slug}`}
-                className="inline-flex items-center gap-3 w-3/7 text-white px-8 py-4 rounded-lg font-semibold uppercase tracking-wide text-sm transition-all duration-300 hover:shadow-lg hover:scale-105 group uiverse-btn-cta font-optima"
+                className="inline-flex items-center gap-3 w-full sm:w-auto text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold uppercase tracking-wide text-xs sm:text-sm transition-all duration-300 hover:shadow-lg hover:scale-105 group uiverse-btn-cta font-optima"
               >
                 <motion.span
                   whileHover={{ x: 5 }}
                   transition={{ duration: 0.2 }}
-                  className='flex gap-4 items-center py-1'
+                  className='flex gap-3 sm:gap-4 items-center py-1'
                 >
                   Read Full Article
                   <ArrowIcon />
@@ -135,12 +135,12 @@ const FeaturedBlog: React.FC<FeaturedBlogProps> = ({ post }) => {
 
           {/* Right Image */}
           <motion.div 
-            className="relative"
+            className="relative order-1 lg:order-2"
             {...imageAnimation}
             viewport={viewportOnce}
           >
             <motion.div
-              className="relative h-[500px] w-full overflow-hidden rounded-2xl shadow-2xl"
+              className="relative h-[300px] sm:h-[400px] md:h-[450px] lg:h-[500px] w-full overflow-hidden rounded-xl sm:rounded-2xl shadow-xl sm:shadow-2xl"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
             >
@@ -165,12 +165,12 @@ const FeaturedBlog: React.FC<FeaturedBlogProps> = ({ post }) => {
 
             {/* Decorative Elements */}
             <motion.div
-              className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-[#8B2131] to-[#B91C1C] rounded-full opacity-20 blur-xl"
+              className="absolute -top-2 sm:-top-4 -right-2 sm:-right-4 w-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24 bg-gradient-to-br from-[#8B2131] to-[#B91C1C] rounded-full opacity-20 blur-xl"
               animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }}
               transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
             />
             <motion.div
-              className="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-br from-[#B91C1C] to-[#8B2131] rounded-full opacity-10 blur-2xl"
+              className="absolute -bottom-3 sm:-bottom-6 -left-3 sm:-left-6 w-20 sm:w-24 md:w-32 h-20 sm:h-24 md:h-32 bg-gradient-to-br from-[#B91C1C] to-[#8B2131] rounded-full opacity-10 blur-2xl"
               animate={{ scale: [1.2, 1, 1.2], rotate: [360, 180, 0] }}
               transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
             />

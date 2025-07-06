@@ -6,6 +6,7 @@ import { BlogLandingPageProps } from '@/lib/blogs/types';
 import React, { useState, useCallback } from 'react';
 import FeaturedBlog from './FeaturedBlogs';
 import BlogGrid from './BlogGrid';
+
 const BlogLandingPage: React.FC<BlogLandingPageProps> = ({
   blogTitle,
   featuredPost,
@@ -45,25 +46,25 @@ const BlogLandingPage: React.FC<BlogLandingPageProps> = ({
       }, 1000);
     }
   }, [onLoadMore, posts.length]);
-    const breadcrumbs = [
+
+  const breadcrumbs = [
     { label: "Home", href: "/" },
     { label: "Blogs", href: "/blogs" },
     ...(blogTitle ? [{ label: blogTitle, href: "#" }] : [])
   ];
 
-
   return (
-    <>
+    <div className="min-h-screen">
       {/* Hero Section */}
-        <Hero
-      title={blogTitle || "Our Blog"}
-      subtitle={blogTitle ? undefined : "Insights and stories from our team"}
-      backgroundType="image"
-      backgroundSrc="Booking2_wltkjn"
-      breadcrumbs={breadcrumbs}
-      height="half"
-      overlay="dark"
-    />
+      <Hero
+        title={blogTitle || "Our Blog"}
+        subtitle={blogTitle ? undefined : "Insights and stories from our team"}
+        backgroundType="image"
+        backgroundSrc="Booking2_wltkjn"
+        breadcrumbs={breadcrumbs}
+        height="half"
+        overlay="dark"
+      />
 
       {/* Featured Blog Section */}
       <FeaturedBlog post={featuredPost} />
@@ -75,7 +76,7 @@ const BlogLandingPage: React.FC<BlogLandingPageProps> = ({
         onLoadMore={handleLoadMore}
         loading={isLoading || loading}
       />
-    </>
+    </div>
   );
 };
 
