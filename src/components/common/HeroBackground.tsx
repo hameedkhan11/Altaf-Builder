@@ -1,5 +1,7 @@
 // common/components/HeroBackground.tsx
-import React from 'react';
+"use client";
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { CldImage } from 'next-cloudinary';
 
 interface HeroBackgroundProps {
@@ -8,6 +10,8 @@ interface HeroBackgroundProps {
   fallbackImage?: string;
   overlay?: 'light' | 'medium' | 'dark' | 'gradient' | 'none';
   className?: string;
+  enableParallax?: boolean;
+  parallaxSpeed?: number;
   videoOptimization?: {
     quality?: 'auto' | 'auto:low' | 'auto:good' | 'auto:best' | number;
     format?: 'auto' | 'mp4' | 'webm';
@@ -24,8 +28,29 @@ export const HeroBackground: React.FC<HeroBackgroundProps> = ({
   fallbackImage,
   overlay = 'medium',
   className = "absolute inset-0 w-full h-full",
+  enableParallax = true,
+  parallaxSpeed = 0.5,
   videoOptimization = {}
 }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  // Smooth scroll-based parallax
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  // Ultra-smooth spring animation for parallax
+  const smoothY = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  // Transform scroll into parallax movement
+  const y = useTransform(smoothY, [0, 1], [0, -100 * parallaxSpeed]);
+  const scale = useTransform(smoothY, [0, 1], [1, 1.1]);
+
   const getOverlayClass = () => {
     switch (overlay) {
       case 'light':
@@ -61,7 +86,7 @@ export const HeroBackground: React.FC<HeroBackgroundProps> = ({
       `c_fill`,
       `br_${bitrate}`,
       `fps_${fps}`,
-      'ac_none' // Remove audio for hero videos
+      'ac_none'
     ].join(',');
 
     return `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/video/upload/${transformations}/${src}`;
@@ -71,17 +96,14 @@ export const HeroBackground: React.FC<HeroBackgroundProps> = ({
     const baseUrl = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/video/upload`;
     
     return [
-      // Mobile - let Cloudinary auto-optimize but constrain dimensions
       {
         src: `${baseUrl}/q_auto,f_auto,w_640,h_360,c_fill,ac_none/${src}`,
         media: '(max-width: 640px)'
       },
-      // Tablet - balanced optimization
       {
         src: `${baseUrl}/q_auto,f_auto,w_1280,h_720,c_fill,ac_none/${src}`,
         media: '(max-width: 1024px)'
       },
-      // Desktop - high quality but size-constrained
       {
         src: `${baseUrl}/q_auto,f_auto,w_1920,h_1080,c_fill,ac_none/${src}`,
         media: '(min-width: 1025px)'
@@ -90,7 +112,49 @@ export const HeroBackground: React.FC<HeroBackgroundProps> = ({
   };
 
   return (
-    <div className={className}>
+    <div ref={containerRef} className={className}>
+      {enableParallax ? (
+        <motion.div
+          style={{ y, scale }}
+          className="absolute inset-0 w-full h-full will-change-transform"
+        >
+          <ParallaxContent
+            type={type}
+            src={src}
+            fallbackImage={fallbackImage}
+            buildVideoUrl={buildVideoUrl}
+            buildResponsiveVideoSources={buildResponsiveVideoSources}
+          />
+        </motion.div>
+      ) : (
+        <div className="absolute inset-0 w-full h-full">
+          <ParallaxContent
+            type={type}
+            src={src}
+            fallbackImage={fallbackImage}
+            buildVideoUrl={buildVideoUrl}
+            buildResponsiveVideoSources={buildResponsiveVideoSources}
+          />
+        </div>
+      )}
+      
+      {overlay !== 'none' && (
+        <div className={`absolute inset-0 z-10 ${getOverlayClass()}`} />
+      )}
+    </div>
+  );
+};
+
+// Separated content component for cleaner code
+const ParallaxContent: React.FC<{
+  type: 'video' | 'image';
+  src: string;
+  fallbackImage?: string;
+  buildVideoUrl: () => string;
+  buildResponsiveVideoSources: () => Array<{src: string; media: string}>;
+}> = ({ type, src, fallbackImage, buildVideoUrl, buildResponsiveVideoSources }) => {
+  return (
+    <>
       {type === 'video' ? (
         <>
           <video
@@ -98,7 +162,7 @@ export const HeroBackground: React.FC<HeroBackgroundProps> = ({
             loop
             muted
             playsInline
-            preload="metadata" // Changed from "auto" to reduce initial load
+            preload="metadata"
             className="absolute inset-0 w-full h-full object-cover z-0"
             onError={(e) => console.error('Video error:', e)}
             poster={fallbackImage ? 
@@ -106,7 +170,6 @@ export const HeroBackground: React.FC<HeroBackgroundProps> = ({
               : undefined
             }
           >
-            {/* Responsive video sources */}
             {buildResponsiveVideoSources().map((source, index) => (
               <source
                 key={index}
@@ -116,14 +179,12 @@ export const HeroBackground: React.FC<HeroBackgroundProps> = ({
               />
             ))}
             
-            {/* Fallback source */}
             <source
               src={buildVideoUrl()}
               type="video/mp4"
             />
           </video>
           
-          {/* Fallback image for when video fails to load */}
           {fallbackImage && (
             <div
               className="absolute inset-0 w-full h-full bg-cover bg-center z-0"
@@ -143,10 +204,6 @@ export const HeroBackground: React.FC<HeroBackgroundProps> = ({
           className="absolute inset-0 object-cover z-0"
         />
       )}
-      
-      {overlay !== 'none' && (
-        <div className={`absolute inset-0 z-10 ${getOverlayClass()}`} />
-      )}
-    </div>
+    </>
   );
 };

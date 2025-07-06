@@ -82,7 +82,7 @@ const BlogDetailContent: React.FC<BlogDetailContentProps> = ({
           {...contentAnimation}
           viewport={viewportOnce}
         >
-          <h2 className="text-xl md:text-2xl font-bold mb-3 md:mb-4">Introduction</h2>
+          <h2 className="text-xl md:text-2xl mb-3 md:mb-4">Introduction</h2>
           <p className="text-base md:text-lg leading-relaxed mb-4 md:mb-6">
             {blogContent.introduction}
           </p>
@@ -122,7 +122,7 @@ const BlogDetailContent: React.FC<BlogDetailContentProps> = ({
             transition={{ delay: 0.1 * index }}
             viewport={viewportOnce}
           >
-            <h2 className="text-xl md:text-2xl font-bold mb-3 md:mb-4">
+            <h2 className="text-xl md:text-2xl mb-3 md:mb-4">
               {section.heading}
             </h2>
             <p className="leading-relaxed mb-4 md:mb-6">

@@ -17,7 +17,7 @@ const BlogDetailHero: React.FC<BlogDetailHeroProps> = ({ post }) => {
 
   return (
     <Hero
-      title={post.title}
+      // title={post.title}
       backgroundType="image"
       backgroundSrc="Booking2_wltkjn"
       breadcrumbs={breadcrumbs}
@@ -25,6 +25,8 @@ const BlogDetailHero: React.FC<BlogDetailHeroProps> = ({ post }) => {
       overlay="gradient"
       contentAlignment="left"
       enableAnimations={true}
+      enableParallax={true}
+      parallaxSpeed={0.3}
       ariaLabel={`Blog post: ${post.title}`}
     />
   );

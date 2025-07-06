@@ -17,6 +17,7 @@ interface RelatedBlogsProps {
   currentPost: BlogPost;
 }
 
+
 const RelatedBlogs: React.FC<RelatedBlogsProps> = ({ currentPost }) => {
   const buttonAnimation = getPerformanceVariant(fadeInRight);
 
@@ -76,7 +77,7 @@ const RelatedBlogs: React.FC<RelatedBlogsProps> = ({ currentPost }) => {
         >
           <h2 
             id="related-articles-heading"
-            className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4"
+            className="text-2xl md:text-3xl lg:text-5xl mb-3 md:mb-4"
           >
             Related Articles
           </h2>

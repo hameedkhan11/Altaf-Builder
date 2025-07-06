@@ -90,7 +90,7 @@ const FeaturedBlog: React.FC<FeaturedBlogProps> = ({ post }) => {
 
             {/* Title */}
             <motion.h1 
-              className="text-4xl lg:text-5xl leading-tight"
+              className="text-2xl lg:text-4xl leading-tight max-w-xl "
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: delays.long }}
@@ -119,7 +119,7 @@ const FeaturedBlog: React.FC<FeaturedBlogProps> = ({ post }) => {
             >
               <Link 
                 href={`/blogs/${post.slug}`}
-                className="inline-flex items-center gap-3 w-3/7 text-white px-8 py-4 rounded-lg font-semibold uppercase tracking-wide text-sm transition-all duration-300 hover:shadow-lg hover:scale-105 group uiverse-btn-cta"
+                className="inline-flex items-center gap-3 w-3/7 text-white px-8 py-4 rounded-lg font-semibold uppercase tracking-wide text-sm transition-all duration-300 hover:shadow-lg hover:scale-105 group uiverse-btn-cta font-optima"
               >
                 <motion.span
                   whileHover={{ x: 5 }}

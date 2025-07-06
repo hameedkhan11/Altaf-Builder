@@ -31,6 +31,8 @@ const HomePage = () => {
         backgroundType="video"
         backgroundSrc="Altaf_hero_4K_under100MB_wzjl1l"
         fallbackImage=""
+        enableParallax={true}
+        parallaxSpeed={0.3}
         // showScrollIndicator={true}
         showHeroButtons={true}
         contentAlignment="center"

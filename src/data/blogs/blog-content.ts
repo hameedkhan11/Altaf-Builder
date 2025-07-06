@@ -19,26 +19,26 @@ export const getBlogContent = (post: BlogPost): BlogContentData => {
     case "1":
       return {
         introduction:
-          "The luxury real estate market in 2025 is experiencing unprecedented transformation. As we navigate through changing consumer preferences and technological advancements, Altaf Development remains at the forefront of innovation, creating spaces that redefine modern luxury living.",
+          "Strategically located with five major access points, including direct links to the Motorway (M-1)(M2), GT Road, and  (FMC),B-17, Faisal Hills offers unparalleled connectivity. This ensures residents enjoy seamless travel to and from the community, making it an ideal location for both living and investment.",
 
         mainContent: [
           {
             id: "smart-integration",
-            heading: "Smart Integration Revolution",
+            heading: "Recreational & Lifestyle ",
             content:
-              "Today's luxury buyers expect seamless integration of technology into their living spaces. From AI-powered climate control systems to voice-activated home automation, smart homes are no longer a luxury—they're an expectation. Our latest developments feature cutting-edge IoT integration that learns from residents' habits and preferences, creating truly personalized living experiences.",
+              "Family and Glow Parks Experience serenity in lush green spaces, with dedicated areas for children and illuminated evening strolls. Sports Facilities State-of-the-art football and cricket grounds cater to sports enthusiasts of all ages. Nature Trails Interconnected walking and jogging paths promote a healthy lifestyle amidst scenic landscapes.Elevated Dining An upcoming hilltop restaurant offers panoramic views, perfect for memorable dining experiences.",
           },
           {
             id: "sustainable-luxury",
-            heading: "Sustainable Luxury Redefined",
+            heading: " Downtown & Commercial Hub",
             content:
-              "Environmental consciousness has become a cornerstone of luxury living. Our developments incorporate solar energy systems, rainwater harvesting, and energy-efficient designs without compromising on opulence. Green buildings not only reduce environmental impact but also offer significant long-term cost savings for homeowners.",
+              "Vibrant Downtown Inspired by Lahore's Defence Raya, the planned food park will be a culinary destination, attracting visitors and enhancing community engagement. Education & Hospitality University Campus A designated plot for a prestigious university underscores the commitment to education and the largest campus of Roots International School & collages  Luxury Hotel Plans for a high end hotel will cater to both residents and visitors, boosting local tourism and economy.",
           },
           {
             id: "wellness-design",
-            heading: "Wellness-Centered Design",
+            heading: "Unmatched Accessibility",
             content:
-              "The pandemic has shifted focus toward health and wellness in residential design. Our properties feature dedicated wellness zones, air purification systems, and biophilic design elements that promote mental and physical well-being. Natural light optimization and green spaces are integral to our architectural philosophy.",
+              "Multiple Entrances With five strategic entry points, including two direct connections to FMC, residents enjoy seamless travel to and from the community. Health care Services Faisal Hills is set to host a state-of-the-art -----kanal teaching hospital, poised to become the largest facility of its kind within the network, surpassing even Islamabad’s renowned Al Shifa International Hospital in size and scope.",
           },
         ],
 

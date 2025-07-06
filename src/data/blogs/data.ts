@@ -4,9 +4,9 @@ import { BlogPost } from "@/lib/blogs/types";
 export const sampleBlogPosts: BlogPost[] = [
   {
     id: '1',
-    title: 'The Future of Luxury: Trends to Watch in 2025',
-    excerpt: 'Discover the latest trends shaping luxury real estate in 2025, from smart home integration to sustainable design and exclusive amenities that define modern luxury living.',
-    image: 'imgi_104_VUIPiyuPSB07F4RWVnwufiszcw_s7kzla',
+    title: 'Faisal Hills A Master Planned Community with Natural Beauty',
+    excerpt: 'Strategically located with five major access points, including direct links to the Motorway (M-1)(M2), GT Road, and  (FMC),B-17, Faisal Hills offers unparalleled connectivity.',
+    image: 'pexels-manjunath450-2793649_cvtric',
     category: 'Market Trends',
     date: 'June 10, 2025',
     slug: 'future-luxury-real-estate-2025',

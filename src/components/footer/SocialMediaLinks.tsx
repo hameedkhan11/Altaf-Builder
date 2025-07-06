@@ -2,7 +2,7 @@ import { socialMediaConfig } from "@/lib/constants";
 import Link from "next/link";
 
 export const SocialMediaLinks = () => (
-  <div className="flex items-center space-x-4">
+  <div className="flex flex-col items-center space-x-4 md:flex-row">
     <span className="text-black dark:text-white text-lg font-medium font-optima">
       Follow us:
     </span>

@@ -66,10 +66,10 @@ export const footerLinks = {
 };
 
 export const companyInfo = {
-  name: "ALTAF BUILDER",
+  name: "ALTAF DEVELOPMENT",
   description:
     "Redefining luxury living with exceptional properties in prime locations. Experience the pinnacle of architectural excellence and craftsmanship.",
-  copyright: "© 2025 ALTAF BUILDER. All rights reserved.",
+  copyright: "© 2025 ALTAF DEVELOPMENT. All rights reserved.",
 };
 
 export const latestNews: NewsItem[] = [
