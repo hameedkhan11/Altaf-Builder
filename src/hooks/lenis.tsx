@@ -31,7 +31,6 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
       smoothWheel: true,
       // Fine-tuned multipliers for smoothness
       touchInertiaMultiplier: 0.8,
-      syncTouch: true,
       touchMultiplier: 1.5,
       wheelMultiplier: 0.8,
       // Prevent infinite scroll
@@ -41,7 +40,7 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
       // Smooth wrapper behavior
       wrapper: window,
       content: document.documentElement,
-      lerp: 0.1,
+      // lerp: 0.1,
     });
 
     lenisRef.current = lenis;
