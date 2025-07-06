@@ -16,7 +16,7 @@ import Link from "next/link";
 import MediaCenterDropdown from "../ui/media-center-dropdown";
 
 // Import SVG as React component
-import AltafLogo from "../../../public/logos/altaf-logo.svg"
+import AltafLogo from "../../../public/logos/ALTAF-LOGO2.svg"
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -138,11 +138,11 @@ const Header = () => {
                       href={item.href}
                       className={`transition-all duration-500 text-sm relative group ${
                         scrolled
-                          ? "text-foreground hover:text-[rgb(140,46,71)] hover:font-bold text-xs"
-                          : "text-white hover:text-[rgb(140,46,71)] hover:font-bold"
+                          ? "text-foreground hover:text-[rgb(140,46,71)] hover:font-bold"
+                          : "text-white hover:text-[rgb(140,46,71)] hover:font-bold space-x-4"
                       }`}
                     >
-                      {item.name}
+                      <span className={`tracking-widest ${scrolled ? "text-xs" : "text-sm"}`}>{item.name}</span>
                       <span
                         className={`absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full bg-[rgb(140,46,71)]`}
                       />
@@ -167,7 +167,7 @@ const Header = () => {
                 {/* Logo using SVGR */}
                 <AltafLogo 
                   className={`cursor-pointer transition-all duration-500 ${
-                    isClient && isMobile ? 'w-[120px] h-[88px]' : 'w-[188px] h-[138px]'
+                    isClient && isMobile ? 'w-[120px] h-[88px]' : 'lg:w-[150px] lg:h-[100px] mb-4'
                   } ${
                     !scrolled 
                       ? "text-white" // White when not scrolled

@@ -1,8 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Variants } from "framer-motion";
 import { Country, NavigationItem, NewsItem } from "./types";
-
-// import { Facebook, Instagram, Twitter, Linkedin } from "lucide-react";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaYoutube,
+  FaPinterestP,
+  FaTiktok,
+  FaXTwitter,
+} from "react-icons/fa6";
+import { FaSnapchatGhost } from "react-icons/fa";
 
 export const NAVIGATION_ITEMS: NavigationItem[] = [
   { name: "ABOUT", href: "/about" },
@@ -34,10 +42,14 @@ export const quickLinks = [
 ];
 
 export const socialMediaLinks = [
-  { name: "Facebook", href: "#" },
-  { name: "Instagram", href: "#" },
-  { name: "Twitter", href: "#" },
-  { name: "LinkedIn", href: "#" },
+  { name: "Facebook", href: "https://www.facebook.com/share/19NaPNBX9R/?mibextid=wwXIfr" },
+  { name: "Instagram", href: "https://www.instagram.com/altafdevelopments?igsh=ZWFqd3Z2amZ0ZXJ2" },
+  { name: "Tiktok", href: "https://www.tiktok.com/@altafdevelopments?_t=ZS-8xlu0gMnTfQ&_r=1" },
+  { name: "LinkedIn", href: "https://www.linkedin.com/company/altaf-developments/" },
+  { name: "Youtube", href: "https://www.youtube.com/@AltafDevelopments" },
+  { name: "Twitter", href: "https://x.com/Altafdevelpmnts" },
+  { name: "Pinterest", href: "https://www.pinterest.com/altafdevelopmentspk/" },
+  { name: "Snapchat", href: "https://www.snapchat.com/add/altafdevelopmnt" },
 ];
 
 export const contactInfo = {
@@ -75,6 +87,64 @@ export const latestNews: NewsItem[] = [
     title: "Sustainability Initiative",
     description: "Green building certification for all new projects",
     date: "Oct 20, 2024",
+  },
+];
+export const socialMediaConfig = [
+  {
+    icon: FaFacebookF,
+    href: "https://www.facebook.com/share/19NaPNBX9R/?mibextid=wwXIfr",
+    name: "Facebook",
+    color: "#1877F2",
+    hoverColor: "#166FE5",
+  },
+  {
+    icon: FaInstagram,
+    href: "https://www.instagram.com/altafdevelopments?igsh=ZWFqd3Z2amZ0ZXJ2",
+    name: "Instagram",
+    color: "#E4405F",
+    hoverColor: "#D73650",
+  },
+  {
+    icon: FaTiktok,
+    href: "https://www.tiktok.com/@altafdevelopments?_t=ZS-8xlu0gMnTfQ&_r=1",
+    name: "TikTok",
+    color: "#000000",
+    hoverColor: "#333333",
+  },
+  {
+    icon: FaLinkedinIn,
+    href: "https://www.linkedin.com/company/altaf-developments/",
+    name: "LinkedIn",
+    color: "#0A66C2",
+    hoverColor: "#0958A5",
+  },
+  {
+    icon: FaYoutube,
+    href: "https://www.youtube.com/@AltafDevelopments",
+    name: "YouTube",
+    color: "#FF0000",
+    hoverColor: "#E60000",
+  },
+  {
+    icon: FaXTwitter,
+    href: "https://x.com/Altafdevelpmnts",
+    name: "Twitter",
+    color: "#000000",
+    hoverColor: "#333333",
+  },
+  {
+    icon: FaPinterestP,
+    href: "https://www.pinterest.com/altafdevelopmentspk/",
+    name: "Pinterest",
+    color: "#E60023",
+    hoverColor: "#D50020",
+  },
+  {
+    icon: FaSnapchatGhost,
+    href: "https://www.snapchat.com/add/altafdevelopmnt",
+    name: "Snapchat",
+    color: "#FFFC00",
+    hoverColor: "#F2EF00",
   },
 ];
 
