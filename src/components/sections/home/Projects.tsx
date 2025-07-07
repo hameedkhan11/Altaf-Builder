@@ -250,7 +250,7 @@ const ProjectsSection = () => {
         viewport={viewportOnce}
         className="flex flex-col lg:flex-row gap-8 sm:gap-12 lg:gap-16 xl:gap-24 items-start lg:items-center justify-between pb-16 sm:pb-20 md:pb-24 lg:pb-28"
       >
-        <motion.h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl w-full lg:w-[40%]">
+        <motion.h1 className="text-3xl md:text-4xl lg:text-5xl w-full lg:w-[40%]">
           EXPLORE APARTMENTS
         </motion.h1>
 
@@ -260,7 +260,7 @@ const ProjectsSection = () => {
             initial="initial"
             whileInView="animate"
             viewport={viewportOnce}
-            className="text-sm sm:text-base lg:text-lg leading-relaxed font-optima"
+            className="text-sm sm:text-base leading-relaxed font-optima"
           >
             Welcome to Altaf Development, a premier development strategically
             located in the vibrant New Mount Hampden City. As the first smart

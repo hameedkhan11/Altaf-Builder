@@ -17,7 +17,6 @@ interface RelatedBlogsProps {
   currentPost: BlogPost;
 }
 
-
 const RelatedBlogs: React.FC<RelatedBlogsProps> = ({ currentPost }) => {
   const buttonAnimation = getPerformanceVariant(fadeInRight);
 
@@ -66,6 +65,7 @@ const RelatedBlogs: React.FC<RelatedBlogsProps> = ({ currentPost }) => {
       transition={{ duration: 0.6 }}
       viewport={viewportOnce}
       aria-labelledby="related-articles-heading"
+      data-section="related-blogs"
     >
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-16">
         <motion.header
@@ -79,7 +79,7 @@ const RelatedBlogs: React.FC<RelatedBlogsProps> = ({ currentPost }) => {
             id="related-articles-heading"
             className="text-2xl md:text-3xl lg:text-5xl mb-3 md:mb-4"
           >
-            Related Articles
+            RELATED ARTICLES
           </h2>
           <p className="text-sm md:text-base text-gray-600 max-w-2xl mx-auto">
             Discover more insights and trends in luxury real estate

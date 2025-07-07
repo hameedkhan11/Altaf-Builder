@@ -20,16 +20,28 @@ const SocialShare: React.FC<SocialShareProps> = ({ post, currentUrl }) => {
       const scrolled = window.scrollY;
       const viewportHeight = window.innerHeight;
       
-      // Only calculate position once when first becoming sticky
-      if (scrolled > viewportHeight && !isSticky && socialRef.current) {
+      // Find the main content container (the grid container)
+      const mainContentContainer = document.querySelector('.container.mx-auto .grid');
+      
+      // Calculate when main content ends
+      let mainContentEnd = document.documentElement.scrollHeight;
+      
+      if (mainContentContainer) {
+        const containerRect = mainContentContainer.getBoundingClientRect();
+        mainContentEnd = containerRect.bottom + window.scrollY - 50; // 50px buffer
+      }
+      
+      // Only be fixed when scrolled past viewport height and before main content ends
+      const shouldBeSticky = scrolled > viewportHeight && scrolled < mainContentEnd;
+      
+      if (shouldBeSticky && !isSticky && socialRef.current) {
         const rect = socialRef.current.getBoundingClientRect();
         setSidebarOffset({
           left: rect.left + window.scrollX,
           width: rect.width
         });
         setIsSticky(true);
-      } else if (scrolled <= viewportHeight && isSticky) {
-        // Only reset when going back above 100vh
+      } else if (!shouldBeSticky && isSticky) {
         setIsSticky(false);
       }
     };
@@ -62,7 +74,7 @@ const SocialShare: React.FC<SocialShareProps> = ({ post, currentUrl }) => {
     <motion.div
       ref={socialRef}
       className={`bg-white rounded-lg shadow-lg p-4 border transition-all duration-300 ${
-        isSticky ? 'fixed z-40' : 'sticky top-8'
+        isSticky ? 'static z-40' : 'sticky top-8'
       }`}
       style={isSticky ? { 
         left: `${sidebarOffset.left}px`, 

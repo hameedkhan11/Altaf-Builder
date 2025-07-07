@@ -36,7 +36,7 @@ const Amenities = () => {
           viewport={viewportOnce}
         >
           <motion.h1 
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl uppercase w-full lg:w-2/3 leading-tight"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl  uppercase w-full lg:w-2/3 leading-tight"
             {...fadeInLeft}
             viewport={viewportOnce}
             transition={{ duration: 0.6, delay: delays.short }}
@@ -44,7 +44,7 @@ const Amenities = () => {
             Explore premium world-class amenities at your neigborhood
           </motion.h1>
           <motion.p 
-            className="sm:text-lg md:text-xl w-full lg:w-1/3 leading-relaxed font-optima"
+            className="sm:text-md  w-full lg:w-1/3 leading-relaxed font-optima"
             {...fadeInRight}
             viewport={viewportOnce}
             transition={{ duration: 0.6, delay: delays.medium }}

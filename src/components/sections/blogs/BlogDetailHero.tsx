@@ -1,5 +1,4 @@
 // components/blog-detail/BlogDetailHero.tsx
-"use client";
 import React from "react";
 import { BlogPost } from "@/lib/blogs/types";
 import { Hero } from "@/components/common/Hero";

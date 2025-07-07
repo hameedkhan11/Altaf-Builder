@@ -9,20 +9,17 @@ import {
   X,
   ArrowRight,
 } from "lucide-react";
-import { useTheme } from "@/hooks/useTheme";
 import { NAVIGATION_ITEMS } from "@/lib/constants";
-import MobileMenu from "./MobileMenu";
 import Link from "next/link";
 import MediaCenterDropdown from "../ui/media-center-dropdown";
 
 // Import SVG as React component
 import AltafLogo from "../../../public/logos/ALTAF-LOGO2.svg"
+import MobileMenu from "./MobileMenu";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [initialLoad, setInitialLoad] = useState(true);
-  const { isDark, toggleTheme } = useTheme();
   const [showBackgroundOverlay] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isClient, setIsClient] = useState(false);
@@ -42,13 +39,7 @@ const Header = () => {
     // Check initial scroll position on component mount
     const checkInitialScroll = () => {
       const scrollPosition = window.scrollY;
-      const shouldBeScrolled = scrollPosition > 100;
-      
-      setScrolled(shouldBeScrolled);
-      // If already scrolled on load, skip the logo animation
-      if (shouldBeScrolled) {
-        setInitialLoad(false);
-      }
+      setScrolled(scrollPosition > 100);
     };
 
     // Check scroll position immediately
@@ -72,46 +63,12 @@ const Header = () => {
     };
   }, []);
 
-  // Logo animation variants - responsive scale based on device
-  const logoVariants = {
-    initial: {
-      opacity: 1,
-      scale: initialLoad && !scrolled ? (isClient && isMobile ? 1.2 : 4) : 1,
-      y: initialLoad && !scrolled ? (isClient && isMobile ? "25vh" : "50vh") : 0,
-      x: 0,
-      rotate: 0,
-    },
-    animate: {
-      opacity: 1,
-      scale: 1, // Shrink to normal size
-      y: 0, // Move to header position
-      x: 0,
-      rotate: 0,
-      transition: {
-        duration: initialLoad && !scrolled ? 2.5 : 0,
-        delay: initialLoad && !scrolled ? 1 : 0,
-        ease: [0.25, 0.1, 0.25, 1],
-        onComplete: () => {
-          setInitialLoad(false);
-        }
-      }
-    },
-    hover: {
-      scale: 1.05,
-      rotate: [0, -2, 2, 0],
-      transition: {
-        duration: 0.6,
-        ease: "easeInOut"
-      }
-    }
-  };
-
   return (
     <>
       <motion.header
         className={`fixed w-full h-20 transition-all duration-500 ease-in-out font-avenir ${
           scrolled
-            ? "z-30 backdrop-blur-lg border-b bg-white dark:bg-purple-950/95 shadow-lg"
+            ? "z-30 backdrop-blur-lg border-b bg-white shadow-lg"
             : "z-20"
         } ${showBackgroundOverlay ? "opacity-0" : "opacity-100"}`}
         initial={{ y: -100 }}
@@ -152,14 +109,8 @@ const Header = () => {
               ))}
             </nav>
 
-            {/* Center Logo with Screen Center to Header Animation */}
-            <motion.div
-              className="flex items-center absolute left-1/2 transform -translate-x-1/2"
-              variants={logoVariants}
-              initial="initial"
-              animate="animate"
-              whileHover="hover"
-            >
+            {/* Center Logo - Simplified without animation */}
+            <div className="flex items-center absolute left-1/2 transform -translate-x-1/2">
               <Link
                 href={"/"}
                 className="cursor-pointer pt-6 flex items-center relative"
@@ -175,16 +126,16 @@ const Header = () => {
                   }`}
                 />
               </Link>
-            </motion.div>
+            </div>
 
-            {/* Right Side - Contact Button & Theme Toggle */}
+            {/* Right Side - Contact Button */}
             <div className="hidden lg:flex items-center space-x-4">
               <Link href="/contact">
                 <Button
                   className={`group relative transition-all duration-500 px-5 bg-transparent cursor-pointer rounded-full font-bold mr-8 overflow-hidden py-6 ${
                     scrolled
-                      ? "bg-[rgb(140,46,71)] text-white hover:bg-[rgb(120,40,61)] shadow-lg hover:shadow-xl"
-                      : "bg-white text-[rgb(140,46,71)] hover:bg-gray-100 shadow-md hover:shadow-lg"
+                      ? "bg-[rgb(140,46,71)] text-white hover:bg-[rgb(120,40,61)] "
+                      : "bg-white text-[rgb(140,46,71)] hover:bg-gray-100"
                   }`}
                 >
                   <div className="flex items-center space-x-2 relative z-10 py-8">
@@ -203,7 +154,7 @@ const Header = () => {
               size="icon"
               className={`lg:hidden transition-all duration-500 ${
                 scrolled
-                  ? "text-foreground hover:bg-gray-100 dark:hover:bg-gray-800"
+                  ? "text-foreground hover:bg-gray-100"
                   : "text-white hover:bg-white/20"
               }`}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -221,8 +172,6 @@ const Header = () => {
       <MobileMenu
         isOpen={isMobileMenuOpen}
         onClose={() => setIsMobileMenuOpen(false)}
-        isDark={isDark}
-        toggleTheme={toggleTheme}
       />
     </>
   );

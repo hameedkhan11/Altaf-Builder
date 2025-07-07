@@ -82,8 +82,8 @@ const BlogDetailPage: React.FC<BlogDetailPageProps> = ({
         <BlogDetailHero post={post} />
 
         {/* Main Content */}
-        <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-16 py-8 md:py-16">
-          <div className="grid lg:grid-cols-4 gap-6 lg:gap-8">
+        <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-16 py-8 md:py-16" id="main-content-container">
+          <div className="grid lg:grid-cols-4 gap-6 lg:gap-8" id="blog-content-grid">
             {/* Main Content Area */}
             <div className="lg:col-span-3">
               <motion.article

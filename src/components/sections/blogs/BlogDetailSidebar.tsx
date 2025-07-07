@@ -1,5 +1,4 @@
 // components/blog-detail/BlogDetailSidebar.tsx
-"use client";
 import React from "react";
 import { BlogPost } from "@/lib/blogs/types";
 import SocialShare from "./SocialShare";
