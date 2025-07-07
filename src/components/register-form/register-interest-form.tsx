@@ -20,7 +20,7 @@ export function RegisterInterestForm() {
   return (
     <div className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl mx-auto bg-black/40 backdrop-blur- rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-white/10 font-optima text-white">
       <div className="mb-4 sm:mb-6">
-        <h1 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2 text-white">
+        <h1 className="text-lg sm:text-xl md:text-2xl  mb-2 text-white">
           Register Your Interest
         </h1>
       </div>

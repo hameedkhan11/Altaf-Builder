@@ -7,7 +7,7 @@ import { HeroBackground } from './HeroBackground';
 import { Breadcrumb } from './Breadcrumb';
 import { HeroProps } from '@/lib/types';
 import { ScrollIndicator } from './ScrollIndicator';
-import HeroButtons from './HeroButtons';
+// import HeroButtons from './HeroButtons';
 
 // Extended HeroProps interface
 interface ExtendedHeroProps extends HeroProps {
@@ -209,10 +209,10 @@ export const Hero: React.FC<ExtendedHeroProps> = ({
                 variants: itemVariants
               })}
             >
-              <HeroButtons 
+              {/* <HeroButtons 
                 enableAnimations={enableAnimations}
                 className={contentAlignment === 'center' ? 'justify-center' : contentAlignment === 'right' ? 'justify-end' : 'justify-start'}
-              />
+              /> */}
             </MotionDiv>
           )}
 

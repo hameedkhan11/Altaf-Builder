@@ -2,8 +2,9 @@
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { TeamMember } from '@/lib/about-us/types';
-import Image from 'next/image';
+// import Image from 'next/image';
 import Link from 'next/link';
+import { CldImage } from 'next-cloudinary';
 
 interface TeamMemberCardProps {
   member: TeamMember;
@@ -18,9 +19,8 @@ export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member, reversed
           {/* Image Section */}
           <div className="lg:w-1/2 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-[rgba(140,46,71,0.1)] to-[rgba(140,46,71,0.3)] opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
-            <Image
-              width={600}
-              height={600}
+            <CldImage
+              fill
               src={member.image}
               alt={member.name}
               className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
@@ -53,7 +53,7 @@ export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member, reversed
           {/* Content Section */}
           <div className="lg:w-1/2 p-8 lg:p-12 flex flex-col justify-center">
             <div className="mb-6">
-              <h3 className="text-3xl lg:text-4xl font-bold mb-2 group-hover:text-[rgb(140,46,71)] transition-colors duration-300">
+              <h3 className="text-3xl lg:text-4xl mb-2 group-hover:text-[rgb(140,46,71)] transition-colors duration-300">
                 {member.name}
               </h3>
               <div className="text-lg font-medium text-[rgb(140,46,71)] mb-4">
@@ -67,11 +67,11 @@ export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member, reversed
             </p>
 
             <div className="space-y-4">
-              <h4 className="text-xl font-semibold mb-4">Key Achievements</h4>
+              <h4 className="text-xl mb-4">Key Achievements</h4>
               {member.achievements.map((achievement, index) => (
                 <div key={index} className="flex items-start gap-3 group/achievement">
                   <div className="w-3 h-3 rounded-full bg-[rgb(140,46,71)] mt-1.5 flex-shrink-0 group-hover/achievement:scale-125 transition-transform duration-200" />
-                  <span className="transition-colors duration-200">
+                  <span className="transition-colors duration-200 font-optima">
                     {achievement}
                   </span>
                 </div>

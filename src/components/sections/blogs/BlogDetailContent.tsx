@@ -187,13 +187,13 @@ const BlogDetailContent: React.FC<BlogDetailContentProps> = ({
 
         {/* CTA Section */}
         <motion.div
-          className="bg-gradient-to-r from-[#8B2131] to-[#B91C1C] rounded-xl p-6 md:p-8 text-white text-center"
+          className="bg-[rgb(140,46,71)] rounded-xl p-6 md:p-8 text-white text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
           viewport={viewportOnce}
         >
-          <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4 text-white">
+          <h3 className="text-xl md:text-2xl mb-3 md:mb-4 text-white">
             Ready to Experience Luxury Living?
           </h3>
           <p className="mb-4 md:mb-6 opacity-90 text-sm md:text-base">

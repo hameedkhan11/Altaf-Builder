@@ -1,7 +1,11 @@
 // components/StatsCard.tsx
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { CompanyStats } from '@/lib/about-us/types';
+interface CompanyStats {
+  value: number;
+  label: string;
+  description: string;
+}
 
 interface StatsCardProps {
   stat: CompanyStats;

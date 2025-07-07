@@ -1,4 +1,4 @@
-// types/index.ts
+// types.ts
 export interface TeamMember {
   id: string;
   name: string;
@@ -21,9 +21,8 @@ export interface MissionVision {
   features: string[];
 }
 
-export interface CompanyStats {
-  value: string;
-  label: string;
+export interface CompanyValue {
+  title: string;
   description: string;
 }
 
@@ -35,10 +34,13 @@ export interface AboutPageData {
   };
   missionVision: MissionVision[];
   team: TeamMember[];
-  stats: CompanyStats[];
   company: {
     foundedYear: string;
     description: string;
-    values: string[];
+    values: CompanyValue[];
   };
+}
+export interface CompanyStat {
+  title: string;
+  value: string;
 }
