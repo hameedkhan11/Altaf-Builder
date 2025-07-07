@@ -2,8 +2,8 @@
 "use client";
 import React from "react";
 import { BlogPost } from "@/lib/blogs/types";
-import TableOfContents from "./TableOfContent";
 import SocialShare from "./SocialShare";
+import TableOfContents from "./TableOfContent";
 
 interface BlogDetailSidebarProps {
   post: BlogPost;
@@ -17,7 +17,11 @@ const BlogDetailSidebar: React.FC<BlogDetailSidebarProps> = ({
   tocSections,
 }) => {
   return (
-    <aside className="space-y-6" role="complementary" aria-label="Blog sidebar">
+    <aside 
+      className="space-y-6" 
+      role="complementary" 
+      aria-label="Blog sidebar"
+    >
       {/* Table of Contents - Hidden on mobile, shown on larger screens */}
       <div className="hidden lg:block">
         <TableOfContents sections={tocSections} />

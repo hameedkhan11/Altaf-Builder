@@ -11,6 +11,33 @@ interface SocialShareProps {
 }
 
 const SocialShare: React.FC<SocialShareProps> = ({ post, currentUrl }) => {
+  const [isSticky, setIsSticky] = React.useState<boolean>(false);
+  const [sidebarOffset, setSidebarOffset] = React.useState<{ left: number; width: number }>({ left: 0, width: 0 });
+  const socialRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      const scrolled = window.scrollY;
+      const viewportHeight = window.innerHeight;
+      
+      // Only calculate position once when first becoming sticky
+      if (scrolled > viewportHeight && !isSticky && socialRef.current) {
+        const rect = socialRef.current.getBoundingClientRect();
+        setSidebarOffset({
+          left: rect.left + window.scrollX,
+          width: rect.width
+        });
+        setIsSticky(true);
+      } else if (scrolled <= viewportHeight && isSticky) {
+        // Only reset when going back above 100vh
+        setIsSticky(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isSticky]);
+
   const shareLinks = {
     facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
       currentUrl
@@ -33,7 +60,15 @@ const SocialShare: React.FC<SocialShareProps> = ({ post, currentUrl }) => {
 
   return (
     <motion.div
-      className="sticky top-8 bg-white rounded-lg shadow-lg p-4 border"
+      ref={socialRef}
+      className={`bg-white rounded-lg shadow-lg p-4 border transition-all duration-300 ${
+        isSticky ? 'fixed z-40' : 'sticky top-8'
+      }`}
+      style={isSticky ? { 
+        left: `${sidebarOffset.left}px`, 
+        width: `${sidebarOffset.width}px`,
+        top: 'calc(2rem + 280px + 1.5rem)' // 2rem + TOC height + gap
+      } : {}}
       initial={{ opacity: 0, x: 50 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: 0.5 }}
@@ -44,7 +79,7 @@ const SocialShare: React.FC<SocialShareProps> = ({ post, currentUrl }) => {
         <Share2 className="w-4 h-4 text-gray-600" aria-hidden="true" />
         <span className="text-sm font-semibold">Share</span>
       </div>
-
+      
       <div className="flex flex-col gap-3">
         <button
           onClick={() => handleShare('facebook', shareLinks.facebook)}
@@ -54,7 +89,7 @@ const SocialShare: React.FC<SocialShareProps> = ({ post, currentUrl }) => {
           <Facebook className="w-4 h-4 text-blue-600 group-hover:scale-110 transition-transform" aria-hidden="true" />
           <span className="text-sm text-blue-600">Facebook</span>
         </button>
-
+        
         <button
           onClick={() => handleShare('twitter', shareLinks.twitter)}
           className="flex items-center gap-2 p-2 rounded-lg bg-sky-50 hover:bg-sky-100 transition-colors group w-full text-left"
@@ -63,7 +98,7 @@ const SocialShare: React.FC<SocialShareProps> = ({ post, currentUrl }) => {
           <Twitter className="w-4 h-4 text-sky-600 group-hover:scale-110 transition-transform" aria-hidden="true" />
           <span className="text-sm text-sky-600">Twitter</span>
         </button>
-
+        
         <button
           onClick={() => handleShare('linkedin', shareLinks.linkedin)}
           className="flex items-center gap-2 p-2 rounded-lg bg-blue-50 hover:bg-blue-100 transition-colors group w-full text-left"

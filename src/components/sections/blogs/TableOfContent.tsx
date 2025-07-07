@@ -9,6 +9,9 @@ interface TableOfContentsProps {
 
 const TableOfContents: React.FC<TableOfContentsProps> = ({ sections }) => {
   const [activeSection, setActiveSection] = React.useState<string>('');
+  const [isSticky, setIsSticky] = React.useState<boolean>(false);
+  const [sidebarOffset, setSidebarOffset] = React.useState<{ left: number; width: number }>({ left: 0, width: 0 });
+  const tocRef = React.useRef<HTMLElement>(null);
 
   React.useEffect(() => {
     const observer = new IntersectionObserver(
@@ -19,7 +22,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ sections }) => {
           }
         });
       },
-      { 
+      {
         rootMargin: '-20% 0% -35% 0%',
         threshold: 0.1
       }
@@ -32,6 +35,29 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ sections }) => {
 
     return () => observer.disconnect();
   }, [sections]);
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      const scrolled = window.scrollY;
+      const viewportHeight = window.innerHeight;
+      
+      // Only calculate horizontal position once when first becoming sticky
+      if (scrolled > viewportHeight && !isSticky && tocRef.current) {
+        const rect = tocRef.current.getBoundingClientRect();
+        setSidebarOffset({
+          left: rect.left + window.scrollX,
+          width: rect.width
+        });
+        setIsSticky(true);
+      } else if (scrolled <= viewportHeight && isSticky) {
+        // Only reset when going back above 100vh
+        setIsSticky(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isSticky]);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
@@ -50,7 +76,15 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ sections }) => {
 
   return (
     <motion.nav
-      className="sticky top-8 bg-white rounded-lg shadow-lg p-4 border"
+      ref={tocRef}
+      className={`bg-white rounded-lg shadow-lg p-4 border transition-all duration-300 ${
+        isSticky ? 'fixed z-50' : 'sticky top-8'
+      }`}
+      style={isSticky ? { 
+        left: `${sidebarOffset.left}px`, 
+        width: `${sidebarOffset.width}px`,
+        top: '2rem' // Direct 2rem from top when fixed
+      } : {}}
       initial={{ opacity: 0, x: 50 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: 0.3 }}

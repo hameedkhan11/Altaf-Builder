@@ -96,9 +96,9 @@ const BlogDetailContent: React.FC<BlogDetailContentProps> = ({
           transition={{ delay: 0.2 }}
           viewport={viewportOnce}
         >
-          <div className="relative h-[250px] sm:h-[300px] md:h-[400px] lg:h-[600px] w-full overflow-hidden rounded-xl">
+          <div className="relative h-[250px] sm:h-[300px] md:h-[400px] lg:h-[600px] w-full overflow-hidden">
             <CldImage
-              src="event5_tz04ae"
+              src="imgi_9_1746009430376_esejfm"
               alt="Luxury Interior Design - Modern luxury living spaces"
               fill
               className="object-cover hover:scale-105 transition-transform duration-500"
@@ -139,12 +139,13 @@ const BlogDetailContent: React.FC<BlogDetailContentProps> = ({
           transition={{ delay: 0.3 }}
           viewport={viewportOnce}
         >
-          <div className="relative h-48 sm:h-56 md:h-64 lg:h-96 w-full overflow-hidden rounded-xl">
+          <div className="relative  w-full overflow-hidden rounded-">
             <CldImage
-              src="event4_wuvx1y"
+              src="imgi_4_default_is216q"
               alt="Sustainable Architecture - Eco-friendly luxury development"
-              fill
-              className="object-cover hover:scale-105 transition-transform duration-500"
+              height={400}
+              width={1000}
+              className="object-cover hover:scale-105 transition-transform duration-500 bg-cover"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 75vw, 50vw"
             />
           </div>
