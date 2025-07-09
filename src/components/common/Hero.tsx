@@ -181,7 +181,7 @@ export const Hero: React.FC<ExtendedHeroProps> = ({
           {title && (
             <motion.h1
               style={enableParallax ? { y: titleY } : {}}
-              className="text-3xl md:text-4xl lg:text-6xl text-white leading-tight will-change-transform"
+              className={`text-3xl md:text-4xl ${ isHomePage ? "lg:text-6xl" : "lg:text-5xl"} text-white leading-tight will-change-transform`}
               {...(enableAnimations && {
                 variants: itemVariants
               })}

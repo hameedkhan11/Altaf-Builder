@@ -2,92 +2,81 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { Phone, Mail, MapPin, Clock } from 'lucide-react';
+import { Phone, Mail, Clock, Building } from 'lucide-react';
+import FeatureCard from '@/components/cards/FeatureCard';
 
 const contactInfo = [
   {
+    icon: Building,
+    title: 'Property Details',
+    primary: 'Main Boulevard Plot #1',
+    secondary: 'Block B, Faisal Hills',
+    description: 'Near Islamabad Rawalpindi'
+  },
+  {
     icon: Phone,
-    title: 'Sales & Inquiries',
-    primary: '+971 4 XXX XXXX',
-    secondary: 'sales@altafdevelopment.ae',
-    description: 'Available 9 AM - 8 PM, 7 days a week'
+    title: 'Sales & Inquiries', 
+    primary: '+92 333 0777775',
+    secondary: 'Direct sales line',
+    description: 'Available Mon - Sun, 9 AM - 7 PM'
   },
   {
     icon: Mail,
-    title: 'Customer Support',
-    primary: 'support@altafdevelopment.ae',
-    secondary: '+971 4 XXX XXXX',
-    description: 'Dedicated support for residents'
-  },
-  {
-    icon: MapPin,
-    title: 'Visit Our Showroom',
-    primary: 'Level 42, Emirates Towers',
-    secondary: 'Sheikh Zayed Road, Dubai, UAE',
-    description: 'By appointment only'
+    title: 'Information & Support',
+    primary: 'info@altafdevelopment.com',
+    secondary: 'General inquiries and support',
+    // description: 'Response within 24 hours'
   },
   {
     icon: Clock,
-    title: 'Operating Hours',
-    primary: 'Mon - Sat: 9:00 AM - 8:00 PM',
-    secondary: 'Sunday: 10:00 AM - 6:00 PM',
+    title: 'Office Hours',
+    primary: 'Mon - Sun: 9:00 AM - 7:00 PM',
+    secondary: 'Open 7 days a week',
     description: 'Extended hours by appointment'
   }
 ];
 
 export const ContactInfoCard = () => {
   return (
-    <motion.div 
-      className=" rounded-2xl p-8 text-black  relative overflow-hidden shadow-xl"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-    >
-      {/* Subtle background pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-white to-transparent rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-white to-transparent rounded-full blur-2xl"></div>
-      </div>
-
-      <div className="relative z-10">
-        <div className="mb-8">
-          <h2 className="text-3xl mt-4">
-            Get in Touch
-          </h2>
-          <p className="leading-relaxed font-optima">
-            Experience luxury living redefined. Our expert team is ready to help you 
-            discover your perfect home in our premium residential developments.
-          </p>
+    <section className="relative pt-16">
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.5 }}
+        className="relative"
+      >
+        <div className="max-w-8xl mx-auto">
+          <div className="mb-8 text-center">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl mt-4">
+              Get in Touch
+            </h2>
+            <p className="leading-relaxed text-black">
+              Experience luxury living redefined. Our expert team is ready to help you 
+              discover your perfect home in our premium residential developments?.
+            </p>
+          </div>
+          
+          <div 
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-4 xl:gap-2 justify-items-center"
+            role="list"
+            aria-label="Contact information and details"
+          >
+            {contactInfo.map((item, index) => (
+              <FeatureCard
+                key={index}
+                icon={item.icon}
+                title={item.title}
+                description={item.description}
+                primary={item.primary}
+                secondary={item.secondary}
+                index={index}
+                variant="contact"
+              />
+            ))}
+          </div>
         </div>
-
-        <div className="space-y-6">
-          {contactInfo.map((info, index) => (
-            <motion.div 
-              key={index}
-              className="flex items-start space-x-4"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <div className="bg-white/10 backdrop-blur-sm p-3 rounded-xl flex-shrink-0">
-                <info.icon className="w-5 h-5 text-[rgb(140,46,71)]" />
-              </div>
-              <div className="flex-1">
-                <h3 className="text-lg mb-1">
-                  {info.title}
-                </h3>
-                <p className="mb-1">{info.primary}</p>
-                {info.secondary && (
-                  <p className="mb-1">{info.secondary}</p>
-                )}
-                {info.description && (
-                  <p className="text-sm">{info.description}</p>
-                )}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </motion.div>
+      </motion.div>
+    </section>
   );
 };

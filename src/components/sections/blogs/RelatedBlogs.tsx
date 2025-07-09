@@ -60,12 +60,12 @@ const RelatedBlogs: React.FC<RelatedBlogsProps> = ({ currentPost }) => {
   return (
     <motion.section
       className="py-12 md:py-16 bg-gray-50"
+      data-section="related-blogs"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
       viewport={viewportOnce}
       aria-labelledby="related-articles-heading"
-      data-section="related-blogs"
     >
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-16">
         <motion.header

@@ -6,28 +6,28 @@ export interface FAQItem {
 }
 
 export const faqData: FAQItem[] = [
-  {
+    {
     id: 1,
-    question: "What exclusive neighborhoods do you specialize in?",
+    question: "Who is ALTAF Developments?",
     answer:
-      "We specialize in the most prestigious neighborhoods including Beverly Hills, Manhattan's Upper East Side, Malibu beachfront, Aspen ski-in/ski-out properties, and exclusive gated communities in Miami Beach. Our portfolio features only the finest addresses with proven investment potential and unparalleled luxury amenities.",
+      "ALTAF Developments is a visionary real estate development company committed to building trust-driven communities and high-value projects. With a deep focus on transparency, purpose, and long-term growth, we aim to transform the real estate landscape of Pakistan one project at a time.",
   },
   {
     id: 2,
-    question: "What is your minimum property price range?",
+    question: "What makes ALTAF Developments different from other developers?",
     answer:
-      "Our luxury portfolio begins at $2.5 million and extends to ultra-premium estates exceeding $100 million. We focus exclusively on high-end properties that meet our rigorous standards for location, architecture, amenities, and investment potential. Each property undergoes comprehensive evaluation to ensure it meets our luxury criteria.",
+      "We don’t just sell buildings we build legacies. Our commitment lies in transparent dealings, investor focused planning, secure and scalable real estate investments, ethical sales practices and a strong emphasis on overseas Pakistani trust-building.",
   },
   {
     id: 3,
-    question: "Do you offer private showings and concierge services?",
+    question: "Is ALTAF Developments officially approved?",
     answer:
-      "Absolutely. We provide exclusive private showings by appointment, often outside traditional hours for maximum privacy. Our white-glove concierge services include helicopter tours, private jet coordination, luxury transportation, and access to off-market properties. Your privacy and convenience are our top priorities.",
+      "Yes, all our projects are initiated only after proper legal approvals and verification from relevant authorities. We prioritize legal transparency to ensure our clients’ investments are fully protected.",
   },
   {
     id: 4,
-    question: "How do you ensure transaction confidentiality?",
+    question: "Is this a good time to invest in Faisal Hills?",
     answer:
-      "We maintain the highest levels of discretion through confidentiality agreements, private showings, and secure transaction processes. Our team includes former investment bankers and legal professionals who understand the importance of privacy in high-net-worth transactions. All client information is protected with bank-level security protocols.",
+      "Yes, Faisal Hills is currently one of the most promising investment locations in the Islamabad region. With major infrastructure development underway and increasing demand, early investments can offer high returns in both residential and commercial sectors.",
   },
 ];

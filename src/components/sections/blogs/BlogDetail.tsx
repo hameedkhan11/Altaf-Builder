@@ -81,27 +81,30 @@ const BlogDetailPage: React.FC<BlogDetailPageProps> = ({
         {/* Hero Section */}
         <BlogDetailHero post={post} />
 
-        {/* Main Content */}
-        <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-16 py-8 md:py-16" id="main-content-container">
-          <div className="grid lg:grid-cols-4 gap-6 lg:gap-8" id="blog-content-grid">
+        {/* Main Content Container */}
+        <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-16 py-8 md:py-16">
+          <div className="grid lg:grid-cols-4 gap-6 lg:gap-8 items-start">
             {/* Main Content Area */}
             <div className="lg:col-span-3">
               <motion.article
                 className="bg-white rounded-2xl shadow-lg overflow-hidden"
                 {...containerAnimation}
                 viewport={viewportOnce}
+                id="main-article"
               >
                 <BlogDetailContent post={post} blogContent={blogContent} />
               </motion.article>
             </div>
 
-            {/* Sidebar */}
-            <div className="lg:col-span-1 space-y-6">
-              <BlogDetailSidebar 
-                post={post} 
-                currentUrl={currentUrl} 
-                tocSections={tocSections} 
-              />
+            {/* Sidebar - This will contain the sticky elements */}
+            <div className="lg:col-span-1">
+              <div className="relative">
+                <BlogDetailSidebar 
+                  post={post} 
+                  currentUrl={currentUrl} 
+                  tocSections={tocSections} 
+                />
+              </div>
             </div>
           </div>
         </div>

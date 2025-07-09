@@ -1,47 +1,38 @@
 // app/contact/page.tsx
-"use client";
+import ContactForm from "@/components/sections/contact/ContactForm";
 
-import { ContactForm } from "@/components/sections/contact/ContactForm";
-import dynamic from 'next/dynamic';
-import { useEffect, useState } from 'react';
-
-// Dynamically import the MapPage component with no SSR
-const MapPage = dynamic(() => import("@/components/sections/contact/HeadOfficeMap"), {
-  ssr: false,
-  loading: () => (
-    <div className="py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
-        <div className="mb-12 text-center">
-          <h2 className="text-7xl mb-4">
-            Explore Our HEAD OFFICE
-          </h2>
-          <p className="text-lg max-w-2xl mx-auto">
-            Interactive map showcasing our office locations and exclusive property listings 
-            in Manhattan&apos;s most desirable neighborhoods
-          </p>
-        </div>
-        <div className="h-96 bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl flex items-center justify-center">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-500 mx-auto mb-4"></div>
-            <p className="text-gray-600 font-medium">Loading interactive map...</p>
+export default function ContactPage() {
+  return (
+    <div className="min-h-1/2">
+      {/* Contact Form Section */}
+      <div className="w-full">
+        <ContactForm />
+      </div>
+      
+      {/* Map Section */}
+      <div className="w-full px-4 sm:px-6 lg:px-8 py-16">
+        <div className="w-full">
+          <div className="mb-12 text-center">
+            <h2 className="text-5xl mb-8 bg-gradient-to-r from-[rgb(140,46,71)] to-[rgb(120,40,65)] bg-clip-text text-transparent">
+              Explore Our HEAD OFFICE
+            </h2>
+            
+            {/* Responsive iframe container with reduced height */}
+            <div className="w-full h-64 sm:h-80 lg:h-96 lg:px-16 mx-auto mt-12">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6730.11321233954!2d72.77498645385508!3d33.710925085000895!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfa10bb0202d23%3A0x8c4cc62d68970a6f!2sFaisal%20Hills%20B%20Block!5e0!3m2!1sen!2s!4v1752037965832!5m2!1sen!2s"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen={true}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="rounded-lg shadow-lg"
+              />
+            </div>
           </div>
         </div>
       </div>
     </div>
-  ),
-});
-
-export default function ContactPage() {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  return (
-    <>
-      <ContactForm />
-      {isMounted && <MapPage />}
-    </>
   );
 }

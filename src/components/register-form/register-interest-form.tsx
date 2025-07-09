@@ -12,7 +12,7 @@ import {
   ApartmentTypeSelector,
   ApartmentSizeSelector,
 } from "./apartment-selector";
-import { useRegisterForm } from "@/hooks/useForm";
+import { useRegisterForm } from "@/hooks/useRegisterForm";
 
 export function RegisterInterestForm() {
   const { form, onSubmit, isSubmitting } = useRegisterForm();

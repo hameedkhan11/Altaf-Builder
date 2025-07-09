@@ -25,6 +25,8 @@ export const ContactHero: React.FC<ContactHeroProps> = ({ className = "" }) => {
         overlay="medium"
         contentAlignment="center"
         breadcrumbs={breadcrumbs}
+        enableParallax={true}
+        parallaxSpeed={0.3}
         enableAnimations={true}
         ariaLabel="Contact us hero section"
       />

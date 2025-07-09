@@ -99,7 +99,7 @@ export const aboutPageData: AboutPageData = {
   company: {
     foundedYear: "1993",
     description:
-      "Established in 1993, we have grown from a boutique real estate firm to one of the region's most prestigious luxury property developers. Our commitment to excellence, innovation, and client satisfaction has made us the preferred choice for discerning buyers seeking exceptional properties.",
+      "Established in 1993, we have grown from a boutique real estate firm to one of the region's most prestigious luxury property developers.",
     values: [
       {
         title: "Uncompromising Quality",

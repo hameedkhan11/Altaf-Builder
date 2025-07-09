@@ -9,7 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        chronicle: ['"Chronicle Display"', 'serif'],
+        body: ['var(--font-poppins)', "sans-serif"],
+        heading: ['Optima', "sans-serif"],
       },
     },
   },

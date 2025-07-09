@@ -3,13 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import {
-  Clock,
-  User,
-  Calendar,
-  ArrowLeft,
-  Quote,
-} from "lucide-react";
+import { Clock, User, Calendar, ArrowLeft, Quote } from "lucide-react";
 import { BlogPost } from "@/lib/blogs/types";
 import {
   fadeInLeft,
@@ -125,9 +119,7 @@ const BlogDetailContent: React.FC<BlogDetailContentProps> = ({
             <h2 className="text-xl md:text-2xl mb-3 md:mb-4">
               {section.heading}
             </h2>
-            <p className="leading-relaxed mb-4 md:mb-6">
-              {section.content}
-            </p>
+            <p className="leading-relaxed mb-4 md:mb-6">{section.content}</p>
           </motion.section>
         ))}
 
@@ -164,8 +156,8 @@ const BlogDetailContent: React.FC<BlogDetailContentProps> = ({
         >
           <Quote className="w-6 h-6 md:w-8 md:h-8 text-[#8B2131] mb-3 md:mb-4" />
           <p className="text-base md:text-lg italic mb-3 md:mb-4 ">
-            &quot;Luxury is not about having the most expensive things,
-            but about creating spaces that enhance and elevate the human
+            &quot;Luxury is not about having the most expensive things, but
+            about creating spaces that enhance and elevate the human
             experience.&quot;
           </p>
           <cite className="text-sm font-semibold ">
@@ -182,34 +174,14 @@ const BlogDetailContent: React.FC<BlogDetailContentProps> = ({
           transition={{ delay: 0.5 }}
           viewport={viewportOnce}
         >
-          <h2 className="text-xl md:text-2xl font-bold mb-3 md:mb-4">Conclusion</h2>
+          <h2 className="text-xl md:text-2xl mb-3 md:mb-4">
+            Conclusion
+          </h2>
           <p className="leading-relaxed">{blogContent.conclusion}</p>
         </motion.section>
 
-        {/* CTA Section */}
-        <motion.div
-          className="bg-[rgb(140,46,71)] rounded-xl p-6 md:p-8 text-white text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          viewport={viewportOnce}
-        >
-          <h3 className="text-xl md:text-2xl mb-3 md:mb-4 text-white">
-            Ready to Experience Luxury Living?
-          </h3>
-          <p className="mb-4 md:mb-6 opacity-90 text-sm md:text-base">
-            Discover our latest developments and find your dream home
-            with Altaf Development.
-          </p>
-          <Link
-            href="/contact"
-            className="inline-block bg-white text-[#8B2131] px-6 md:px-8 py-2 md:py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-sm md:text-base"
-            aria-label="Contact us to learn more about luxury properties"
-          >
-            Get In Touch
-          </Link>
-        </motion.div>
       </div>
+       
     </>
   );
 };

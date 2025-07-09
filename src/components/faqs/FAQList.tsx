@@ -1,4 +1,3 @@
-
 // FAQList.tsx
 "use client";
 import React, { useState } from "react";
@@ -13,7 +12,7 @@ const FAQList: React.FC = () => {
   };
 
   return (
-    <div className="pr-6 lg:pr-8 ml-20" itemScope itemType="https://schema.org/FAQPage">
+    <div className="px-4 sm:px-6 lg:px-8 sm:ml-8 md:ml-12 lg:ml-20" itemScope itemType="https://schema.org/FAQPage">
       {faqData.map((item, index) => (
         <FAQItem
           key={item.id}

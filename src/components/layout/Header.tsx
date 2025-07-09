@@ -83,7 +83,7 @@ const Header = () => {
         <div className="container mx-auto px-6 h-full relative z-10">
           <div className="flex items-center justify-between h-full">
             {/* Left Navigation */}
-            <nav className={`hidden lg:flex items-center space-x-8 ml-12 transition-opacity duration-500 ${
+            <nav className={`hidden lg:flex items-center space-x-12 ml-12 transition-opacity duration-500 ${
               showBackgroundOverlay ? "opacity-0" : "opacity-100"
             }`}>
               {NAVIGATION_ITEMS.map((item) => (
@@ -96,13 +96,13 @@ const Header = () => {
                       className={`transition-all duration-500 text-sm relative group ${
                         scrolled
                           ? "text-foreground hover:text-[rgb(140,46,71)] hover:font-bold"
-                          : "text-white hover:text-[rgb(140,46,71)] hover:font-bold space-x-4"
+                          : "text-white  hover:text-[rgb(255,167,186)] hover:font-bold space-x-4"
                       }`}
                     >
                       <span className={`tracking-widest ${scrolled ? "text-xs" : "text-sm"}`}>{item.name}</span>
-                      <span
+                   { scrolled &&  <span
                         className={`absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full bg-[rgb(140,46,71)]`}
-                      />
+                      /> }
                     </Link>
                   )}
                 </React.Fragment>

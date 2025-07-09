@@ -1,64 +1,22 @@
-import { Project } from '@/lib/types'
+import { Project } from "@/lib/types";
 
-export const projects: Project[] = [
+export const projectsData: Project[] = [
   {
-    id: '1',
-    title: 'The Oasis Towers',
-    location: 'Business Bay, Dubai',
-    status: 'Under Construction',
-    launch: 'Q4 2024',
-    description: 'A landmark residential development featuring twin towers with luxury amenities.',
-    image: '/images/avi-waxman-f9qZuKoZYoY-unsplash.jpg',
-    badgeColor: 'bg-indigo-600'
+    id: 1,
+    title: "Modern Apartment",
+    image: "imgi_2_EXTERIOR_FRONT_STREET_VIEW_REVISED_vajrlu",
+    price: "Pkr 14,000,000",
+    bedrooms: 1,
+    bathrooms: 1,
+    propertyType: "1bed", // Add this property
   },
   {
-    id: '2',
-    title: 'Sapphire Bay Villas',
-    location: 'Jumeirah Bay Island, Dubai',
-    status: 'Launching Soon',
-    launch: 'Q4 2024',
-    description: 'An exclusive collection of beachfront villas with private pools and direct access to pristine beaches.',
-    image: '/images/avi-waxman-f9qZuKoZYoY-unsplash.jpg',
-    badgeColor: 'bg-indigo-400'
+    id: 2,
+    title: "Luxury Villa",
+    image: "imgi_3_5_Bed_Villa_Revised_Front_Closeup_pkdtfq",
+    price: "Pkr 26,400,000",
+    bedrooms: 2,
+    bathrooms: 2,
+    propertyType: "2bed", // Add this property
   },
-  // {
-  //   id: '3',
-  //   title: 'Metropolitan Square',
-  //   location: 'Sheikh Zayed Road, Dubai',
-  //   status: 'Coming Soon',
-  //   launch: 'Q1 2025',
-  //   description: 'A mixed-use development featuring luxury residences, premium office spaces, and high-end retail outlets.',
-  //   image: '/images/avi-waxman-f9qZuKoZYoY-unsplash.jpg',
-  //   badgeColor: 'bg-indigo-600'
-  // },
-  // {
-  //   id: '4',
-  //   title: 'The Oasis Towers',
-  //   location: 'Business Bay, Dubai',
-  //   status: 'Under Construction',
-  //   launch: 'Q4 2024',
-  //   description: 'A landmark residential development featuring twin towers with luxury amenities.',
-  //   image: '/images/avi-waxman-f9qZuKoZYoY-unsplash.jpg',
-  //   badgeColor: 'bg-indigo-600'
-  // },
-  // {
-  //   id: '5',
-  //   title: 'Sapphire Bay Villas',
-  //   location: 'Jumeirah Bay Island, Dubai',
-  //   status: 'Launching Soon',
-  //   launch: 'Q4 2024',
-  //   description: 'An exclusive collection of beachfront villas with private pools and direct access to pristine beaches.',
-  //   image: '/images/avi-waxman-f9qZuKoZYoY-unsplash.jpg',
-  //   badgeColor: 'bg-indigo-400'
-  // },
-  // {
-  //   id: '6',
-  //   title: 'Metropolitan Square',
-  //   location: 'Sheikh Zayed Road, Dubai',
-  //   status: 'Coming Soon',
-  //   launch: 'Q1 2025',
-  //   description: 'A mixed-use development featuring luxury residences, premium office spaces, and high-end retail outlets.',
-  //   image: '/images/avi-waxman-f9qZuKoZYoY-unsplash.jpg',
-  //   badgeColor: 'bg-indigo-600'
-  // }
-]
+];

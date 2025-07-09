@@ -29,11 +29,11 @@ const FeaturesGrid = () => {
   } : quickFade;
 
   return (
-    <section className="relative bg-white pt-16 sm:pt-24 md:pt-32 lg:pt-40 xl:pt-48 pb-16 sm:pb-24 md:pb-32">
+    <section className="relative">
       {/* Cards Container - Positioned to overlap 10% on image, 90% after */}
       <motion.div
         {...cardsAnimation}
-        className="absolute -top-8 sm:-top-12 md:-top-16 lg:-top-20 xl:-top-24 left-0 right-0 px-4 sm:px-6 md:px-12 lg:px-16 z-10"
+        className="relative"
       >
         <div className="max-w-8xl mx-auto">
           <div 

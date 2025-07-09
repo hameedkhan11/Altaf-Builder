@@ -23,22 +23,28 @@ export const getBlogContent = (post: BlogPost): BlogContentData => {
 
         mainContent: [
           {
-            id: "smart-integration",
-            heading: "Recreational & Lifestyle ",
+            id: "Unmatched Location & Connectivity",
+            heading: "Unmatched Location & Connectivity",
             content:
-              "Family and Glow Parks Experience serenity in lush green spaces, with dedicated areas for children and illuminated evening strolls. Sports Facilities State-of-the-art football and cricket grounds cater to sports enthusiasts of all ages. Nature Trails Interconnected walking and jogging paths promote a healthy lifestyle amidst scenic landscapes.Elevated Dining An upcoming hilltop restaurant offers panoramic views, perfect for memorable dining experiences.",
+              "Faisal Hills is strategically positioned at the junction of  Islamabad, with multiple access routes including M-1 & M-2 Motorways, Margalla Avenue (Newly Opened), GT Road Direct link to B-17 and FMC sectors This 5 point access advantage not only makes commuting easy but also future-proofs the value of the area. With the opening of Margalla Avenue, reaching F-10   minutes has become a daily reality. Whether you're a working professional, a frequent traveller, or a growing family, the connectivity Faisal Hills offers is second to none.",
           },
           {
-            id: "sustainable-luxury",
-            heading: " Downtown & Commercial Hub",
+            id: "Planned Growth and Massive Infrastructure",
+            heading: "Planned Growth and Massive Infrastructure",
             content:
-              "Vibrant Downtown Inspired by Lahore's Defence Raya, the planned food park will be a culinary destination, attracting visitors and enhancing community engagement. Education & Hospitality University Campus A designated plot for a prestigious university underscores the commitment to education and the largest campus of Roots International School & collages  Luxury Hotel Plans for a high end hotel will cater to both residents and visitors, boosting local tourism and economy.",
+              "Faisal Hills is not growing  it\'s evolving with vision. The scale of infrastructure development is both bold and well-orchestrated. From wide boulevards to zoned commercial and residential sectors, everything is planned to accommodate modern urban needs. Underground electrification, Wide roads and green medians, Modern sewage and drainage systems, Water supply networks already operational, Long-term zoning for healthcare, education, parks, and public utilities This isn\'t just another plot-based society. It\'s a master planned city within a city.",
           },
           {
-            id: "wellness-design",
-            heading: "Unmatched Accessibility",
+            id: "Rapid Development Pace",
+            heading: "Rapid Development Pace",
             content:
-              "Multiple Entrances With five strategic entry points, including two direct connections to FMC, residents enjoy seamless travel to and from the community. Health care Services Faisal Hills is set to host a state-of-the-art -----kanal teaching hospital, poised to become the largest facility of its kind within the network, surpassing even Islamabad’s renowned Al Shifa International Hospital in size and scope.",
+              "Unlike many societies that linger in prolonged phases of \"coming soon,\" Faisal Hills is visibly transforming every month. Multiple blocks are fully developed with families already residing Commercial activity is picking up with shopping plazas, banks, and restaurants Construction of homes and buildings is at an all-time high For buyers who don\'t want to wait years for possession or basic amenities, Faisal Hills offers ready-to-live options and high-yield potential for early investors.",
+          },
+          {
+            id: "Ideal for Families",
+            heading: "Ideal for Families",
+            content:
+              "Faisal Hills is quickly becoming a family-first community. With its secure, peaceful environment away from city noise  yet close enough to the action  it\'s a place where people want to settle down, not just speculate. The master plan includes: Parks and recreational grounds, Schools and upcoming colleges,Jamia Mosques and community centers Future hospital zone and health services Fitness zones, walking tracks, and green belts. It\'s the kind of environment where families thrive  secure, healthy, and balanced.",
           },
         ],
 
@@ -49,7 +55,7 @@ export const getBlogContent = (post: BlogPost): BlogContentData => {
     case "2":
       return {
         introduction:
-          "The integration of smart home technology in luxury properties has evolved from a novelty to an essential feature. At Altaf Development, we understand that modern luxury is defined by seamless connectivity and intelligent automation.",
+          "In the evolving real estate landscape of Pakistan, few developments have managed to capture buyer confidence, family appeal, and investment potential quite like Faisal Hills. Situated near the Margalla Hills and connected to the major lifelines of the capital region, Faisal Hills is no longer just a housing society it’s a lifestyle destination and a symbol of smart, future-ready living. But what exactly makes Faisal Hills the first choice for today’s buyers?",
 
         mainContent: [
           {
@@ -79,7 +85,7 @@ export const getBlogContent = (post: BlogPost): BlogContentData => {
     case "3":
       return {
         introduction:
-          "Sustainable architecture is revolutionizing the luxury real estate landscape. Today's discerning buyers seek properties that combine environmental responsibility with uncompromising elegance and comfort.",
+          "Sustainable architecture is revolutionizing the luxury real estate landscape. Today\'s discerning buyers seek properties that combine environmental responsibility with uncompromising elegance and comfort.",
 
         mainContent: [
           {
@@ -129,6 +135,12 @@ export const getBlogContent = (post: BlogPost): BlogContentData => {
             heading: "Investment Opportunities",
             content:
               "Luxury real estate remains a stable investment option with strong potential for appreciation. Strategic location selection and premium amenities contribute to long-term value growth.",
+          },
+          {
+            id: "High Return on Investment (ROI)",
+            heading: "High Return on Investment (ROI)",
+            content:
+              "Investors are particularly drawn to Faisal Hills due to its early development phase and explosive potential for appreciation. With multiple access roads, government-backed infrastructure around the area, and a surge in population movement from urban centers to suburban communities, plot, apartment  prices and rental value are on a strong upward curve. For both short-term flippers and long-term holders, Faisal Hills presents a golden investment window  especially before upcoming high rise apartment building in Main Boulevard civic centre  downtown, hotel, and hospital zones are fully realized.",
           },
         ],
 

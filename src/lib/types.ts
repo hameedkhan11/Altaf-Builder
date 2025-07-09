@@ -22,14 +22,13 @@ export interface Testimonial {
 }
 
 export interface Project {
-  id: string
+  id: number
+  price: string
+  bedrooms: number
+  bathrooms: number
   title: string
-  location: string
-  status: string
-  launch: string
-  description: string
   image: string
-  badgeColor: string
+  
 }
 
 export interface NavigationItem {
@@ -299,10 +298,55 @@ export interface HeroProps {
   ariaLabel?: string;
 }
 
+// Property detail interface - for detailed property information
+export interface PropertyDetail {
+  name: string;
+  size: number;
+  rate: number;
+  totalPrice: string;
+  downPayment: number;
+  quarterlyInstallment: number;
+  bedrooms: number;
+  bathrooms: number;
+  type: string;
+}
+
+// Project card interface - for project listings
+export interface Project {
+  id: number;
+  title: string;
+  image: string;
+  price: string;
+  bedrooms: number;
+  bathrooms: number;
+  propertyType: PropertyKey;
+}
+
+export type PropertyKey = "1bed" | "2bed";
+
+// Updated to use PropertyDetail instead of Property
+export interface PropertyData {
+  [key: string]: PropertyDetail;
+}
+
+export interface PropertyImages {
+  [key: string]: string[];
+}
+
+// Other existing interfaces
+export interface Delays {
+  small: number;
+  medium: number;
+  large: number;
+}
+
+export interface ViewportOnce {
+  once: boolean;
+}
+
 export interface PropertySection {
   id: string;
   title: string;
   image: string;
   alt: string;
 }
-

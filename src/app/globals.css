@@ -3,11 +3,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Optima Font Face Definitions */
 @font-face {
-  font-family: "Chronicle Display";
-  src: url("/fonts/chronicle-display/ChronicleDisplay-XLight.woff2")
-      format("woff2"),
-    url("/fonts/chronicle-display/ChronicleDisplay-XLight.woff") format("woff");
+  font-family: "Optima";
+  src: url("/fonts/optima/Optima.woff2") format("woff2");     
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -61,6 +60,7 @@ html, body {
     scroll-behavior: auto !important;
   }
 }
+
 /* Parallax Performance Optimizations */
 .will-change-transform {
   will-change: transform;
@@ -89,39 +89,11 @@ video {
   }
 }
 
-@font-face {
-  font-family: "Optima";
-  src: url("/fonts/optima/Optima.woff2") format("woff2"),
-    url("/fonts/optima/Optima.woff") format("woff");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Diagrid";
-  src: url("/fonts/Bwdiagrid.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Avenir";
-  src: url("/fonts/avenir/Avenir.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-poppins);
   --font-mono: var(--font-geist-mono);
-  --font-chronicle: "Chronicle Display", serif;
-  --font-optima: Optima, "Segoe UI", "Helvetica Neue", sans-serif;
-  --font-diagrid: "Diagrid", sans-serif;
-  --font-avenir: "Avenir", sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -233,220 +205,81 @@ video {
     box-sizing: border-box;
     @apply border-border outline-ring/50;
   }
- /* Oregon Font Face Definitions */
-@font-face {
-  font-family: "Oregon";
-  src: url("/fonts/Oregon/OregonLDO.woff2") format("woff2"),
-       url("/fonts/Oregon/OregonLDO.woff") format("woff");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
 
-@font-face {
-  font-family: "Oregon";
-  src: url("/fonts/Oregon/OregonLDOLight.woff2") format("woff2");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
+  /* Body Styles - Using Poppins */
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-poppins), "Poppins", sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+  }
 
-@font-face {
-  font-family: "Oregon";
-  src: url("/fonts/Oregon/OregonLDOMedium.woff2") format("woff2");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
+  /* All Heading Styles - Using Optima Font */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Optima", sans-serif;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    color: rgb(140, 46, 71);
+    box-sizing: border-box;
+    margin-block-end: 15px;
+    margin-block-start: 0px;
+    margin-bottom: 15px;
+    margin-inline-end: 0px;
+    margin-inline-start: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    text-transform: uppercase;
+    unicode-bidi: isolate;
+  }
 
-@font-face {
-  font-family: "Oregon";
-  src: url("/fonts/Oregon/OregonLDODemiBold.woff2") format("woff2");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
+  /* Specific heading sizes */
+  h1 {
+    font-weight: 400;
+    letter-spacing: 0.784px;
+  }
 
-@font-face {
-  font-family: "Oregon";
-  src: url("/fonts/Oregon/OregonLDOExtraBold.woff2") format("woff2");
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
-}
+  h2 {
+    letter-spacing: 0.784px;
+  }
 
-/* Other Font Face Definitions */
-@font-face {
-  font-family: "Chronicle Display";
-  src: url("/fonts/chronicle-display/ChronicleDisplay-XLight.woff2") format("woff2"),
-       url("/fonts/chronicle-display/ChronicleDisplay-XLight.woff") format("woff");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
+  h3 {
+    font-size: 1.8rem;
+    letter-spacing: 0.784px;
+  }
 
-@font-face {
-  font-family: "Optima";
-  src: url("/fonts/optima/Optima.woff2") format("woff2"),
-       url("/fonts/optima/Optima.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
+  h4 {
+    font-size: 1.5rem;
+  }
 
-@font-face {
-  font-family: "Optima";
-  src: url("/fonts/optima/Optima.woff2") format("woff2"),
-       url("/fonts/optima/Optima.woff") format("woff");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
+  h5 {
+    font-size: 1.25rem;
+  }
 
-@font-face {
-  font-family: "Optima";
-  src: url("/fonts/optima/Optima-Bold.woff2") format("woff2"),
-       url("/fonts/optima/Optima-Bold.woff") format("woff");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
+  h6 {
+    font-size: 1rem;
+  }
 
-@font-face {
-  font-family: "Optima";
-  src: url("/fonts/optima/Optima-Medium.woff2") format("woff2"),
-       url("/fonts/optima/Optima-Medium.woff") format("woff");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Optima";
-  src: url("/fonts/optima/Optima-Italic.woff2") format("woff2"),
-       url("/fonts/optima/Optima-Italic.woff") format("woff");
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Diagrid";
-  src: url("/fonts/Bwdiagrid.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Avenir";
-  src: url("/fonts/avenir/Avenir.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Body Styles */
-body {
-  @apply bg-background text-foreground antialiased;
-  font-family: var(--font-optima), Optima;
-  line-height: 1.6;
-}
-
-/* All Heading Styles - Using Optima Font */
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Optima", sans-serif;
-  letter-spacing: -0.01em;
-  line-height: 1.2;
-  color: rgb(140, 46, 71);
-  box-sizing: border-box;
-  margin-block-end: 15px;
-  margin-block-start: 0px;
-  margin-bottom: 15px;
-  margin-inline-end: 0px;
-  margin-inline-start: 0px;
-  margin-left: 0px;
-  margin-right: 0px;
-  margin-top: 0px;
-  text-transform: uppercase;
-  unicode-bidi: isolate;
-}
-
-/* Specific heading sizes */
-h1 {
-  font-weight: 400;
-  letter-spacing: 0.784px;
-}
-
-h2 {
-  /* font-weight: 700; */
-  letter-spacing: 0.784px;
-}
-
-h3 {
-  font-size: 1.8rem;
-  /* font-weight: 500; */
-  letter-spacing: 0.784px;
-}
-
-h4 {
-  font-size: 1.5rem;
-  /* font-weight: 500; */
-}
-
-h5 {
-  font-size: 1.25rem;
-  /* font-weight: 500; */
-}
-
-h6 {
-  font-size: 1rem;
-  /* font-weight: 500; */
-}
-
+  /* Paragraph and span styles - Using Poppins */
   p {
     font-size: 1rem;
-    font-weight: 400;
-    font-family: Optima;
+    font-weight: 300;
+    font-family: var(--font-poppins), "Poppins", sans-serif;
   }
 
   span {
     font-size: 0.95rem;
     font-weight: 300;
+    font-family: var(--font-poppins), "Poppins", sans-serif;
+  }
+
+  a {
+    font-weight: 300;
+    font-family: var(--font-poppins), "Poppins", sans-serif;
   }
 }
 
-a {
-  font-weight: 500;
-}
-
-/* Diagrid Font Utility Classes */
-.font-diagrid {
-  font-family: var(--font-diagrid), "Diagrid", sans-serif;
-  font-feature-settings: "kern" 0;
-  font-kerning: none;
-  font-variation-settings: normal;
-  color: rgb(140, 46, 71);
-  font-size: 30.8974px;
-}
-
-.diagrid-large {
-  font-family: var(--font-diagrid), "Diagrid", sans-serif;
-  font-size: 79.8974px;
-  font-weight: 400;
-  line-height: 79.8974px;
-  letter-spacing: -1.99744px;
-  color: rgb(138, 108, 96);
-  display: block;
-  height: 239.7px;
-  font-feature-settings: "kern" 0;
-  font-kerning: none;
-  font-variation-settings: normal;
-}
-
-/* Add this to your global CSS file (globals.css or similar) */
-
-/* Fade-in-up animation */
+/* Custom Animations */
 @keyframes fade-in-up {
   from {
     opacity: 0;
@@ -579,7 +412,7 @@ a {
   animation: gradient-shift 3s ease infinite;
 }
 
-/* From Uiverse.io by alexroumi - Scoped to .uiverse-btn only */
+/* Button Styles */
 .uiverse-btn {
   padding: 15px 25px;
   border: unset;
@@ -618,7 +451,6 @@ a {
   width: 100%;
 }
 
-/* Uiverse.io button style by mobinkakei, tailored for direct use in Button */
 .uiverse-btn-cta {
   display: flex;
   padding: 10px 33px;
@@ -722,17 +554,18 @@ a {
   transform: translateY(4px);
 }
 
+/* Card Styles */
 .card {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  /* padding: 32px; */
   overflow: hidden;
   border-radius: 10px;
   transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
+
 .card::before {
   content: "";
   position: absolute;
@@ -754,7 +587,7 @@ a {
   color: white;
 }
 
-/* From Uiverse.io by Praashoo7 */
+/* Social Media Cards */
 .main {
   display: flex;
   flex-direction: column;

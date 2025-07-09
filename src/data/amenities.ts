@@ -6,7 +6,7 @@ export const amenitiesData: AmenitiesData = {
     id: 'shopping-mall',
     name: 'Shopping Mall',
     title: 'Faisal Hills City Mall',
-    description: 'Explore the Faisal Hills City Mall, where luxury meets convenience. Our mall offers a variety of high-end retail stores, dining options, and entertainment venues, creating a vibrant shopping experience. Discover the latest fashion, enjoy gourmet meals, and unwind with premium entertainment in Zimbabwe\'s premier smart city.',
+    description: 'Explore the Faisal Hills City Mall, where luxury meets convenience. Our mall offers a variety of high-end retail stores, dining options, and entertainment venues, creating a vibrant shopping experience. Discover the latest fashion, enjoy gourmet meals, and unwind with premium entertainment in Pakistan\'s premier smart city.',
     image: 'gallery_7_qwhdmg',
     features: ['High-end retail stores', 'Gourmet dining options', 'Entertainment venues', 'Premium shopping experience']
   },

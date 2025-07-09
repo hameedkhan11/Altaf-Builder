@@ -1,10 +1,9 @@
-// components/sections/home/FeatureCard.tsx
-
+// components/cards/FeatureCard.tsx
 "use client";
 
 import { motion } from "framer-motion";
 import { LucideIcon } from "lucide-react";
-import { 
+import {
   viewportOnce,
   delays,
   shouldAnimate,
@@ -15,11 +14,23 @@ import {
 interface FeatureCardProps {
   icon: LucideIcon;
   title: string;
-  description: string;
+  description?: string;
   index: number;
+  // Optional props for contact info usage
+  primary?: string;
+  secondary?: string;
+  variant?: 'feature' | 'contact';
 }
 
-const FeatureCard = ({ icon: Icon, title, description, index }: FeatureCardProps) => {
+const FeatureCard = ({ 
+  icon: Icon, 
+  title, 
+  description, 
+  index, 
+  primary, 
+  secondary, 
+  variant = 'feature' 
+}: FeatureCardProps) => {
   const performanceMode = getPerformanceMode();
   const canAnimate = shouldAnimate();
 
@@ -28,7 +39,7 @@ const FeatureCard = ({ icon: Icon, title, description, index }: FeatureCardProps
     initial: { opacity: 0, y: 20, scale: 0.95 },
     whileInView: { opacity: 1, y: 0, scale: 1 },
     viewport: viewportOnce,
-    transition: { 
+    transition: {
       duration: performanceMode === "fast" ? 0.5 : 0.7,
       delay: delays.stagger(index) * 0.1,
       ease: easingPresets.smooth
@@ -41,19 +52,63 @@ const FeatureCard = ({ icon: Icon, title, description, index }: FeatureCardProps
 
   // Optimized hover animations
   const itemHoverAnimation = canAnimate ? {
-    whileHover: { 
-      y: -8, 
+    whileHover: {
+      y: -8,
       scale: 1.03,
       transition: { duration: performanceMode === "fast" ? 0.3 : 0.4 }
     }
   } : {};
 
   const iconHoverAnimation = canAnimate ? {
-    whileHover: { 
+    whileHover: {
       scale: 1.15,
       transition: { duration: performanceMode === "fast" ? 0.3 : 0.4 }
     }
   } : {};
+
+  // Render content based on variant
+  const renderContent = () => {
+    if (variant === 'contact') {
+      return (
+        <div className="text-center">
+          <h3
+            id={`feature-${index}-title`}
+            className="text-xl sm:text-2xl mb-4 sm:mb-5 text-white leading-tight"
+          >
+            {title}
+          </h3>
+          {primary && (
+            <p className="font-optima text-white leading-relaxed font-light text-base sm:text-lg mb-2">
+              {primary}
+            </p>
+          )}
+          {secondary && (
+            <p className="font-optima text-white leading-relaxed font-light text-base sm:text-lg mb-2">
+              {secondary}
+            </p>
+          )}
+          <p className="font-optima text-white leading-relaxed font-light text-base sm:text-lg">
+            {description}
+          </p>
+        </div>
+      );
+    }
+
+    // Default feature variant
+    return (
+      <div className="text-center">
+        <h3
+          id={`feature-${index}-title`}
+          className="text-xl sm:text-2xl mb-4 sm:mb-5 text-white leading-tight"
+        >
+          {title}
+        </h3>
+        <p className="font-optima text-white leading-relaxed font-light text-base sm:text-lg">
+          {description}
+        </p>
+      </div>
+    );
+  };
 
   return (
     <motion.article
@@ -74,17 +129,7 @@ const FeatureCard = ({ icon: Icon, title, description, index }: FeatureCardProps
       </motion.div>
       
       {/* Content */}
-      <div className="text-center">
-        <h3 
-          id={`feature-${index}-title`}
-          className="text-xl sm:text-2xl mb-4 sm:mb-5 text-white leading-tight"
-        >
-          {title}
-        </h3>
-        <p className="font-optima text-white leading-relaxed font-light text-base sm:text-lg">
-          {description}
-        </p>
-      </div>
+      {renderContent()}
     </motion.article>
   );
 };

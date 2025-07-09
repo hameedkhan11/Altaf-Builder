@@ -66,7 +66,7 @@ const WhyChoose = () => {
   return (
     <div className="relative">
       {/* Background Image Section */}
-      <div className="relative h-[100vh] sm:h-[110vh] lg:h-[120vh] overflow-hidden">
+      <div className="relative h-[100vh] sm:h-[110vh] overflow-hidden">
         <CldImage
           src="imgi_28_hFGYVnlwaecZbMBXIolx5d7ExQ_uo5x2i"
           alt="ALTAF BUILDER Office"
@@ -84,10 +84,10 @@ const WhyChoose = () => {
             {...titleAnimation}
             className="mb-6 sm:mb-8 max-w-5xl"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-white tracking-wide leading-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white tracking-wide leading-tight">
               Why Choose
             </h2>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-white tracking-wide leading-tight ml-8 sm:ml-16 md:ml-24 lg:ml-32 xl:ml-44">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white tracking-wide leading-tight ml-8 sm:ml-16 md:ml-24 lg:ml-32 xl:ml-44">
               ALTAF DEVELOPMENT
             </h2>
           </motion.div>

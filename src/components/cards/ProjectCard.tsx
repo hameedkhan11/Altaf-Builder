@@ -11,22 +11,23 @@ interface ProjectCardProps {
   bedrooms?: number;
   bathrooms?: number;
   location?: string;
+  propertyType?: "1bed" | "2bed";
 }
 
 export const ProjectCard = ({
   image,
   title,
-  price = "14,000,000",
-  bedrooms = 1,
-  bathrooms = 1,
-  // location = "Faisal Hills",
+  price,
+  bedrooms,
+  bathrooms,
+  propertyType = "1bed", // Default to 1bed
 }: ProjectCardProps) => {
   return (
     <Card className="w-full shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
       {/* Image Container */}
       <CardHeader className="p-0 relative group">
         <Link
-          href={`/property-detail`}
+          href={`/property-detail?property=${propertyType}`}
           className="relative w-full h-[460px] overflow-hidden cursor-pointer rounded-xs"
         >
           <CldImage
@@ -43,7 +44,7 @@ export const ProjectCard = ({
           <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
             {/* View Apartment text and icon at bottom */}
             <div className="flex justify-between items-center">
-              <span className="text-white text-xl font-bold font-optima">
+              <span className="text-white text-xl">
                 View Apartment
               </span>
               <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
@@ -76,12 +77,6 @@ export const ProjectCard = ({
             <span className=" font-optima text-xl">Bathrooms</span>
             <span className="text-2xl font-optima">{bathrooms}</span>
           </div>
-
-          {/* Location */}
-          {/* <div className="flex flex-col justify-between items-center">
-            <span className="text-xl font-optima">Location</span>
-            <span className="text-xl font-optima">{location}</span>
-          </div> */}
         </div>
       </CardContent>
     </Card>

@@ -44,7 +44,7 @@ const Amenities = () => {
             Explore premium world-class amenities at your neigborhood
           </motion.h1>
           <motion.p 
-            className="sm:text-md  w-full lg:w-1/3 leading-relaxed font-optima"
+            className="sm:text-md  w-full lg:w-1/3 leading-relaxed font-light"
             {...fadeInRight}
             viewport={viewportOnce}
             transition={{ duration: 0.6, delay: delays.medium }}
@@ -113,7 +113,7 @@ const Amenities = () => {
             </motion.h2>
             
             <motion.p 
-              className="text-sm sm:text-base md:text-lg leading-relaxed font-optima"
+              className="text-sm sm:text-base leading-relaxed font-light"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}

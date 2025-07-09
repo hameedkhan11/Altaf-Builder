@@ -11,45 +11,6 @@ interface SocialShareProps {
 }
 
 const SocialShare: React.FC<SocialShareProps> = ({ post, currentUrl }) => {
-  const [isSticky, setIsSticky] = React.useState<boolean>(false);
-  const [sidebarOffset, setSidebarOffset] = React.useState<{ left: number; width: number }>({ left: 0, width: 0 });
-  const socialRef = React.useRef<HTMLDivElement>(null);
-
-  React.useEffect(() => {
-    const handleScroll = () => {
-      const scrolled = window.scrollY;
-      const viewportHeight = window.innerHeight;
-      
-      // Find the main content container (the grid container)
-      const mainContentContainer = document.querySelector('.container.mx-auto .grid');
-      
-      // Calculate when main content ends
-      let mainContentEnd = document.documentElement.scrollHeight;
-      
-      if (mainContentContainer) {
-        const containerRect = mainContentContainer.getBoundingClientRect();
-        mainContentEnd = containerRect.bottom + window.scrollY - 50; // 50px buffer
-      }
-      
-      // Only be fixed when scrolled past viewport height and before main content ends
-      const shouldBeSticky = scrolled > viewportHeight && scrolled < mainContentEnd;
-      
-      if (shouldBeSticky && !isSticky && socialRef.current) {
-        const rect = socialRef.current.getBoundingClientRect();
-        setSidebarOffset({
-          left: rect.left + window.scrollX,
-          width: rect.width
-        });
-        setIsSticky(true);
-      } else if (!shouldBeSticky && isSticky) {
-        setIsSticky(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isSticky]);
-
   const shareLinks = {
     facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
       currentUrl
@@ -72,15 +33,7 @@ const SocialShare: React.FC<SocialShareProps> = ({ post, currentUrl }) => {
 
   return (
     <motion.div
-      ref={socialRef}
-      className={`bg-white rounded-lg shadow-lg p-4 border transition-all duration-300 ${
-        isSticky ? 'static z-40' : 'sticky top-8'
-      }`}
-      style={isSticky ? { 
-        left: `${sidebarOffset.left}px`, 
-        width: `${sidebarOffset.width}px`,
-        top: 'calc(2rem + 280px + 1.5rem)' // 2rem + TOC height + gap
-      } : {}}
+      className="bg-white rounded-lg shadow-lg p-4 border sticky top-8 z-10"
       initial={{ opacity: 0, x: 50 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: 0.5 }}
