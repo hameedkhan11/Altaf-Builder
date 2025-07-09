@@ -95,7 +95,7 @@ const BlogGrid: React.FC<BlogGridProps> = ({
                 </span>
               ) : (
                 <span className="flex items-center justify-center">
-                  <span className="text-base sm:text-xl md:text-2xl">Load More Articles</span>
+                  <span className="text-base">Load More Articles</span>
                   <motion.div
                     className="ml-2"
                     whileHover={{ y: -2 }}

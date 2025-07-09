@@ -9,10 +9,10 @@ import {
   DollarSign,
   Home,
 } from "lucide-react";
-import { PropertyDetail } from "@/lib/types"; // Changed from Property to PropertyDetail
+import { PropertyDetail } from "@/lib/types";
 
 interface PropertyDetailInfoProps {
-  property: PropertyDetail; // Changed from Property to PropertyDetail
+  property: PropertyDetail;
 }
 
 export const PropertyDetailInfo: React.FC<PropertyDetailInfoProps> = ({ property }) => {
@@ -21,36 +21,46 @@ export const PropertyDetailInfo: React.FC<PropertyDetailInfoProps> = ({ property
   };
 
   return (
-    <div className="lg:col-span-2 space-y-6">
+    <div className="lg:col-span-2 space-y-4 sm:space-y-5 md:space-y-6 px-4 sm:px-6 lg:px-0">
       {/* Header */}
       <div>
-        <h1 className="text-3xl mb-2">{property.name}</h1>
-        <p className="text-lg mb-4">Starting from</p>
-        <div className="text-4xl font-bold text-gray-900 mb-6">
+        <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-3xl mb-1 sm:mb-2 leading-tight">
+          {property.name}
+        </h1>
+        <p className="text-sm sm:text-base md:text-lg mb-2 sm:mb-3 md:mb-4 text-gray-600">
+          Starting from
+        </p>
+        <div className="text-xl sm:text-3xl md:text-4xl lg:text-4xl font-semibold sm:font-bold text-gray-900 mb-4 sm:mb-5 md:mb-6">
           {property.totalPrice}
         </div>
       </div>
 
       {/* Property Stats */}
-      <div className="grid grid-cols-3 gap-4 mb-6">
+      <div className="grid grid-cols-3 gap-2 sm:gap-3 md:gap-4 mb-4 sm:mb-5 md:mb-6">
         <div className="text-center">
-          <div className="mb-1 ">Bedrooms</div>
-          <div className="text-2xl flex items-center justify-center gap-1 ">
-            <Bed className="w-5 h-5" />
+          <div className="mb-1 text-xs sm:text-sm md:text-base text-gray-600">
+            Bedrooms
+          </div>
+          <div className="text-lg sm:text-xl md:text-2xl flex items-center justify-center gap-1">
+            <Bed className="w-4 h-4 sm:w-5 sm:h-5" />
             {property.bedrooms}
           </div>
         </div>
         <div className="text-center">
-          <div className=" mb-1">Bathrooms</div>
-          <div className="text-2xl flex items-center justify-center gap-1 ">
-            <Bath className="w-5 h-5" />
+          <div className="mb-1 text-xs sm:text-sm md:text-base text-gray-600">
+            Bathrooms
+          </div>
+          <div className="text-lg sm:text-xl md:text-2xl flex items-center justify-center gap-1">
+            <Bath className="w-4 h-4 sm:w-5 sm:h-5" />
             {property.bathrooms}
           </div>
         </div>
         <div className="text-center">
-          <div className=" mb-1">SQFT</div>
-          <div className="text-2xl flex items-center justify-center gap-1">
-            <Square className="w-5 h-5" />
+          <div className="mb-1 text-xs sm:text-sm md:text-base text-gray-600">
+            SQFT
+          </div>
+          <div className="text-lg sm:text-xl md:text-2xl flex items-center justify-center gap-1">
+            <Square className="w-4 h-4 sm:w-5 sm:h-5" />
             {property.size}
           </div>
         </div>
@@ -58,30 +68,32 @@ export const PropertyDetailInfo: React.FC<PropertyDetailInfoProps> = ({ property
 
       {/* Key Information */}
       <Card>
-        <CardContent className="p-6">
-          <h3 className="text-lg mb-4">Key Information</h3>
-          <div className="grid grid-cols-2 gap-4 text-sm">
+        <CardContent className="p-4 sm:p-5 md:p-6">
+          <h3 className="text-base sm:text-lg md:text-lg mb-3 sm:mb-4 font-semibold">
+            Key Information
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-xs sm:text-sm">
             <div className="flex items-center gap-2">
-              <Home className="w-4 h-4 text-gray-500" />
-              <span className="px-2 py-1 bg-gray-100 rounded-full">
+              <Home className="w-3 h-3 sm:w-4 sm:h-4 text-gray-500 flex-shrink-0" />
+              <span className="px-2 py-1 bg-gray-100 rounded-full text-xs sm:text-sm">
                 {property.type}
               </span>
             </div>
             <div className="flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-gray-500" />
-              <span className="px-2 py-1 bg-gray-100 rounded-full">
+              <Calendar className="w-3 h-3 sm:w-4 sm:h-4 text-gray-500 flex-shrink-0" />
+              <span className="px-2 py-1 bg-gray-100 rounded-full text-xs sm:text-sm">
                 Newly Built
               </span>
             </div>
             <div className="flex items-center gap-2">
-              <DollarSign className="w-4 h-4 text-gray-500" />
-              <span className="px-2 py-1 bg-gray-100 rounded-full">
+              <DollarSign className="w-3 h-3 sm:w-4 sm:h-4 text-gray-500 flex-shrink-0" />
+              <span className="px-2 py-1 bg-gray-100 rounded-full text-xs sm:text-sm">
                 Rate: PKR {property.rate}/sqft
               </span>
             </div>
             <div className="flex items-center gap-2">
-              <Square className="w-4 h-4 text-gray-500" />
-              <span className="px-2 py-1 bg-gray-100 rounded-full">
+              <Square className="w-3 h-3 sm:w-4 sm:h-4 text-gray-500 flex-shrink-0" />
+              <span className="px-2 py-1 bg-gray-100 rounded-full text-xs sm:text-sm">
                 Open Plan
               </span>
             </div>
@@ -91,38 +103,42 @@ export const PropertyDetailInfo: React.FC<PropertyDetailInfoProps> = ({ property
 
       {/* Pricing Details */}
       <Card>
-        <CardContent className="p-6">
-          <h3 className="text-xl  mb-4">Pricing Details</h3>
-          <div className="space-y-3">
+        <CardContent className="p-4 sm:p-5 md:p-6">
+          <h3 className="text-lg sm:text-xl md:text-xl mb-3 sm:mb-4 font-semibold">
+            Pricing Details
+          </h3>
+          <div className="space-y-2 sm:space-y-3">
             <div className="flex justify-between items-center">
-              <span className="">Size</span>
-              <span className=" font-semibold">
+              <span className="text-sm sm:text-base text-gray-600">Size</span>
+              <span className="font-semibold text-sm sm:text-base">
                 {property.size} sqft
               </span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="">Rate per sqft</span>
-              <span className="font-semibold ">
-                PKR {property.rate.toLocaleString()}
+              <span className="text-sm sm:text-base text-gray-600">Rate per sqft</span>
+              <span className="font-semibold text-sm sm:text-base">
+                {property.rate.toLocaleString()}
               </span>
             </div>
-            <div className="flex justify-between items-center border-t pt-3">
-              <span className="">Total Price</span>
-              <span className="font-semibold text-lg ">
+            <div className="flex justify-between items-center border-t pt-2 sm:pt-3">
+              <span className="text-xs sm:text-base text-gray-600">Total Price</span>
+              <span className="font-medium sm:font-semibold text-sm sm:text-lg">
                 {property.totalPrice}
               </span>
             </div>
             <div className="flex justify-between items-center">
-              <span className=" ">Down Payment (25%)</span>
-              <span className="font-semibold  text-lg">
+              <span className="text-xs sm:text-base text-gray-600">
+                Down Payment (25%)
+              </span>
+              <span className="font-medium sm:font-semibold text-sm sm:text-lg">
                 {formatPriceFull(property.downPayment)}
               </span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="">
+              <span className="text-xs sm:text-base text-gray-600">
                 Each Quarterly Installment
               </span>
-              <span className=" text-lg font-semibold">
+              <span className="text-sm sm:text-lg font-medium sm:font-semibold">
                 {formatPriceFull(property.quarterlyInstallment)}
               </span>
             </div>
@@ -130,18 +146,10 @@ export const PropertyDetailInfo: React.FC<PropertyDetailInfoProps> = ({ property
         </CardContent>
       </Card>
 
-      {/* CTA Buttons */}
-      <div className="flex gap-4">
-        <Button className="flex-1 bg-[] hover:bg-[#8B2131] text-white py-6">
-          Schedule a Tour
-        </Button>
-        <Button
-          variant="outline"
-          className="flex-1 border-[#B91C1C] text-[#B91C1C] hover:bg-[#B91C1C] hover:text-white py-3"
-        >
-          Get More Info
-        </Button>
-      </div>
+      {/* CTA Button */}
+      <Button className="bg-[rgb(140,46,71)] w-full cursor-pointer hover:bg-transparent hover:text-[rgb(140,46,71)] border border-[rgb(140,46,71)] text-white py-4 sm:py-5 md:py-6 transition-all duration-300 ease-in text-sm sm:text-base">
+        Contact For More Details
+      </Button>
     </div>
   );
 };

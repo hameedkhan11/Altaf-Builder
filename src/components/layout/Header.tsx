@@ -151,8 +151,8 @@ const Header = () => {
             {/* Mobile Menu Button */}
             <Button
               variant="ghost"
-              size="icon"
-              className={`lg:hidden transition-all duration-500 ${
+              size="lg"
+              className={`lg:hidden mt-4 transition-all duration-500 ${
                 scrolled
                   ? "text-foreground hover:bg-gray-100"
                   : "text-white hover:bg-white/20"

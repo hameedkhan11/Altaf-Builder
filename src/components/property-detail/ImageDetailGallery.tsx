@@ -25,7 +25,7 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
       {/* Main Image */}
       <div className="relative group">
         <div className="relative overflow-hidden rounded-lg bg-white shadow-lg cursor-pointer">
-          <div className="w-full h-64 sm:h-80 md:h-96 lg:h-[440px] xl:h-[520px]">
+          <div className="w-full h-64 sm:h-80 md:h-96 lg:h-[27rem] xl:h-[32rem]">
             <CldImage
               width={800}
               height={600}

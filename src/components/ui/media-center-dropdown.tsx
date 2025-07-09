@@ -4,60 +4,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { ChevronDown, ChevronRight, Camera, Video, FileText, Play, Image as ImageIcon } from "lucide-react";
+import { ChevronDown, ChevronRight, } from "lucide-react";
+import { MEDIA_ITEMS } from "@/data/media-center/data";
 
-interface MediaItem {
-  name: string;
-  href: string;
-  icon: React.ElementType;
-  description: string;
-  gradient: string;
-}
-
-const MEDIA_ITEMS: MediaItem[] = [
-  {
-    name: "Photo Gallery",
-    href: "/media/photos",
-    icon: Camera,
-    description: "Stunning property visuals",
-    gradient: "from-purple-500 to-pink-500"
-  },
-  {
-    name: "Video Tours",
-    href: "/media/videos",
-    icon: Video,
-    description: "Immersive property tours",
-    gradient: "from-blue-500 to-cyan-500"
-  },
-  {
-    name: "Virtual Tours",
-    href: "/media/virtual-tours",
-    icon: Play,
-    description: "360° interactive experiences",
-    gradient: "from-green-500 to-emerald-500"
-  },
-  {
-    name: "Floor Plans",
-    href: "/media/floor-plans",
-    icon: ImageIcon,
-    description: "Detailed layout designs",
-    gradient: "from-orange-500 to-red-500"
-  },
-  {
-    name: "Brochures",
-    href: "/media/brochures",
-    icon: FileText,
-    description: "Download property details",
-    gradient: "from-indigo-500 to-purple-500"
-  },
-  // {
-  //   name: "Press Releases",
-  //   href: "/media/press",
-  //   icon: BookOpen,
-  //   description: "Latest news & updates",
-  //   gradient: "from-teal-500 to-blue-500"
-  // }
-];
 
 interface MediaCenterDropdownProps {
   scrolled: boolean;
