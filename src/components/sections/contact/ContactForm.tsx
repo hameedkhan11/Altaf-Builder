@@ -89,7 +89,7 @@ const ContactForm = () => {
 
       {/* Contact Form Section */}
       <div className="py-8 sm:py-12 lg:py-16 px-4 sm:px-6 lg:px-16">
-        <div className="mx-auto max-w-7xl">
+        <div className="mx-auto">
           <div className="text-center mt-6 sm:mt-8 lg:mt-12">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-2 sm:mb-3">Register Your Interest</h2>
             <p className="font-optima text-sm sm:text-base px-4 sm:px-0">
@@ -113,7 +113,7 @@ const ContactForm = () => {
             </div>
 
             {/* Right Side - Contact Form */}
-            <div className="bg-white p-4 sm:p-6 lg:p-8 xl:p-10 order-1 lg:order-2">
+            <div className="bg-white p-4  order-1 lg:order-2">
               <div className="space-y-4 sm:space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   {/* Name Field */}

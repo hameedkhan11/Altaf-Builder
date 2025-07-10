@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from "framer-motion";
-import { Clock, User, Calendar } from 'lucide-react';
+// import { Clock, User, Calendar } from 'lucide-react';
 import { FeaturedBlogProps } from '@/lib/blogs/types';
 import {
   fadeInUp,
@@ -13,7 +13,7 @@ import {
   delays,
   getPerformanceVariant,
 } from "@/lib/constants";
-import { ArrowIcon } from '../../../../public/icons/ArrowIcon';
+// import { ArrowIcon } from '../../../../public/icons/ArrowIcon';
 import { CldImage } from 'next-cloudinary';
 
 const FeaturedBlog: React.FC<FeaturedBlogProps> = ({ post }) => {
@@ -30,7 +30,7 @@ const FeaturedBlog: React.FC<FeaturedBlogProps> = ({ post }) => {
     >
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         {/* Featured Badge */}
-        <motion.div
+        {/* <motion.div
           className="flex items-center mb-6 sm:mb-8"
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -44,7 +44,7 @@ const FeaturedBlog: React.FC<FeaturedBlogProps> = ({ post }) => {
             </span>
             <div className="w-6 sm:w-8 h-0.5 bg-gradient-to-r from-[#8B2131] to-[#B91C1C]"></div>
           </div>
-        </motion.div>
+        </motion.div> */}
 
         {/* Main Featured Content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center">
@@ -55,7 +55,7 @@ const FeaturedBlog: React.FC<FeaturedBlogProps> = ({ post }) => {
             viewport={viewportOnce}
           >
             {/* Category and Meta Info */}
-            <motion.div 
+            {/* <motion.div 
               className="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-3 sm:gap-4 text-sm text-gray-600"
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -86,11 +86,11 @@ const FeaturedBlog: React.FC<FeaturedBlogProps> = ({ post }) => {
                   </div>
                 )}
               </div>
-            </motion.div>
+            </motion.div> */}
 
             {/* Title */}
             <motion.h1 
-              className="text-xl sm:text-2xl md:text-3xl lg:text-4xl leading-tight max-w-xl"
+              className="text-xl sm:text-2xl md:text-3xl leading-tight max-w-xl"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: delays.long }}
@@ -101,7 +101,7 @@ const FeaturedBlog: React.FC<FeaturedBlogProps> = ({ post }) => {
 
             {/* Excerpt */}
             <motion.p 
-              className="text-sm sm:text-base leading-relaxed"
+              className="text-sm  leading-relaxed"
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: delays.long + 0.1 }}
@@ -119,15 +119,14 @@ const FeaturedBlog: React.FC<FeaturedBlogProps> = ({ post }) => {
             >
               <Link 
                 href={`/blogs/${post.slug}`}
-                className="inline-flex items-center gap-3 w-full sm:w-auto text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold uppercase tracking-wide text-xs sm:text-sm transition-all duration-300 hover:shadow-lg hover:scale-105 group uiverse-btn-cta font-optima"
+                className="inline-flex items-center gap-3 w-full sm:w-auto text-white sm:px-4 py-3 px-4 rounded-xs uppercase tracking-wide transition-all duration-300 group bg-[rgb(140,46,71)] hover:bg-transparent hover:border-2 hover:border-[rgb(140,46,71)] hover:text-[rgb(140,46,71)]"
               >
                 <motion.span
                   whileHover={{ x: 5 }}
                   transition={{ duration: 0.2 }}
-                  className='flex gap-3 sm:gap-4 items-center py-1'
+                  className='flex gap-3 sm:gap-4 items-center py-1 font-semibold'
                 >
                   Read Full Article
-                  <ArrowIcon />
                 </motion.span>
               </Link>
             </motion.div>
@@ -140,7 +139,7 @@ const FeaturedBlog: React.FC<FeaturedBlogProps> = ({ post }) => {
             viewport={viewportOnce}
           >
             <motion.div
-              className="relative h-[300px] sm:h-[400px] md:h-[450px] lg:h-[500px] w-full overflow-hidden rounded-xl sm:rounded-2xl shadow-xl sm:shadow-2xl"
+              className="relative h-[300px] sm:h-[400px] md:h-[450px] lg:h-[500px] w-full overflow-hidden"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
             >

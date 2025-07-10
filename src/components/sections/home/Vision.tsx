@@ -13,8 +13,7 @@ import {
   // shouldAnimate,
   // getPerformanceMode,
   getPerformanceVariant,
-  createLazyAnimation,
-  staggerContainer,
+
 } from "@/lib/constants";
 import { visionData } from "@/data/vision";
 import { CldImage } from "next-cloudinary";
@@ -26,8 +25,8 @@ const CEOMessage = () => {
   const contentAnimation = getPerformanceVariant(fadeInLeft);
   const imageAnimation = getPerformanceVariant(fadeInRight);
   const signatureAnimation = getPerformanceVariant(microSlide);
-  const statsAnimation = getPerformanceVariant(microSlide);
-  const lazyStatsContainer = createLazyAnimation(staggerContainer);
+  // const statsAnimation = getPerformanceVariant(microSlide);
+  // const lazyStatsContainer = createLazyAnimation(staggerContainer);
 
   // Custom underline animation with performance awareness
   // const underlineAnimation = shouldAnimate()
@@ -72,7 +71,7 @@ const CEOMessage = () => {
           >
             {/* Title */}
             <motion.div {...titleAnimation} viewport={viewportOnce} className="text-left">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-0">OUR MISSION</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl  mb-0">LEGACY OF EXCELLENCE</h2>
             </motion.div>
 
             {/* Content Paragraphs */}
@@ -80,7 +79,7 @@ const CEOMessage = () => {
               {shortContent.map((paragraph, index) => (
                 <motion.p
                   key={index}
-                  className="leading-relaxed font-optima max-w-xl text-sm sm:text-base"
+                  className="leading-relaxed max-w-xl text-sm"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{
@@ -116,14 +115,14 @@ const CEOMessage = () => {
             {...imageAnimation}
             viewport={viewportDefault}
           >
-            <div className="relative h-[300px] sm:h-[400px] md:h-[450px] lg:h-[500px] xl:h-[600px] w-full overflow-hidden shadow-2xl">
+            <div className="relative h-[300px] sm:h-[360px] md:h-[400px] lg:h-[460px] xl:h-[520px] w-full overflow-hidden shadow-2xl">
               <motion.div
                 className="w-full h-full"
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
               >
                 <CldImage
-                  src={"imgi_81_x1jKKGBbcFDotH9VW4wXmw2gA_jtti68"}
+                  src={"imgi_15_Picture122251_gwvfyf"}
                   alt={`${ceoName} - ${ceoTitle}`}
                   fill
                   className="object-cover object-center"
@@ -137,37 +136,7 @@ const CEOMessage = () => {
             </div>
           </motion.div>
         </div>
-        {/* Statistics Section - Optimized stagger container */}
-        <motion.div
-          className="mt-8 sm:mt-10 md:mt-12 lg:mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 w-full"
-          {...lazyStatsContainer}
-          viewport={viewportDefault}
-        >
-          {[
-            { label: "Properties Sold", value: "500+" },
-            { label: "Happy Clients", value: "1000+" },
-            { label: "Years Experience", value: "15+" },
-            { label: "Awards Won", value: "25+" },
-          ].map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              className="text-center"
-              {...statsAnimation}
-              transition={{
-                ...statsAnimation.transition,
-                delay: delays.stagger(index) + delays.long,
-              }}
-              viewport={viewportOnce}
-            >
-              <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#8B2131] dark:text-red-400 mb-1 sm:mb-2">
-                {stat.value}
-              </div>
-              <div className="text-[#8B2131] dark:text-gray-300 font-bold text-xs sm:text-sm md:text-base">
-                {stat.label}
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+       
       </div>
     </section>
   );

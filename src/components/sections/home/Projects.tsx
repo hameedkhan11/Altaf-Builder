@@ -21,14 +21,14 @@ const ProjectsSection = () => {
         initial="initial"
         whileInView="animate"
         viewport={{ once: true }}
-        className="flex flex-col lg:flex-row gap-8 sm:gap-12 lg:gap-16 xl:gap-24 items-start lg:items-center justify-between pb-16 sm:pb-20 md:pb-24 lg:pb-28"
+        className="flex flex-col lg:flex-row items-start lg:items-center justify-between"
       >
-        <motion.h1 className="text-3xl md:text-4xl lg:text-5xl w-full lg:w-[40%]">
-          EXPLORE APARTMENTS
+        <motion.h1 className="text-3xl md:text-4xl w-full lg:w-[40%] mb-0">
+          Preview Modern Elegance
         </motion.h1>
 
-        <div className="flex flex-col gap-3 sm:gap-4 w-full lg:w-[40%]">
-          <motion.p
+        <div className="flex flex-col gap-3 sm:gap-4 w-full lg:w-[20%]">
+          {/* <motion.p
             variants={fadeInUp}
             initial="initial"
             whileInView="animate"
@@ -41,8 +41,8 @@ const ProjectsSection = () => {
             Development stands as a flagship project within the city, featuring
             upscale apartments and villas, a luxurious duty-free mall, and
             state-of-the-art commercial facilities.
-          </motion.p>
-          <Button className="bg-[rgb(140,46,71)] text-white hover:bg-transparent hover:text-[rgb(140,46,71)] py-6 px-8 w-full rounded-full text-lg transition-all duration-300 ease-in transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none border-2 border-transparent cursor-pointer hover:border-[rgb(140,46,71)]">
+          </motion.p> */}
+          <Button className="bg-[rgb(140,46,71)] pb-4 text-white hover:bg-transparent hover:text-[rgb(140,46,71)] py-6 px-4 w-full  text-lg transition-all duration-300 ease-in transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none border-2 border-transparent cursor-pointer hover:border-[rgb(140,46,71)]">
             View All Apartments
           </Button>
         </div>
@@ -50,13 +50,13 @@ const ProjectsSection = () => {
 
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-full opacity-5">
-        <div className="absolute top-10 sm:top-20 left-5 sm:left-10 w-48 sm:w-72 h-48 sm:h-72 bg-blue-500 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-10 sm:bottom-20 right-5 sm:right-10 w-64 sm:w-96 h-64 sm:h-96 bg-purple-500 rounded-full blur-3xl"></div>
+        <div className="absolute left-5 sm:left-10 w-48 sm:w-72 h-48 sm:h-72rounded-full blur-3xl"></div>
+        <div className="absolute bottom-10 sm:bottom-20 right-5 sm:right-10 w-64 sm:w-96 h-64 sm:h-96 rounded-full blur-3xl"></div>
       </div>
 
       <div className="mx-auto relative z-10">
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-x-6 md:gap-x-8"
           initial="initial"
           whileInView="animate"
           viewport={{ once: true }}

@@ -127,7 +127,7 @@ const Amenities = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">Key Features:</h3>
+              <h3 className="text-lg sm:text-xl md:text-2xl  mb-3 sm:mb-4">Key Features:</h3>
               <ul className="space-y-2 sm:space-y-3">
                 {currentAmenity.features.map((feature, index) => (
                   <motion.li 
@@ -153,7 +153,7 @@ const Amenities = () => {
             transition={{ duration: 0.6, delay: delays.medium }}
           >
             <motion.div
-              className="relative w-full h-[280px] xs:h-[320px] sm:h-[400px] md:h-[450px] lg:h-[500px] xl:h-[600px] rounded-xl sm:rounded-2xl overflow-hidden shadow-xl"
+              className="relative w-full h-[280px] xs:h-[320px] sm:h-[400px] md:h-[450px] lg:h-[500px] xl:h-[520px] rounded-xl sm:rounded-2xl overflow-hidden shadow-xl"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}

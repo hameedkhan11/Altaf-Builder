@@ -21,7 +21,7 @@ import { BlogSectionProps } from '@/lib/blogs/types';
 
 const BlogSection: React.FC<BlogSectionProps> = ({
   posts,
-  title = "RECENT BLOGS",
+  title = "The Altaf Journal",
   showSeeAll = true
 }) => {
   // Performance-aware animations
@@ -62,7 +62,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         {/* Header - Performance optimized */}
         <motion.div
-          className="flex flex-col sm:flex-row items-start justify-between mb-8 sm:mb-10 md:mb-12 gap-4 sm:gap-6"
+          className="flex flex-col sm:flex-row items-start justify-between gap-x-4 sm:gap-x-6"
           {...headerAnimation}
           viewport={viewportDefault}
         >
@@ -72,7 +72,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({
             viewport={viewportOnce}
           >
             <div className="w-full sm:w-auto">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl uppercase tracking-wide leading-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide leading-tight">
                 {title}
               </h2>
               {/* <motion.div
@@ -92,7 +92,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({
             >
               <Link
                 href="/blogs"
-                className="comic-button text-white py-2 sm:py-3 px-4 sm:px-6 text-xs sm:text-sm uppercase tracking-wide object-cover"
+                className="text-white bg-[rgb(140,46,71)] hover:bg-transparent hover:border-2 hover:border-[rgb(140,46,71)] hover:text-[rgb(140,46,71)] rounded-sm py-2 sm:py-3 px-4 sm:px-6 text-xs sm:text-sm uppercase tracking-wide object-cover"
               >
                 <motion.span
                   {...scaleOnHover}
@@ -108,7 +108,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({
 
         {/* Blog Grid - Batch staggered for performance */}
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 sm:gap-x-6 md:gap-x-8"
           {...lazyBatchStagger.container}
           viewport={viewportDefault}
         >
@@ -132,7 +132,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({
         {/* Empty State */}
         {latestPosts.length === 0 && (
           <motion.div
-            className="text-center py-8 sm:py-12 px-4"
+            className="text-center px-4"
             {...fadeInUp}
             viewport={viewportOnce}
           >
