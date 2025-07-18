@@ -1,13 +1,26 @@
 // components/blog-detail/BlogDetailHero.tsx
 import React from "react";
-import { BlogPost } from "@/lib/blogs/types";
 import { Hero } from "@/components/common/Hero";
+import { HeroImage } from "@/lib/hero/types";
 
 interface BlogDetailHeroProps {
-  post: BlogPost;
+  post: {
+    title: string;
+    excerpt?: string;
+    categories?: Array<{
+      title: string;
+      slug?: {
+        current: string;
+      };
+    }>;
+    slug?: {
+      current: string;
+    };
+  };
+  heroImage?: HeroImage | null; // New prop for Sanity hero image
 }
 
-const BlogDetailHero: React.FC<BlogDetailHeroProps> = ({ post }) => {
+const BlogDetailHero: React.FC<BlogDetailHeroProps> = ({ post, heroImage }) => {
   const breadcrumbs = [
     { label: "Home", href: "/" },
     { label: "Blogs", href: "/blogs" },
@@ -16,11 +29,13 @@ const BlogDetailHero: React.FC<BlogDetailHeroProps> = ({ post }) => {
 
   return (
     <Hero
+      heroImage={heroImage}
       // title={post.title}
+      // subtitle={post.excerpt}
       backgroundType="image"
-      backgroundSrc="Booking2_wltkjn"
+      backgroundSrc="imgi_89_e7vHmyk3naIt1aqkQMnTzkZ50_tjrfnt"
       breadcrumbs={breadcrumbs}
-      height="screen"
+      height="half"
       overlay="gradient"
       contentAlignment="left"
       enableAnimations={true}

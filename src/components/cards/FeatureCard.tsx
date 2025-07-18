@@ -78,16 +78,16 @@ const FeatureCard = ({
             {title}
           </h3>
           {primary && (
-            <p className="font-optima text-white leading-relaxed font-light text-base sm:text-lg mb-2">
+            <p className=" text-white leading-relaxed font-light text-base sm:text-lg mb-2">
               {primary}
             </p>
           )}
           {secondary && (
-            <p className="font-optima text-white leading-relaxed font-light text-base sm:text-lg mb-2">
+            <p className=" text-white leading-relaxed font-light text-base sm:text-lg mb-2">
               {secondary}
             </p>
           )}
-          <p className="font-optima text-white leading-relaxed font-light text-base sm:text-lg">
+          <p className=" text-white leading-relaxed font-light text-base sm:text-lg">
             {description}
           </p>
         </div>
@@ -103,7 +103,7 @@ const FeatureCard = ({
         >
           {title}
         </h3>
-        <p className="font-optima text-white leading-relaxed font-light text-base sm:text-lg">
+        <p className=" text-white leading-relaxed font-light text-base sm:text-lg">
           {description}
         </p>
       </div>

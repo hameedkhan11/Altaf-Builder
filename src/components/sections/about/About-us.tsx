@@ -1,8 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Hero } from "@/components/common/Hero";
-import { MissionVisionSection } from './MissionVisionSection';
-import { TeamSection } from './TeamSection';
+import MissionVisionSection  from './MissionVisionSection';
+import  TeamSection  from './TeamSection';
 import { aboutPageData, breadcrumbs } from "@/data/about-us/data";
 import { CompanyValuesSection } from "./CompanyValue";
 // import FeaturesGrid from "./FeaturesGrid";
@@ -108,13 +108,18 @@ export default function AboutPage() {
           breadcrumbs={breadcrumbs}
           overlay="gradient"
           contentAlignment="center"
+          ariaLabel="About us hero section"
+          enableParallax={true}
+          parallaxSpeed={0.3}
+          enableAnimations={true}
+          height="half"
         />
 
+        <TeamSection />
         {/* Mission & Vision Section */}
-        <MissionVisionSection missionVision={aboutPageData.missionVision} />
+        <MissionVisionSection />
 
         {/* Team Section */}
-        <TeamSection team={aboutPageData.team} />
 
         {/* Company Values Section */}
         <CompanyValuesSection 

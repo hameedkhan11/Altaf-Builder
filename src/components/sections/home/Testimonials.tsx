@@ -1,181 +1,217 @@
 "use client";
-import React from "react";
-import { motion } from "framer-motion";
-import { Quote, Star } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { CldImage } from "next-cloudinary";
 import { testimonials } from "@/data/testimonials";
-import {
-  fadeInUp,
-  cardHover,
-  batchStaggerContainer,
-  batchStaggerItem,
-  viewportOnce,
-  delays,
-  shouldAnimate,
-  getPerformanceMode,
-  createLazyAnimation,
-  animationMetrics,
-  quickFade,
-} from "@/lib/constants";
 
 const Testimonials = () => {
-  const performanceMode = getPerformanceMode();
-  const canAnimate = shouldAnimate();
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
-  // Performance-optimized header animation
-  const headerAnimation = createLazyAnimation(fadeInUp);
-  
-  // Optimized title animation with performance awareness
-  const titleAnimation = canAnimate ? {
-    initial: { opacity: 0, y: -30 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: viewportOnce,
-    transition: { 
-      duration: performanceMode === "fast" ? 0.4 : 0.6, 
-      delay: delays.short 
+  // Auto-play functionality
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Touch handlers
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) {
+      goToNext();
+    } else if (isRightSwipe) {
+      goToPrevious();
     }
-  } : quickFade;
+  };
 
-  // Optimized subtitle animation
-  const subtitleAnimation = canAnimate ? {
-    initial: { opacity: 0 },
-    whileInView: { opacity: 1 },
-    viewport: viewportOnce,
-    transition: { 
-      duration: performanceMode === "fast" ? 0.4 : 0.6, 
-      delay: delays.medium 
-    }
-  } : quickFade;
+  const goToPrevious = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1
+    );
+  };
 
-  // Track animation performance
-  React.useEffect(() => {
-    animationMetrics.track('testimonials-section', !canAnimate);
-  }, [canAnimate]);
+  const goToNext = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index);
+  };
+
+  const currentTestimonial = testimonials[currentIndex];
 
   return (
-    <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative">
-      <div className="absolute inset-0 bg-cover bg-center opacity-10" />
-
-      <div className="mx-auto relative z-10">
-        {/* Header Section - Performance Optimized */}
-        <motion.div
-          className="text-center mb-8 sm:mb-12 md:mb-16"
-          {...headerAnimation}
-        >
-          <motion.h2
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-3 sm:mb-4 dark:text-white leading-tight"
-            {...titleAnimation}
+    <section className="relative">
+      {/* Header Section */}
+      <div className="py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24 px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-16">
+        <div className="mx-auto relative z-10">
+          <motion.div 
+            className="text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
           >
-            What Our Clients Say
-          </motion.h2>
-          <motion.p
-            className="text-sm sm:text-base md:text-lg max-w-xl lg:max-w-2xl mx-auto px-4 sm:px-0 font-optima"
-            {...subtitleAnimation}
-          >
-            Hear from our satisfied clients about their experience with ALTAF
-            DEVELOPMENT.
-          </motion.p>
-        </motion.div>
+            <motion.h2
+              className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl mb-2 sm:mb-3 md:mb-4 dark:text-white leading-tight"
+              initial={{ opacity: 0, y: -20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              What Our Clients Say
+            </motion.h2>
+            <motion.p
+              className="text-xs sm:text-sm md:text-base lg:text-lg max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl mx-auto px-2 sm:px-4 md:px-0 mb-6"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              Hear from our satisfied clients about their experience with ALTAF DEVELOPMENT.
+            </motion.p>
+          </motion.div>
+        </div>
+      </div>
 
-        {/* Testimonials Grid - Batch Stagger Optimization */}
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
-          {...batchStaggerContainer}
+      {/* Testimonial Slider with Curtain Effect */}
+      <div
+        className="relative h-[50vh] sm:h-[55vh] md:h-[60vh] lg:h-[70vh] xl:h-[75vh] 2xl:h-[80vh] w-full overflow-hidden -mt-12"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
+        {/* Background Image */}
+        <div className="absolute inset-0 w-full h-full">
+          <CldImage
+            src="imgi_15_istur_Neo-futuristic_house_with_pool_architecture_by_david_rock_64ad3b44-766a-420a-8ab7-4ef23d6857c3-min_yjy3uo"
+            alt="Modern living room interior"
+            fill
+            className="object-cover"
+            quality="auto"
+            format="auto"
+            sizes="100vw"
+            priority
+          />
+          {/* Dark overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
+        </div>
+
+        {/* Curtain Effect - Opens from both sides */}
+        <motion.div 
+          className="absolute inset-0 w-full h-full bg-white z-10"
+          initial={{ clipPath: "inset(0 50% 0 0)" }}
+          whileInView={{ clipPath: "inset(0 100% 0 0)" }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ 
+            duration: 2.0, 
+            delay: 0.8,
+            ease: [0.25, 0.1, 0.25, 1]
+          }}
+        />
+
+        {/* Second curtain for dual-side effect */}
+        <motion.div 
+          className="absolute inset-0 w-full h-full bg-white z-10"
+          initial={{ clipPath: "inset(0 0 0 50%)" }}
+          whileInView={{ clipPath: "inset(0 0 0 100%)" }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ 
+            duration: 2.0, 
+            delay: 0.8,
+            ease: [0.25, 0.1, 0.25, 1]
+          }}
+        />
+
+        {/* Content */}
+        <motion.div 
+          className="relative z-20 h-full flex flex-col justify-center items-center px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ 
+            duration: 0.8, 
+            delay: 2.0,
+            ease: [0.25, 0.1, 0.25, 1]
+          }}
         >
-          {testimonials.map((testimonial, index) => {
-            // Performance-aware card animations
-            const cardAnimation = canAnimate ? {
-              ...batchStaggerItem,
-              ...cardHover,
-            } : {
-              initial: { opacity: 1, y: 0 },
-              animate: { opacity: 1, y: 0 },
-              transition: { duration: 0 }
-            };
+          <div className="w-full max-w-4xl sm:max-w-5xl md:max-w-6xl lg:max-w-7xl">
+            <div className="relative overflow-hidden">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentIndex}
+                  initial={{ opacity: 0, x: 100 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -100 }}
+                  transition={{ duration: 0.7, ease: "easeInOut" }}
+                  className="flex flex-col items-center text-center"
+                >
+                  {/* Quote */}
+                  <blockquote className="text-white text-sm xs:text-base sm:text-lg md:text-xl lg:text-xl xl:text-2xl font-light leading-relaxed max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl mx-auto mb-4 sm:mb-6 md:mb-8 lg:mb-8 px-2 sm:px-4 md:px-0">
+                    &quot;{currentTestimonial.content}&quot;
+                  </blockquote>
 
-            // Optimized profile section animation
-            const profileAnimation = canAnimate ? {
-              initial: { opacity: 0, x: -20 },
-              whileInView: { opacity: 1, x: 0 },
-              viewport: viewportOnce,
-              transition: {
-                duration: performanceMode === "fast" ? 0.3 : 0.5,
-                delay: delays.stagger(index) + (performanceMode === "fast" ? 0.1 : 0.2),
-              }
-            } : quickFade;
+                  {/* Profile */}
+                  <div className="flex items-center justify-center gap-3 sm:gap-4 md:gap-5 lg:gap-6">
+                    <div className="w-12 h-12 xs:w-14 xs:h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 lg:w-20 lg:h-20 xl:w-22 xl:h-22 rounded-full overflow-hidden border-2 border-white/20 shadow-lg flex-shrink-0">
+                      <CldImage
+                        src={currentTestimonial.image || "default-avatar"}
+                        alt={currentTestimonial.name}
+                        width={88}
+                        height={88}
+                        className="object-cover w-full h-full"
+                        quality="auto"
+                        format="auto"
+                      />
+                    </div>
+                    <div className="text-left">
+                      <h4 className="text-white text-sm xs:text-base sm:text-lg md:text-lg lg:text-xl font-semibold mb-1">
+                        {currentTestimonial.name}
+                      </h4>
+                      <p className="text-white/80 text-xs xs:text-sm sm:text-base md:text-base lg:text-lg font-optima">
+                        {currentTestimonial.role}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
 
-            // Optimized content animation
-            const contentAnimation = canAnimate ? {
-              initial: { opacity: 0 },
-              whileInView: { opacity: 1 },
-              viewport: viewportOnce,
-              transition: {
-                duration: performanceMode === "fast" ? 0.3 : 0.5,
-                delay: delays.stagger(index) + (performanceMode === "fast" ? 0.2 : 0.4),
-              }
-            } : quickFade;
-
-            // Optimized stars animation
-            const starsAnimation = canAnimate ? {
-              initial: { opacity: 0, scale: 0.8 },
-              whileInView: { opacity: 1, scale: 1 },
-              viewport: viewportOnce,
-              transition: {
-                duration: performanceMode === "fast" ? 0.2 : 0.3,
-                delay: delays.stagger(index) + (performanceMode === "fast" ? 0.3 : 0.6),
-              }
-            } : quickFade;
-
-            return (
-              <motion.div
-                key={testimonial.id}
-                {...cardAnimation}
-                className="h-full"
-              >
-                <Card className="p-4 sm:p-6 md:p-8 h-full hover:shadow-xl transition-shadow duration-300">
-                  <CardContent className="p-0">
-                    <motion.div
-                      className="flex items-center mb-4 sm:mb-6"
-                      {...profileAnimation}
-                    >
-                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[rgb(140,46,71)] rounded-full flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
-                        <Quote className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <h4 className="dark:text-white text-sm md:text-base lg:text-xl font-medium truncate">
-                          {testimonial.name}
-                        </h4>
-                        <p className="text-xs sm:text-sm dark:text-white  opacity-80 truncate font-optima">
-                          {testimonial.role}
-                        </p>
-                      </div>
-                    </motion.div>
-
-                    <motion.p
-                      className="mb-3 sm:mb-4 dark:text-white text-sm sm:text-base leading-relaxed font-optima"
-                      {...contentAnimation}
-                    >
-                      {testimonial.content}
-                    </motion.p>
-
-                    <motion.div
-                      className="flex text-[rgb(140,46,71)]"
-                      {...starsAnimation}
-                    >
-                      {Array.from({ length: 5 }).map((_, i) => (
-                        <Star
-                          key={i}
-                          className={`h-4 w-4 sm:h-5 sm:w-5 ${
-                            i < testimonial.rating ? "fill-current" : ""
-                          }`}
-                        />
-                      ))}
-                    </motion.div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            );
-          })}
+            {/* Dots Navigation */}
+            <div className="flex justify-center items-center mt-6 sm:mt-8 md:mt-10 lg:mt-12 xl:mt-16 gap-2 sm:gap-3 md:gap-4">
+              {testimonials.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  className={`w-2 h-2 xs:w-2.5 xs:h-2.5 sm:w-3 sm:h-3 md:w-4 md:h-4 lg:w-4 lg:h-4 rounded-full transition-all duration-300 ${
+                    index === currentIndex
+                      ? "bg-white scale-125"
+                      : "bg-white/50 hover:bg-white/75"
+                  }`}
+                  aria-label={`Go to testimonial ${index + 1}`}
+                />
+              ))}
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>

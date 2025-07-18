@@ -1,40 +1,30 @@
 import WhyChoose from "@/components/sections/home/WhyChooseUs";
 import ProjectsSection from "@/components/sections/home/Projects";
 import Testimonials from "@/components/sections/home/Testimonials";
-// import Newsletter from "@/components/sections/home/Newsletters";
-// import { LatestProperties } from "@/components/sections/home/FeaturedProperties";
-// import HeroSection from "@/components/sections/home/Hero";
 import PropertyShowcase from "@/components/sections/home/PropertySlider";
-// import MeetOurTeam from "@/components/sections/home/Team";
-// import RealEstateLeafletMap from "@/components/layout/Map";
-import BlogSection from "@/components/sections/home/Blogs";
-import { getBlogPosts } from "@/data/blogs";
 import CEOMessage from "@/components/sections/home/Vision";
 import Amenities from "@/components/sections/home/Amenities";
 import { Hero } from "@/components/common/Hero";
-// import { RegisterInterestForm } from "@/components/register-form/register-interest-form";
 import { RegisterHero } from "@/components/register-form/hero-section";
 import LuxuryRealEstateFAQ from "@/components/sections/home/FAQs";
 import { ApartmentGallery } from "@/components/sections/home/ApartmentGallery";
-// import PropertyGallery from "@/components/sections/home/ApartmentGallery";
+import sanityService from "@/lib/sanityService";
+import { FeaturedPostsSection } from "@/components/sections/home/Blogs";
 
-const HomePage = () => {
-  const posts = getBlogPosts();
+const HomePage = async () => {
+  const featuredPosts = await sanityService.getFeaturedPosts(3);
+  
   return (
     <div>
-      {/* <Header /> */}
-      {/* <HeroSection /> */}
       <Hero
         title="Designing the future of living"
-        // subtitle="Experience unparalleled comfort and elegance"
         isHomePage={true}
         backgroundType="video"
         backgroundSrc="Altaf_hero_4K_under100MB_wzjl1l"
         fallbackImage=""
         enableParallax={true}
-        parallaxSpeed={0.3}
-        // showScrollIndicator={true}
-        showHeroButtons={true}
+        parallaxSpeed={0.5}
+        ariaLabel="Altaf Development Home Section"
         contentAlignment="center"
         enableAnimations={true}
       />
@@ -44,18 +34,13 @@ const HomePage = () => {
         <CEOMessage />
         <ProjectsSection />
         <PropertyShowcase />
-        {/* <LatestProperties /> */}
         <Amenities />
         <WhyChoose />
         <Testimonials />
-        {/* <Newsletter /> */}
-        {/* <MeetOurTeam /> */}
-        <BlogSection posts={posts} />
-        <RegisterHero />
+        <FeaturedPostsSection posts={featuredPosts} />
         <LuxuryRealEstateFAQ />
+        <RegisterHero />
       </div>
-      {/* <RealEstateLeafletMap /> */}
-      {/* <Footer /> */}
     </div>
   );
 };

@@ -1,211 +1,99 @@
-// components/cards/BlogCard.tsx (Optimized Server Component)
-import React from 'react';
-import Link from 'next/link';
-import { Clock, User } from 'lucide-react';
-import { BlogCardProps } from '@/lib/blogs/types';
-import { BlogCardAnimations } from '@/lib/styles/BlogsAnimation';
-import { CldImage } from 'next-cloudinary';
+//  components/cards/BlogCard.tsx
+import Link from "next/link";
+import Image from "next/image";
+import { urlFor } from "@/lib/sanityService";
+import type { PostPreview } from "@/lib/sanity/sanity";
+import { AnimatedH1, AnimatedP, AnimatedSpan } from "../ui/text-animations";
 
-const BlogCard: React.FC<BlogCardProps> = ({
-  post,
-  index = 0,
-  prioritizeLoading = false,
-  enableAnimations = true,
-}) => {
-  const shouldPrioritize = prioritizeLoading || index < 3;
-  const formattedDate = new Date(post.publishedAt).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  });
-  const isoDate = post.publishedAt.toISOString();
+interface BlogCardProps {
+  post: PostPreview;
+  index: number;
+}
 
-  // Structured data for SEO (only include essential fields)
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": post.title,
-    "description": post.excerpt,
-    "url": `/blogs/${post.slug}`,
-    "datePublished": isoDate,
-    "author": {
-      "@type": "Person",
-      "name": post.author || "Author"
-    },
-    ...(post.image && {
-      "image": {
-        "@type": "ImageObject",
-        "url": post.image
-      }
-    })
-  };
+export function BlogCard({ post, index }: BlogCardProps) {
+  if (!post || !post.slug?.current) {
+    return null;
+  }
+
+  const imageUrl = post?.featuredImage
+    ? urlFor(post.featuredImage).width(800).height(500).url()
+    : null;
+  const isEven = index % 2 === 0;
 
   return (
-    <>
-      <article 
-        className="blog-card group shadow-xs overflow-hidden h-full flex flex-col"
-        data-index={index}
-        itemScope 
-        itemType="https://schema.org/BlogPosting"
-        style={{
-          opacity: enableAnimations ? 0 : 1,
-          transform: enableAnimations ? 'translateY(32px) scale(0.95)' : 'none',
-        }}
+    <article className="overflow-hidden transition-all duration-300">
+      <div
+        className={`flex flex-col lg:flex-row ${
+          isEven ? "lg:flex-row" : "lg:flex-row-reverse"
+        } min-h-[300px] sm:min-h-[350px] md:min-h-[400px] lg:min-h-[460px] w-full`}
       >
-        {/* Image Container */}
-        <div className="relative w-full h-48 sm:h-56 md:h-96 bg-gray-200 overflow-hidden">
-          {post.image ? (
-            <CldImage
-              src={post.image}
-              alt={`Featured image for ${post.title}`}
+        {/* Image Section */}
+        <div className="w-full lg:w-1/2 h-48 sm:h-56 md:h-64 lg:h-auto relative overflow-hidden">
+          {imageUrl ? (
+            <Image
               fill
-              className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              priority={shouldPrioritize}
-              loading={shouldPrioritize ? "eager" : "lazy"}
-              itemProp="image"
+              src={imageUrl}
+              alt={post?.featuredImage?.alt || post?.title || "Blog post image"}
+              className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 400px"
             />
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-              <svg 
-                className="w-12 h-12" 
-                fill="none" 
-                stroke="currentColor" 
+              <svg
+                className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 text-gray-400"
+                fill="none"
+                stroke="currentColor"
                 viewBox="0 0 24 24"
-                aria-hidden="true"
               >
-                <path 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth={2} 
-                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" 
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1}
+                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 002 2v12a2 2 0 002 2z"
                 />
               </svg>
             </div>
           )}
-
-          {/* Category Badge */}
-          {post.category && (
-            <div className="absolute top-3 left-3 animate-child" style={{ opacity: enableAnimations ? 0 : 1, transform: enableAnimations ? 'translateY(8px)' : 'none' }}>
-              <span 
-                className="bg-gradient-to-r from-[#8B2131] to-[#B91C1C] text-white px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide shadow-lg"
-                itemProp="articleSection"
-              >
-                {post.category}
-              </span>
-            </div>
-          )}
-
-          {/* Featured badge */}
-          {post.featured && (
-            <div className="absolute top-3 right-3 animate-child" style={{ opacity: enableAnimations ? 0 : 1, transform: enableAnimations ? 'translateY(8px)' : 'none' }}>
-              <span className="bg-yellow-500 text-white px-2 py-1 rounded-full text-xs font-semibold uppercase">
-                Featured
-              </span>
-            </div>
-          )}
-
-          {/* Hover overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
 
-        {/* Content */}
-        <div className="p-4 sm:p-5 md:p-6 flex-1 flex flex-col">
-          {/* Meta Info */}
-          <div className="flex items-center gap-3 text-sm mb-3 animate-child" style={{ opacity: enableAnimations ? 0 : 1, transform: enableAnimations ? 'translateY(8px)' : 'none' }}>
-            <time dateTime={isoDate} itemProp="datePublished">
-              {formattedDate}
-            </time>
-            
-            {post.author && (
-              <>
-                <span>•</span>
-                <div className="flex items-center gap-1" itemProp="author" itemScope itemType="https://schema.org/Person">
-                  <User className="w-3 h-3" />
-                  <span className="truncate" itemProp="name">{post.author}</span>
-                </div>
-              </>
-            )}
-            
-            {post.readTime && (
-              <>
-                <span>•</span>
-                <div className="flex items-center gap-1">
-                  <Clock className="w-3 h-3" />
-                  <span>{post.readTime}</span>
-                </div>
-              </>
-            )}
-          </div>
-
-          {/* Title */}
-          <h3 
-            className="text-lg sm:text-xl mb-2 sm:mb-3 line-clamp-1 leading-tight group-hover:text-[#8B2131] transition-colors duration-300 animate-child"
-            itemProp="headline"
-            style={{ opacity: enableAnimations ? 0 : 1, transform: enableAnimations ? 'translateY(12px)' : 'none' }}
+        {/* Content Section */}
+        <div className="w-full lg:w-1/2 p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-center">
+          <AnimatedH1 
+            wordByWord={true} 
+            duration={0.2}  
+            className="text-xl sm:text-2xl lg:text-3xl mb-3 sm:mb-4 line-clamp-2 transition-colors"
           >
-            <Link 
-              href={`/blogs/${post.slug}`}
-              aria-label={`Read more about ${post.title}`}
-              itemProp="url"
-              className="hover:no-underline"
-            >
-              {post.title}
-            </Link>
-          </h3>
+            {post?.title || "Untitled Post"}
+          </AnimatedH1>
 
-          {/* Excerpt */}
-          <p 
-            className="text-sm sm:text-base mb-4 line-clamp-2 flex-1 leading-relaxed animate-child font-optima"
-            itemProp="description"
-            style={{ opacity: enableAnimations ? 0 : 1, transform: enableAnimations ? 'translateY(8px)' : 'none' }}
-          >
-            {post.excerpt}
-          </p>
+          <AnimatedP className="mb-4 sm:mb-6 line-clamp-3 text-sm sm:text-base leading-relaxed">
+            {post?.excerpt || "No excerpt available."}
+          </AnimatedP>
 
-          {/* Read More Link */}
-          <div className="mt-auto pt-4 animate-child" style={{ opacity: enableAnimations ? 0 : 1, transform: enableAnimations ? 'translateY(8px)' : 'none' }}>
-            <Link
-              href={`/blogs/${post.slug}`}
-              className="inline-flex items-center text-[#8B2131] hover:text-[#B91C1C] font-semibold text-sm uppercase tracking-wide transition-all duration-300 group/link"
-              aria-label={`Read full article: ${post.title}`}
-            >
-              <span className="group-hover/link:translate-x-1 transition-transform duration-200">
-                Read More
-              </span>
-              <svg 
-                className="w-4 h-4 ml-2 group-hover/link:translate-x-1 transition-transform duration-200" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <path 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth={2} 
-                  d="M17 8l4 4m0 0l-4 4m4-4H3" 
-                />
-              </svg>
+          <div className="flex items-center justify-between">
+            <Link href={`/blogs/${post?.slug?.current}`}>
+              <button className="bg-[rgb(140,46,71)] text-white px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 text-sm sm:text-base font-medium hover:bg-transparent hover:text-[rgb(140,46,71)] border border-[rgb(140,46,71)] cursor-pointer ease-in duration-300 transition-colors">
+                READ MORE
+              </button>
             </Link>
+
+            {/* SEO-friendly hidden metadata */}
+            <div className="sr-only">
+              <span>Author: {post?.author?.name || "Unknown"}</span>
+              <AnimatedSpan>
+                Published:{" "}
+                {post?.publishedAt
+                  ? new Date(post.publishedAt).toLocaleDateString()
+                  : ""}
+              </AnimatedSpan>
+              <AnimatedSpan>
+                Categories:{" "}
+                {post?.categories?.map((cat) => cat?.title).join(", ") || ""}
+              </AnimatedSpan>
+            </div>
           </div>
         </div>
-      </article>
-
-      {/* Client-side animations - only render if animations are enabled */}
-      {enableAnimations && <BlogCardAnimations index={index} />}
-
-      {/* Structured Data for SEO - only for first few posts to reduce HTML size */}
-      {index < 10 && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(structuredData)
-          }}
-        />
-      )}
-    </>
+      </div>
+    </article>
   );
-};
-
-export default BlogCard;
+}

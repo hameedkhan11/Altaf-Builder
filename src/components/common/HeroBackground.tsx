@@ -3,10 +3,13 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { CldImage } from 'next-cloudinary';
+import { HeroImage } from '@/lib/hero/types';
+import sanityService from '@/lib/sanityService';
 
 interface HeroBackgroundProps {
-  type: 'video' | 'image';
-  src: string;
+  heroImage?: HeroImage | null;
+  type?: 'video' | 'image';
+  src?: string;
   fallbackImage?: string;
   overlay?: 'light' | 'medium' | 'dark' | 'gradient' | 'none';
   className?: string;
@@ -23,7 +26,8 @@ interface HeroBackgroundProps {
 }
 
 export const HeroBackground: React.FC<HeroBackgroundProps> = ({
-  type,
+  heroImage, // New prop from Sanity
+  type = 'image',
   src,
   fallbackImage,
   overlay = 'medium',
@@ -51,7 +55,53 @@ export const HeroBackground: React.FC<HeroBackgroundProps> = ({
   const y = useTransform(smoothY, [0, 1], [0, -100 * parallaxSpeed]);
   const scale = useTransform(smoothY, [0, 1], [1, 1.1]);
 
+  // Determine the image source - prioritize Sanity data
+  const imageSource = heroImage?.cloudinaryUrl || src;
+  const altText = heroImage?.altText || "Hero Background";
+  
+  // Extract Cloudinary public ID from full URL if using Sanity data
+  const getCloudinaryPublicId = (url: string) => {
+    try {
+      const urlObj = new URL(url);
+      console.log(urlObj)
+      const pathSegments = urlObj.pathname.split('/');
+      const uploadIndex = pathSegments.findIndex(segment => segment === 'upload');
+      console.log(uploadIndex)
+      
+      if (uploadIndex !== -1 && uploadIndex < pathSegments.length - 1) {
+        const publicIdParts = pathSegments.slice(uploadIndex + 1);
+        console.log(publicIdParts)
+        return publicIdParts.join('/').replace(/\.[^/.]+$/, '');
+      }
+      
+      return pathSegments[pathSegments.length - 1].replace(/\.[^/.]+$/, '');
+    } catch (error) {
+      console.error('Error extracting Cloudinary public ID:', error);
+      return url;
+    }
+  };
+
   const getOverlayClass = () => {
+    // If using Sanity data, use its overlay settings
+    if (heroImage?.overlaySettings?.hasOverlay) {
+      const { overlayColor, overlayOpacity = 0.5 } = heroImage.overlaySettings;
+      const opacityValue = Math.round(overlayOpacity * 100);
+      
+      switch (overlayColor) {
+        case 'black':
+          return `bg-black/${opacityValue}`;
+        case 'white':
+          return `bg-white/${opacityValue}`;
+        case 'darkblue':
+          return `bg-blue-900/${opacityValue}`;
+        case 'custom':
+          return ''; // Handle with inline styles
+        default:
+          return `bg-black/${opacityValue}`;
+      }
+    }
+    
+    // Fallback to original overlay logic
     switch (overlay) {
       case 'light':
         return 'bg-black/20';
@@ -66,6 +116,18 @@ export const HeroBackground: React.FC<HeroBackgroundProps> = ({
       default:
         return 'bg-black/40';
     }
+  };
+
+  const getCustomOverlayStyle = (): React.CSSProperties | undefined => {
+    if (heroImage?.overlaySettings?.hasOverlay && heroImage.overlaySettings.overlayColor === 'custom') {
+      const opacity = heroImage.overlaySettings.overlayOpacity || 0.5;
+      const color = heroImage.overlaySettings.customOverlayColor || '#000000';
+      
+      return {
+        backgroundColor: `${color}${Math.round(opacity * 255).toString(16).padStart(2, '0')}`
+      };
+    }
+    return undefined;
   };
 
   const buildVideoUrl = () => {
@@ -111,6 +173,11 @@ export const HeroBackground: React.FC<HeroBackgroundProps> = ({
     ];
   };
 
+  // Don't render if no image source is available
+  if (!imageSource) {
+    return null;
+  }
+
   return (
     <div ref={containerRef} className={className}>
       {enableParallax ? (
@@ -120,26 +187,36 @@ export const HeroBackground: React.FC<HeroBackgroundProps> = ({
         >
           <ParallaxContent
             type={type}
-            src={src}
+            src={imageSource}
+            altText={altText}
             fallbackImage={fallbackImage}
             buildVideoUrl={buildVideoUrl}
             buildResponsiveVideoSources={buildResponsiveVideoSources}
+            getCloudinaryPublicId={getCloudinaryPublicId}
+            heroImage={heroImage}
           />
         </motion.div>
       ) : (
         <div className="absolute inset-0 w-full h-full">
           <ParallaxContent
             type={type}
-            src={src}
+            src={imageSource}
+            altText={altText}
             fallbackImage={fallbackImage}
             buildVideoUrl={buildVideoUrl}
             buildResponsiveVideoSources={buildResponsiveVideoSources}
+            getCloudinaryPublicId={getCloudinaryPublicId}
+            heroImage={heroImage}
           />
         </div>
       )}
       
-      {overlay !== 'none' && (
-        <div className={`absolute inset-0 z-10 ${getOverlayClass()}`} />
+      {/* Overlay with Sanity support */}
+      {(heroImage?.overlaySettings?.hasOverlay || overlay !== 'none') && (
+        <div 
+          className={`absolute inset-0 z-10 ${getOverlayClass()}`}
+          style={getCustomOverlayStyle()}
+        />
       )}
     </div>
   );
@@ -149,10 +226,22 @@ export const HeroBackground: React.FC<HeroBackgroundProps> = ({
 const ParallaxContent: React.FC<{
   type: 'video' | 'image';
   src: string;
+  altText: string;
   fallbackImage?: string;
   buildVideoUrl: () => string;
   buildResponsiveVideoSources: () => Array<{src: string; media: string}>;
-}> = ({ type, src, fallbackImage, buildVideoUrl, buildResponsiveVideoSources }) => {
+  getCloudinaryPublicId: (url: string) => string;
+  heroImage?: HeroImage | null;
+}> = ({ 
+  type, 
+  src, 
+  altText, 
+  fallbackImage, 
+  buildVideoUrl, 
+  buildResponsiveVideoSources, 
+  // getCloudinaryPublicId,
+  heroImage 
+}) => {
   return (
     <>
       {type === 'video' ? (
@@ -196,8 +285,8 @@ const ParallaxContent: React.FC<{
         </>
       ) : (
         <CldImage
-          src={src}
-          alt="Hero Background"
+          src={heroImage?.cloudinaryUrl ? sanityService.getCloudinaryPublicId(src) : src}
+          alt={altText}
           fill
           sizes="100vw"
           priority

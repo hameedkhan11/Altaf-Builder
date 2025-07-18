@@ -12,6 +12,15 @@
   font-display: swap;
 }
 
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* Ultra-smooth Lenis styles */
 html.lenis, html.lenis body {
   height: auto;

@@ -1,8 +1,9 @@
 // app/blogs/[slug]/not-found.tsx
 "use client";
 import Link from 'next/link';
-import { ArrowLeft, Home, Search } from 'lucide-react';
+import { ArrowLeft, Home } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { AnimatedH1, AnimatedP } from '@/components/ui/text-animations';
 
 export default function BlogNotFound() {
   return (
@@ -15,7 +16,7 @@ export default function BlogNotFound() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="text-9xl font-bold text-gray-200 select-none">
+          <div className="text-9xl font-bold text-[rgb(140,46,71)] select-none">
             404
           </div>
           <motion.div
@@ -24,7 +25,7 @@ export default function BlogNotFound() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.5 }}
           >
-            <Search className="w-16 h-16 text-[#8B2131] opacity-50" />
+            {/* <Search className="w-16 h-16 text- opacity-50" /> */}
           </motion.div>
         </motion.div>
 
@@ -34,19 +35,19 @@ export default function BlogNotFound() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.5 }}
         >
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">
+          <AnimatedH1 wordByWord={true} duration={0.6} className="text-3xl  mb-4">
             Blog Post Not Found
-          </h1>
+          </AnimatedH1>
           
-          <p className="text-gray-600 mb-8 leading-relaxed">
+          <AnimatedP className="mb-8 leading-relaxed">
             Sorry, we couldn&apos;t find the blog post you&apos;re looking for. It might have been moved, deleted, or the URL might be incorrect.
-          </p>
+          </AnimatedP>
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/blogs"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-[#8B2131] to-[#B91C1C] text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 group"
+              className="inline-flex items-center gap-2 bg-[rgb(140,46,71] text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 group"
             >
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
               Back to Blogs
@@ -54,7 +55,7 @@ export default function BlogNotFound() {
             
             <Link
               href="/"
-              className="inline-flex items-center gap-2 border-2 border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:border-[#8B2131] hover:text-[#8B2131] transition-all duration-300 group"
+              className="inline-flex bg-[rgb(140,46,71)] text-white items-center gap-2 border-2  px-6 py-3 rounded-lg font-semibold hover:bg-transparent hover:text-[rgb(140,46,71)] hover:border-2 hover:border-[rgb(140,46,71)]  transition-all duration-300 ease-in group"
             >
               <Home className="w-4 h-4" />
               Go Home

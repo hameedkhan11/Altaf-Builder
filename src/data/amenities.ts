@@ -5,7 +5,7 @@ export const amenitiesData: AmenitiesData = {
   'shopping-mall': {
     id: 'shopping-mall',
     name: 'Shopping Mall',
-    title: 'Faisal Hills City Mall',
+    title: 'Faisal Hills Islamabad',
     description: 'Explore the Faisal Hills City Mall, where luxury meets convenience. Our mall offers a variety of high-end retail stores, dining options, and entertainment venues, creating a vibrant shopping experience. Discover the latest fashion, enjoy gourmet meals, and unwind with premium entertainment in Pakistan\'s premier smart city.',
     image: 'imgi_4_default_is216q',
     features: ['High-end retail stores', 'Gourmet dining options', 'Entertainment venues', 'Premium shopping experience']

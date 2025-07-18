@@ -2,7 +2,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
   Menu,
@@ -16,6 +16,7 @@ import MediaCenterDropdown from "../ui/media-center-dropdown";
 // Import SVG as React component
 import AltafLogo from "../../../public/logos/ALTAF-LOGO2.svg"
 import MobileMenu from "./MobileMenu";
+import { Animate } from "../ui/animate";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -65,15 +66,13 @@ const Header = () => {
 
   return (
     <>
-      <motion.header
+      <Animate
+      type="stagger"
         className={`fixed w-full h-20 transition-all duration-500 ease-in-out font-avenir ${
           scrolled
-            ? "z-30 backdrop-blur-lg border-b bg-white shadow-lg"
-            : "z-20"
+            ? "z-30 backdrop-blur-lg bg-white shadow-lg"
+            : "z-30"
         } ${showBackgroundOverlay ? "opacity-0" : "opacity-100"}`}
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6 }}
       >
         {/* Background image overlay for initial state */}
         {!scrolled && (
@@ -167,7 +166,7 @@ const Header = () => {
             </Button>
           </div>
         </div>
-      </motion.header>
+      </Animate>
 
       <MobileMenu
         isOpen={isMobileMenuOpen}

@@ -14,6 +14,7 @@ import { amenitiesData } from '@/data/amenities';
 import { AmenityData } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { CldImage } from 'next-cloudinary';
+import { AnimatedH1, AnimatedH2, AnimatedP } from '@/components/ui/text-animations';
 
 const Amenities = () => {
   const [activeAmenity, setActiveAmenity] = useState<string>('shopping-mall');
@@ -30,28 +31,25 @@ const Amenities = () => {
     <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
       <div className="mx-auto">
         {/* Header Section */}
-        <motion.div 
+        <div 
           className="w-full flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-12 mb-8 sm:mb-10 lg:mb-12"
           {...fadeInUp}
-          viewport={viewportOnce}
         >
-          <motion.h1 
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl  uppercase w-full lg:w-2/3 leading-tight"
+          <AnimatedH1
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center  uppercase w-full leading-tight"
             {...fadeInLeft}
-            viewport={viewportOnce}
-            transition={{ duration: 0.6, delay: delays.short }}
           >
-            Explore premium world-class amenities at your neigborhood
-          </motion.h1>
-          <motion.p 
+            Live Close to Premium Luxury
+          </AnimatedH1>
+          {/* <motion.p 
             className="sm:text-md  w-full lg:w-1/3 leading-relaxed font-light"
             {...fadeInRight}
             viewport={viewportOnce}
             transition={{ duration: 0.6, delay: delays.medium }}
           >
             At Altaf Devlopment, the neigborhood offers top-tier fitness centers, luxurious pools, parks, high-end shopping, dining, coworking spaces, and event venues. Enjoy security, high-speed internet, and eco-friendly infrastructure for modern living in Pakistan&apos;s premier smart city.
-          </motion.p>
-        </motion.div>
+          </motion.p> */}
+        </div>
 
         {/* Amenity Tabs */}
         <motion.div 
@@ -61,7 +59,7 @@ const Amenities = () => {
           whileInView="animate"
           viewport={viewportOnce}
         >
-          <motion.ul className="flex flex-wrap gap-2 sm:gap-3 md:gap-4 justify-start">
+          <motion.ul className="flex flex-wrap gap-2 sm:gap-3 md:gap-4 items-center justify-center">
             {amenityKeys.map((amenityKey) => {
               const amenity = amenitiesData[amenityKey];
               const isActive = activeAmenity === amenityKey;
@@ -90,70 +88,40 @@ const Amenities = () => {
         </motion.div>
 
         {/* Content Section */}
-        <motion.div 
-          className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-16 items-start"
+        <div 
+          className="grid grid-cols-1 lg:grid-cols-2 items-start"
           key={activeAmenity} // This ensures re-animation when content changes
           {...fadeInUp}
-          viewport={viewportOnce}
         >
           {/* Left Content */}
           <motion.div 
-            className="space-y-4 sm:space-y-5 md:space-y-6 order-2 lg:order-1"
+            className="space-y-4 sm:space-y-5 md:space-y-6 order-2 lg:order-1  max-w-lg"
             {...fadeInLeft}
             viewport={viewportOnce}
             transition={{ duration: 0.6, delay: delays.short }}
           >
-            <motion.h2 
-              className="text-xl sm:text-2xl md:text-3xl lg:text-4xl leading-tight"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+            <AnimatedH2 
+              className="text-xl sm:text-2xl md:text-3xl lg:text-4xl leading-tight mt-6"
             >
               {currentAmenity.title}
-            </motion.h2>
+            </AnimatedH2>
             
-            <motion.p 
-              className="text-sm sm:text-base leading-relaxed font-light"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+            <AnimatedP 
+              className="text-sm leading-relaxed font-light"
             >
               {currentAmenity.description}
-            </motion.p>
-
-            {/* Features List */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <h3 className="text-lg sm:text-xl md:text-2xl  mb-3 sm:mb-4">Key Features:</h3>
-              <ul className="space-y-2 sm:space-y-3">
-                {currentAmenity.features.map((feature, index) => (
-                  <motion.li 
-                    key={index}
-                    className="flex items-start font-optima text-sm sm:text-base"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: 0.3 + (index * 0.1) }}
-                  >
-                    <div className="w-2 h-2 bg-[rgb(140,46,71)] rounded-full mr-3 mt-2 flex-shrink-0"/>
-                    <span className="leading-relaxed">{feature}</span>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
+            </AnimatedP>
           </motion.div>
 
           {/* Right Image */}
           <motion.div 
-            className="relative order-1 lg:order-2"
+            className="relative order-1 lg:order-2 w-full"
             {...fadeInRight}
             viewport={viewportOnce}
             transition={{ duration: 0.6, delay: delays.medium }}
           >
             <motion.div
-              className="relative w-full h-[280px] xs:h-[320px] sm:h-[400px] md:h-[450px] lg:h-[500px] xl:h-[520px] rounded-xl sm:rounded-2xl overflow-hidden shadow-xl"
+              className="relative w-full h-[280px] xs:h-[320px] sm:h-[400px] md:h-[450px] lg:h-[500px] xl:h-[580px] rounded-md overflow-hidden shadow-xl"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}
@@ -163,7 +131,7 @@ const Amenities = () => {
                 alt={currentAmenity.title}
                 fill
                 className="object-cover"
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 50vw"
+                sizes="(max-width: 720px) 100vw, (max-width: 1024px) 100vw, 50vw"
                 priority
               />
               
@@ -172,7 +140,7 @@ const Amenities = () => {
               
             </motion.div>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

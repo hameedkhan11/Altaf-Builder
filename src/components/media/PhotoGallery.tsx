@@ -2,7 +2,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, Variants } from "framer-motion";
 import { Loader2, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CldImage } from "next-cloudinary";
@@ -508,7 +508,7 @@ const NextCloudinaryGrid: React.FC<NextCloudinaryGridProps> = ({
       {filteredImages.map((image, index) => (
         <motion.div
           key={image.id}
-          variants={itemVariants}
+          variants={itemVariants as Variants}
           className="group relative aspect-[4/3] overflow-hidden bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
           onClick={() => onImageClick(index)}
           whileHover={{ y: -8 }}

@@ -2,7 +2,7 @@
 "use client";
 
 import React, { useState, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import Image from "next/image";
 import { Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -128,7 +128,7 @@ const GalleryGrid: React.FC<GalleryGridProps> = ({
         {filteredImages.map((image, index) => (
           <motion.div
             key={image.id}
-            variants={itemVariants}
+            variants={itemVariants as Variants}
             layout
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}

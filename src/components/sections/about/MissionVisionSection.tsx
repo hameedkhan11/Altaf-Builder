@@ -1,59 +1,107 @@
+// components/sections/home/WhyChooseUs.tsx
 "use client";
-import React from "react";
+
 import { motion } from "framer-motion";
-import { MissionVision } from "@/lib/about-us/types";
-import { MissionVisionCard } from "@/components/cards/VisionCard";
+import {
+  viewportOnce,
+  shouldAnimate,
+  getPerformanceMode,
+  animationMetrics,
+  quickFade,
+  easingPresets,
+} from "@/lib/constants";
+import { useEffect } from "react";
+import { CldImage } from "next-cloudinary";
+import { AnimatedH2, AnimatedP } from "@/components/ui/text-animations";
+import StatsSection from "@/components/ui/stats-section";
+import AnimatedBackground from "@/components/ui/animated-background";
 
+const MissionVisionSection = () => {
+  const performanceMode = getPerformanceMode();
+  const canAnimate = shouldAnimate();
 
-interface MissionVisionSectionProps {
-  missionVision: MissionVision[];
-}
+  // Performance-optimized animations
+  const titleAnimation = canAnimate
+    ? {
+        initial: { opacity: 0, y: 30 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: viewportOnce,
+        transition: {
+          duration: performanceMode === "fast" ? 0.8 : 1.0,
+          ease: easingPresets.smooth,
+        },
+      }
+    : quickFade;
 
-export const MissionVisionSection: React.FC<MissionVisionSectionProps> = ({
-  missionVision,
-}) => {
+  useEffect(() => {
+    animationMetrics.track("whychoose-section", !canAnimate);
+  }, [canAnimate]);
+
   return (
-    <section className="py-12 sm:py-16 lg:py-20 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml,<svg width=\'40\' height=\'40\' viewBox=\'0 0 40 40\' xmlns=\'http://www.w3.org/2000/svg\'><g fill=\'none\' fill-rule=\'evenodd\'><g fill=\'%23f3f4f6\' fill-opacity=\'0.4\'><circle cx=\'20\' cy=\'20\' r=\'1\'/></g></g></svg>\')] opacity-30" />
+    <div className="relative">
+      {/* Background Image Section */}
+      <div className="relative h-[90vh] overflow-hidden">
+        <motion.div
+          initial={canAnimate ? { scaleX: 0, transformOrigin: "left center" } : { scaleX: 1, transformOrigin: "left center" }}
+          whileInView={canAnimate ? { scaleX: 1, transformOrigin: "left center" } : undefined}
+          viewport={canAnimate ? { once: true, amount: 0.8, margin: "-30% 0px -30% 0px" } : undefined}
+          transition={canAnimate ? {
+            duration: performanceMode === "fast" ? 1.2 : 1.6,
+            ease: [0.25, 0.1, 0.25, 1] as const,
+            delay: 0.1
+          } : undefined}
+          className="w-full h-full"
+        >
+          <CldImage
+            src="imgi_20_istur_Neo-futuristic_house_with_pool_architecture_by_david_rock_997de75f-5df4-4851-89b3-9ab751d93bbf-min_ubf7zz"
+            alt="ALTAF Development Office"
+            className="w-full h-full object-cover"
+            width={1920}
+            height={1080}
+          />
+        </motion.div>
+        
+        {/* Dark overlay for text readability - appears after animation */}
+        <motion.div 
+          className="absolute inset-0 bg-black/40"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ 
+            once: true, 
+            amount: 0.8,
+            margin: "-30% 0px -30% 0px"
+          }}
+          transition={{ 
+            duration: performanceMode === "fast" ? 0.6 : 0.8,
+            delay: performanceMode === "fast" ? 1.3 : 1.7 // Appears after curtain animation
+          }}
+        />
 
-      <div className="container mx-auto relative z-10 px-4 sm:px-6 lg:px-16 ">
-        <div className="mb-12 sm:mb-16 flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-20 w-full">
-          <motion.h1 
-            className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-[rgb(140,46,71)] mb-4 w-full lg:w-1/2"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            Real luxury is time well spent in peace, not things well owned in
-            noise.
-          </motion.h1>
-          <motion.div 
-            className="w-full lg:w-1/2"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <p className="text-sm sm:text-base leading-relaxed">
-              Altaf Developments was founded in the UAE in October 2014, with
-              our construction division operating in the region for nearly 20
-              years. We believe that the future of real estate lies not just in
-              building spaces but in creating immersive experiences that
-              inspire, transform, and integrate communities. At the heart of our
-              philosophy is a steadfast commitment to delivering lasting value
-              to our customers and stakeholders. We strive for the
-              extraordinary, with a mission to revolutionise the real estate
-              industry by setting new benchmarks in design, functionality, and
-              sustainability.
-            </p>
+        {/* Content Container */}
+        <div className="absolute inset-0 flex flex-col justify-center items-center text-left px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24">
+          {/* Header Section */}
+          <motion.div {...titleAnimation} className="mb-6 sm:mb-8 text-center">
+            <AnimatedP className="text-sm sm:text-base md:text-xl lg:text-2xl text-white/70 mb-4">
+              Building Trust, Delivering Excellence
+            </AnimatedP>
+            <AnimatedH2
+              wordByWord={true}
+              duration={0.6}
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white tracking-wider leading-tight"
+            >
+              Mission & Values
+            </AnimatedH2>
+            
+            {/* Statistics Section with Counter Animation */}
+            <StatsSection />
           </motion.div>
         </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 max-w-7xl mx-auto">
-          {missionVision.map((item, index) => (
-            <MissionVisionCard key={index} data={item} index={index} />
-          ))}
-        </div>
       </div>
-    </section>
+
+      {/* Animated Background Elements */}
+      <AnimatedBackground />
+    </div>
   );
 };
+
+export default MissionVisionSection;

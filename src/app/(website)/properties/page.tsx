@@ -3,12 +3,11 @@ import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Hero } from "@/components/common/Hero";
 import { RegisterHero } from "@/components/register-form/hero-section";
-import { properties, propertyImagesPlaceholder } from "@/data/properties";
+import { properties } from "@/data/properties";
 import { PropertySelector } from "@/components/property-detail/PropertySelector";
 import { ImageGallery } from "@/components/property-detail/ImageDetailGallery";
 import { PropertyDetailInfo } from "@/components/property-detail/PropertyDetailInfo";
 import { PropertyDetailAmenities } from "@/components/property-detail/PropertyDetailAmenities";
-// import { PropertyOverview } from "@/components/property-detail/PropertyDetailOverview";
 import { PropertyKey } from "@/lib/types";
 
 // Separate component that uses useSearchParams
@@ -30,7 +29,16 @@ const PropertyDetailContent: React.FC = () => {
     }
   }, [propertyParam]);
 
-  const currentProperty = properties[selectedProperty];
+  // Now this will work correctly with PropertyDetail type
+const currentProperty = properties[selectedProperty as keyof typeof properties];
+  // Add error handling in case property doesn't exist
+  if (!currentProperty) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p>Property not found</p>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -38,52 +46,51 @@ const PropertyDetailContent: React.FC = () => {
         backgroundType="image"
         backgroundSrc="Booking1_rg1bhs"
         fallbackImage="luxury-apartment-hero-gallery"
-        height="half"
+        height="screen"
         overlay="gradient"
         contentAlignment="center"
         enableParallax={true}
         parallaxSpeed={0.3}
-        title="Property Detail"
+        title="Featured Properties"
         breadcrumbs={[
           { label: "Home", href: "/" },
-          { label: "Property Detail", href: "/property-detail" },
+          { label: "Properties", href: "/properties" },
         ]}
       />
-      <div className="mx-auto mt-24 px-8 md:px-12 lg:px-16">
+      <div className="mx-auto mt-24 px-2 md:px-12 lg:px-16">
         <PropertySelector
           selectedProperty={selectedProperty}
           onPropertyChange={setSelectedProperty}
         />
                 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 mt-8">
-          <ImageGallery images={propertyImagesPlaceholder[selectedProperty]} />
+          <ImageGallery propertyType={selectedProperty} />
           <PropertyDetailInfo property={currentProperty} />
         </div>
 
         <PropertyDetailAmenities />
-        {/* <PropertyOverview property={currentProperty} /> */}
       </div>
       <RegisterHero />
     </>
   );
 };
 
-// Loading component
+// Loading component (unchanged)
 const PropertyDetailLoading: React.FC = () => (
   <div className="min-h-screen">
     <Hero
       backgroundType="image"
       backgroundSrc="Booking1_rg1bhs"
       fallbackImage="luxury-apartment-hero-gallery"
-      height="half"
+      height="screen"
       overlay="gradient"
       contentAlignment="center"
       enableParallax={true}
       parallaxSpeed={0.3}
-      title="Property Detail"
+      title="Featured Properties"
       breadcrumbs={[
         { label: "Home", href: "/" },
-        { label: "Property Detail", href: "/property-detail" },
+        { label: "Properties", href: "/properties" },
       ]}
     />
     <div className="mx-auto mt-24 px-8 md:px-12 lg:px-16">
@@ -102,7 +109,7 @@ const PropertyDetailLoading: React.FC = () => (
   </div>
 );
 
-// Main component wrapped with Suspense
+// Main component wrapped with Suspense (unchanged)
 const PropertyDetailSection: React.FC = () => {
   return (
     <div className="min-h-screen">

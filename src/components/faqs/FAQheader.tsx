@@ -1,5 +1,6 @@
 // FAQHeader.tsx
 import React from "react";
+import { AnimatedH2, AnimatedSpan } from "../ui/text-animations";
 
 const FAQHeader: React.FC = () => {
   return (
@@ -7,10 +8,10 @@ const FAQHeader: React.FC = () => {
       <div className="text-sm sm:text-base lg:text-lg uppercase tracking-wider text-gray-500 mb-3 sm:mb-4 font-medium font-optima">
         FAQ&apos;S
       </div>
-      <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light mb-4 sm:mb-6 tracking-tight leading-tight flex flex-col gap-y-2 sm:gap-y-3 md:gap-y-4">
+      <AnimatedH2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light mb-4 sm:mb-6 tracking-tight leading-tight flex flex-col gap-y-2 sm:gap-y-3 md:gap-y-4">
         Frequently
-        <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl">Asked Questions</span>
-      </h2>
+        <AnimatedSpan className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl">Asked Questions</AnimatedSpan>
+      </AnimatedH2>
     </header>
   );
 };

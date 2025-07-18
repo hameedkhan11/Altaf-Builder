@@ -13,6 +13,7 @@ import {
   ApartmentSizeSelector,
 } from "./apartment-selector";
 import { useRegisterForm } from "@/hooks/useRegisterForm";
+import { AnimatedH1, AnimatedP } from "../ui/text-animations";
 
 export function RegisterInterestForm() {
   const { form, onSubmit, isSubmitting } = useRegisterForm();
@@ -20,9 +21,9 @@ export function RegisterInterestForm() {
   return (
     <div className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl mx-auto bg-black/40 backdrop-blur- rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-white/10 font-optima text-white">
       <div className="mb-4 sm:mb-6">
-        <h1 className="text-lg sm:text-xl md:text-2xl  mb-2 text-white">
+        <AnimatedH1 wordByWord={true} duration={0.6} className="text-lg sm:text-xl md:text-2xl  mb-2 text-white">
           Register Your Interest
-        </h1>
+        </AnimatedH1>
       </div>
 
       <Form {...form}>
@@ -64,14 +65,14 @@ export function RegisterInterestForm() {
               onPhoneChange={(value) => form.setValue("phone", value)}
             />
             {form.formState.errors.countryCode && (
-              <p className="text-red-400 text-xs sm:text-sm mt-1">
+              <AnimatedP className="text-red-400 text-xs sm:text-sm mt-1">
                 {form.formState.errors.countryCode.message}
-              </p>
+              </AnimatedP>
             )}
             {form.formState.errors.phone && (
-              <p className="text-red-400 text-xs sm:text-sm mt-1">
+              <AnimatedP className="text-red-400 text-xs sm:text-sm mt-1">
                 {form.formState.errors.phone.message}
-              </p>
+              </AnimatedP>
             )}
           </div>
 

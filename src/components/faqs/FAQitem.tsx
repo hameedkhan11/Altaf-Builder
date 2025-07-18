@@ -3,6 +3,7 @@
 import React from "react";
 import { ChevronDown } from "lucide-react";
 import { FAQItem as FAQItemType } from "@/data/faqs/data";
+import { AnimatedH3 } from "../ui/text-animations";
 
 interface FAQItemProps {
   item: FAQItemType;
@@ -25,12 +26,11 @@ const FAQItem: React.FC<FAQItemProps> = ({ item, isOpen, onToggle }) => {
         aria-controls={`faq-answer-${item.id}`}
       >
         <div className="flex items-start justify-between w-full">
-          <h3
+          <AnimatedH3
             className="text-lg sm:text-xl md:text-xl lg:text-xl font-light text-left leading-tight pr-4 sm:pr-6 md:pr-8 flex-1 min-w-0"
-            itemProp="name"
           >
             {item.question}
-          </h3>
+          </AnimatedH3>
           <ChevronDown
             className={`w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 transition-transform duration-300 flex-shrink-0 mt-0.5 sm:mt-1 ${
               isOpen ? "rotate-180" : ""
@@ -54,7 +54,6 @@ const FAQItem: React.FC<FAQItemProps> = ({ item, isOpen, onToggle }) => {
         <div className="pb-6 sm:pb-7 md:pb-8 lg:pb-10 pr-8 sm:pr-10 md:pr-12">
           <p
             className="leading-relaxed font-light text-sm sm:text-base"
-            itemProp="text"
           >
             {item.answer}
           </p>

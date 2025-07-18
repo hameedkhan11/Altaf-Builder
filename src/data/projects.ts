@@ -4,7 +4,7 @@ export const projectsData: Project[] = [
   {
     id: 1,
     title: "Modern Apartment",
-    image: "imgi_2_EXTERIOR_FRONT_STREET_VIEW_REVISED_vajrlu",
+    image: "imgi_15_ufGwQIv5Es5vOOeB39i4tZpHI4_zocudn",
     price: "Pkr 14,000,000",
     bedrooms: 1,
     bathrooms: 1,
@@ -13,7 +13,7 @@ export const projectsData: Project[] = [
   {
     id: 2,
     title: "Luxury Villa",
-    image: "imgi_3_5_Bed_Villa_Revised_Front_Closeup_pkdtfq",
+    image: "Booking3_uieo5a",
     price: "Pkr 26,400,000",
     bedrooms: 2,
     bathrooms: 2,

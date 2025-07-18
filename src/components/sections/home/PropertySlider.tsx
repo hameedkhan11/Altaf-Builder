@@ -1,18 +1,16 @@
 "use client";
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState, useEffect, useMemo } from 'react';
+import {  AnimatePresence } from 'framer-motion';
+// import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { CldImage } from 'next-cloudinary';
 import {
   fadeInUp,
-  fadeInLeft,
-  fadeInRight,
-  scaleOnHover,
   slideInFromBottom,
   microSlide,
   shouldAnimate,
   simpleFadeSlide
 } from '@/lib/constants';
+import { AnimatedH1 } from '@/components/ui/text-animations';
 
 // Property data - moved outside component to prevent recreating on each render
 const showcaseProperties = [
@@ -77,7 +75,7 @@ const showcaseProperties = [
 const PropertyShowcase = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [, setIsMobile] = useState(false);
   const [, setDirection] = useState(0);
 
   // Memoize performance checks
@@ -119,22 +117,22 @@ const PropertyShowcase = () => {
   }, [isHovered, animationEnabled]);
 
   // Memoized navigation functions
-  const nextSlide = useCallback(() => {
-    setDirection(1);
-    setCurrentIndex((prev) => (prev + 1) % showcaseProperties.length);
-  }, []);
+  // const nextSlide = useCallback(() => {
+  //   setDirection(1);
+  //   setCurrentIndex((prev) => (prev + 1) % showcaseProperties.length);
+  // }, []);
 
-  const prevSlide = useCallback(() => {
-    setDirection(-1);
-    setCurrentIndex((prev) => (prev - 1 + showcaseProperties.length) % showcaseProperties.length);
-  }, []);
+  // const prevSlide = useCallback(() => {
+  //   setDirection(-1);
+  //   setCurrentIndex((prev) => (prev - 1 + showcaseProperties.length) % showcaseProperties.length);
+  // }, []);
 
   return (
     <div className="relative h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-[90vh] xl:h-[110vh] w-full overflow-hidden">
       {/* Background Images with Simple Fade Effect */}
       <div className="absolute inset-0 bg-black">
         <AnimatePresence initial={false} mode="popLayout">
-          <motion.div
+          <div
             key={currentIndex}
             {...simpleFadeSlide}
             className="absolute inset-0 z-10"
@@ -150,12 +148,12 @@ const PropertyShowcase = () => {
               priority
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-          </motion.div>
+          </div>
         </AnimatePresence>
       </div>
 
       {/* Navigation Controls - Only show on larger screens or when hovered */}
-      <motion.button
+      {/* <motion.button
         onClick={prevSlide}
         className={`absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 p-2 sm:p-3 rounded-full bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-all duration-300 ${
           isMobile ? 'opacity-0 pointer-events-none' : 'opacity-100'
@@ -164,9 +162,9 @@ const PropertyShowcase = () => {
         {...fadeInLeft}
       >
         <ChevronLeft size={isMobile ? 20 : 24} />
-      </motion.button>
+      </motion.button> */}
 
-      <motion.button
+      {/* <motion.button
         onClick={nextSlide}
         className={`absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 p-2 sm:p-3 rounded-full bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-all duration-300 ${
           isMobile ? 'opacity-0 pointer-events-none' : 'opacity-100'
@@ -175,25 +173,25 @@ const PropertyShowcase = () => {
         {...fadeInRight}
       >
         <ChevronRight size={isMobile ? 20 : 24} />
-      </motion.button>
+      </motion.button> */}
 
       {/* Main Content Overlay */}
       <div className="absolute inset-0 z-10 flex items-end">
         <div className="w-full p-4 sm:p-6 md:p-8 lg:p-12">
-          <motion.div 
+          <div 
             className="max-w-4xl mx-auto"
             {...fadeInUp}
           >
-            <motion.div className="mb-4 sm:mb-6" {...microSlide}>
+            <div className="mb-4 sm:mb-6" {...microSlide}>
               
-              <motion.h1 
-                className="text-xl sm:text-2xl md:text-3xl text-center lg:text-4xl xl:text-5xl text-white leading-tight px-2 sm:px-4"
+              <AnimatedH1
+                className="text-xl sm:text-2xl md:text-3xl text-center lg:text-4xl text-white leading-tight px-2 sm:px-4"
                 {...slideInFromBottom}
               >
                 {currentProperty.title}
-              </motion.h1>
-            </motion.div>
-          </motion.div>
+              </AnimatedH1>
+            </div>
+          </div>
         </div>
       </div>
     </div>

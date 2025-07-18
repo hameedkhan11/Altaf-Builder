@@ -10,7 +10,7 @@ import {
   getPerformanceVariant,
   scaleOnHover,
 } from "@/lib/constants";
-import BlogCard from "@/components/cards/BlogCard";
+// import BlogCard from "@/components/cards/BlogCard";
 import { sampleBlogPosts } from "@/data/blogs/data";
 
 interface RelatedBlogsProps {
@@ -87,9 +87,9 @@ const RelatedBlogs: React.FC<RelatedBlogsProps> = ({ currentPost }) => {
         </motion.header>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-8 md:mb-12">
-          {relatedPosts.map((post, index) => (
+          {/* {relatedPosts.map((post, index) => (
             <BlogCard key={post.id} post={post} index={index} />
-          ))}
+          ))} */}
         </div>
 
         {/* View All Blogs Link */}

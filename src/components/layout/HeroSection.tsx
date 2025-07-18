@@ -1,5 +1,6 @@
 // layouts/HeroSection.tsx
 import React from 'react';
+import { AnimatedH1 } from '../ui/text-animations';
 
 interface HeroSectionProps {
   title: string;
@@ -27,14 +28,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ title, subtitle, backg
       
       {/* Content */}
       <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
-        <h1 className="text-5xl lg:text-7xl font-bold text-white mb-8 leading-tight">
+        <AnimatedH1 className="text-5xl font-bold text-white mb-8 leading-tight">
           <span className="block opacity-0 animate-[fadeInUp_1s_ease-out_0.5s_forwards]">
             {title.split(' ').slice(0, 3).join(' ')}
           </span>
           <span className="block opacity-0 animate-[fadeInUp_1s_ease-out_1s_forwards] bg-gradient-to-r from-white to-[rgb(140,46,71)] bg-clip-text text-transparent">
             {title.split(' ').slice(3).join(' ')}
           </span>
-        </h1>
+        </AnimatedH1>
         
         <p className="text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto opacity-0 animate-[fadeInUp_1s_ease-out_1.5s_forwards]">
           {subtitle}

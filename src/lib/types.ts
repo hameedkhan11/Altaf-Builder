@@ -1,24 +1,12 @@
 import type { LucideIcon } from "lucide-react"
-
-export interface Property {
-  id: number
-  title: string
-  location: string
-  price: string
-  beds: number
-  baths: number
-  sqft: string
-  image: string
-  badge: string
-  badgeColor: string
-}
+import { Author, Category, Post, PropertyType } from "./sanity/sanity"
 
 export interface Testimonial {
-  id: string
+  id: number
   name: string
   role: string
   content: string
-  rating: number
+  image: string
 }
 
 export interface Project {
@@ -169,7 +157,7 @@ export interface Agent {
 export interface Property {
   id: number;
   title: string;
-  location: string;
+  location?: string;
   price: string;
   beds: number;
   baths: number;
@@ -322,17 +310,6 @@ export interface Project {
   propertyType: PropertyKey;
 }
 
-export type PropertyKey = "1bed" | "2bed";
-
-// Updated to use PropertyDetail instead of Property
-export interface PropertyData {
-  [key: string]: PropertyDetail;
-}
-
-export interface PropertyImages {
-  [key: string]: string[];
-}
-
 // Other existing interfaces
 export interface Delays {
   small: number;
@@ -349,4 +326,81 @@ export interface PropertySection {
   title: string;
   image: string;
   alt: string;
+}
+
+export type PropertyKey = "1bed" | "2bed";
+
+export interface PropertyImage {
+  cloudinaryUrl: string;
+  alt?: string;
+  isFeatured: boolean;
+}
+
+// For individual property data from Sanity (used in ProjectsSection)
+export interface PropertyData {
+  _id: string;
+  title: string;
+  price: string;
+  bedrooms: number;
+  bathrooms: number;
+  location?: string;
+  propertyType: "1bed" | "2bed";
+  featuredImage: string;
+  allImages: string[];
+}
+
+// For detailed property information (used in PropertyDetailInfo)
+export interface PropertyDetail {
+  _id?: string;
+  name: string;
+  type: string;
+  size: number;
+  bedrooms: number;
+  bathrooms: number;
+  rate: number;
+  totalPrice: string;
+  downPayment: number;
+  quarterlyInstallment: number;
+  location?: string;
+  propertyType?: "1bed" | "2bed";
+  featuredImage?: string;
+  allImages?: string[];
+}
+
+// For projects/listings data
+export interface Project {
+  id: number;
+  title: string;
+  image: string;
+  price: string;
+  bedrooms: number;
+  bathrooms: number;
+  propertyType: "1bed" | "2bed";
+}
+
+// Type for the properties object structure
+export type PropertiesData = Record<PropertyKey, PropertyDetail>;
+
+export interface PropertyDetailInfoProps {
+  property: PropertyDetail;
+}
+
+export interface ProjectCardProps {
+  image: string;
+  title: string;
+  price?: string;
+  bedrooms?: number;
+  bathrooms?: number;
+  location?: string;
+  propertyType?: "1bed" | "2bed";
+}
+
+export interface ImageGalleryProps {
+  propertyType: "1bed" | "2bed";
+}
+export interface PopulatedPost extends Omit<Post, 'author' | 'categories' | 'locations' | 'propertyTypes'> {
+  author: Author; // Populated author instead of reference
+  categories: Category[]; // Populated categories
+  locations?: Location[]; // Populated locations
+  propertyTypes?: PropertyType[]; // Populated property types
 }
